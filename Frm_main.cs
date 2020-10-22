@@ -48,5 +48,10 @@ namespace DataMaintenance
             EmbedForm embedForm = new EmbedForm();
             embedForm.openForm(frm_Scrap, tabPageText, tabControl1, panel1);
         }
+
+        private void 客商解锁ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
