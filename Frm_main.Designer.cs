@@ -33,13 +33,17 @@
             this.刀具管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.属性修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.数据库设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
             this.清除锁定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.客商解锁ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.凭证解锁ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.科目解锁ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.任务清理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.授权ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.采购订单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.数据库设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -48,7 +52,9 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.刀具管理ToolStripMenuItem,
-            this.清除锁定ToolStripMenuItem});
+            this.清除锁定ToolStripMenuItem,
+            this.授权ToolStripMenuItem,
+            this.设置ToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 25);
@@ -68,16 +74,66 @@
             // 属性修改ToolStripMenuItem
             // 
             this.属性修改ToolStripMenuItem.Name = "属性修改ToolStripMenuItem";
-            this.属性修改ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.属性修改ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.属性修改ToolStripMenuItem.Text = "属性修改";
             this.属性修改ToolStripMenuItem.Click += new System.EventHandler(this.属性修改ToolStripMenuItem_Click);
             // 
             // 数据库设置ToolStripMenuItem
             // 
             this.数据库设置ToolStripMenuItem.Name = "数据库设置ToolStripMenuItem";
-            this.数据库设置ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.数据库设置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.数据库设置ToolStripMenuItem.Text = "数据库设置";
-            this.数据库设置ToolStripMenuItem.Click += new System.EventHandler(this.数据库设置ToolStripMenuItem_Click);
+            // 
+            // 清除锁定ToolStripMenuItem
+            // 
+            this.清除锁定ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.客商解锁ToolStripMenuItem,
+            this.凭证解锁ToolStripMenuItem,
+            this.科目解锁ToolStripMenuItem,
+            this.任务清理ToolStripMenuItem});
+            this.清除锁定ToolStripMenuItem.Name = "清除锁定ToolStripMenuItem";
+            this.清除锁定ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+            this.清除锁定ToolStripMenuItem.Text = "清除锁定";
+            // 
+            // 客商解锁ToolStripMenuItem
+            // 
+            this.客商解锁ToolStripMenuItem.Name = "客商解锁ToolStripMenuItem";
+            this.客商解锁ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.客商解锁ToolStripMenuItem.Text = "客商解锁";
+            this.客商解锁ToolStripMenuItem.Click += new System.EventHandler(this.客商解锁ToolStripMenuItem_Click);
+            // 
+            // 凭证解锁ToolStripMenuItem
+            // 
+            this.凭证解锁ToolStripMenuItem.Name = "凭证解锁ToolStripMenuItem";
+            this.凭证解锁ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.凭证解锁ToolStripMenuItem.Text = "凭证解锁";
+            // 
+            // 科目解锁ToolStripMenuItem
+            // 
+            this.科目解锁ToolStripMenuItem.Name = "科目解锁ToolStripMenuItem";
+            this.科目解锁ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.科目解锁ToolStripMenuItem.Text = "科目解锁";
+            // 
+            // 任务清理ToolStripMenuItem
+            // 
+            this.任务清理ToolStripMenuItem.Name = "任务清理ToolStripMenuItem";
+            this.任务清理ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.任务清理ToolStripMenuItem.Text = "任务清理";
+            // 
+            // 授权ToolStripMenuItem
+            // 
+            this.授权ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.采购订单ToolStripMenuItem});
+            this.授权ToolStripMenuItem.Name = "授权ToolStripMenuItem";
+            this.授权ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.授权ToolStripMenuItem.Text = "授权";
+            // 
+            // 采购订单ToolStripMenuItem
+            // 
+            this.采购订单ToolStripMenuItem.Name = "采购订单ToolStripMenuItem";
+            this.采购订单ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.采购订单ToolStripMenuItem.Text = "采购订单";
+            this.采购订单ToolStripMenuItem.Click += new System.EventHandler(this.采购订单ToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -97,41 +153,20 @@
             this.tabControl1.Size = new System.Drawing.Size(800, 425);
             this.tabControl1.TabIndex = 0;
             // 
-            // 清除锁定ToolStripMenuItem
+            // 设置ToolStripMenuItem
             // 
-            this.清除锁定ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.客商解锁ToolStripMenuItem,
-            this.凭证解锁ToolStripMenuItem,
-            this.科目解锁ToolStripMenuItem,
-            this.任务清理ToolStripMenuItem});
-            this.清除锁定ToolStripMenuItem.Name = "清除锁定ToolStripMenuItem";
-            this.清除锁定ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
-            this.清除锁定ToolStripMenuItem.Text = "清除锁定";
+            this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.数据库设置ToolStripMenuItem});
+            this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
+            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+            this.设置ToolStripMenuItem.Text = "设置";
             // 
-            // 客商解锁ToolStripMenuItem
+            // 数据库设置ToolStripMenuItem1
             // 
-            this.客商解锁ToolStripMenuItem.Name = "客商解锁ToolStripMenuItem";
-            this.客商解锁ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.客商解锁ToolStripMenuItem.Text = "客商解锁";
-            this.客商解锁ToolStripMenuItem.Click += new System.EventHandler(this.客商解锁ToolStripMenuItem_Click);
-            // 
-            // 凭证解锁ToolStripMenuItem
-            // 
-            this.凭证解锁ToolStripMenuItem.Name = "凭证解锁ToolStripMenuItem";
-            this.凭证解锁ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.凭证解锁ToolStripMenuItem.Text = "凭证解锁";
-            // 
-            // 科目解锁ToolStripMenuItem
-            // 
-            this.科目解锁ToolStripMenuItem.Name = "科目解锁ToolStripMenuItem";
-            this.科目解锁ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.科目解锁ToolStripMenuItem.Text = "科目解锁";
-            // 
-            // 任务清理ToolStripMenuItem
-            // 
-            this.任务清理ToolStripMenuItem.Name = "任务清理ToolStripMenuItem";
-            this.任务清理ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.任务清理ToolStripMenuItem.Text = "任务清理";
+            this.数据库设置ToolStripMenuItem.Name = "数据库设置ToolStripMenuItem1";
+            this.数据库设置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.数据库设置ToolStripMenuItem.Text = "数据库设置";
+            this.数据库设置ToolStripMenuItem.Click += new System.EventHandler(this.数据库设置ToolStripMenuItem1_Click);
             // 
             // Frm_main
             // 
@@ -159,12 +194,16 @@
         private System.Windows.Forms.ToolStripMenuItem 属性修改ToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.ToolStripMenuItem 数据库设置ToolStripMenuItem;
+   
         private System.Windows.Forms.ToolStripMenuItem 清除锁定ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 客商解锁ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 凭证解锁ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 科目解锁ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 任务清理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 授权ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 采购订单ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 数据库设置ToolStripMenuItem;
     }
 }
 

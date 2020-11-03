@@ -41,17 +41,29 @@ namespace DataMaintenance
             embedForm.openForm(t, tabPageText, tabControl1, panel1);
         }
 
-        private void 数据库设置ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Frm_config frm_Scrap = new Frm_config();
-            string tabPageText = frm_Scrap.Text;
-            EmbedForm embedForm = new EmbedForm();
-            embedForm.openForm(frm_Scrap, tabPageText, tabControl1, panel1);
-        }
-
+     
         private void 客商解锁ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void 采购订单ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_PO  PO = new Frm_PO();
+            embedForm(PO);
+        }
+
+        private void embedForm(Form form)
+        {
+            EmbedForm embedForm = new EmbedForm();
+
+            embedForm.openForm(form, form.Text, tabControl1, panel1);
+        }
+
+        private void 数据库设置ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Frm_config  config = new Frm_config();
+            embedForm(config);
         }
     }
 }
