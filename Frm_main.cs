@@ -62,7 +62,13 @@ namespace DataMaintenance
 
         private void 数据库设置ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Frm_config  config = new Frm_config();
+            Frm_DoubleDataBaseConfig  config = new Frm_DoubleDataBaseConfig();
+            embedForm(config);
+        }
+
+        private void 人员档案ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_user config = new Frm_user();
             embedForm(config);
         }
     }

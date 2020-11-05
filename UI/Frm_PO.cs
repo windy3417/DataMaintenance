@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Utility.Sql;
+using DataMaintenance.Modle;
 
 
 namespace DataMaintenance.UI
@@ -72,29 +73,50 @@ namespace DataMaintenance.UI
 
             try
             {
-                int influnceRows1 = Sqlhelper.UpdateWithparameters(sql+sql2, sqlParameterList.ToArray());
+                int influnceRows1 = Sqlhelper.UpdateWithparameters(sql + sql2, sqlParameterList.ToArray());
                 //int influnceRows2=Sqlhelper.UpdateWithparameters(sql2, sqlParameterList.ToArray());
-                MessageBox.Show("更新" + influnceRows1 + "条记录", "数据修改提示");
+                authorizationLog();
+                MessageBox.Show("更新" + influnceRows1 + "条记录,授权成功", "授权提示");
             }
             catch (Exception ex)
             {
 
-                
-                MessageBox.Show("更新属性出错"+ex.Message+ex.InnerException, "数据修改提示");
+
+                MessageBox.Show("授权出错" + ex.Message + ex.InnerException, "授权提示");
             }
 
-            
+
 
         }
 
         void authorizationLog()
         {
+            using (var db = new DataMaitenanceContext())
+            {
+
+                AuthorizationModle m = new AuthorizationModle();
+                m.userID = 1;
+                m.dateTime = System.DateTime.Now;
+               
+
+
+                db.Authorizoations.Add(m);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+
+                    MessageBox.Show("授权提示:" + e.Message + e.InnerException, "授权失败");
+                    return;
+                }
+            }
+
+
+
 
         }
-
-
-
-
     }
 }
 
