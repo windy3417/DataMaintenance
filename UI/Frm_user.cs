@@ -25,7 +25,7 @@ namespace DataMaintenance.UI
 
         #region 变量
         //新增时,dataGridview绑定的数据源，以体现新增的结果
-        List<UserModle> customerList = new List<UserModle>();
+        List<UserModle> mList = new List<UserModle>();
         //最大客户编号
         int maxCusCode;
         //dataGridView控件的数据来源，true为查询时绑定，
@@ -160,8 +160,8 @@ namespace DataMaintenance.UI
                     if (saveOrModifQueryFlag == saveOrChangeOrQueryMolde.save.ToString())
                     {
 
-                        List<UserModle> customer = customerList.Where(c => c.userID == System.Convert.ToInt32(selected)).ToList<UserModle>();
-                        customerList.Remove(customer[0]);
+                        List<UserModle> customer = mList.Where(c => c.userID == System.Convert.ToInt32(selected)).ToList<UserModle>();
+                        mList.Remove(customer[0]);
 
                     }
                     bind_gv_dateSource();
@@ -201,12 +201,12 @@ namespace DataMaintenance.UI
                         UserModle m = new UserModle();
                         m.userID = Convert.ToInt32(txt_cusCode.Text);
                         m.name = this.txt_cusName.Text;
-                        m.password =Encrypt.Encode( txt_pwd.Text);
-                        //customer.EffectDate = Convert.ToDateTime(this.tbd_effect.Text);
-                        //if (this.tbd_failure.Text != null & tbd_failure.Text != "")
-                        //{
-                        //    customer.FailuerDate = Convert.ToDateTime(this.tbd_failure.Text);
-                        //}
+                        m.pwd =Encrypt.Encode( txt_pwd.Text);
+                        m.RegistrationDate = Convert.ToDateTime(this.tbd_effect.Text);
+                        if (this.tbd_failure.Text != null & tbd_failure.Text != "")
+                        {
+                            m.DateOfCancellation = Convert.ToDateTime(this.tbd_failure.Text);
+                        }
 
 
                         db.Users.Add(m);
@@ -221,10 +221,8 @@ namespace DataMaintenance.UI
                             return;
                         }
 
-                        customerList.Add(m);
-                        //this.dataGridView1.DataSource = null;
-                        //this.dataGridView1.DataSource = customerList;
-                        //MessageBox.Show("数据保存成功", "保存提示");
+                        mList.Add(m);
+                       
                         this.bind_gv_dateSource();
 
                         //清空填制记录
@@ -243,11 +241,13 @@ namespace DataMaintenance.UI
                 {
                     using (var db = new DataMaitenanceContext())
                     {
-                        UserModle customer = db.Users.Where(c => c.userID.ToString() == txt_cusCode.Text).FirstOrDefault();
+                        UserModle m = db.Users.Where(c => c.userID.ToString() == txt_cusCode.Text).FirstOrDefault();
 
-                        customer.userID = System.Convert.ToInt32(txt_cusCode.Text);
+                        m.userID = System.Convert.ToInt32(txt_cusCode.Text);
 
-                        customer.name = this.txt_cusName.Text;
+                        m.name = this.txt_cusName.Text;
+                        m.pwd = Encrypt.Encode(txt_pwd.Text);
+                        m.RegistrationDate = Convert.ToDateTime(this.tbd_effect.Text);
 
                         //customer.EffectDate = Convert.ToDateTime(this.tbd_effect.Text);
                         //if (this.tbd_failure.Text != null & this.tbd_failure.Text != "")
@@ -414,7 +414,7 @@ namespace DataMaintenance.UI
             //新增状态的数据源
             else
             {
-                this.dataGridView1.DataSource = customerList;
+                this.dataGridView1.DataSource = mList;
             }
 
 

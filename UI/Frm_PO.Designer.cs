@@ -76,7 +76,6 @@
             this.rb_noEedit.Name = "rb_noEedit";
             this.rb_noEedit.Size = new System.Drawing.Size(107, 16);
             this.rb_noEedit.TabIndex = 4;
-            this.rb_noEedit.TabStop = true;
             this.rb_noEedit.Text = "修改为不可编辑";
             this.rb_noEedit.UseVisualStyleBackColor = true;
             // 
@@ -84,6 +83,7 @@
             // 
             this.rb_edit.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.rb_edit.AutoSize = true;
+            this.rb_edit.Checked = true;
             this.rb_edit.Location = new System.Drawing.Point(57, 17);
             this.rb_edit.Name = "rb_edit";
             this.rb_edit.Size = new System.Drawing.Size(95, 16);

@@ -22,6 +22,17 @@ namespace DataMaintenance.UI
 
         }
 
+        #region 属性
+
+
+
+        #endregion
+
+        #region 变量
+
+        
+        #endregion
+
         private void tsb_close_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -38,6 +49,25 @@ namespace DataMaintenance.UI
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btn_mend_Click(object sender, EventArgs e)
+        {
+            Frm_authorization f = new Frm_authorization();
+            f.authorizPass += modifyTemple;
+
+            f.ShowDialog();
+
+                     
+                if (f.DialogResult == DialogResult.Cancel)
+                {
+                    f.Close();
+                }
+              
+            
+           
+
+        }
+
+
+        private void modifyTemple( object sender,AuthorizationEventArgs authorizationEventArgs)
         {
             int editAble;
             List<SqlParameter> sqlParameterList = new List<SqlParameter>();
@@ -75,18 +105,14 @@ namespace DataMaintenance.UI
             {
                 int influnceRows1 = Sqlhelper.UpdateWithparameters(sql + sql2, sqlParameterList.ToArray());
                 //int influnceRows2=Sqlhelper.UpdateWithparameters(sql2, sqlParameterList.ToArray());
-                authorizationLog();
+                //authorizationLog();
                 MessageBox.Show("更新" + influnceRows1 + "条记录,授权成功", "授权提示");
             }
             catch (Exception ex)
             {
 
-
-                MessageBox.Show("授权出错" + ex.Message + ex.InnerException, "授权提示");
+                MessageBox.Show("授权出错:" + ex.Message + ex.InnerException, "授权提示");
             }
-
-
-
         }
 
         void authorizationLog()

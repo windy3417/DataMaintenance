@@ -93,7 +93,8 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Utility">
+    <Reference Include="Utility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Utility\bin\Debug\Utility.dll</HintPath>
     </Reference>
   </ItemGroup>
@@ -108,12 +109,23 @@
     <Compile Include="Migrations\202011050108017_first.designer.cs">
       <DependentUpon>202011050108017_first.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011080350132_changColumn.cs" />
+    <Compile Include="Migrations\202011080350132_changColumn.designer.cs">
+      <DependentUpon>202011080350132_changColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modle\DataMaitenanceContext.cs" />
     <Compile Include="Modle\AuthorizationModle.cs" />
     <Compile Include="Modle\UserModle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\UserService.cs" />
+    <Compile Include="UI\Frm_authorization.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Frm_authorization.Designer.cs">
+      <DependentUpon>Frm_authorization.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Frm_user.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -138,6 +150,9 @@
     <EmbeddedResource Include="Migrations\202011050108017_first.resx">
       <DependentUpon>202011050108017_first.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011080350132_changColumn.resx">
+      <DependentUpon>202011080350132_changColumn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -148,6 +163,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\Frm_authorization.resx">
+      <DependentUpon>Frm_authorization.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Frm_user.resx">
       <DependentUpon>Frm_user.cs</DependentUpon>
     </EmbeddedResource>
@@ -186,9 +204,7 @@
   <ItemGroup>
     <Content Include="setup.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DAL\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>

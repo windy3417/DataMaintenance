@@ -40,10 +40,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txt_cusCode = new System.Windows.Forms.TextBox();
             this.txt_cusName = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.lbl_regitrationDate = new System.Windows.Forms.Label();
             this.tbd_effect = new Utility.UControl.txtBoxWithDate();
             this.label4 = new System.Windows.Forms.Label();
             this.tbd_failure = new Utility.UControl.txtBoxWithDate();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txt_pwd = new System.Windows.Forms.TextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsb_add = new System.Windows.Forms.ToolStripButton();
             this.tsb_abandon = new System.Windows.Forms.ToolStripButton();
@@ -52,12 +54,10 @@
             this.tsb_query = new System.Windows.Forms.ToolStripButton();
             this.tsb_delete = new System.Windows.Forms.ToolStripButton();
             this.tsb_close = new System.Windows.Forms.ToolStripButton();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txt_pwd = new System.Windows.Forms.TextBox();
             this.userID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.登录密码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.effectDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.registrationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.failuerDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -107,7 +107,7 @@
             this.userID,
             this.Name,
             this.登录密码,
-            this.effectDate,
+            this.registrationDate,
             this.failuerDate});
             this.dataGridView1.Location = new System.Drawing.Point(3, 241);
             this.dataGridView1.Name = "dataGridView1";
@@ -140,7 +140,7 @@
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.txt_cusCode, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.txt_cusName, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.lbl_regitrationDate, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.tbd_effect, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.label4, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.tbd_failure, 3, 1);
@@ -196,16 +196,16 @@
             this.txt_cusName.TabIndex = 2;
             this.txt_cusName.Tag = "客户名称";
             // 
-            // label3
+            // lbl_regitrationDate
             // 
-            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(381, 14);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(65, 12);
-            this.label3.TabIndex = 0;
-            this.label3.Tag = "生效日期标签";
-            this.label3.Text = "生效日期：";
+            this.lbl_regitrationDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lbl_regitrationDate.AutoSize = true;
+            this.lbl_regitrationDate.Location = new System.Drawing.Point(381, 14);
+            this.lbl_regitrationDate.Name = "lbl_regitrationDate";
+            this.lbl_regitrationDate.Size = new System.Drawing.Size(65, 12);
+            this.lbl_regitrationDate.TabIndex = 0;
+            this.lbl_regitrationDate.Tag = "注册日期标签";
+            this.lbl_regitrationDate.Text = "注册日期：";
             // 
             // tbd_effect
             // 
@@ -224,8 +224,8 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 12);
             this.label4.TabIndex = 0;
-            this.label4.Tag = "失效日期标签";
-            this.label4.Text = "失效日期：";
+            this.label4.Tag = "注销日期标签";
+            this.label4.Text = "注销日期：";
             // 
             // tbd_failure
             // 
@@ -235,6 +235,26 @@
             this.tbd_failure.Size = new System.Drawing.Size(252, 21);
             this.tbd_failure.TabIndex = 3;
             this.tbd_failure.Tag = "失效日期";
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 95);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 12);
+            this.label5.TabIndex = 0;
+            this.label5.Tag = "登录密码标签";
+            this.label5.Text = "登录密码:";
+            // 
+            // txt_pwd
+            // 
+            this.txt_pwd.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txt_pwd.Location = new System.Drawing.Point(111, 90);
+            this.txt_pwd.Name = "txt_pwd";
+            this.txt_pwd.Size = new System.Drawing.Size(252, 21);
+            this.txt_pwd.TabIndex = 2;
+            this.txt_pwd.Tag = "登录密码";
             // 
             // toolStrip1
             // 
@@ -316,26 +336,6 @@
             this.tsb_close.Text = "关闭";
             this.tsb_close.Click += new System.EventHandler(this.Tsb_close_Click);
             // 
-            // label5
-            // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 95);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(59, 12);
-            this.label5.TabIndex = 0;
-            this.label5.Tag = "登录密码标签";
-            this.label5.Text = "登录密码:";
-            // 
-            // txt_pwd
-            // 
-            this.txt_pwd.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.txt_pwd.Location = new System.Drawing.Point(111, 90);
-            this.txt_pwd.Name = "txt_pwd";
-            this.txt_pwd.Size = new System.Drawing.Size(252, 21);
-            this.txt_pwd.TabIndex = 2;
-            this.txt_pwd.Tag = "登录密码";
-            // 
             // userID
             // 
             this.userID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
@@ -359,22 +359,22 @@
             // 
             // 登录密码
             // 
-            this.登录密码.DataPropertyName = "password";
+            this.登录密码.DataPropertyName = "pwd";
             this.登录密码.HeaderText = "登录密码";
             this.登录密码.Name = "登录密码";
             this.登录密码.ReadOnly = true;
             // 
-            // effectDate
+            // registrationDate
             // 
-            this.effectDate.DataPropertyName = "effectDate";
-            this.effectDate.HeaderText = "生效日期";
-            this.effectDate.Name = "effectDate";
-            this.effectDate.ReadOnly = true;
+            this.registrationDate.DataPropertyName = "RegistrationDate";
+            this.registrationDate.HeaderText = "注册日期";
+            this.registrationDate.Name = "registrationDate";
+            this.registrationDate.ReadOnly = true;
             // 
             // failuerDate
             // 
             this.failuerDate.DataPropertyName = "failuerDate";
-            this.failuerDate.HeaderText = "失效日期";
+            this.failuerDate.HeaderText = "注销日期";
             this.failuerDate.Name = "failuerDate";
             this.failuerDate.ReadOnly = true;
             // 
@@ -386,7 +386,7 @@
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.panel1);
             this.KeyPreview = true;
-            
+           
             this.Text = "人员档案";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Frm_customer_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Frm_customer_KeyPress);
@@ -414,7 +414,7 @@
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsb_save;
         private System.Windows.Forms.ToolStripButton tsb_close;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lbl_regitrationDate;
         private System.Windows.Forms.Label label4;
         private Utility.UControl.txtBoxWithDate tbd_effect;
         private Utility.UControl.txtBoxWithDate tbd_failure;
@@ -425,12 +425,12 @@
         private System.Windows.Forms.ToolStripButton tsb_delete;
         private System.Windows.Forms.ToolStripButton tsb_abandon;
         private System.Windows.Forms.Label lbl_voucherStatus;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txt_pwd;
         private System.Windows.Forms.DataGridViewTextBoxColumn userID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Name;
         private System.Windows.Forms.DataGridViewTextBoxColumn 登录密码;
-        private System.Windows.Forms.DataGridViewTextBoxColumn effectDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn registrationDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn failuerDate;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txt_pwd;
     }
 }

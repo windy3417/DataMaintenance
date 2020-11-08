@@ -49,8 +49,10 @@ namespace DataMaintenance
 
         private void 采购订单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Frm_PO  PO = new Frm_PO();
-            embedForm(PO);
+                      
+                Frm_PO config = new Frm_PO();
+                embedForm(config);
+            
         }
 
         private void embedForm(Form form)
