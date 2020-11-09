@@ -41,7 +41,9 @@ namespace DataMaintenance.UI
         public event EventHandler<AuthorizationEventArgs> authorizPass;
 
         /// <summary>
-        /// 事件处理方法,调用端实例化事件委托后就执行
+        /// 事件处理方法,调用端实例化事件委托后就执行该方法
+        /// authorizPass?本质上相当于执行方法时的第二次判断
+        /// 引发事件是执行事件处理方法的第一次判断
         /// </summary>
         /// <param name="authorizationEventArgs"></param>
         protected virtual void onAuthorizPass(AuthorizationEventArgs authorizationEventArgs)
@@ -59,9 +61,9 @@ namespace DataMaintenance.UI
                 string pwd = Encrypt.Encode(txt_pwd.Text);
               
 
-                if (new UserService().loginCheck(Convert.ToInt32(cmb_user.SelectedValue), pwd))
+                if (new UserService().loginCheck(cmb_user.SelectedValue.ToString(), pwd))
                 {
-                    //引发验证通过事件
+                    //引发事件并传递事件包含的数据，该事件检验用户名密码是否正确
                     AuthorizationEventArgs authorizationEventArgs = new AuthorizationEventArgs();
                     authorizationEventArgs.userAndPwdRight = true;
                     onAuthorizPass(authorizationEventArgs);
@@ -97,7 +99,7 @@ namespace DataMaintenance.UI
 
 
     /// <summary>
-    /// 事件数据类，传递验证成功数据
+    /// 事件数据类，传递验证成功数据，类似于模型类，用于存储数据
     /// </summary>
     public class AuthorizationEventArgs : EventArgs
 

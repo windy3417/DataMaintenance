@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataMaintenance.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -15,7 +16,7 @@ namespace DataMaintenance
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Frm_main());
+            Application.Run(new Frm_login());
         }
     }
 }

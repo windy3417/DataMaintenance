@@ -12,7 +12,7 @@ namespace DataMaintenance.Modle
 
     {
         [Key]
-        public int userID { get; set; }
+        public string userID { get; set; }
         public string name { get; set; }
         public string pwd { get; set; }
         public DateTime RegistrationDate { get; set; }

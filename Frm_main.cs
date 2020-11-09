@@ -21,6 +21,8 @@ namespace DataMaintenance
             initializeControlsState();
         }
 
+        #region 初始化
+
         /// <summary>
         /// 初始化控件状态
         /// </summary>
@@ -28,6 +30,9 @@ namespace DataMaintenance
         {
             this.WindowState = FormWindowState.Maximized;
         }
+        #endregion
+
+
         private void 刀具管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
 

@@ -24,7 +24,7 @@ namespace DataMaintenance.Services
             while (sqlDataReader.Read())
             {
                 UserModle m = new UserModle();
-                m.userID = Convert.ToInt32(sqlDataReader["userID"]);
+                m.userID = sqlDataReader["userID"].ToString();
                 m.name = sqlDataReader["name"].ToString();
 
 
@@ -41,7 +41,7 @@ namespace DataMaintenance.Services
         /// </summary>
         /// <param name="pwd"></param>
         /// <returns></returns>
-        public bool loginCheck(int userID,string pwd)
+        public bool loginCheck(string userID,string pwd)
         {
             using (var db=new DataMaitenanceContext())
             {

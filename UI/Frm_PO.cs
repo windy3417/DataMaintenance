@@ -115,13 +115,16 @@ namespace DataMaintenance.UI
             }
         }
 
+        /// <summary>
+        /// 授权日志
+        /// </summary>
         void authorizationLog()
         {
             using (var db = new DataMaitenanceContext())
             {
 
                 AuthorizationModle m = new AuthorizationModle();
-                m.userID = 1;
+                m.userID = "1";
                 m.dateTime = System.DateTime.Now;
                
 

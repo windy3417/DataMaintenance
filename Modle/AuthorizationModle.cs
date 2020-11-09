@@ -14,7 +14,7 @@ namespace DataMaintenance.Modle
         [Key]
         public int id { get; set; }
         [ForeignKey("UserModle")]
-        public int userID { get; set; }
+        public string userID { get; set; }
         //授权时间
         public DateTime dateTime { get; set; }
         public virtual UserModle UserModle { get; set; }

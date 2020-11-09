@@ -114,6 +114,7 @@
             this.Controls.Add(this.lbl_authorizer);
             this.Controls.Add(this.txt_pwd);
             this.Name = "Frm_authorization";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "业务授权";
             this.ResumeLayout(false);
             this.PerformLayout();

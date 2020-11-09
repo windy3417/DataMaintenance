@@ -138,7 +138,7 @@ namespace DataMaintenance.UI
 
             if (dataGridView1.Rows.Count > 0)
             {
-                Int32 selected = (Int32)this.dataGridView1.SelectedRows[0].Cells[0].Value;
+               string selected = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
                 if (DialogResult.Yes == MessageBox.Show("是否确定删除", "删除提醒", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
 
@@ -160,7 +160,7 @@ namespace DataMaintenance.UI
                     if (saveOrModifQueryFlag == saveOrChangeOrQueryMolde.save.ToString())
                     {
 
-                        List<UserModle> customer = mList.Where(c => c.userID == System.Convert.ToInt32(selected)).ToList<UserModle>();
+                        List<UserModle> customer = mList.Where(c => c.userID == selected).ToList<UserModle>();
                         mList.Remove(customer[0]);
 
                     }
@@ -199,7 +199,7 @@ namespace DataMaintenance.UI
                     {
 
                         UserModle m = new UserModle();
-                        m.userID = Convert.ToInt32(txt_cusCode.Text);
+                        m.userID = txt_cusCode.Text;
                         m.name = this.txt_cusName.Text;
                         m.pwd =Encrypt.Encode( txt_pwd.Text);
                         m.RegistrationDate = Convert.ToDateTime(this.tbd_effect.Text);
@@ -243,7 +243,7 @@ namespace DataMaintenance.UI
                     {
                         UserModle m = db.Users.Where(c => c.userID.ToString() == txt_cusCode.Text).FirstOrDefault();
 
-                        m.userID = System.Convert.ToInt32(txt_cusCode.Text);
+                        m.userID = txt_cusCode.Text;
 
                         m.name = this.txt_cusName.Text;
                         m.pwd = Encrypt.Encode(txt_pwd.Text);
