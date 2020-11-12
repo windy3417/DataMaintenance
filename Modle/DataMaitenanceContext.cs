@@ -22,6 +22,7 @@
 
         public virtual DbSet<UserModle> Users { get; set; }
         public virtual DbSet<AuthorizationModle> Authorizoations {get;set;}
+        public virtual DbSet<MenuModle> Menus { get; set; }
 
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{

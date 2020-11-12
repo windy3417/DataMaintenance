@@ -28,7 +28,10 @@ namespace DataMaintenance.UI
         void intializeControlState()
         {
             lbl_information.Visible = false;
+            
             checkDatabaseConect();
+            txt_userID.Focus();
+            //txt_userID.TabIndex = 0;
         }
 
         /// <summary>
@@ -36,7 +39,7 @@ namespace DataMaintenance.UI
         /// </summary>
         private void initializeDatasource()
         {
-            
+
         }
 
         #endregion
@@ -65,42 +68,79 @@ namespace DataMaintenance.UI
         /// <param name="e"></param>
         private void btn_certain_Click(object sender, EventArgs e)
         {
-           
-            if (txt_pwd.Text != "")
+            if (inputVlidate())
             {
-                string pwd = Encrypt.Encode(txt_pwd.Text);
-
-
-                if (new UserService().loginCheck(txt_userID.Text, pwd))
+                //登录系统
+                if (ch_changePWD.Checked == false)
                 {
-                    Frm_main f = new Frm_main();
-                    f.Show();
+                    string pwd = Encrypt.Encode(txt_pwd.Text);
+                    //string pwd = txt_pwd.Text;
 
-                    this.Hide();
-                    f.FormClosed += closeLoginForm;
+
+                    if (new UserService().loginCheck(txt_userID.Text, pwd))
+                    {
+                        Frm_main f = new Frm_main();
+                        f.Show();
+
+                        this.Hide();
+                        f.FormClosed += closeLoginForm;
+                    }
+
+
+                    else
+                    {
+
+                        lbl_information.Text = "";
+                        lbl_information.Text = lbl_information.Text + "您输入的用户名或密码不正确，请重新输入";
+                        lbl_information.Visible = true;
+                        txt_pwd.Focus();
+
+                    }
+
                 }
-
-
+                //登录系统并修改密码
                 else
                 {
 
-                    lbl_information.Text = "";
-                    lbl_information.Text = lbl_information.Text + "您输入的用户名或密码不正确，请重新输入";
-                    lbl_information.Visible = true;
-                    txt_pwd.Focus();
+                    string pwd = Encrypt.Encode(txt_pwd.Text);
+                    if (new UserService().loginCheck(txt_userID.Text, pwd))
+                    {
+                        Frm_main f = new Frm_main();
+                        f.Show();
+
+                        this.Hide();
+                        f.FormClosed += closeLoginForm;
+
+                    }
+                    else
+                    {
+                        lbl_information.Text = "";
+                        lbl_information.Text = lbl_information.Text + "您输入的用户名或密码不正确，请重新输入";
+                        lbl_information.Visible = true;
+                        txt_pwd.Focus();
+                    }
+
+
 
                 }
 
             }
-            else
-            {
-                lbl_information.Text = "";
-                lbl_information.Text = "请输入密码";
-                lbl_information.Visible = true;
-                txt_pwd.Focus();
+            ;
 
-            }
 
+        }
+
+
+        /// <summary>
+        /// 登录前数据库连接设置
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btn_conect_Click(object sender, EventArgs e)
+        {
+            Utility.UI.Frm_DoubleDB_loginConfig f = new Utility.UI.Frm_DoubleDB_loginConfig();
+
+            f.ShowDialog();
         }
 
         #endregion
@@ -112,12 +152,6 @@ namespace DataMaintenance.UI
             this.Close();
         }
 
-        private void btn_conect_Click(object sender, EventArgs e)
-        {
-            Utility.UI.Frm_DoubleDB_loginConfig f = new Utility.UI.Frm_DoubleDB_loginConfig();
-            
-            f.ShowDialog();
-        }
 
         /// <summary>
         /// 回车代替TAB键
@@ -132,25 +166,47 @@ namespace DataMaintenance.UI
             }
         }
 
+        /// <summary>
+        /// 检测数据库是否连接
+        /// </summary>
         void checkDatabaseConect()
         {
-            if(ConfigurationManager.ConnectionStrings["plugConection"] != null & ConfigurationManager.ConnectionStrings["myConection"] != null)
+            if (ConfigurationManager.ConnectionStrings["plugConection"] != null & ConfigurationManager.ConnectionStrings["myConection"] != null)
             {
                 btn_conect.Visible = false;
             }
         }
+
+        /// <summary>
+        /// 非空校验
+        /// </summary>
+        /// <returns></returns>
+        private bool inputVlidate()
+        {
+
+            for (int i = 0; i < this.p_login.Controls.Count;)
+            {
+
+                if (this.p_login.Controls[i].Text == "" || this.p_login.Controls[i].Text == null)
+                {
+                    MessageBox.Show(this.p_login.Controls[i].Tag + "不能为空", "输入校验");
+                    return false;
+                }
+
+
+                i++;
+
+
+            }
+            return true;
+
+
+        }
     }
 
-    
 
 
 
-    /// <summary>
-    /// 事件数据类，传递验证成功数据，类似于模型类，用于存储数据
-    /// </summary>
-    //public class AuthorizationEventArgs : EventArgs
 
-    //{
-    //    public bool userAndPwdRight { get; set; }
-    //}
+
 }

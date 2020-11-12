@@ -80,12 +80,14 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="NPOI, Version=2.5.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -106,13 +108,24 @@
     <Compile Include="Frm_main.Designer.cs">
       <DependentUpon>Frm_main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011120147389_changeColumn.cs" />
+    <Compile Include="Migrations\202011120147389_changeColumn.designer.cs">
+      <DependentUpon>202011120147389_changeColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Modle\DataMaitenanceContext.cs" />
     <Compile Include="Modle\AuthorizationModle.cs" />
+    <Compile Include="Modle\MenuModle.cs" />
     <Compile Include="Modle\UserModle.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="UI\Frm_config.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Frm_config.Designer.cs">
+      <DependentUpon>Frm_config.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Frm_login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +137,12 @@
     </Compile>
     <Compile Include="UI\Frm_authorization.Designer.cs">
       <DependentUpon>Frm_authorization.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Frm_menuList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Frm_menuList.Designer.cs">
+      <DependentUpon>Frm_menuList.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Frm_user.cs">
       <SubType>Form</SubType>
@@ -146,6 +165,9 @@
     <EmbeddedResource Include="Frm_main.resx">
       <DependentUpon>Frm_main.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011120147389_changeColumn.resx">
+      <DependentUpon>202011120147389_changeColumn.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -161,6 +183,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Frm_authorization.resx">
       <DependentUpon>Frm_authorization.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Frm_menuList.resx">
+      <DependentUpon>Frm_menuList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Frm_user.resx">
       <DependentUpon>Frm_user.cs</DependentUpon>

@@ -27,7 +27,7 @@ namespace DataMaintenance.UI
         //新增时,dataGridview绑定的数据源，以体现新增的结果
         List<UserModle> mList = new List<UserModle>();
         //最大客户编号
-        int maxCusCode;
+        //int maxCusCode;
         //dataGridView控件的数据来源，true为查询时绑定，
         //false为新增档案时的绑定
 
@@ -100,27 +100,27 @@ namespace DataMaintenance.UI
             this.tbd_effect.Controls[2].Text = DateTime.Now.ToString().Substring(0,10);
             tbd_effect.Text = DateTime.Now.ToString().Substring(0, 10);
 
-            //取最大编号时速度太慢，三秒左右，同时最大号算法有误，取到第10号则不向上递增了???。
-            using (var db = new DataMaitenanceContext())
-            {
-                UserModle customer = new UserModle();
+            ////取最大编号时速度太慢，三秒左右，同时最大号算法有误，取到第10号则不向上递增了???。
+            //using (var db = new DataMaitenanceContext())
+            //{
+            //    UserModle customer = new UserModle();
 
-                var custQuery = from cust in db.Users.AsNoTracking()
+            //    var custQuery = from cust in db.Users.AsNoTracking()
 
-                                select cust.userID;
-                if (custQuery.Count()==0)
-                {
-                    maxCusCode = 1;
-                }
-                else
-                {
-                    maxCusCode = Convert.ToInt32(custQuery.Max()) + 1;
-                }
+            //                    select cust.userID;
+            //    if (custQuery.Count()==0)
+            //    {
+            //        maxCusCode = 1;
+            //    }
+            //    else
+            //    {
+            //        maxCusCode = Convert.ToInt32(custQuery.Max()) + 1;
+            //    }
                
 
 
-            }
-            this.txt_cusCode.Text = maxCusCode.ToString();
+            //}
+            //this.txt_cusCode.Text = maxCusCode.ToString();
 
             this.txt_cusCode.Focus();
             //表明当前dataGridView的数据源是内存集合数据
