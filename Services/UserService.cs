@@ -11,6 +11,10 @@ namespace DataMaintenance.Services
 {
     class UserService
     {
+        /// <summary>
+        /// 用户列表
+        /// </summary>
+        /// <returns></returns>
         public List<UserModle> getUserList()
         {
             List<UserModle> listUser = new List<UserModle>();
@@ -58,6 +62,32 @@ namespace DataMaintenance.Services
             }
             
 
+        }
+
+        /// <summary>
+        /// 使用Sqlparameters检测登录密码与用户名
+        /// </summary>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
+        public bool loginCheckWithSqlparameters(string userID, string pwd)
+        {
+           
+           
+            string sql = "select  *  from  [user] where userID=@userID and pwd=@pwd  ";
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@userID",userID ),
+                new SqlParameter("@pwd",pwd ),
+            };
+
+            SqlDataReader sqlDataReader = Utility.Sql.Sqlhelper.GetSqlDataReader(sql, dataSourceType.plug, sqlParameters);
+            if (sqlDataReader.HasRows)
+            {
+                return true;
+
+                              
+            }
+            return false;
         }
 
         public void updateCustomer()

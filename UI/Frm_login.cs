@@ -68,6 +68,7 @@ namespace DataMaintenance.UI
         /// <param name="e"></param>
         private void btn_certain_Click(object sender, EventArgs e)
         {
+           
             if (inputVlidate())
             {
                 //登录系统
@@ -77,7 +78,7 @@ namespace DataMaintenance.UI
                     //string pwd = txt_pwd.Text;
 
 
-                    if (new UserService().loginCheck(txt_userID.Text, pwd))
+                    if (new UserService().loginCheckWithSqlparameters(txt_userID.Text, pwd))
                     {
                         Frm_main f = new Frm_main();
                         f.Show();
