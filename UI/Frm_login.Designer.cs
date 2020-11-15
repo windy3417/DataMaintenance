@@ -41,6 +41,8 @@
             this.txt_userID = new System.Windows.Forms.TextBox();
             this.ch_changePWD = new System.Windows.Forms.CheckBox();
             this.p_login = new System.Windows.Forms.Panel();
+            this.btn_cancel = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.p_login.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,7 +78,7 @@
             // btn_certain
             // 
             this.btn_certain.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btn_certain.Location = new System.Drawing.Point(123, 113);
+            this.btn_certain.Location = new System.Drawing.Point(65, 113);
             this.btn_certain.Name = "btn_certain";
             this.btn_certain.Size = new System.Drawing.Size(112, 23);
             this.btn_certain.TabIndex = 2;
@@ -155,18 +157,42 @@
             this.p_login.Size = new System.Drawing.Size(256, 87);
             this.p_login.TabIndex = 0;
             // 
+            // btn_cancel
+            // 
+            this.btn_cancel.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_cancel.Location = new System.Drawing.Point(207, 113);
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.Size = new System.Drawing.Size(112, 23);
+            this.btn_cancel.TabIndex = 3;
+            this.btn_cancel.Text = "取消";
+            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(388, 25);
+            this.toolStrip1.TabIndex = 7;
+            this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
+            // 
             // Frm_login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(388, 203);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.p_login);
             this.Controls.Add(this.horizonLine1);
             this.Controls.Add(this.btn_conect);
             this.Controls.Add(this.lbl_information);
+            this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_certain);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Frm_login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "系统登录";
@@ -190,5 +216,7 @@
         private System.Windows.Forms.TextBox txt_userID;
         private System.Windows.Forms.CheckBox ch_changePWD;
         private System.Windows.Forms.Panel p_login;
+        private System.Windows.Forms.Button btn_cancel;
+        private System.Windows.Forms.ToolStrip toolStrip1;
     }
 }

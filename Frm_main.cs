@@ -8,8 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DataMaintenance.Modle;
+using DataMaintenance.Data;
 using Utility;
 using Utility.UI;
+using System.Threading.Tasks;
 
 namespace DataMaintenance
 {
@@ -29,6 +31,21 @@ namespace DataMaintenance
         private void initializeControlsState()
         {
             this.WindowState = FormWindowState.Maximized;
+
+            //状态栏显示已经登录的用户信息
+            tstb_currentUser.Text = CurrentUser.userID;
+            //用户重登录后即刻刷新登录状态栏
+            CurrentUser.authorizPass += CurrentUser_authorizPass;
+        }
+
+        /// <summary>
+        /// 用户重登录后即刻刷新登录状态栏
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CurrentUser_authorizPass(object sender, EventArgs e)
+        {
+            tstb_currentUser.Text = CurrentUser.userID;
         }
         #endregion
 
@@ -110,6 +127,17 @@ namespace DataMaintenance
         {
             Frm_menuList f = new Frm_menuList();
             embedForm(f);
+        }
+
+        private void 重登录ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_login frm_Login = new Frm_login();
+            frm_Login.ShowDialog();
+            if (frm_Login.DialogResult==DialogResult.OK)
+            {
+                //new Task
+                    
+            }
         }
     }
 }

@@ -8,11 +8,15 @@ using System.Text;
 using System.Windows.Forms;
 using DataMaintenance.Services;
 using DataMaintenance.Modle;
+using DataMaintenance.Data;
 using Utility;
 using System.Configuration;
 
 namespace DataMaintenance.UI
 {
+    /// <summary>
+    /// 重注册时要调用该窗体，故设定访问域为public
+    /// </summary>
     public partial class Frm_login : Form
     {
         public Frm_login()
@@ -22,6 +26,10 @@ namespace DataMaintenance.UI
             initializeDatasource();
         }
 
+        #region 变量
+
+        bool loginSuccessFlag;
+        #endregion
 
         #region 初始化
 
@@ -48,18 +56,10 @@ namespace DataMaintenance.UI
 
         #region 事件
 
-        public event EventHandler<AuthorizationEventArgs> authorizPass;
+        
 
-        /// <summary>
-        /// 事件处理方法,调用端实例化事件委托后就执行该方法
-        /// authorizPass?本质上相当于执行方法时的第二次判断
-        /// 引发事件是执行事件处理方法的第一次判断
-        /// </summary>
-        /// <param name="authorizationEventArgs"></param>
-        protected virtual void onAuthorizPass(AuthorizationEventArgs authorizationEventArgs)
-        {
-            authorizPass?.Invoke(this, authorizationEventArgs);
-        }
+       
+      
 
         /// <summary>
         /// 登录确认
@@ -75,16 +75,17 @@ namespace DataMaintenance.UI
                 if (ch_changePWD.Checked == false)
                 {
                     string pwd = Encrypt.Encode(txt_pwd.Text);
-                    //string pwd = txt_pwd.Text;
+                   
 
 
                     if (new UserService().loginCheckWithSqlparameters(txt_userID.Text, pwd))
                     {
-                        Frm_main f = new Frm_main();
-                        f.Show();
+                        CurrentUser.userID = txt_userID.Text;
+                        
+                       
+                        DialogResult = DialogResult.OK;
 
-                        this.Hide();
-                        f.FormClosed += closeLoginForm;
+                      
                     }
 
 
@@ -131,6 +132,17 @@ namespace DataMaintenance.UI
 
         }
 
+        /// <summary>
+        /// //主窗体点击重登录时，调出登录窗体
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void 重登录ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.ShowDialog();
+            //this.Activate();
+        }
+
 
         /// <summary>
         /// 登录前数据库连接设置
@@ -141,16 +153,30 @@ namespace DataMaintenance.UI
         {
             Utility.UI.Frm_DoubleDB_loginConfig f = new Utility.UI.Frm_DoubleDB_loginConfig();
 
+            //以模式窗体显示
             f.ShowDialog();
         }
 
         #endregion
 
+        #region 窗体操作
 
-
+        /// <summary>
+        /// 子窗体关闭后，联动关闭母窗体
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void closeLoginForm(object sender, FormClosedEventArgs e)
         {
-            this.Close();
+            if (loginSuccessFlag)
+            {
+                this.Hide();
+            }
+            else
+            {
+                this.Close();
+            }
+           
         }
 
 
@@ -166,6 +192,8 @@ namespace DataMaintenance.UI
                 System.Windows.Forms.SendKeys.Send("{tab}");
             }
         }
+        #endregion
+
 
         /// <summary>
         /// 检测数据库是否连接
@@ -201,6 +229,24 @@ namespace DataMaintenance.UI
             }
             return true;
 
+
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
+            if (loginSuccessFlag)
+            {
+                this.Hide();
+                //this.DialogResult
+            }
+            else
+            {
+                this.Close();
+            }
+        }
+
+        private void toolStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
 
         }
     }

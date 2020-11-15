@@ -16,7 +16,21 @@ namespace DataMaintenance
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Frm_login());
+
+            Frm_login frm_Login = new Frm_login();
+
+            frm_Login.ShowDialog();
+            if (frm_Login.DialogResult == DialogResult.OK)
+            {
+                Application.Run(new Frm_main());
+            }
+            else
+            {
+                Application.Exit();
+            }
+
+
         }
+
     }
 }
