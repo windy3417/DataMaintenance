@@ -36,6 +36,7 @@ namespace DataMaintenance
             tstb_currentUser.Text = CurrentUser.userID;
             //用户重登录后即刻刷新登录状态栏
             CurrentUser.authorizPass += CurrentUser_authorizPass;
+
         }
 
         /// <summary>
@@ -138,6 +139,12 @@ namespace DataMaintenance
                 //new Task
                     
             }
+        }
+
+        private void 权限设定ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_authorize f = new Frm_authorize();
+            embedForm(f);
         }
     }
 }

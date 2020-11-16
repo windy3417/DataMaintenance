@@ -7,7 +7,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataMaintenance.Modle
 {
-   public  class MenuModle
+    [Table("menus")]
+    public  class MenuModle
     {
         [Key][DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int menuID { get; set; }
