@@ -17,6 +17,9 @@ namespace DataMaintenance.UI
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 管理员信息设置
+        /// </summary>
       protected  override void adminSetUp()
         {
             using (var db = new DataMaitenanceContext())

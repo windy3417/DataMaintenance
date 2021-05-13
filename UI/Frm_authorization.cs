@@ -36,30 +36,27 @@ namespace DataMaintenance.UI
            
         }
 
-        #region 事件
-
-        public event EventHandler<AuthorizationEventArgs> authorizPass;
+        #region 自定义事件
 
         /// <summary>
-        /// 事件处理方法,调用端实例化事件委托后就执行该方法
-        /// authorizPass?本质上相当于执行方法时的第二次判断
-        /// 引发事件是执行事件处理方法的第一次判断
+        /// 定义事件
         /// </summary>
-        /// <param name="authorizationEventArgs"></param>
-        protected virtual void onAuthorizPass(AuthorizationEventArgs authorizationEventArgs)
-        {
-            authorizPass?.Invoke(this, authorizationEventArgs);
-        }
+        public event EventHandler<AuthorizationEventArgs> authorizPass;
 
-        #endregion
 
+        /// <summary>
+        /// 引发事件
+        /// 授权修改权限，授权通过后则引发事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_certain_Click(object sender, EventArgs e)
         {
             //this.DialogResult = DialogResult.OK;
-            if (txt_pwd.Text!="")
+            if (txt_pwd.Text != "")
             {
                 string pwd = Encrypt.Encode(txt_pwd.Text);
-              
+
 
                 if (new UserService().loginCheck(cmb_user.SelectedValue.ToString(), pwd))
                 {
@@ -67,14 +64,14 @@ namespace DataMaintenance.UI
                     AuthorizationEventArgs authorizationEventArgs = new AuthorizationEventArgs();
                     authorizationEventArgs.userAndPwdRight = true;
                     onAuthorizPass(authorizationEventArgs);
-                    
+
                     this.Close();
                 }
 
-                
+
                 else
                 {
-                   
+
                     lbl_information.Text = "";
                     lbl_information.Text = lbl_information.Text + "您输入受权密码不正确，请重新输入";
 
@@ -85,10 +82,35 @@ namespace DataMaintenance.UI
             {
                 lbl_information.Text = "";
                 lbl_information.Text = "请输入受权密码";
-               
+
             }
-        
+
         }
+
+        /// <summary>
+        /// 事件处理方法
+        /// 调用端实例化事件委托后就执行该方法
+        /// authorizPass?本质上相当于执行方法时的第二次判断
+        /// 引发事件是执行事件处理方法的第一次判断
+        /// </summary>
+        /// <param name="authorizationEventArgs"></param>
+        protected virtual void onAuthorizPass(AuthorizationEventArgs authorizationEventArgs)
+        {
+            authorizPass?.Invoke(this, authorizationEventArgs);
+        }
+
+        /// <summary>
+        /// 事件数据类，传递验证成功数据，类似于模型类，用于存储数据
+        /// </summary>
+        public class AuthorizationEventArgs : EventArgs
+
+        {
+            public bool userAndPwdRight { get; set; }
+        }
+
+        #endregion
+
+
 
         private void btn_cancel_Click(object sender, EventArgs e)
         {
@@ -98,12 +120,5 @@ namespace DataMaintenance.UI
     }
 
 
-    /// <summary>
-    /// 事件数据类，传递验证成功数据，类似于模型类，用于存储数据
-    /// </summary>
-    public class AuthorizationEventArgs : EventArgs
-
-    {
-        public bool userAndPwdRight { get; set; }
-    }
+    
 }

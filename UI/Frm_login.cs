@@ -32,7 +32,9 @@ namespace DataMaintenance.UI
         #endregion
 
         #region 初始化
-
+        /// <summary>
+        /// 初始化控件状态
+        /// </summary>
         void intializeControlState()
         {
             lbl_information.Visible = false;
@@ -57,8 +59,7 @@ namespace DataMaintenance.UI
         #region 事件
 
         
-
-       
+              
       
 
         /// <summary>
@@ -107,7 +108,7 @@ namespace DataMaintenance.UI
                     string pwd = Encrypt.Encode(txt_pwd.Text);
                     if (new UserService().loginCheck(txt_userID.Text, pwd))
                     {
-                        Frm_main f = new Frm_main();
+                        FrmMain f = new FrmMain();
                         f.Show();
 
                         this.Hide();
@@ -200,7 +201,8 @@ namespace DataMaintenance.UI
         /// </summary>
         void checkDatabaseConect()
         {
-            if (ConfigurationManager.ConnectionStrings["plugConection"] != null & ConfigurationManager.ConnectionStrings["myConection"] != null)
+            if (ConfigurationManager.ConnectionStrings["plugConection"] != null
+                & ConfigurationManager.ConnectionStrings["myConection"] != null)
             {
                 btn_conect.Visible = false;
             }

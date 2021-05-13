@@ -17,17 +17,23 @@ namespace DataMaintenance
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            Frm_login frm_Login = new Frm_login();
+            //#region 登录检测
+            //Frm_login frm_Login = new Frm_login();
 
-            frm_Login.ShowDialog();
-            if (frm_Login.DialogResult == DialogResult.OK)
-            {
-                Application.Run(new Frm_main());
-            }
-            else
-            {
-                Application.Exit();
-            }
+            //frm_Login.ShowDialog();
+            //if (frm_Login.DialogResult == DialogResult.OK)
+            //{
+            //    Application.Run(new Frm_main());
+            //}
+            //else
+            //{
+            //    Application.Exit();
+            //}
+
+            //#endregion
+
+
+            Application.Run(new FrmMain());
 
 
         }

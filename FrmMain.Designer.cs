@@ -1,6 +1,6 @@
 ﻿namespace DataMaintenance
 {
-    partial class Frm_main
+    partial class FrmMain
     {
         /// <summary>
         /// 必需的设计器变量。
@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm_main));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.ms_main = new System.Windows.Forms.MenuStrip();
             this.刀具管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.属性修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.外借导入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.清除锁定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.客商解锁ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.凭证解锁ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -45,13 +46,14 @@
             this.数据库设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.权限生成ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.菜单清单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.权限设定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.重登录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ts_foot = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tstb_currentUser = new System.Windows.Forms.ToolStripTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.权限设定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmUnitCostQuery = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_main.SuspendLayout();
             this.panel1.SuspendLayout();
             this.ts_foot.SuspendLayout();
@@ -75,7 +77,9 @@
             // 刀具管理ToolStripMenuItem
             // 
             this.刀具管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.属性修改ToolStripMenuItem});
+            this.属性修改ToolStripMenuItem,
+            this.外借导入ToolStripMenuItem,
+            this.tsmUnitCostQuery});
             this.刀具管理ToolStripMenuItem.Name = "刀具管理ToolStripMenuItem";
             this.刀具管理ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.刀具管理ToolStripMenuItem.Text = "刀具管理";
@@ -84,9 +88,16 @@
             // 属性修改ToolStripMenuItem
             // 
             this.属性修改ToolStripMenuItem.Name = "属性修改ToolStripMenuItem";
-            this.属性修改ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.属性修改ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.属性修改ToolStripMenuItem.Text = "属性修改";
             this.属性修改ToolStripMenuItem.Click += new System.EventHandler(this.属性修改ToolStripMenuItem_Click);
+            // 
+            // 外借导入ToolStripMenuItem
+            // 
+            this.外借导入ToolStripMenuItem.Name = "外借导入ToolStripMenuItem";
+            this.外借导入ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.外借导入ToolStripMenuItem.Text = "外借导入";
+            this.外借导入ToolStripMenuItem.Click += new System.EventHandler(this.外借导入ToolStripMenuItem_Click);
             // 
             // 清除锁定ToolStripMenuItem
             // 
@@ -150,7 +161,7 @@
             // 人员档案ToolStripMenuItem
             // 
             this.人员档案ToolStripMenuItem.Name = "人员档案ToolStripMenuItem";
-            this.人员档案ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.人员档案ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.人员档案ToolStripMenuItem.Text = "人员档案";
             this.人员档案ToolStripMenuItem.Click += new System.EventHandler(this.人员档案ToolStripMenuItem_Click);
             // 
@@ -168,23 +179,30 @@
             // 数据库设置ToolStripMenuItem
             // 
             this.数据库设置ToolStripMenuItem.Name = "数据库设置ToolStripMenuItem";
-            this.数据库设置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.数据库设置ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.数据库设置ToolStripMenuItem.Text = "数据库设置";
             this.数据库设置ToolStripMenuItem.Click += new System.EventHandler(this.数据库设置ToolStripMenuItem1_Click);
             // 
             // 权限生成ToolStripMenuItem
             // 
             this.权限生成ToolStripMenuItem.Name = "权限生成ToolStripMenuItem";
-            this.权限生成ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.权限生成ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.权限生成ToolStripMenuItem.Text = "权限表";
             this.权限生成ToolStripMenuItem.Click += new System.EventHandler(this.权限生成ToolStripMenuItem_Click);
             // 
             // 菜单清单ToolStripMenuItem
             // 
             this.菜单清单ToolStripMenuItem.Name = "菜单清单ToolStripMenuItem";
-            this.菜单清单ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.菜单清单ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.菜单清单ToolStripMenuItem.Text = "菜单清单";
             this.菜单清单ToolStripMenuItem.Click += new System.EventHandler(this.菜单清单ToolStripMenuItem_Click);
+            // 
+            // 权限设定ToolStripMenuItem
+            // 
+            this.权限设定ToolStripMenuItem.Name = "权限设定ToolStripMenuItem";
+            this.权限设定ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.权限设定ToolStripMenuItem.Text = "权限设定";
+            this.权限设定ToolStripMenuItem.Click += new System.EventHandler(this.权限设定ToolStripMenuItem_Click);
             // 
             // 重登录ToolStripMenuItem
             // 
@@ -239,14 +257,14 @@
             this.tabControl1.Size = new System.Drawing.Size(786, 271);
             this.tabControl1.TabIndex = 0;
             // 
-            // 权限设定ToolStripMenuItem
+            // tsmUnitCostQuery
             // 
-            this.权限设定ToolStripMenuItem.Name = "权限设定ToolStripMenuItem";
-            this.权限设定ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.权限设定ToolStripMenuItem.Text = "权限设定";
-            this.权限设定ToolStripMenuItem.Click += new System.EventHandler(this.权限设定ToolStripMenuItem_Click);
+            this.tsmUnitCostQuery.Name = "tsmUnitCostQuery";
+            this.tsmUnitCostQuery.Size = new System.Drawing.Size(180, 22);
+            this.tsmUnitCostQuery.Text = "单价查询";
+            this.tsmUnitCostQuery.Click += new System.EventHandler(this.tsmUnitCostQuery_Click);
             // 
-            // Frm_main
+            // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -255,7 +273,7 @@
             this.Controls.Add(this.ms_main);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.ms_main;
-            this.Name = "Frm_main";
+            this.Name = "FrmMain";
             this.Text = "数据维护";
             this.ms_main.ResumeLayout(false);
             this.ms_main.PerformLayout();
@@ -295,6 +313,8 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabel1;
         private System.Windows.Forms.ToolStripTextBox tstb_currentUser;
         private System.Windows.Forms.ToolStripMenuItem 权限设定ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 外借导入ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmUnitCostQuery;
     }
 }
 

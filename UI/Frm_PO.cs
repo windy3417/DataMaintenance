@@ -9,7 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using Utility.Sql;
 using DataMaintenance.Modle;
-
+using static DataMaintenance.UI.Frm_authorization;
 
 namespace DataMaintenance.UI
 {
@@ -61,8 +61,7 @@ namespace DataMaintenance.UI
                     f.Close();
                 }
               
-            
-           
+                       
 
         }
 

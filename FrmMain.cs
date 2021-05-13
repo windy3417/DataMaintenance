@@ -15,9 +15,9 @@ using System.Threading.Tasks;
 
 namespace DataMaintenance
 {
-    public partial class Frm_main : Form
+    public partial class FrmMain : Form
     {
-        public Frm_main()
+        public FrmMain()
         {
             InitializeComponent();
             initializeControlsState();
@@ -87,7 +87,7 @@ namespace DataMaintenance
 
         private void 数据库设置ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Frm_DoubleDataBaseConfig  config = new Frm_DoubleDataBaseConfig();
+           FrmConfig config = new FrmConfig();
             embedForm(config);
         }
 
@@ -132,7 +132,7 @@ namespace DataMaintenance
 
         private void 重登录ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Frm_login frm_Login = new Frm_login();
+            UI.Frm_login frm_Login = new UI.Frm_login();
             frm_Login.ShowDialog();
             if (frm_Login.DialogResult==DialogResult.OK)
             {
@@ -145,6 +145,17 @@ namespace DataMaintenance
         {
             Frm_authorize f = new Frm_authorize();
             embedForm(f);
+        }
+
+        private void 外借导入ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmImport f = new FrmImport();
+            embedForm(f);
+        }
+
+        private void tsmUnitCostQuery_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
