@@ -31,6 +31,11 @@ namespace DataMaintenance.UI
             this.Parent.Dispose();
         }
 
+        /// <summary>
+        /// 修改资产属性
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btn_mend_Click(object sender, EventArgs e)
         {
             int isAset;
@@ -58,7 +63,7 @@ namespace DataMaintenance.UI
 
             try
             {
-                int influnceRows = Sqlhelper.UpdateWithparameters(sql, sqlParameterList.ToArray());
+                int influnceRows = Sqlhelper.UpdateWithparameters(sql, Sqlhelper.DataSourceType.u8, sqlParameterList.ToArray());
                 MessageBox.Show("更新" + influnceRows + "条记录", "数据修改提示");
             }
             catch (Exception ex)

@@ -36,7 +36,7 @@ namespace DataMaintenance.UI
         {
             Utility.Files.ImportFromExcel importFromExcel = new Utility.Files.ImportFromExcel();
           
-            importFromExcel.ImportFileFromExcel(DgvImport, this.dataTable);
+            importFromExcel.ReadExcelWithNPOI(DgvImport, this.dataTable);
 
         }
 
