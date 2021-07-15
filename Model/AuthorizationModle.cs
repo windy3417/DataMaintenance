@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataMaintenance.Modle
+namespace DataMaintenance.Model
 {
     [Table("authorization")]
    public class AuthorizationModle

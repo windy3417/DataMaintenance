@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DataMaintenance.Services;
-using DataMaintenance.Modle;
+using DataMaintenance.Model;
 using DataMaintenance.Data;
 using Utility;
 using System.Configuration;

@@ -33,6 +33,7 @@
             this.刀具管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.属性修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.外借导入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmUnitCostQuery = new System.Windows.Forms.ToolStripMenuItem();
             this.清除锁定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.客商解锁ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.凭证解锁ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,7 +54,7 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tstb_currentUser = new System.Windows.Forms.ToolStripTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tsmUnitCostQuery = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmSpecifiactionCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_main.SuspendLayout();
             this.panel1.SuspendLayout();
             this.ts_foot.SuspendLayout();
@@ -79,7 +80,8 @@
             this.刀具管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.属性修改ToolStripMenuItem,
             this.外借导入ToolStripMenuItem,
-            this.tsmUnitCostQuery});
+            this.tsmUnitCostQuery,
+            this.tsmSpecifiactionCheck});
             this.刀具管理ToolStripMenuItem.Name = "刀具管理ToolStripMenuItem";
             this.刀具管理ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
             this.刀具管理ToolStripMenuItem.Text = "刀具管理";
@@ -98,6 +100,13 @@
             this.外借导入ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.外借导入ToolStripMenuItem.Text = "外借导入";
             this.外借导入ToolStripMenuItem.Click += new System.EventHandler(this.外借导入ToolStripMenuItem_Click);
+            // 
+            // tsmUnitCostQuery
+            // 
+            this.tsmUnitCostQuery.Name = "tsmUnitCostQuery";
+            this.tsmUnitCostQuery.Size = new System.Drawing.Size(180, 22);
+            this.tsmUnitCostQuery.Text = "单价查询";
+            this.tsmUnitCostQuery.Click += new System.EventHandler(this.tsmUnitCostQuery_Click);
             // 
             // 清除锁定ToolStripMenuItem
             // 
@@ -257,12 +266,12 @@
             this.tabControl1.Size = new System.Drawing.Size(786, 271);
             this.tabControl1.TabIndex = 0;
             // 
-            // tsmUnitCostQuery
+            // tsmSpecifiactionCheck
             // 
-            this.tsmUnitCostQuery.Name = "tsmUnitCostQuery";
-            this.tsmUnitCostQuery.Size = new System.Drawing.Size(180, 22);
-            this.tsmUnitCostQuery.Text = "单价查询";
-            this.tsmUnitCostQuery.Click += new System.EventHandler(this.tsmUnitCostQuery_Click);
+            this.tsmSpecifiactionCheck.Name = "tsmSpecifiactionCheck";
+            this.tsmSpecifiactionCheck.Size = new System.Drawing.Size(180, 22);
+            this.tsmSpecifiactionCheck.Text = "规格检视";
+            this.tsmSpecifiactionCheck.Click += new System.EventHandler(this.tsmSpecifiactionCheck_Click);
             // 
             // FrmMain
             // 
@@ -315,6 +324,7 @@
         private System.Windows.Forms.ToolStripMenuItem 权限设定ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 外借导入ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmUnitCostQuery;
+        private System.Windows.Forms.ToolStripMenuItem tsmSpecifiactionCheck;
     }
 }
 

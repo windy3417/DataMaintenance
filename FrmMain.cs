@@ -7,11 +7,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using DataMaintenance.Modle;
+using DataMaintenance.Model;
 using DataMaintenance.Data;
 using Utility;
 using Utility.UI;
+using DataMaintenance.UI;
 using System.Threading.Tasks;
+using DataMaintenance.UI.Tools;
 
 namespace DataMaintenance
 {
@@ -156,6 +158,12 @@ namespace DataMaintenance
         private void tsmUnitCostQuery_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void tsmSpecifiactionCheck_Click(object sender, EventArgs e)
+        {
+            FrmSpecificationCheck f = new FrmSpecificationCheck();
+            embedForm(f);
         }
     }
 }

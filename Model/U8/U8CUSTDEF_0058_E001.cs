@@ -1,4 +1,4 @@
-namespace DataMaintenance.Modle.U8
+namespace DataMaintenance.Model.U8
 {
     using System;
     using System.Collections.Generic;

@@ -5,7 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using DataMaintenance.Modle;
+using DataMaintenance.Model;
 using DataMaintenance;
 using System.Linq;
 

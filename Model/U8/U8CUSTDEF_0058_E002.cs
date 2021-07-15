@@ -1,4 +1,4 @@
-namespace DataMaintenance.Modle
+namespace DataMaintenance.Model
 {
     using System;
     using System.Collections.Generic;

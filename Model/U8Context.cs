@@ -1,10 +1,12 @@
-namespace DataMaintenance.Modle
+namespace DataMaintenance.Model
 {
     using System;
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-    using DataMaintenance.Modle.U8;
+ 
+    using DataMaintenance.Model.U8;
+    using DataMaintenance.Model.U8;
 
     public partial class U8Context : DbContext
     {
@@ -17,7 +19,8 @@ namespace DataMaintenance.Modle
         public virtual DbSet<U8CUSTDEF_0058_E002> U8CUSTDEF_0058_E002 { get; set; }
         //外发需返子表
         public virtual DbSet<U8CUSTDEF_0058_E001> U8CUSTDEF_0058_E001 { get; set; }
+        public virtual DbSet<Inventory> Inventory { get; set; }
 
-    
+
     }
 }

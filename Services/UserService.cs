@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using DataMaintenance.Modle;
+using DataMaintenance.Model;
 using System.Data;
 using System.Data.SqlClient;
 using static Utility.Sql.Sqlhelper;

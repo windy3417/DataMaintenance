@@ -4,7 +4,7 @@ namespace DataMaintenance.Model.IT
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-    using DataMaintenance.Modle;
+    using DataMaintenance.Model;
 
     public partial class ItContext : DbContext
     {

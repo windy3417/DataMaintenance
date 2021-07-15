@@ -6,7 +6,7 @@ using System.Windows.Forms;
 using System.Linq;
 using System.Linq.Expressions;
 using DataMaintenance;
-using DataMaintenance.Modle;
+using DataMaintenance.Model;
 using System.Collections.Generic;
 using System.Configuration;
 using Utility;

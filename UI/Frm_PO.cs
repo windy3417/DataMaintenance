@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Utility.Sql;
-using DataMaintenance.Modle;
+using DataMaintenance.Model;
 using static DataMaintenance.UI.Frm_authorization;
 
 namespace DataMaintenance.UI

@@ -1,5 +1,5 @@
 ﻿using DataMaintenance.Model.IT;
-using DataMaintenance.Modle;
+using DataMaintenance.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

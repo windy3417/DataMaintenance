@@ -121,6 +121,7 @@
     <Compile Include="Model\U8Context.cs" />
     <Compile Include="Model\MenuAuthorizationModle.cs" />
     <Compile Include="Model\MenuModle.cs" />
+    <Compile Include="Model\U8\Inventory.cs" />
     <Compile Include="Model\U8\U8CUSTDEF_0058_E001.cs" />
     <Compile Include="Model\U8\U8CUSTDEF_0058_E002.cs" />
     <Compile Include="Model\UserModle.cs" />
@@ -194,6 +195,12 @@
     <Compile Include="UI\Frm_toolProperty.Designer.cs">
       <DependentUpon>Frm_toolProperty.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Tools\FrmSpecificationCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Tools\FrmSpecificationCheck.Designer.cs">
+      <DependentUpon>FrmSpecificationCheck.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -240,6 +247,9 @@
     <EmbeddedResource Include="UI\Frm_toolProperty.resx">
       <DependentUpon>Frm_toolProperty.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Tools\FrmSpecificationCheck.resx">
+      <DependentUpon>FrmSpecificationCheck.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="DataMaintenance_TemporaryKey.pfx" />
     <None Include="packages.config" />
@@ -252,6 +262,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\balance check.png" />
     <Content Include="Resources\template\外发需返资产清单导入模板.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
