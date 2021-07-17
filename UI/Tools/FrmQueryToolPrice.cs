@@ -15,5 +15,10 @@ namespace DataMaintenance.UI
         {
             InitializeComponent();
         }
+
+        private void tsmGetToolUnitPrice_Click(object sender, EventArgs e)
+        {
+        
+        }
     }
 }

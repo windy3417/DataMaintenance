@@ -30,7 +30,7 @@
     <SuiteName>信息平台管理</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>10</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -135,16 +135,16 @@
     <Compile Include="UI\FrmConfig.Designer.cs">
       <DependentUpon>FrmConfig.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\FrmImport.cs">
+    <Compile Include="UI\Tools\FrmImport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\FrmImport.Designer.cs">
+    <Compile Include="UI\Tools\FrmImport.Designer.cs">
       <DependentUpon>FrmImport.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\FrmQueryToolPrice.cs">
+    <Compile Include="UI\Tools\FrmQueryToolPrice.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\FrmQueryToolPrice.Designer.cs">
+    <Compile Include="UI\Tools\FrmQueryToolPrice.Designer.cs">
       <DependentUpon>FrmQueryToolPrice.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Frm_authorize.cs">
@@ -189,11 +189,17 @@
     <Compile Include="UI\Frm_PO.Designer.cs">
       <DependentUpon>Frm_PO.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Frm_toolProperty.cs">
+    <Compile Include="UI\Tools\Frm_toolProperty.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Frm_toolProperty.Designer.cs">
+    <Compile Include="UI\Tools\Frm_toolProperty.Designer.cs">
       <DependentUpon>Frm_toolProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Tools\FrmDupliateDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Tools\FrmDupliateDetails.Designer.cs">
+      <DependentUpon>FrmDupliateDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Tools\FrmSpecificationCheck.cs">
       <SubType>Form</SubType>
@@ -220,10 +226,10 @@
     <EmbeddedResource Include="UI\FrmConfig.resx">
       <DependentUpon>FrmConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\FrmImport.resx">
+    <EmbeddedResource Include="UI\Tools\FrmImport.resx">
       <DependentUpon>FrmImport.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\FrmQueryToolPrice.resx">
+    <EmbeddedResource Include="UI\Tools\FrmQueryToolPrice.resx">
       <DependentUpon>FrmQueryToolPrice.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Frm_authorize.resx">
@@ -244,8 +250,11 @@
     <EmbeddedResource Include="UI\Frm_PO.resx">
       <DependentUpon>Frm_PO.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Frm_toolProperty.resx">
+    <EmbeddedResource Include="UI\Tools\Frm_toolProperty.resx">
       <DependentUpon>Frm_toolProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Tools\FrmDupliateDetails.resx">
+      <DependentUpon>FrmDupliateDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Tools\FrmSpecificationCheck.resx">
       <DependentUpon>FrmSpecificationCheck.cs</DependentUpon>
@@ -263,6 +272,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <None Include="Resources\balance check.png" />
+    <None Include="Resources\export.gif" />
     <Content Include="Resources\template\外发需返资产清单导入模板.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -55,6 +55,7 @@
             this.tsmGetToolUnitPrice.Name = "tsmGetToolUnitPrice";
             this.tsmGetToolUnitPrice.Size = new System.Drawing.Size(52, 22);
             this.tsmGetToolUnitPrice.Text = "取价";
+            this.tsmGetToolUnitPrice.Click += new System.EventHandler(this.tsmGetToolUnitPrice_Click);
             // 
             // toolStripButton1
             // 
