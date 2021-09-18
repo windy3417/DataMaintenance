@@ -84,6 +84,8 @@ namespace DataMaintenance.UI
             dbConnect.ReadConfig(u8FileName, this.lblU8status);
         }
 
+        #region U8数据库
+
         private void btnU8test_Click(object sender, EventArgs e)
         {
             ConnectStringModel m = new ConnectStringModel();
@@ -116,5 +118,53 @@ namespace DataMaintenance.UI
             Utility.Files.JsonOperate jsonOperate = new Utility.Files.JsonOperate();
             jsonOperate.ModelToJsonFile(fileName, m);
         }
+
+
+        #endregion
+
+
+        #region ufsystem库连接
+        /// <summary>
+        /// ufsystem库的连接
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnUFsystemTest_Click(object sender, EventArgs e)
+        {
+            ConnectStringModel m = new ConnectStringModel();
+
+            m.DataSource = this.dbUfSystem.TxtServer.Text;
+            m.DataBase = this.dbUfSystem.TxtDataBase.Text;
+            m.UserName = this.dbUfSystem.TxtUser.Text;
+            m.Pwd = this.dbUfSystem.TxtPWD.Text;
+
+            Utility.DAL.DbConnect dbConnect = new Utility.DAL.DbConnect();
+            dbConnect.DbConnectTest(m);
+        }
+
+        private void btnSaveUfSystemp_Click(object sender, EventArgs e)
+        {
+
+            ConnectStringModel m = new ConnectStringModel();
+
+            m.DataSource = this.dbUfSystem.TxtServer.Text;
+            m.DataBase = this.dbUfSystem.TxtDataBase.Text;
+            m.UserName = this.dbUfSystem.TxtUser.Text;
+            m.Pwd = this.dbUfSystem.TxtPWD.Text;
+
+            //存储到AppConfig文件中
+            DbConnect dbConnect = new DbConnect();
+            dbConnect.DbConnectStringSave(m, DataSourceType.ufsystem.ToString());
+
+            //存储为Json文件
+            m.Pwd = Utility.Encrypt.Encode("mixture"); //不存储真实密码
+            string fileName = Environment.CurrentDirectory + "\\" + DataSourceType.u8.ToString() + "DBConfig.txt";
+            Utility.Files.JsonOperate jsonOperate = new Utility.Files.JsonOperate();
+            jsonOperate.ModelToJsonFile(fileName, m);
+        }
+
+        #endregion
+
+
     }
 }

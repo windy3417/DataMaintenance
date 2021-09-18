@@ -11,7 +11,7 @@ using DataMaintenance.Model;
 using DataMaintenance.Data;
 using Utility;
 using Utility.UI;
-using DataMaintenance.UI;
+using DataMaintenance.UI.ClearLocker;
 using System.Threading.Tasks;
 using DataMaintenance.UI.Tools;
 
@@ -163,6 +163,12 @@ namespace DataMaintenance
         private void tsmSpecifiactionCheck_Click(object sender, EventArgs e)
         {
             FrmSpecificationCheck f = new FrmSpecificationCheck();
+            embedForm(f);
+        }
+
+        private void 任务清理ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmClearU8Task f = new FrmClearU8Task();
             embedForm(f);
         }
     }

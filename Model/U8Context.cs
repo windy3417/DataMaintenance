@@ -6,7 +6,7 @@ namespace DataMaintenance.Model
     using System.Linq;
  
     using DataMaintenance.Model.U8;
-    using DataMaintenance.Model.U8;
+
 
     public partial class U8Context : DbContext
     {

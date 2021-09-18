@@ -114,21 +114,32 @@
       <DependentUpon>202011120147389_changeColumn.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Model\DataMaitenanceContext.cs" />
-    <Compile Include="Model\AuthorizationModle.cs" />
+    <Compile Include="Model\IT\DataMaitenanceContext.cs" />
+    <Compile Include="Model\IT\AuthorizationModle.cs" />
     <Compile Include="Model\IT\MaxKeys.cs" />
     <Compile Include="Model\ItContext.cs" />
+    <Compile Include="Model\UfSsytmeContext.cs" />
     <Compile Include="Model\U8Context.cs" />
-    <Compile Include="Model\MenuAuthorizationModle.cs" />
-    <Compile Include="Model\MenuModle.cs" />
+    <Compile Include="Model\IT\MenuAuthorizationModle.cs" />
+    <Compile Include="Model\IT\MenuModle.cs" />
     <Compile Include="Model\U8\Inventory.cs" />
     <Compile Include="Model\U8\U8CUSTDEF_0058_E001.cs" />
     <Compile Include="Model\U8\U8CUSTDEF_0058_E002.cs" />
-    <Compile Include="Model\UserModle.cs" />
+    <Compile Include="Model\IT\UserModel.cs" />
+    <Compile Include="Model\Ufsystem\UA_Auth.cs" />
+    <Compile Include="Model\Ufsystem\ua_Task.cs" />
+    <Compile Include="Model\Ufsystem\UA_TaskLog.cs" />
+    <Compile Include="Model\Ufsystem\UA_User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MenuService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="UI\ClearLocker\FrmClearU8Task.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ClearLocker\FrmClearU8Task.Designer.cs">
+      <DependentUpon>FrmClearU8Task.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\FrmConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -223,6 +234,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\ClearLocker\FrmClearU8Task.resx">
+      <DependentUpon>FrmClearU8Task.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\FrmConfig.resx">
       <DependentUpon>FrmConfig.cs</DependentUpon>
     </EmbeddedResource>
@@ -273,6 +287,7 @@
     </Compile>
     <None Include="Resources\balance check.png" />
     <None Include="Resources\export.gif" />
+    <None Include="Resources\delete multipleRows.bmp" />
     <Content Include="Resources\template\外发需返资产清单导入模板.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -34,6 +34,7 @@
             this.属性修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.外借导入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmUnitCostQuery = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmSpecifiactionCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.清除锁定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.客商解锁ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.凭证解锁ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +55,6 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tstb_currentUser = new System.Windows.Forms.ToolStripTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tsmSpecifiactionCheck = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_main.SuspendLayout();
             this.panel1.SuspendLayout();
             this.ts_foot.SuspendLayout();
@@ -90,23 +90,30 @@
             // 属性修改ToolStripMenuItem
             // 
             this.属性修改ToolStripMenuItem.Name = "属性修改ToolStripMenuItem";
-            this.属性修改ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.属性修改ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.属性修改ToolStripMenuItem.Text = "属性修改";
             this.属性修改ToolStripMenuItem.Click += new System.EventHandler(this.属性修改ToolStripMenuItem_Click);
             // 
             // 外借导入ToolStripMenuItem
             // 
             this.外借导入ToolStripMenuItem.Name = "外借导入ToolStripMenuItem";
-            this.外借导入ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.外借导入ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
             this.外借导入ToolStripMenuItem.Text = "外借导入";
             this.外借导入ToolStripMenuItem.Click += new System.EventHandler(this.外借导入ToolStripMenuItem_Click);
             // 
             // tsmUnitCostQuery
             // 
             this.tsmUnitCostQuery.Name = "tsmUnitCostQuery";
-            this.tsmUnitCostQuery.Size = new System.Drawing.Size(180, 22);
+            this.tsmUnitCostQuery.Size = new System.Drawing.Size(124, 22);
             this.tsmUnitCostQuery.Text = "单价查询";
             this.tsmUnitCostQuery.Click += new System.EventHandler(this.tsmUnitCostQuery_Click);
+            // 
+            // tsmSpecifiactionCheck
+            // 
+            this.tsmSpecifiactionCheck.Name = "tsmSpecifiactionCheck";
+            this.tsmSpecifiactionCheck.Size = new System.Drawing.Size(124, 22);
+            this.tsmSpecifiactionCheck.Text = "规格检视";
+            this.tsmSpecifiactionCheck.Click += new System.EventHandler(this.tsmSpecifiactionCheck_Click);
             // 
             // 清除锁定ToolStripMenuItem
             // 
@@ -122,27 +129,28 @@
             // 客商解锁ToolStripMenuItem
             // 
             this.客商解锁ToolStripMenuItem.Name = "客商解锁ToolStripMenuItem";
-            this.客商解锁ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.客商解锁ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.客商解锁ToolStripMenuItem.Text = "客商解锁";
             this.客商解锁ToolStripMenuItem.Click += new System.EventHandler(this.客商解锁ToolStripMenuItem_Click);
             // 
             // 凭证解锁ToolStripMenuItem
             // 
             this.凭证解锁ToolStripMenuItem.Name = "凭证解锁ToolStripMenuItem";
-            this.凭证解锁ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.凭证解锁ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.凭证解锁ToolStripMenuItem.Text = "凭证解锁";
             // 
             // 科目解锁ToolStripMenuItem
             // 
             this.科目解锁ToolStripMenuItem.Name = "科目解锁ToolStripMenuItem";
-            this.科目解锁ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.科目解锁ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.科目解锁ToolStripMenuItem.Text = "科目解锁";
             // 
             // 任务清理ToolStripMenuItem
             // 
             this.任务清理ToolStripMenuItem.Name = "任务清理ToolStripMenuItem";
-            this.任务清理ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.任务清理ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.任务清理ToolStripMenuItem.Text = "任务清理";
+            this.任务清理ToolStripMenuItem.Click += new System.EventHandler(this.任务清理ToolStripMenuItem_Click);
             // 
             // 授权ToolStripMenuItem
             // 
@@ -265,13 +273,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(786, 271);
             this.tabControl1.TabIndex = 0;
-            // 
-            // tsmSpecifiactionCheck
-            // 
-            this.tsmSpecifiactionCheck.Name = "tsmSpecifiactionCheck";
-            this.tsmSpecifiactionCheck.Size = new System.Drawing.Size(180, 22);
-            this.tsmSpecifiactionCheck.Text = "规格检视";
-            this.tsmSpecifiactionCheck.Click += new System.EventHandler(this.tsmSpecifiactionCheck_Click);
             // 
             // FrmMain
             // 
