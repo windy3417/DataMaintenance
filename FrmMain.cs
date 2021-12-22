@@ -69,7 +69,8 @@ namespace DataMaintenance
      
         private void 客商解锁ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FrmDeleteLockedVendor f = new FrmDeleteLockedVendor();
+            embedForm(f);
         }
 
         private void 采购订单ToolStripMenuItem_Click(object sender, EventArgs e)

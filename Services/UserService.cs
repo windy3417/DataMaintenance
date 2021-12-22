@@ -24,7 +24,7 @@ namespace DataMaintenance.Services
                 new SqlParameter("@queryAll",1 )
             };
 
-            SqlDataReader sqlDataReader = Utility.Sql.Sqlhelper.GetSqlDataReader(sql, DataSourceType.plug, sqlParameters);
+            SqlDataReader sqlDataReader = Utility.Sql.Sqlhelper.GetSqlDataReader(sql, sqlParameters, DataSourceType.plug );
             while (sqlDataReader.Read())
             {
                 UserModle m = new UserModle();
@@ -80,7 +80,7 @@ namespace DataMaintenance.Services
                 new SqlParameter("@pwd",pwd ),
             };
 
-            SqlDataReader sqlDataReader = Utility.Sql.Sqlhelper.GetSqlDataReader(sql, DataSourceType.plug, sqlParameters);
+            SqlDataReader sqlDataReader = Utility.Sql.Sqlhelper.GetSqlDataReader(sql, sqlParameters, DataSourceType.plug );
             if (sqlDataReader.HasRows)
             {
                 return true;

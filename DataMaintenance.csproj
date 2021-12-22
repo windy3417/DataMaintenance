@@ -15,7 +15,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <PublishUrl>\\192.168.10.200\scanFiles\DataMaintenance\</PublishUrl>
+    <PublishUrl>\\192.168.10.201\software\DevelopByXIMAI\DataMaintenance\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -30,7 +30,7 @@
     <SuiteName>信息平台管理</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>10</ApplicationRevision>
+    <ApplicationRevision>13</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -65,7 +65,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>setup.ico</ApplicationIcon>
@@ -139,6 +139,12 @@
     </Compile>
     <Compile Include="UI\ClearLocker\FrmClearU8Task.Designer.cs">
       <DependentUpon>FrmClearU8Task.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ClearLocker\FrmDeleteLockedVendor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ClearLocker\FrmDeleteLockedVendor.Designer.cs">
+      <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\FrmConfig.cs">
       <SubType>Form</SubType>
@@ -236,6 +242,9 @@
     </Compile>
     <EmbeddedResource Include="UI\ClearLocker\FrmClearU8Task.resx">
       <DependentUpon>FrmClearU8Task.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ClearLocker\FrmDeleteLockedVendor.resx">
+      <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\FrmConfig.resx">
       <DependentUpon>FrmConfig.cs</DependentUpon>
