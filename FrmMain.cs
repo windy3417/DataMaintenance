@@ -14,6 +14,7 @@ using Utility.UI;
 using DataMaintenance.UI.ClearLocker;
 using System.Threading.Tasks;
 using DataMaintenance.UI.Tools;
+using DataMaintenance.UI.U8Attachment;
 
 namespace DataMaintenance
 {
@@ -170,6 +171,12 @@ namespace DataMaintenance
         private void 任务清理ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FrmClearU8Task f = new FrmClearU8Task();
+            embedForm(f);
+        }
+
+        private void tsmArchiveAttachment_Click(object sender, EventArgs e)
+        {
+            FrmArchiveAttachment f = new FrmArchiveAttachment();
             embedForm(f);
         }
     }

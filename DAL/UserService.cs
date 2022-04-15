@@ -7,36 +7,36 @@ using System.Data;
 using System.Data.SqlClient;
 using static Utility.Sql.Sqlhelper;
 
-namespace DataMaintenance.Services
+namespace DataMaintenance.DAL
 {
-    class MenuService
+    class UserService
     {
         /// <summary>
-        /// 菜单列表
+        /// 用户列表
         /// </summary>
         /// <returns></returns>
-        public List<MenuModle> getList()
+        public List<UserModle> getUserList()
         {
-            List<MenuModle> mList = new List<MenuModle>();
-            string sql = "select  *  from  [menus] where 1=@queryAll   ";
+            List<UserModle> listUser = new List<UserModle>();
+            string sql = "select  *  from  [user] where 1=@queryAll   ";
             SqlParameter[] sqlParameters =
             {
                 new SqlParameter("@queryAll",1 )
             };
 
-            SqlDataReader sqlDataReader = Utility.Sql.Sqlhelper.GetSqlDataReader(sql, sqlParameters, DataSourceType.plug);
+            SqlDataReader sqlDataReader = Utility.Sql.Sqlhelper.GetSqlDataReader(sql, sqlParameters, DataSourceType.plug );
             while (sqlDataReader.Read())
             {
-                MenuModle m = new MenuModle();
-                m.menuID = Convert.ToInt32(sqlDataReader["menuID"]);
-                m.menuName = sqlDataReader["menuName"].ToString();
+                UserModle m = new UserModle();
+                m.userID = sqlDataReader["userID"].ToString();
+                m.name = sqlDataReader["name"].ToString();
 
 
 
 
-                mList.Add(m);
+                listUser.Add(m);
             }
-            return mList;
+            return listUser;
         }
 
 
@@ -80,7 +80,7 @@ namespace DataMaintenance.Services
                 new SqlParameter("@pwd",pwd ),
             };
 
-            SqlDataReader sqlDataReader = Utility.Sql.Sqlhelper.GetSqlDataReader(sql, sqlParameters,DataSourceType.plug );
+            SqlDataReader sqlDataReader = Utility.Sql.Sqlhelper.GetSqlDataReader(sql, sqlParameters, DataSourceType.plug );
             if (sqlDataReader.HasRows)
             {
                 return true;
