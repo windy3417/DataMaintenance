@@ -15,6 +15,7 @@ using DataMaintenance.UI.ClearLocker;
 using System.Threading.Tasks;
 using DataMaintenance.UI.Tools;
 using DataMaintenance.UI.U8Attachment;
+using DataMaintenance.UI.SetUp;
 
 namespace DataMaintenance
 {
@@ -177,6 +178,12 @@ namespace DataMaintenance
         private void tsmArchiveAttachment_Click(object sender, EventArgs e)
         {
             FrmArchiveAttachment f = new FrmArchiveAttachment();
+            embedForm(f);
+        }
+
+        private void tsmSmbConnectiongString_Click(object sender, EventArgs e)
+        {
+            FrmSmbConfig f = new FrmSmbConfig();
             embedForm(f);
         }
     }

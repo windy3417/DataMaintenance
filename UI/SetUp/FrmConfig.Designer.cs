@@ -1,4 +1,4 @@
-﻿namespace DataMaintenance.UI
+﻿namespace DataMaintenance.UI.SetUp
 
 {
     partial class FrmConfig

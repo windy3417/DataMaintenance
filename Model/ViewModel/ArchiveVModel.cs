@@ -9,8 +9,12 @@ namespace DataMaintenance.Model.ViewModel
     {
         public string ArchiveCode { get; set; }
         public string ArchiveName { get; set; }
+
+        public string ArchiveMarsterName { get; set; }
+
+
         public string Describe { get; set; }
-        public Guid FileID { get; set; }
+        public Guid AttachFileGUID { get; set; }
 
     }
 }

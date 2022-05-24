@@ -30,10 +30,10 @@ namespace DataMaintenance.UI.Ref
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.tsbCertain = new System.Windows.Forms.ToolStripButton();
             this.ccusCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cCusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsbCertain = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -49,6 +49,18 @@ namespace DataMaintenance.UI.Ref
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(758, 395);
             this.dataGridView1.TabIndex = 0;
+            // 
+            // ccusCode
+            // 
+            this.ccusCode.DataPropertyName = "cCusCode";
+            this.ccusCode.HeaderText = "客户编码";
+            this.ccusCode.Name = "ccusCode";
+            // 
+            // cCusName
+            // 
+            this.cCusName.DataPropertyName = "cCusName";
+            this.cCusName.HeaderText = "客户名称";
+            this.cCusName.Name = "cCusName";
             // 
             // toolStrip1
             // 
@@ -67,18 +79,7 @@ namespace DataMaintenance.UI.Ref
             this.tsbCertain.Name = "tsbCertain";
             this.tsbCertain.Size = new System.Drawing.Size(53, 22);
             this.tsbCertain.Text = "确定";
-            // 
-            // ccusCode
-            // 
-            this.ccusCode.DataPropertyName = "cCusCode";
-            this.ccusCode.HeaderText = "客户编码";
-            this.ccusCode.Name = "ccusCode";
-            // 
-            // cCusName
-            // 
-            this.cCusName.DataPropertyName = "cCusName";
-            this.cCusName.HeaderText = "客户名称";
-            this.cCusName.Name = "cCusName";
+            this.tsbCertain.Click += new System.EventHandler(this.tsbConfirm_Click);
             // 
             // FrmRefCustomer
             // 

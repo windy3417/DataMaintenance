@@ -12,7 +12,8 @@ using Utility.Model;
 using static Utility.Sql.Sqlhelper;
 using Utility.Files;
 
-namespace DataMaintenance.UI
+namespace DataMaintenance.UI.SetUp
+
 {
     public partial class FrmConfig : Form
     {
@@ -41,7 +42,7 @@ namespace DataMaintenance.UI
             m.UserName = this.DbIT.TxtUser.Text;
             m.Pwd = this.DbIT.TxtPWD.Text;
 
-            Utility.DAL.DbConnect dbConnect = new Utility.DAL.DbConnect();
+            Utility.DAL.ConnectString dbConnect = new Utility.DAL.ConnectString();
             dbConnect.DbConnectTest(m);
         }
 
@@ -60,7 +61,7 @@ namespace DataMaintenance.UI
             m.Pwd = this.DbIT.TxtPWD.Text;
 
             //存储到AppConfig文件中
-            DbConnect dbConnect = new DbConnect();
+            ConnectString dbConnect = new ConnectString();
             dbConnect.DbConnectStringSave(m, DataSourceType.it.ToString());
 
             //存储为Json文件
@@ -79,7 +80,7 @@ namespace DataMaintenance.UI
         {
             string itFileName = Environment.CurrentDirectory + "\\" + DataSourceType.it.ToString() + "DBConfig.txt";
             string u8FileName = Environment.CurrentDirectory + "\\" + DataSourceType.u8.ToString() + "DBConfig.txt";
-            Utility.DAL.DbConnect dbConnect = new DbConnect();
+            ConnectString dbConnect = new ConnectString();
             dbConnect.ReadConfig(itFileName, this.lblStatus);
             dbConnect.ReadConfig(u8FileName, this.lblU8status);
         }
@@ -95,7 +96,7 @@ namespace DataMaintenance.UI
             m.UserName = this.DBU8.TxtUser.Text;
             m.Pwd = this.DBU8.TxtPWD.Text;
 
-            Utility.DAL.DbConnect dbConnect = new Utility.DAL.DbConnect();
+            Utility.DAL.ConnectString dbConnect = new Utility.DAL.ConnectString();
             dbConnect.DbConnectTest(m);
         }
 
@@ -109,7 +110,7 @@ namespace DataMaintenance.UI
             m.Pwd = this.DBU8.TxtPWD.Text;
 
             //存储到AppConfig文件中
-            DbConnect dbConnect = new DbConnect();
+            ConnectString dbConnect = new ConnectString();
             dbConnect.DbConnectStringSave(m, DataSourceType.u8.ToString());
 
             //存储为Json文件
@@ -138,7 +139,7 @@ namespace DataMaintenance.UI
             m.UserName = this.dbUfSystem.TxtUser.Text;
             m.Pwd = this.dbUfSystem.TxtPWD.Text;
 
-            Utility.DAL.DbConnect dbConnect = new Utility.DAL.DbConnect();
+            Utility.DAL.ConnectString dbConnect = new Utility.DAL.ConnectString();
             dbConnect.DbConnectTest(m);
         }
 
@@ -153,7 +154,7 @@ namespace DataMaintenance.UI
             m.Pwd = this.dbUfSystem.TxtPWD.Text;
 
             //存储到AppConfig文件中
-            DbConnect dbConnect = new DbConnect();
+            ConnectString dbConnect = new ConnectString();
             dbConnect.DbConnectStringSave(m, DataSourceType.ufsystem.ToString());
 
             //存储为Json文件

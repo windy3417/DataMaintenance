@@ -47,13 +47,13 @@ namespace DataMaintenance.UI.Ref
 
         public Action<Customer> ActionRefCustomerEntity;
 
-        public Action<string> ActionRefVendorCode;
+        public Action<string> ActionRefCustomerCode;
 
         private void tsbConfirm_Click(object sender, EventArgs e)
         {
             Customer m = new Customer();
-            m.cCusCode = dataGridView1.CurrentRow.Cells["customerCode"].Value.ToString();
-            m.cCusName = dataGridView1.CurrentRow.Cells["customerName"].Value.ToString();
+            m.cCusCode = dataGridView1.CurrentRow.Cells["ccusCode"].Value.ToString();
+            m.cCusName = dataGridView1.CurrentRow.Cells["cCusName"].Value.ToString();
 
             if (ActionRefCustomerEntity != null)
             {

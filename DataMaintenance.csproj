@@ -30,7 +30,7 @@
     <SuiteName>信息平台管理</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>14</ApplicationRevision>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -154,10 +154,10 @@
     <Compile Include="UI\ClearLocker\FrmDeleteLockedVendor.Designer.cs">
       <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\FrmConfig.cs">
+    <Compile Include="UI\SetUp\FrmConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\FrmConfig.Designer.cs">
+    <Compile Include="UI\SetUp\FrmConfig.Designer.cs">
       <DependentUpon>FrmConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\RefForm\FrmRefCustomer.cs">
@@ -165,6 +165,12 @@
     </Compile>
     <Compile Include="UI\RefForm\FrmRefCustomer.Designer.cs">
       <DependentUpon>FrmRefCustomer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SetUp\FrmSmbConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\SetUp\FrmSmbConfig.Designer.cs">
+      <DependentUpon>FrmSmbConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Tools\FrmImport.cs">
       <SubType>Form</SubType>
@@ -266,11 +272,14 @@
     <EmbeddedResource Include="UI\ClearLocker\FrmDeleteLockedVendor.resx">
       <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\FrmConfig.resx">
+    <EmbeddedResource Include="UI\SetUp\FrmConfig.resx">
       <DependentUpon>FrmConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\RefForm\FrmRefCustomer.resx">
       <DependentUpon>FrmRefCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\SetUp\FrmSmbConfig.resx">
+      <DependentUpon>FrmSmbConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Tools\FrmImport.resx">
       <DependentUpon>FrmImport.cs</DependentUpon>
@@ -351,6 +360,7 @@
     <Content Include="setup.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Common\" />
     <Folder Include="DAL\TableServices\" />
   </ItemGroup>
   <ItemGroup>

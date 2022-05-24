@@ -30,6 +30,11 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.ms_main = new System.Windows.Forms.MenuStrip();
+            this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.数据库设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.权限生成ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.菜单清单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.权限设定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.刀具管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.属性修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.外借导入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,19 +49,15 @@
             this.采购订单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.用户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.人员档案ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.数据库设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.权限生成ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.菜单清单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.权限设定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.重登录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.u8附件管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmArchiveAttachment = new System.Windows.Forms.ToolStripMenuItem();
+            this.重登录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ts_foot = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tstb_currentUser = new System.Windows.Forms.ToolStripTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tsmSmbConnectiongString = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_main.SuspendLayout();
             this.panel1.SuspendLayout();
             this.ts_foot.SuspendLayout();
@@ -77,6 +78,46 @@
             this.ms_main.Size = new System.Drawing.Size(786, 24);
             this.ms_main.TabIndex = 0;
             this.ms_main.Text = "menuStrip1";
+            // 
+            // 设置ToolStripMenuItem
+            // 
+            this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.数据库设置ToolStripMenuItem,
+            this.权限生成ToolStripMenuItem,
+            this.菜单清单ToolStripMenuItem,
+            this.权限设定ToolStripMenuItem,
+            this.tsmSmbConnectiongString});
+            this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
+            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.设置ToolStripMenuItem.Text = "设置";
+            // 
+            // 数据库设置ToolStripMenuItem
+            // 
+            this.数据库设置ToolStripMenuItem.Name = "数据库设置ToolStripMenuItem";
+            this.数据库设置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.数据库设置ToolStripMenuItem.Text = "数据库设置";
+            this.数据库设置ToolStripMenuItem.Click += new System.EventHandler(this.数据库设置ToolStripMenuItem1_Click);
+            // 
+            // 权限生成ToolStripMenuItem
+            // 
+            this.权限生成ToolStripMenuItem.Name = "权限生成ToolStripMenuItem";
+            this.权限生成ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.权限生成ToolStripMenuItem.Text = "权限表";
+            this.权限生成ToolStripMenuItem.Click += new System.EventHandler(this.权限生成ToolStripMenuItem_Click);
+            // 
+            // 菜单清单ToolStripMenuItem
+            // 
+            this.菜单清单ToolStripMenuItem.Name = "菜单清单ToolStripMenuItem";
+            this.菜单清单ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.菜单清单ToolStripMenuItem.Text = "菜单清单";
+            this.菜单清单ToolStripMenuItem.Click += new System.EventHandler(this.菜单清单ToolStripMenuItem_Click);
+            // 
+            // 权限设定ToolStripMenuItem
+            // 
+            this.权限设定ToolStripMenuItem.Name = "权限设定ToolStripMenuItem";
+            this.权限设定ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.权限设定ToolStripMenuItem.Text = "权限设定";
+            this.权限设定ToolStripMenuItem.Click += new System.EventHandler(this.权限设定ToolStripMenuItem_Click);
             // 
             // 刀具管理ToolStripMenuItem
             // 
@@ -185,52 +226,6 @@
             this.人员档案ToolStripMenuItem.Text = "人员档案";
             this.人员档案ToolStripMenuItem.Click += new System.EventHandler(this.人员档案ToolStripMenuItem_Click);
             // 
-            // 设置ToolStripMenuItem
-            // 
-            this.设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.数据库设置ToolStripMenuItem,
-            this.权限生成ToolStripMenuItem,
-            this.菜单清单ToolStripMenuItem,
-            this.权限设定ToolStripMenuItem});
-            this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
-            this.设置ToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
-            this.设置ToolStripMenuItem.Text = "设置";
-            // 
-            // 数据库设置ToolStripMenuItem
-            // 
-            this.数据库设置ToolStripMenuItem.Name = "数据库设置ToolStripMenuItem";
-            this.数据库设置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.数据库设置ToolStripMenuItem.Text = "数据库设置";
-            this.数据库设置ToolStripMenuItem.Click += new System.EventHandler(this.数据库设置ToolStripMenuItem1_Click);
-            // 
-            // 权限生成ToolStripMenuItem
-            // 
-            this.权限生成ToolStripMenuItem.Name = "权限生成ToolStripMenuItem";
-            this.权限生成ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.权限生成ToolStripMenuItem.Text = "权限表";
-            this.权限生成ToolStripMenuItem.Click += new System.EventHandler(this.权限生成ToolStripMenuItem_Click);
-            // 
-            // 菜单清单ToolStripMenuItem
-            // 
-            this.菜单清单ToolStripMenuItem.Name = "菜单清单ToolStripMenuItem";
-            this.菜单清单ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.菜单清单ToolStripMenuItem.Text = "菜单清单";
-            this.菜单清单ToolStripMenuItem.Click += new System.EventHandler(this.菜单清单ToolStripMenuItem_Click);
-            // 
-            // 权限设定ToolStripMenuItem
-            // 
-            this.权限设定ToolStripMenuItem.Name = "权限设定ToolStripMenuItem";
-            this.权限设定ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.权限设定ToolStripMenuItem.Text = "权限设定";
-            this.权限设定ToolStripMenuItem.Click += new System.EventHandler(this.权限设定ToolStripMenuItem_Click);
-            // 
-            // 重登录ToolStripMenuItem
-            // 
-            this.重登录ToolStripMenuItem.Name = "重登录ToolStripMenuItem";
-            this.重登录ToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
-            this.重登录ToolStripMenuItem.Text = "重登录";
-            this.重登录ToolStripMenuItem.Click += new System.EventHandler(this.重登录ToolStripMenuItem_Click);
-            // 
             // u8附件管理ToolStripMenuItem
             // 
             this.u8附件管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -245,6 +240,13 @@
             this.tsmArchiveAttachment.Size = new System.Drawing.Size(217, 22);
             this.tsmArchiveAttachment.Text = "客户供应商存货档案附件";
             this.tsmArchiveAttachment.Click += new System.EventHandler(this.tsmArchiveAttachment_Click);
+            // 
+            // 重登录ToolStripMenuItem
+            // 
+            this.重登录ToolStripMenuItem.Name = "重登录ToolStripMenuItem";
+            this.重登录ToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
+            this.重登录ToolStripMenuItem.Text = "重登录";
+            this.重登录ToolStripMenuItem.Click += new System.EventHandler(this.重登录ToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -291,6 +293,13 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(786, 272);
             this.tabControl1.TabIndex = 0;
+            // 
+            // tsmSmbConnectiongString
+            // 
+            this.tsmSmbConnectiongString.Name = "tsmSmbConnectiongString";
+            this.tsmSmbConnectiongString.Size = new System.Drawing.Size(180, 22);
+            this.tsmSmbConnectiongString.Text = "SMB连接字符串";
+            this.tsmSmbConnectiongString.Click += new System.EventHandler(this.tsmSmbConnectiongString_Click);
             // 
             // FrmMain
             // 
@@ -346,6 +355,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmSpecifiactionCheck;
         private System.Windows.Forms.ToolStripMenuItem u8附件管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmArchiveAttachment;
+        private System.Windows.Forms.ToolStripMenuItem tsmSmbConnectiongString;
     }
 }
 

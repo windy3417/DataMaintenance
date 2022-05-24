@@ -34,7 +34,7 @@ namespace DataMaintenance.UI
 
         private void TsbImport_Click(object sender, EventArgs e)
         {
-            Utility.Files.ImportFromExcel importFromExcel = new Utility.Files.ImportFromExcel();
+            Utility.Excel.ImportFromExcel importFromExcel = new Utility.Excel.ImportFromExcel();
           
             importFromExcel.ReadExcelWithNPOI(DgvImport, this.dataTable);
 
