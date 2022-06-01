@@ -15,7 +15,7 @@ namespace DataMaintenance.DAL.U8services
         public List<ArchiveVModel> GetListArchiveEntiy()
         {
 
-            var q = from s in new CustomerService().GetListCustomer()
+            var q = from s in new MasterDataService().GetListCustomer()
                     join y in new AttacheFileService().GetListAttachfile()
                     on s.cCusCode equals y.cInvCode
                     select new { s.cCusCode, s.cCusName, y.cFileName, y.AttachFileGUID };

@@ -14,8 +14,8 @@ namespace DataMaintenance.DAL.U8services.RefServices
         public List<Customer> GetListCustomerInArchive()
         {
 
-            var q = from s in new CustomerService().GetListCustomer()
-                    join y in new AttacheFileService().GetListCustomer()
+            var q = from s in new MasterDataService().GetListCustomer()
+                    join y in new AttacheFileService().GetListCustomerInAttachfiles()
                     on s.cCusCode equals y
                     select new { s.cCusCode, s.cCusName };
 

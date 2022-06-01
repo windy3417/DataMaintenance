@@ -13,9 +13,10 @@ using System.Windows.Forms;
 
 namespace DataMaintenance.UI.Ref
 {
-    public partial class FrmRefCustomer : Form
+    public partial class FrmRefInventory : Form
+
     {
-        public FrmRefCustomer()
+        public FrmRefInventory()
         {
             InitializeComponent();
             InitializeContolState();
@@ -24,6 +25,15 @@ namespace DataMaintenance.UI.Ref
 
 
         }
+
+        #region delegate
+
+        public Action<Inventory> ActionRefIventoryEntity;
+
+
+        public Action<string> ActionRefInventoryCode;
+
+        #endregion
 
         #region Intial
 
@@ -36,24 +46,34 @@ namespace DataMaintenance.UI.Ref
 
         #endregion
 
-        #region delegate
 
-        public Action<Customer> ActionRefCustomerEntity;
-
-        public Action<string> ActionRefCustomerCode;
-
-        #endregion
-
+        #region Get data
         void InitializeControlDataSource()
         {
-            //dataGridView1.DataSource = new CustomerAttachmentService().GetListArchiveEntiy();
-            dataGridView1.DataSource = new CustomerRefService().GetListCustomerInArchive();
-
-
+            
+            dataGridView1.DataSource = new InventoryRefService().GetListInventoryInArchive();
 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
-        #region Get data
+
+        #endregion
+
+        #region data handle
+
+
+        private void tsbConfirm_Click(object sender, EventArgs e)
+        {
+            Inventory m = new Inventory();
+            m.cInvCode = dataGridView1.CurrentRow.Cells["cinvCode"].Value.ToString();
+            m.cInvName = dataGridView1.CurrentRow.Cells["cinvName"].Value.ToString();
+            m.cInvStd = dataGridView1.CurrentRow.Cells["std"].Value.ToString();
+
+            if (ActionRefIventoryEntity != null)
+            {
+                ActionRefIventoryEntity.Invoke(m);
+            }
+            this.Close();
+        }
 
 
         #endregion
@@ -64,21 +84,9 @@ namespace DataMaintenance.UI.Ref
         {
             new Utility.Style.StyleDataGridView().DisplayRowNo(e, dataGridView1);
         }
+
         #endregion
 
-        private void tsbConfirm_Click(object sender, EventArgs e)
-        {
-            Customer m = new Customer();
-            m.cCusCode = dataGridView1.CurrentRow.Cells["ccusCode"].Value.ToString();
-            m.cCusName = dataGridView1.CurrentRow.Cells["cCusName"].Value.ToString();
 
-            if (ActionRefCustomerEntity != null)
-            {
-                ActionRefCustomerEntity.Invoke(m);
-            }
-            this.Close();
-        }
-
-     
     }
 }

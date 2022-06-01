@@ -1,7 +1,8 @@
 ﻿
 namespace DataMaintenance.UI.Ref
 {
-    partial class FrmRefCustomer
+    partial class FrmRefInventory
+
     {
         /// <summary>
         /// Required designer variable.
@@ -30,10 +31,11 @@ namespace DataMaintenance.UI.Ref
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ccusCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cCusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbCertain = new System.Windows.Forms.ToolStripButton();
+            this.cInvCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cInvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.std = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -42,26 +44,15 @@ namespace DataMaintenance.UI.Ref
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ccusCode,
-            this.cCusName});
+            this.cInvCode,
+            this.cInvName,
+            this.std});
             this.dataGridView1.Location = new System.Drawing.Point(12, 43);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(758, 395);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
-            // 
-            // ccusCode
-            // 
-            this.ccusCode.DataPropertyName = "cCusCode";
-            this.ccusCode.HeaderText = "客户编码";
-            this.ccusCode.Name = "ccusCode";
-            // 
-            // cCusName
-            // 
-            this.cCusName.DataPropertyName = "cCusName";
-            this.cCusName.HeaderText = "客户名称";
-            this.cCusName.Name = "cCusName";
             // 
             // toolStrip1
             // 
@@ -82,15 +73,33 @@ namespace DataMaintenance.UI.Ref
             this.tsbCertain.Text = "确定";
             this.tsbCertain.Click += new System.EventHandler(this.tsbConfirm_Click);
             // 
-            // FrmRefCustomer
+            // cInvCode
+            // 
+            this.cInvCode.DataPropertyName = "cInvCode";
+            this.cInvCode.HeaderText = "存货编码";
+            this.cInvCode.Name = "cInvCode";
+            // 
+            // cInvName
+            // 
+            this.cInvName.DataPropertyName = "cInvName";
+            this.cInvName.HeaderText = "存货名称";
+            this.cInvName.Name = "cInvName";
+            // 
+            // std
+            // 
+            this.std.DataPropertyName = "cInvStd";
+            this.std.HeaderText = "规格型号";
+            this.std.Name = "std";
+            // 
+            // FrmRefInventory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 450);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "FrmRefCustomer";
-            this.Text = "客户档案参照";
+            this.Name = "FrmRefInventory";
+            this.Text = "存货档案参照";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -104,7 +113,8 @@ namespace DataMaintenance.UI.Ref
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbCertain;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ccusCode;
-        private System.Windows.Forms.DataGridViewTextBoxColumn cCusName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cInvCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cInvName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn std;
     }
 }

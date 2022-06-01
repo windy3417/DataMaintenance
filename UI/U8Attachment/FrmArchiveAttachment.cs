@@ -49,24 +49,48 @@ namespace DataMaintenance.UI.U8Attachment
             cmbArchiveType.Text = "客户";
         }
 
+        /// <summary>
+        /// refer form for data
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnRef_Click(object sender, EventArgs e)
         {
+
+            this.Cursor = Cursors.WaitCursor;
             switch (cmbArchiveType.Text)
             {
                 case "客户":
                     FrmRefCustomer f = new FrmRefCustomer();
-                    f.ActionRefCustomerEntity = GetCustomerCode;
+                    f.ActionRefCustomerEntity = GetCutomerCode;
                     f.Show();
+                    break;
+
+                case "存货":
+                    FrmRefInventory fi = new FrmRefInventory();
+                    fi.ActionRefIventoryEntity = GetInventoryCode;
+                    fi.Show();
+                    this.Cursor = Cursors.Default;
                     break;
             }
         }
 
-        void GetCustomerCode(Customer customer)
+        #region data bind
+        void GetInventoryCode(Inventory inventory)
+        {
+            this.txtArchiveCode.Text = inventory.cInvCode;
+            this.txtArchvieName.Text = inventory.cInvName;
+
+        }
+
+        void GetCutomerCode(Customer customer)
         {
             this.txtArchiveCode.Text = customer.cCusCode;
             this.txtArchvieName.Text = customer.cCusName;
 
         }
+        #endregion
+
 
         private void btnQuery_Click(object sender, EventArgs e)
         {
