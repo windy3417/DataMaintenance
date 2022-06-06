@@ -19,5 +19,10 @@ namespace DataMaintenance.DAL.U8services.TableServices
         {
             return Utility.DAL.QueryService.GetDataList<Inventory>(DataSourceType.u8);
         }
+
+        public List<InventoryClass> GetListInventoryClass()
+        {
+            return Utility.DAL.QueryService.GetDataList<InventoryClass>(DataSourceType.u8);
+        }
     }
 }

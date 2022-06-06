@@ -125,6 +125,7 @@
     <Compile Include="Model\ItContext.cs" />
     <Compile Include="Model\U8\Attachfile.cs" />
     <Compile Include="Model\U8\Customer.cs" />
+    <Compile Include="Model\U8\InventoryClass.cs" />
     <Compile Include="Model\U8\Vendor.cs" />
     <Compile Include="Model\UfSsytmeContext.cs" />
     <Compile Include="Model\U8Context.cs" />

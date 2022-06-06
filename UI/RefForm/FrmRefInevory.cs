@@ -26,6 +26,13 @@ namespace DataMaintenance.UI.Ref
 
         }
 
+        #region field
+
+        List<InventoryClass> listClass = new List<InventoryClass>();
+
+
+        #endregion
+
         #region delegate
 
         public Action<Inventory> ActionRefIventoryEntity;
@@ -50,10 +57,77 @@ namespace DataMaintenance.UI.Ref
         #region Get data
         void InitializeControlDataSource()
         {
-            
-            dataGridView1.DataSource = new InventoryRefService().GetListInventoryInArchive();
+            #region treeView dataSource
+
+            listClass = (from s in new MasterDataService().GetListInventoryClass()
+                        select s). ToList();
+
+
+            var q = listClass.Where(s => s.iInvCGrade == 1);
+
+            treeView1.BeginUpdate();
+
+            //add root node
+            foreach (var item in q)
+            {
+                TreeNode treeNode = new TreeNode($"({item.cInvCCode}){item.cInvCName}");
+                treeNode.Tag = item.cInvCCode;
+                treeView1.Nodes.Add(treeNode);
+                //add child node
+                AddChildNodes(treeNode,1);
+
+
+            }
+
+
+
+            treeView1.EndUpdate();
+
+            #endregion
+
+            dataGridView1.DataSource = new InventoryRefService().GetListInventoryInArchiveWithEF();
 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+        }
+
+
+        /// <summary>
+        /// add child nodes
+        /// </summary>
+        /// <param name="parentNodes"></param>
+        void AddChildNodes(TreeNode parentNode,int parentGrade)
+        {
+
+            //var q = from s in new MasterDataService().GetListInventoryClass().Where(s => s.cInvCCode.StartsWith(parentNode.Tag.ToString())
+            //        & s.iInvCGrade == parentGrade+ 1)
+
+            //        select new { s.cInvCCode, s.cInvCName,s.iInvCGrade };
+
+            //improve speed by 2 seconds from 21 seconds with  list data structure instead of EF 
+
+            var q = from s in listClass.Where(s => s.cInvCCode.StartsWith(parentNode.Tag.ToString())
+                       & s.iInvCGrade == parentGrade + 1)
+                    select s;
+
+                  
+
+
+            #region treeView dataSource
+
+
+            foreach (var item in q)
+                {
+                    TreeNode treeNode = new TreeNode($"({item.cInvCCode}){item.cInvCName}");
+                    treeNode.Tag = item.cInvCCode;
+
+                    parentNode.Nodes.Add(treeNode);
+                    AddChildNodes(treeNode,item.iInvCGrade);
+
+                }
+
+         
+                #endregion
+           
         }
 
         #endregion
