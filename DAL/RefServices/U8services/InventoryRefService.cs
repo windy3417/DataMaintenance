@@ -1,4 +1,5 @@
-﻿using DataMaintenance.DAL.U8services.TableServices;
+﻿using DataMaintenance.DAL.TableServices.U8services;
+
 using DataMaintenance.Model;
 using DataMaintenance.Model.U8;
 using System;
@@ -6,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DataMaintenance.DAL.U8services.RefServices
+namespace DataMaintenance.DAL.RefServices.U8services
 {
     public class InventoryRefService
 
@@ -46,7 +47,7 @@ namespace DataMaintenance.DAL.U8services.RefServices
                 var q = from s in db.Inventory
                         join a in db.Attachfile.Where(s => s.cTableName == "inventory")
                         on s.cInvCode equals a.cInvCode
-                        select new { s.cInvCode, s.cInvName, s.cInvStd };
+                        select new { s.cInvCode, s.cInvName, s.cInvStd ,s.cInvCCode};
                 List<Inventory> ls = new List<Inventory>();
 
                 foreach (var item in q)
@@ -55,6 +56,7 @@ namespace DataMaintenance.DAL.U8services.RefServices
                     m.cInvCode = item.cInvCode;
                     m.cInvName = item.cInvName;
                     m.cInvStd = item.cInvStd;
+                    m.cInvCCode = item.cInvCCode;
 
                     ls.Add(m);
                 }

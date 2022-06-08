@@ -1,6 +1,5 @@
-﻿using DataMaintenance.DAL.U8services;
-using DataMaintenance.DAL.U8services.RefServices;
-using DataMaintenance.DAL.U8services.TableServices;
+﻿using DataMaintenance.DAL.RefServices.U8services;
+using DataMaintenance.DAL.TableServices.U8services;
 using DataMaintenance.Model.U8;
 using System;
 using System.Collections.Generic;
@@ -20,7 +19,7 @@ namespace DataMaintenance.UI.Ref
         {
             InitializeComponent();
             InitializeContolState();
-            InitializeControlDataSource();
+            DataBind();
            
 
 
@@ -29,7 +28,7 @@ namespace DataMaintenance.UI.Ref
         #region field
 
         List<InventoryClass> listClass = new List<InventoryClass>();
-
+        List<Inventory> inventoryList;
 
         #endregion
 
@@ -42,21 +41,19 @@ namespace DataMaintenance.UI.Ref
 
         #endregion
 
-        #region Intial
-
-
-        void InitializeContolState()
-        {
-            this.StartPosition = FormStartPosition.CenterScreen;
-            dataGridView1.AutoGenerateColumns = false;
-        }
-
-        #endregion
-
-
+       
         #region Get data
-        void InitializeControlDataSource()
+        void DataBind()
         {
+            #region dataGridView datasource
+
+            inventoryList = new InventoryRefService().GetListInventoryInArchiveWithEF();
+
+            dataGridView1.DataSource = inventoryList;
+
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            #endregion
+
             #region treeView dataSource
 
             listClass = (from s in new MasterDataService().GetListInventoryClass()
@@ -85,9 +82,8 @@ namespace DataMaintenance.UI.Ref
 
             #endregion
 
-            dataGridView1.DataSource = new InventoryRefService().GetListInventoryInArchiveWithEF();
+          
 
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
 
@@ -130,11 +126,33 @@ namespace DataMaintenance.UI.Ref
            
         }
 
+
+        /// <summary>
+        /// get inventory after chcking inventory class 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            dataGridView1.DataSource = null;
+            string ccode = e.Node.Tag.ToString();
+
+            var q = inventoryList.Where(s => s.cInvCCode.StartsWith(ccode));
+            
+            dataGridView1.DataSource = q.ToList();
+        
+                     
+        }
+
         #endregion
 
         #region data handle
 
-
+        /// <summary>
+        /// return data to caller
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tsbConfirm_Click(object sender, EventArgs e)
         {
             Inventory m = new Inventory();
@@ -154,13 +172,21 @@ namespace DataMaintenance.UI.Ref
 
         #region ui handle
 
+
+        void InitializeContolState()
+        {
+            this.StartPosition = FormStartPosition.CenterScreen;
+           
+            dataGridView1.AutoGenerateColumns = false;
+        }
+
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             new Utility.Style.StyleDataGridView().DisplayRowNo(e, dataGridView1);
         }
 
+
+
         #endregion
-
-
     }
 }

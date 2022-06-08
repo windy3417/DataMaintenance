@@ -1,13 +1,14 @@
-﻿using DataMaintenance.DAL.U8services.TableServices;
+﻿using DataMaintenance.DAL.TableServices.U8services;
+
 using DataMaintenance.Model.U8;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace DataMaintenance.DAL.U8services.RefServices
+namespace DataMaintenance.DAL.RefServices.U8services
 {
-  public  class CustomerRefService
+    public class CustomerRefService
 
     {
 
@@ -35,3 +36,5 @@ namespace DataMaintenance.DAL.U8services.RefServices
         }
     }
 }
+ 
+

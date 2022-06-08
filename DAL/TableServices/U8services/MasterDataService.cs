@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using static Utility.Sql.Sqlhelper;
 
-namespace DataMaintenance.DAL.U8services.TableServices
+namespace DataMaintenance.DAL.TableServices.U8services
 {
  public   class MasterDataService
     {
@@ -13,6 +13,11 @@ namespace DataMaintenance.DAL.U8services.TableServices
         public List<Customer> GetListCustomer()
         {
             return Utility.DAL.QueryService.GetDataList<Customer>(DataSourceType.u8);
+        }
+
+        public List<Vendor> GetListVendor()
+        {
+            return Utility.DAL.QueryService.GetDataList<Vendor>(DataSourceType.u8);
         }
 
         public List<Inventory> GetListInventory()

@@ -1,6 +1,6 @@
 ﻿
-using DataMaintenance.DAL.U8services;
-using DataMaintenance.DAL.U8services.TableServices;
+
+using DataMaintenance.DAL.ViewServices.U8services;
 using DataMaintenance.Model.U8;
 using DataMaintenance.UI.Ref;
 using System;
@@ -25,29 +25,50 @@ namespace DataMaintenance.UI.U8Attachment
         public FrmArchiveAttachment()
         {
             InitializeComponent();
-            InitializeControlsData();
+            SetDefaultValue();
             InitializeControlsState();
         }
 
-
-        private void FrmArchiveAttachment_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            this.Parent.Dispose();
-        }
-
-        private void tsbClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+         
 
 
         #region get data
 
 
-        void InitializeControlsData()
+        /// <summary>
+        /// download files
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            cmbArchiveType.Text = "客户";
+            if (e.RowIndex < 0 || e.ColumnIndex !=
+             dataGridView1.Columns["downLoad"].Index) return;
+            ConnectString connectString = new ConnectString();
+            ConnectStringModel m = connectString.GetSmbConnectionString(Environment.CurrentDirectory + @"/SmbConfig.bin");
+
+            string[] savingFileName = dataGridView1.CurrentRow.Cells["archiveName"].Value.ToString().Split(new char[] { '.' });
+            string extName = "." + savingFileName.Last();
+
+            if (extName != ".rar")
+            {
+                extName = ".txt";
+            }
+
+            string fileName = dataGridView1.CurrentRow.Cells["GUID"].Value.ToString() + extName;
+
+            byte[] data = new SmbFiels().GetFile(m.DataSource.Trim(), m.DataBase, m.FileDirectory, fileName, m.UserName, m.Pwd).ToArray();
+
+            string saveDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + dataGridView1.CurrentRow.Cells["archiveName"].Value;
+            FileStream fs = new FileStream(saveDir, FileMode.Create);
+            fs.Write(data, 0, data.Length);
+
+
+
+            System.Diagnostics.Process.Start(saveDir);
+
         }
+
 
         /// <summary>
         /// refer form for data
@@ -58,6 +79,8 @@ namespace DataMaintenance.UI.U8Attachment
         {
 
             this.Cursor = Cursors.WaitCursor;
+            //choose reference form
+
             switch (cmbArchiveType.Text)
             {
                 case "客户":
@@ -72,8 +95,16 @@ namespace DataMaintenance.UI.U8Attachment
                     fi.Show();
                     this.Cursor = Cursors.Default;
                     break;
+                case "供应商":
+                    FrmRefVendor fv = new FrmRefVendor();
+                    fv.ActionRefVendorEntity = GetVendorCode;
+                    fv.Show();
+                    this.Cursor = Cursors.Default;
+                    break;
             }
         }
+          
+        
 
         #region data bind
         void GetInventoryCode(Inventory inventory)
@@ -89,20 +120,31 @@ namespace DataMaintenance.UI.U8Attachment
             this.txtArchvieName.Text = customer.cCusName;
 
         }
-        #endregion
 
+        void GetVendorCode(Vendor vendor)
+        {
+            this.txtArchiveCode.Text = vendor.cVenCode;
+            this.txtArchvieName.Text = vendor.cVenName;
 
+        }
+
+        /// <summary>
+        /// bind data to dataGridView
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnQuery_Click(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
             string archiveType = "";
             List<SqlParameter> sqlParameters = new List<SqlParameter>();
-     
+
             if (txtArchiveCode.Text != "")
             {
                 sqlParameters.Add(new SqlParameter("@cInvCode", txtArchiveCode.Text));
             }
 
-           
+
             if (cmbArchiveType.Text == "客户")
             {
                 archiveType = "Customer";
@@ -112,38 +154,35 @@ namespace DataMaintenance.UI.U8Attachment
             if (cmbArchiveType.Text == "供应商")
             {
                 archiveType = "Vendor";
+                sqlParameters.Add(new SqlParameter("@cTableName", archiveType));
+                this.dataGridView1.DataSource = new VendorAttachmentService().GetVendorArchive(sqlParameters).ToList();
             }
 
             if (cmbArchiveType.Text == "存货")
             {
                 archiveType = "Inventory";
+                sqlParameters.Add(new SqlParameter("@cTableName", archiveType));
+                this.dataGridView1.DataSource = new InventoryAttachmentService().GetInventoryArchive(sqlParameters).ToList();
             }
 
-            //SqlParameter[] sqlParameters = { new SqlParameter("@cInvCode", txtArchiveCode.Text), new SqlParameter("@cTableName", archiveType) };
-
-        
-          
-
-           
 
 
-            //var q = QueryService.GetDataList<Attachfile>(sqlParameters, Utility.Sql.Sqlhelper.DataSourceType.u8);
-
-            //var q1 = QueryService.GetDataList<Customer>(Utility.Sql.Sqlhelper.DataSourceType.u8);
-
-            //var q3 = from s in q
-            //         join c in q1 on s.cInvCode equals c.cCusCode
-            //         select new { cInvCode = c.cCusCode, archiveMarsterName = c.cCusName, archiveName = s.cFileName, s.AttachFileGUID };
-
-            
-
+            this.Cursor = Cursors.Default;
             this.DecorateDataGridView();
         }
+
+        void SetDefaultValue()
+        {
+            cmbArchiveType.Text = "客户";
+        }
+        #endregion
+
+
 
         #endregion
 
 
-        #region style
+        #region UI handl
         void InitializeControlsState()
         {
             this.FormClosed += FrmArchiveAttachment_FormClosed;
@@ -172,37 +211,17 @@ namespace DataMaintenance.UI.U8Attachment
 
         }
 
+        private void FrmArchiveAttachment_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Parent.Dispose();
+        }
 
+        private void tsbClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
 
         #endregion
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0 || e.ColumnIndex !=
-             dataGridView1.Columns["downLoad"].Index) return;
-            ConnectString connectString = new ConnectString();
-            ConnectStringModel m = connectString.GetSmbConnectionString(Environment.CurrentDirectory + @"/SmbConfig.bin");
-
-            string[] savingFileName = dataGridView1.CurrentRow.Cells["archiveName"].Value.ToString().Split(new char[] { '.' });
-            string extName = "."+ savingFileName.Last();
-
-            if (extName!=".rar")
-            {
-                extName = ".txt";
-            }
-
-            string fileName = dataGridView1.CurrentRow.Cells["GUID"].Value.ToString() + extName;
-
-            byte[] data = new SmbFiels().GetFile(m.DataSource.Trim(), m.DataBase, m.FileDirectory, fileName, m.UserName, m.Pwd).ToArray();
-
-            string saveDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)+"\\" + dataGridView1.CurrentRow.Cells["archiveName"].Value;
-            FileStream fs = new FileStream(saveDir , FileMode.Create);
-            fs.Write(data, 0, data.Length);
-
-
-
-            System.Diagnostics.Process.Start(saveDir);
-
-        }
     }
 }

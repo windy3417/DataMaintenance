@@ -1,4 +1,5 @@
-﻿using DataMaintenance.DAL.U8services.TableServices;
+﻿using DataMaintenance.DAL.TableServices.U8services;
+
 using DataMaintenance.Model.U8;
 using DataMaintenance.Model.ViewModel;
 using System;
@@ -8,25 +9,26 @@ using System.Linq;
 using System.Text;
 using Utility.DAL;
 
-namespace DataMaintenance.DAL.U8services
+namespace DataMaintenance.DAL.ViewServices.U8services
+
 {
-  public  class CustomerAttachmentService
+  public  class VendorAttachmentService
     {
         public List<ArchiveVModel> GetListArchiveEntiy()
         {
 
-            var q = from s in new MasterDataService().GetListCustomer()
+            var q = from s in new MasterDataService().GetListVendor()
                     join y in new AttacheFileService().GetListAttachfile()
-                    on s.cCusCode equals y.cInvCode
-                    select new { s.cCusCode, s.cCusName, y.cFileName, y.AttachFileGUID };
+                    on s.cVenCode equals y.cInvCode
+                    select new { s.cVenCode, s.cVenName, y.cFileName, y.AttachFileGUID };
 
             List<ArchiveVModel> ls = new List<ArchiveVModel>();
 
             foreach (var item in q)
             {
                 ArchiveVModel m = new ArchiveVModel();
-                m.ArchiveCode = item.cCusCode;
-                m.ArchiveName = item.cCusName;
+                m.ArchiveCode = item.cVenCode;
+                m.ArchiveName = item.cVenName;
                 m.AttachFileGUID = item.AttachFileGUID;
 
                 ls.Add(m);
@@ -36,16 +38,16 @@ namespace DataMaintenance.DAL.U8services
 
         }
 
-        public List<ArchiveVModel> GetCustomerArchive(List<SqlParameter> sqlParameters)
+        public List<ArchiveVModel> GetVendorArchive(List<SqlParameter> sqlParameters)
         {
             var q = QueryService.GetDataList<Attachfile>(sqlParameters, Utility.Sql.Sqlhelper.DataSourceType.u8);
 
-            var q1 = QueryService.GetDataList<Customer>(Utility.Sql.Sqlhelper.DataSourceType.u8);
+            var q1 = QueryService.GetDataList<Vendor>(Utility.Sql.Sqlhelper.DataSourceType.u8);
 
             var q3 = from s in q
-                     join c in q1 on s.cInvCode equals c.cCusCode
-                     select new { cInvCode = c.cCusCode, archiveMarsterName = c.cCusName, archiveName = s.cFileName, s.AttachFileGUID };
-
+                     join c in q1 on s.cInvCode equals c.cVenCode
+                     select new { cInvCode = c.cVCCode, archiveMarsterName = c.cVenName, 
+                         archiveName = s.cFileName, s.AttachFileGUID };
 
 
 

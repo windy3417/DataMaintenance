@@ -1,4 +1,5 @@
 ﻿using DataMaintenance.DAL.RefServices.U8services;
+
 using DataMaintenance.Model.U8;
 using System;
 using System.Collections.Generic;
@@ -11,13 +12,15 @@ using System.Windows.Forms;
 
 namespace DataMaintenance.UI.Ref
 {
-    public partial class FrmRefCustomer : Form
+    public partial class FrmRefVendor : Form
+
     {
-        public FrmRefCustomer()
+        public FrmRefVendor()
+
         {
             InitializeComponent();
             InitializeContolState();
-            InitializeControlDataSource();
+            BindData();
            
 
 
@@ -36,23 +39,22 @@ namespace DataMaintenance.UI.Ref
 
         #region delegate
 
-        public Action<Customer> ActionRefCustomerEntity;
+        public Action<Vendor> ActionRefVendorEntity;
 
         public Action<string> ActionRefCustomerCode;
 
         #endregion
 
-        void InitializeControlDataSource()
-        {
-            //dataGridView1.DataSource = new CustomerAttachmentService().GetListArchiveEntiy();
-            dataGridView1.DataSource = new CustomerRefService().GetListCustomerInArchive();
 
+        #region Get data
+        void BindData()
+        {
+          
+            dataGridView1.DataSource = new VendorRefService().GetListVendorInArchive();
 
 
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
-        #region Get data
-
 
         #endregion
 
@@ -66,14 +68,13 @@ namespace DataMaintenance.UI.Ref
 
         private void tsbConfirm_Click(object sender, EventArgs e)
         {
-            Customer m = new Customer();
-            m.cCusCode = dataGridView1.CurrentRow.Cells["ccusCode"].Value.ToString();
-            m.cCusName = dataGridView1.CurrentRow.Cells["cCusName"].Value.ToString();
+            Vendor m = new Vendor();
+            m.cVenCode = dataGridView1.CurrentRow.Cells["cVenCode"].Value.ToString();
+            m.cVenName = dataGridView1.CurrentRow.Cells["cVenName"].Value.ToString();
 
-            if (ActionRefCustomerEntity != null)
-            {
-                ActionRefCustomerEntity.Invoke(m);
-            }
+
+            ActionRefVendorEntity?.Invoke(m);
+            
             this.Close();
         }
 

@@ -6,7 +6,7 @@ using System.Text;
 using Utility.DAL;
 using static Utility.Sql.Sqlhelper;
 
-namespace DataMaintenance.DAL.U8services.TableServices
+namespace DataMaintenance.DAL.TableServices.U8services
 {
   public  class AttacheFileService
     {
@@ -21,8 +21,16 @@ namespace DataMaintenance.DAL.U8services.TableServices
         /// <returns></returns>
         public List<string> GetListCustomerInAttachfiles()
         {
-             return QueryService.GetDataList<Attachfile>(DataSourceType.u8).Where(s => s.cTableName== "Customer").Select(x =>x.cInvCode).Distinct().ToList();
+             return QueryService.GetDataList<Attachfile>(DataSourceType.u8).Where(s => s.cTableName== "Customer").
+                Select(x =>x.cInvCode).Distinct().ToList();
            
+        }
+
+        public List<string> GetListVendorInAttachfiles()
+        {
+            return QueryService.GetDataList<Attachfile>(DataSourceType.u8).Where(s => s.cTableName == "Vendor").
+               Select(x => x.cInvCode).Distinct().ToList();
+
         }
 
 
@@ -32,7 +40,8 @@ namespace DataMaintenance.DAL.U8services.TableServices
         /// <returns></returns>
         public List<string> GetListInventoryInAttachfiles()
         {
-            return QueryService.GetDataList<Attachfile>(DataSourceType.u8).Where(s => s.cTableName== "Inventory").Select(x => x.cInvCode).Distinct().ToList();
+            return QueryService.GetDataList<Attachfile>(DataSourceType.u8).Where(s => s.cTableName== "Inventory")
+                .Select(x => x.cInvCode).Distinct().ToList();
 
         }
     }

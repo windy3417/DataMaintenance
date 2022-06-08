@@ -102,11 +102,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAL\U8services\CustomerAttachmentService.cs" />
-    <Compile Include="DAL\U8services\RefServices\InventoryRefService.cs" />
-    <Compile Include="DAL\U8services\RefServices\CustomerRefService.cs" />
-    <Compile Include="DAL\U8services\TableServices\AttacheFileService.cs" />
-    <Compile Include="DAL\U8services\TableServices\MasterDataService.cs" />
+    <Compile Include="DAL\RefServices\U8services\VendorRefService.cs" />
+    <Compile Include="DAL\ViewServices\U8services\VendorAttachmentService.cs" />
+    <Compile Include="DAL\ViewServices\U8services\CustomerAttachmentService.cs" />
+    <Compile Include="DAL\RefServices\U8services\InventoryRefService.cs" />
+    <Compile Include="DAL\RefServices\U8services\CustomerRefService.cs" />
+    <Compile Include="DAL\TableServices\U8services\AttacheFileService.cs" />
+    <Compile Include="DAL\TableServices\U8services\MasterDataService.cs" />
+    <Compile Include="DAL\ViewServices\U8services\InventoryAttachmentService.cs" />
     <Compile Include="Data\CurrentUser.cs" />
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
@@ -155,6 +158,12 @@
     </Compile>
     <Compile Include="UI\ClearLocker\FrmDeleteLockedVendor.Designer.cs">
       <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\RefForm\FrmRefVendor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\RefForm\FrmRefVendor.Designer.cs">
+      <DependentUpon>FrmRefVendor.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\RefForm\FrmRefInevory.cs">
       <SubType>Form</SubType>
@@ -280,6 +289,9 @@
     <EmbeddedResource Include="UI\ClearLocker\FrmDeleteLockedVendor.resx">
       <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\RefForm\FrmRefVendor.resx">
+      <DependentUpon>FrmRefVendor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\RefForm\FrmRefInevory.resx">
       <DependentUpon>FrmRefInevory.cs</DependentUpon>
     </EmbeddedResource>
@@ -372,7 +384,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
-    <Folder Include="DAL\TableServices\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
