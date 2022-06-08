@@ -2,19 +2,28 @@
 using DataMaintenance.Model.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using Utility.DAL;
+using Utility.Sql;
 
 namespace DataMaintenance.DAL.ViewServices.U8services
 {
-  public  class InventoryAttachmentService
+    public class InventoryAttachmentService
     {
+        /// <summary>
+        /// it is effect,but not efficiency
+        /// </summary>
+        /// <param name="sqlParameters"></param>
+        /// <returns></returns>
         public List<ArchiveVModel> GetInventoryArchive(List<SqlParameter> sqlParameters)
 
         {
             var q = QueryService.GetDataList<Attachfile>(sqlParameters, Utility.Sql.Sqlhelper.DataSourceType.u8);
+
+
 
             var q1 = QueryService.GetDataList<Inventory>(Utility.Sql.Sqlhelper.DataSourceType.u8);
 
@@ -48,5 +57,32 @@ namespace DataMaintenance.DAL.ViewServices.U8services
 
         }
 
+        public List<ArchiveVModel> GetInventoryArchive(SqlParameter[] sqlParameter)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append($"select * from inventory as a ");
+            sb.Append($" inner join Attachfile as b  on a.cinvcode=b.cinvcode where b.ctablename=@ctablename and b.cinvcode=@cinvcode ");
+
+          
+
+           SqlDataReader reader= Sqlhelper.GetSqlDataReader(sb.ToString(), sqlParameter, Sqlhelper.DataSourceType.u8);
+
+            List<ArchiveVModel> ls = new List<ArchiveVModel>();
+
+            while (reader.Read())
+            {
+                ArchiveVModel m = new ArchiveVModel();
+                m.ArchiveCode = reader["cInvCode"].ToString();
+                m.ArchiveMarsterName = reader["cInvname"].ToString();
+                m.ArchiveName = reader["cFileName"].ToString();
+                m.AttachFileGUID =(Guid)reader["AttachFileGUID"];
+            
+
+                ls.Add(m);
+            }
+           
+            return ls;
+
+        }
     }
 }

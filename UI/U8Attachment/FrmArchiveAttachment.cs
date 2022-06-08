@@ -62,6 +62,7 @@ namespace DataMaintenance.UI.U8Attachment
             string saveDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + dataGridView1.CurrentRow.Cells["archiveName"].Value;
             FileStream fs = new FileStream(saveDir, FileMode.Create);
             fs.Write(data, 0, data.Length);
+            fs.Close();
 
 
 
@@ -160,9 +161,13 @@ namespace DataMaintenance.UI.U8Attachment
 
             if (cmbArchiveType.Text == "存货")
             {
+                //采用sqlhelper 中的方法直联数据库，否则太慢
                 archiveType = "Inventory";
-                sqlParameters.Add(new SqlParameter("@cTableName", archiveType));
-                this.dataGridView1.DataSource = new InventoryAttachmentService().GetInventoryArchive(sqlParameters).ToList();
+                SqlParameter[] sqlParameter= { new SqlParameter("@cTableName", archiveType) ,
+                new SqlParameter("@cInvCode", txtArchiveCode.Text)};
+                
+             
+                this.dataGridView1.DataSource = new InventoryAttachmentService().GetInventoryArchive(sqlParameter);
             }
 
 
