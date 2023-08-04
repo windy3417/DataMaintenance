@@ -54,6 +54,31 @@ namespace DataMaintenance
         }
         #endregion
 
+        /// <summary>
+        /// open form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItemClick(object sender, EventArgs e)
+        {
+
+
+            ToolStripItem toolStripItem = (ToolStripItem)sender;
+            // Instantiate the form using reflection
+            Type formType = Type.GetType(toolStripItem.Tag.ToString());
+            Form form = (Form)Activator.CreateInstance(formType);
+
+
+            string tabPageText = form.Text;
+            Utility.UI.EmbedForm embed = new Utility.UI.EmbedForm();
+            embed.openForm(form, tabPageText, tabControl1, false);
+
+
+
+
+
+        }
+
 
         private void 刀具管理ToolStripMenuItem_Click(object sender, EventArgs e)
         {

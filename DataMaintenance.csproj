@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>DataMaintenance</RootNamespace>
     <AssemblyName>DataMaintenance</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -30,11 +30,12 @@
     <SuiteName>信息平台管理</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>16</ApplicationRevision>
+    <ApplicationRevision>17</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,6 +46,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -54,6 +56,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>53B3EDC50D45B3BFF0EDDB7D8628FF378836518F</ManifestCertificateThumbprint>
@@ -75,21 +78,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.4.4\lib\net40\EntityFramework.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>packages\EntityFramework.6.4.4\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="NPOI, Version=2.5.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -103,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\RefServices\U8services\VendorRefService.cs" />
+    <Compile Include="DAL\TableServices\U8services\Rdrecord32Service.cs" />
     <Compile Include="DAL\ViewServices\U8services\VendorAttachmentService.cs" />
     <Compile Include="DAL\ViewServices\U8services\CustomerAttachmentService.cs" />
     <Compile Include="DAL\RefServices\U8services\InventoryRefService.cs" />
@@ -129,6 +133,8 @@
     <Compile Include="Model\U8\Attachfile.cs" />
     <Compile Include="Model\U8\Customer.cs" />
     <Compile Include="Model\U8\InventoryClass.cs" />
+    <Compile Include="Model\U8\rdrecord32.cs" />
+    <Compile Include="Model\U8\rdrecords32.cs" />
     <Compile Include="Model\U8\Vendor.cs" />
     <Compile Include="Model\UfSsytmeContext.cs" />
     <Compile Include="Model\U8Context.cs" />
@@ -159,17 +165,23 @@
     <Compile Include="UI\ClearLocker\FrmDeleteLockedVendor.Designer.cs">
       <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\RefForm\FrmRefInventoryWithAttachment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\RefForm\FrmRefInventoryWithAttachment.Designer.cs">
+      <DependentUpon>FrmRefInventoryWithAttachment.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\RefForm\FrmRefVendor.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\RefForm\FrmRefVendor.Designer.cs">
       <DependentUpon>FrmRefVendor.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\RefForm\FrmRefInevory.cs">
+    <Compile Include="UI\RefForm\FrmRefInventory.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\RefForm\FrmRefInevory.Designer.cs">
-      <DependentUpon>FrmRefInevory.cs</DependentUpon>
+    <Compile Include="UI\RefForm\FrmRefInventory.Designer.cs">
+      <DependentUpon>FrmRefInventory.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\SetUp\FrmConfig.cs">
       <SubType>Form</SubType>
@@ -237,10 +249,10 @@
     <Compile Include="UI\Frm_user.designer.cs">
       <DependentUpon>Frm_user.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Frm_PO.cs">
+    <Compile Include="UI\U8\Frm_PO.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Frm_PO.Designer.cs">
+    <Compile Include="UI\U8\Frm_PO.Designer.cs">
       <DependentUpon>Frm_PO.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Tools\Frm_toolProperty.cs">
@@ -261,11 +273,17 @@
     <Compile Include="UI\Tools\FrmSpecificationCheck.Designer.cs">
       <DependentUpon>FrmSpecificationCheck.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\U8Attachment\FrmArchiveAttachment.cs">
+    <Compile Include="UI\U8\FrmArchiveAttachment.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\U8Attachment\FrmArchiveAttachment.Designer.cs">
+    <Compile Include="UI\U8\FrmArchiveAttachment.Designer.cs">
       <DependentUpon>FrmArchiveAttachment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\U8\FrmBoxIdDeliveryQuery.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\U8\FrmBoxIdDeliveryQuery.Designer.cs">
+      <DependentUpon>FrmBoxIdDeliveryQuery.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
@@ -289,11 +307,14 @@
     <EmbeddedResource Include="UI\ClearLocker\FrmDeleteLockedVendor.resx">
       <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\RefForm\FrmRefInventoryWithAttachment.resx">
+      <DependentUpon>FrmRefInventoryWithAttachment.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\RefForm\FrmRefVendor.resx">
       <DependentUpon>FrmRefVendor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\RefForm\FrmRefInevory.resx">
-      <DependentUpon>FrmRefInevory.cs</DependentUpon>
+    <EmbeddedResource Include="UI\RefForm\FrmRefInventory.resx">
+      <DependentUpon>FrmRefInventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\SetUp\FrmConfig.resx">
       <DependentUpon>FrmConfig.cs</DependentUpon>
@@ -325,7 +346,7 @@
     <EmbeddedResource Include="UI\Frm_user.resx">
       <DependentUpon>Frm_user.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Frm_PO.resx">
+    <EmbeddedResource Include="UI\U8\Frm_PO.resx">
       <DependentUpon>Frm_PO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Tools\Frm_toolProperty.resx">
@@ -337,8 +358,11 @@
     <EmbeddedResource Include="UI\Tools\FrmSpecificationCheck.resx">
       <DependentUpon>FrmSpecificationCheck.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\U8Attachment\FrmArchiveAttachment.resx">
+    <EmbeddedResource Include="UI\U8\FrmArchiveAttachment.resx">
       <DependentUpon>FrmArchiveAttachment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\U8\FrmBoxIdDeliveryQuery.resx">
+      <DependentUpon>FrmBoxIdDeliveryQuery.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
     <None Include="DataMaintenance_TemporaryKey.pfx" />
@@ -380,6 +404,7 @@
     <None Include="Resources\importdir_wiz.gif" />
     <None Include="Resources\Search.gif" />
     <None Include="Resources\download.png" />
+    <None Include="Resources\预览.jpg" />
     <Content Include="setup.ico" />
   </ItemGroup>
   <ItemGroup>

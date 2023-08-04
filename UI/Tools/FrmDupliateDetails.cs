@@ -34,8 +34,8 @@ namespace DataMaintenance.UI.Tools
 
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Utility.Style.StyleDataGridView styleDataGridView = new Utility.Style.StyleDataGridView();
-            styleDataGridView.DisplayRowNo(e, dataGridView1);
+            Utility.Style.DataGridViewStyle styleDataGridView = new Utility.Style.DataGridViewStyle();
+            styleDataGridView.DisplayRowNo(e, dataGridView1,false);
         }
     }
 }

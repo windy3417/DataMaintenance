@@ -29,27 +29,28 @@ namespace DataMaintenance.UI.Ref
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvArchive = new System.Windows.Forms.DataGridView();
             this.ccusCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cCusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbCertain = new System.Windows.Forms.ToolStripButton();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvArchive)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgvArchive
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvArchive.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dgvArchive.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvArchive.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ccusCode,
             this.cCusName});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 43);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(758, 395);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
+            this.dgvArchive.Location = new System.Drawing.Point(12, 43);
+            this.dgvArchive.Name = "dgvArchive";
+            this.dgvArchive.RowTemplate.Height = 23;
+            this.dgvArchive.Size = new System.Drawing.Size(758, 395);
+            this.dgvArchive.TabIndex = 0;
+            this.dgvArchive.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
             // 
             // ccusCode
             // 
@@ -88,10 +89,10 @@ namespace DataMaintenance.UI.Ref
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 450);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvArchive);
             this.Name = "FrmRefCustomer";
             this.Text = "客户档案参照";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvArchive)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -101,7 +102,7 @@ namespace DataMaintenance.UI.Ref
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvArchive;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbCertain;
         private System.Windows.Forms.DataGridViewTextBoxColumn ccusCode;

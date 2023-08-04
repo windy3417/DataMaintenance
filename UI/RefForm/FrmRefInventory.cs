@@ -5,10 +5,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Utility.DAL;
 
 namespace DataMaintenance.UI.Ref
 {
@@ -19,13 +21,12 @@ namespace DataMaintenance.UI.Ref
         {
             InitializeComponent();
             InitializeContolState();
-            DataBind();
+            InitailTreeViewDataSource();
            
-
-
         }
 
-        #region field
+        #region vary
+
 
         List<InventoryClass> listClass = new List<InventoryClass>();
         List<Inventory> inventoryList;
@@ -43,17 +44,9 @@ namespace DataMaintenance.UI.Ref
 
        
         #region Get data
-        void DataBind()
+        void InitailTreeViewDataSource()
         {
-            #region dataGridView datasource
-
-            inventoryList = new InventoryRefService().GetListInventoryInArchiveWithEF();
-
-            dataGridView1.DataSource = inventoryList;
-
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            #endregion
-
+                     
             #region treeView dataSource
 
             listClass = (from s in new MasterDataService().GetListInventoryClass()
@@ -81,9 +74,7 @@ namespace DataMaintenance.UI.Ref
             treeView1.EndUpdate();
 
             #endregion
-
-          
-
+                      
         }
 
 
@@ -128,25 +119,48 @@ namespace DataMaintenance.UI.Ref
 
 
         /// <summary>
-        /// get inventory after chcking inventory class 
+        /// get inventory after checking inventory class 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            dataGridView1.DataSource = null;
+            dgvArchive.DataSource = null;
             string ccode = e.Node.Tag.ToString();
+            Inventory m = new Inventory();
+            SqlParameter[] sqlParameters = { new SqlParameter("@cInvCCode", ccode) };
 
-            var q = inventoryList.Where(s => s.cInvCCode.StartsWith(ccode));
-            
-            dataGridView1.DataSource = q.ToList();
+            var inventory= QueryService.GetSingleTable<Inventory>( sqlParameters, Utility.Sql.Sqlhelper.DataSourceType.u8);
+
+                   
+            dgvArchive.DataSource = inventory.ToList();
         
                      
         }
 
         #endregion
 
-        #region data handle
+      
+        #region ui handle
+
+
+        void InitializeContolState()
+        {
+            this.StartPosition = FormStartPosition.CenterScreen;
+           
+            dgvArchive.AutoGenerateColumns = false;
+        }
+
+        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            new Utility.Style.DataGridViewStyle().DisplayRowNo(e, dgvArchive,false);
+        }
+
+
+
+        #endregion
+
+        #region return data to caller
 
         /// <summary>
         /// return data to caller
@@ -156,35 +170,18 @@ namespace DataMaintenance.UI.Ref
         private void tsbConfirm_Click(object sender, EventArgs e)
         {
             Inventory m = new Inventory();
-            m.cInvCode = dataGridView1.CurrentRow.Cells["cinvCode"].Value.ToString();
-            m.cInvName = dataGridView1.CurrentRow.Cells["cinvName"].Value.ToString();
-            m.cInvStd = dataGridView1.CurrentRow.Cells["std"].Value.ToString();
+            m.cInvCode = dgvArchive.CurrentRow.Cells["cinvCode"].Value.ToString();
+            m.cInvName = dgvArchive.CurrentRow.Cells["cinvName"].Value.ToString();
+            m.cInvStd = dgvArchive.CurrentRow.Cells["std"].Value.ToString();
 
             if (ActionRefIventoryEntity != null)
             {
                 ActionRefIventoryEntity.Invoke(m);
             }
+
+            ActionRefInventoryCode?.Invoke(m.cInvCode);
             this.Close();
         }
-
-
-        #endregion
-
-        #region ui handle
-
-
-        void InitializeContolState()
-        {
-            this.StartPosition = FormStartPosition.CenterScreen;
-           
-            dataGridView1.AutoGenerateColumns = false;
-        }
-
-        private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            new Utility.Style.StyleDataGridView().DisplayRowNo(e, dataGridView1);
-        }
-
 
 
         #endregion

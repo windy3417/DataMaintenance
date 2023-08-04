@@ -35,6 +35,7 @@
             this.权限生成ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.菜单清单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.权限设定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmSmbConnectiongString = new System.Windows.Forms.ToolStripMenuItem();
             this.刀具管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.属性修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.外借导入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,13 +52,14 @@
             this.人员档案ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.u8附件管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmArchiveAttachment = new System.Windows.Forms.ToolStripMenuItem();
+            this.箱号管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.出库箱号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.重登录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ts_foot = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tstb_currentUser = new System.Windows.Forms.ToolStripTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tsmSmbConnectiongString = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_main.SuspendLayout();
             this.panel1.SuspendLayout();
             this.ts_foot.SuspendLayout();
@@ -72,6 +74,7 @@
             this.授权ToolStripMenuItem,
             this.用户管理ToolStripMenuItem,
             this.u8附件管理ToolStripMenuItem,
+            this.箱号管理ToolStripMenuItem,
             this.重登录ToolStripMenuItem});
             this.ms_main.Location = new System.Drawing.Point(0, 0);
             this.ms_main.Name = "ms_main";
@@ -94,30 +97,37 @@
             // 数据库设置ToolStripMenuItem
             // 
             this.数据库设置ToolStripMenuItem.Name = "数据库设置ToolStripMenuItem";
-            this.数据库设置ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.数据库设置ToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.数据库设置ToolStripMenuItem.Text = "数据库设置";
             this.数据库设置ToolStripMenuItem.Click += new System.EventHandler(this.数据库设置ToolStripMenuItem1_Click);
             // 
             // 权限生成ToolStripMenuItem
             // 
             this.权限生成ToolStripMenuItem.Name = "权限生成ToolStripMenuItem";
-            this.权限生成ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.权限生成ToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.权限生成ToolStripMenuItem.Text = "权限表";
             this.权限生成ToolStripMenuItem.Click += new System.EventHandler(this.权限生成ToolStripMenuItem_Click);
             // 
             // 菜单清单ToolStripMenuItem
             // 
             this.菜单清单ToolStripMenuItem.Name = "菜单清单ToolStripMenuItem";
-            this.菜单清单ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.菜单清单ToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.菜单清单ToolStripMenuItem.Text = "菜单清单";
             this.菜单清单ToolStripMenuItem.Click += new System.EventHandler(this.菜单清单ToolStripMenuItem_Click);
             // 
             // 权限设定ToolStripMenuItem
             // 
             this.权限设定ToolStripMenuItem.Name = "权限设定ToolStripMenuItem";
-            this.权限设定ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.权限设定ToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.权限设定ToolStripMenuItem.Text = "权限设定";
             this.权限设定ToolStripMenuItem.Click += new System.EventHandler(this.权限设定ToolStripMenuItem_Click);
+            // 
+            // tsmSmbConnectiongString
+            // 
+            this.tsmSmbConnectiongString.Name = "tsmSmbConnectiongString";
+            this.tsmSmbConnectiongString.Size = new System.Drawing.Size(163, 22);
+            this.tsmSmbConnectiongString.Text = "SMB连接字符串";
+            this.tsmSmbConnectiongString.Click += new System.EventHandler(this.tsmSmbConnectiongString_Click);
             // 
             // 刀具管理ToolStripMenuItem
             // 
@@ -241,6 +251,22 @@
             this.tsmArchiveAttachment.Text = "客户供应商存货档案附件";
             this.tsmArchiveAttachment.Click += new System.EventHandler(this.tsmArchiveAttachment_Click);
             // 
+            // 箱号管理ToolStripMenuItem
+            // 
+            this.箱号管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.出库箱号ToolStripMenuItem});
+            this.箱号管理ToolStripMenuItem.Name = "箱号管理ToolStripMenuItem";
+            this.箱号管理ToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.箱号管理ToolStripMenuItem.Text = "箱号管理";
+            // 
+            // 出库箱号ToolStripMenuItem
+            // 
+            this.出库箱号ToolStripMenuItem.Name = "出库箱号ToolStripMenuItem";
+            this.出库箱号ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.出库箱号ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.FrmBoxIdDeliveryQuery";
+            this.出库箱号ToolStripMenuItem.Text = "出库箱号";
+            this.出库箱号ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
+            // 
             // 重登录ToolStripMenuItem
             // 
             this.重登录ToolStripMenuItem.Name = "重登录ToolStripMenuItem";
@@ -293,13 +319,6 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(786, 272);
             this.tabControl1.TabIndex = 0;
-            // 
-            // tsmSmbConnectiongString
-            // 
-            this.tsmSmbConnectiongString.Name = "tsmSmbConnectiongString";
-            this.tsmSmbConnectiongString.Size = new System.Drawing.Size(180, 22);
-            this.tsmSmbConnectiongString.Text = "SMB连接字符串";
-            this.tsmSmbConnectiongString.Click += new System.EventHandler(this.tsmSmbConnectiongString_Click);
             // 
             // FrmMain
             // 
@@ -356,6 +375,8 @@
         private System.Windows.Forms.ToolStripMenuItem u8附件管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem tsmArchiveAttachment;
         private System.Windows.Forms.ToolStripMenuItem tsmSmbConnectiongString;
+        private System.Windows.Forms.ToolStripMenuItem 箱号管理ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 出库箱号ToolStripMenuItem;
     }
 }
 

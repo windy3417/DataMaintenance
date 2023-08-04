@@ -23,7 +23,9 @@ namespace DataMaintenance.Model
         public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Vendor> Vendor { get; set; }
         public virtual DbSet<Attachfile> Attachfile { get; set; }
-        
+        public virtual DbSet<rdrecord32> rdrecord32 { get; set; }
+        public virtual DbSet<rdrecords32> rdrecords32 { get; set; }
+
 
 
     }

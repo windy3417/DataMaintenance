@@ -41,9 +41,9 @@
             this.txt_cusCode = new System.Windows.Forms.TextBox();
             this.txt_cusName = new System.Windows.Forms.TextBox();
             this.lbl_regitrationDate = new System.Windows.Forms.Label();
-            this.tbd_effect = new Utility.UControl.txtBoxWithDate();
+            this.tbd_effect = new Utility.UControl.XmTxtBoxWithDate();
             this.label4 = new System.Windows.Forms.Label();
-            this.tbd_failure = new Utility.UControl.txtBoxWithDate();
+            this.tbd_failure = new Utility.UControl.XmTxtBoxWithDate();
             this.label5 = new System.Windows.Forms.Label();
             this.txt_pwd = new System.Windows.Forms.TextBox();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -416,8 +416,8 @@
         private System.Windows.Forms.ToolStripButton tsb_close;
         private System.Windows.Forms.Label lbl_regitrationDate;
         private System.Windows.Forms.Label label4;
-        private Utility.UControl.txtBoxWithDate tbd_effect;
-        private Utility.UControl.txtBoxWithDate tbd_failure;
+        private Utility.UControl.XmTxtBoxWithDate tbd_effect;
+        private Utility.UControl.XmTxtBoxWithDate tbd_failure;
         private System.Windows.Forms.ToolStripButton tsb_add;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.ToolStripButton tsb_modify;

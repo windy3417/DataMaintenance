@@ -91,7 +91,7 @@ namespace DataMaintenance.UI.U8Attachment
                     break;
 
                 case "存货":
-                    FrmRefInventory fi = new FrmRefInventory();
+                    FrmRefInventoryWithAttacchment fi = new FrmRefInventoryWithAttacchment();
                     fi.ActionRefIventoryEntity = GetInventoryCode;
                     fi.Show();
                     this.Cursor = Cursors.Default;
@@ -210,8 +210,8 @@ namespace DataMaintenance.UI.U8Attachment
 
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Utility.Style.StyleDataGridView style = new Utility.Style.StyleDataGridView();
-            style.DisplayRowNo(e, dataGridView1);
+            Utility.Style.DataGridViewStyle style = new Utility.Style.DataGridViewStyle();
+            style.DisplayRowNo(e, dataGridView1,false);
             style.DataGridViewColumnHeaderStyle(dataGridView1);
 
         }

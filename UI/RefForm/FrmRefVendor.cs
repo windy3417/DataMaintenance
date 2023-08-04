@@ -62,7 +62,7 @@ namespace DataMaintenance.UI.Ref
 
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            new Utility.Style.StyleDataGridView().DisplayRowNo(e, dataGridView1);
+            new Utility.Style.DataGridViewStyle().DisplayRowNo(e, dataGridView1,false);
         }
         #endregion
 

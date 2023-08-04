@@ -29,7 +29,7 @@ namespace DataMaintenance.UI.Ref
         void InitializeContolState()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
-            dataGridView1.AutoGenerateColumns = false;
+            dgvArchive.AutoGenerateColumns = false;
         }
 
         #endregion
@@ -45,11 +45,11 @@ namespace DataMaintenance.UI.Ref
         void InitializeControlDataSource()
         {
             //dataGridView1.DataSource = new CustomerAttachmentService().GetListArchiveEntiy();
-            dataGridView1.DataSource = new CustomerRefService().GetListCustomerInArchive();
+            dgvArchive.DataSource = new CustomerRefService().GetListCustomerInArchive();
 
 
 
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvArchive.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
         #region Get data
 
@@ -60,19 +60,29 @@ namespace DataMaintenance.UI.Ref
 
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            new Utility.Style.StyleDataGridView().DisplayRowNo(e, dataGridView1);
+            new Utility.Style.DataGridViewStyle().DisplayRowNo(e, dgvArchive,false);
         }
         #endregion
 
+        /// <summary>
+        /// return data to caller
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tsbConfirm_Click(object sender, EventArgs e)
         {
             Customer m = new Customer();
-            m.cCusCode = dataGridView1.CurrentRow.Cells["ccusCode"].Value.ToString();
-            m.cCusName = dataGridView1.CurrentRow.Cells["cCusName"].Value.ToString();
+            m.cCusCode = dgvArchive.CurrentRow.Cells["ccusCode"].Value.ToString();
+            m.cCusName = dgvArchive.CurrentRow.Cells["cCusName"].Value.ToString();
 
             if (ActionRefCustomerEntity != null)
             {
                 ActionRefCustomerEntity.Invoke(m);
+            }
+
+            if (ActionRefCustomerCode!=null)
+            {
+                ActionRefCustomerCode.Invoke(m.cCusCode);
             }
             this.Close();
         }

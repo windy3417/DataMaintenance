@@ -44,7 +44,7 @@ namespace DataMaintenance.UI.ClearLocker
               
 
                 dataGridView1.DataSource= Sqlhelper.GetDataTable(sql.ToString(),Sqlhelper.DataSourceType.ufsystem);
-                Utility.Style.StyleDataGridView styleDataGridView = new Utility.Style.StyleDataGridView();
+                Utility.Style.DataGridViewStyle styleDataGridView = new Utility.Style.DataGridViewStyle();
                 styleDataGridView.DataGridViewColumnHeaderStyle(dataGridView1);
                 dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
 
@@ -66,8 +66,8 @@ namespace DataMaintenance.UI.ClearLocker
 
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            Utility.Style.StyleDataGridView styleDataGridView = new Utility.Style.StyleDataGridView();
-            styleDataGridView.DisplayRowNo(e, dataGridView1);
+            Utility.Style.DataGridViewStyle styleDataGridView = new Utility.Style.DataGridViewStyle();
+            styleDataGridView.DisplayRowNo(e, dataGridView1,false);
         }
 
         private void tsbDeleteTask_Click(object sender, EventArgs e)
