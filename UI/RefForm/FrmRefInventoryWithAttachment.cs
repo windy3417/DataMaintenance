@@ -141,11 +141,9 @@ namespace DataMaintenance.UI.Ref
 
             var q = inventoryList.Where(s => s.cInvCCode.StartsWith(ccode));
 
-
-            
+                        
             dgvArchive.DataSource = q.ToList();
-        
-                     
+                            
         }
 
         #endregion
@@ -165,7 +163,6 @@ namespace DataMaintenance.UI.Ref
         {
             new Utility.Style.DataGridViewStyle().DisplayRowNo(e, dgvArchive,false);
         }
-
 
 
         #endregion

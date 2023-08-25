@@ -1,4 +1,5 @@
 ﻿using DataMaintenance.DAL.TableServices.U8services;
+using DataMaintenance.DAL.ViewServices.U8services;
 using DataMaintenance.Model.U8;
 using DataMaintenance.UI.Ref;
 using System;
@@ -12,11 +13,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace DataMaintenance.UI.U8
 {
-    public partial class FrmBoxIdDeliveryQuery : Form
+    public partial class FrmBoxIdExist : Form
+
+
     {
-        public FrmBoxIdDeliveryQuery()
+        public FrmBoxIdExist()
+
+
         {
             InitializeComponent();
             InitialCotrolsData();
@@ -27,33 +33,37 @@ namespace DataMaintenance.UI.U8
        void InitialCotrolsData()
         {
             txtInvcode.RefButton.Click += RefInventory;
-            txtCustomerCode.RefButton.Click += RefCustomer;
+            txtWarehouseCode.RefButton.Click += RefForm;
+
+            txtWarehouseCode.Text = "101";
+            dtpStartDate.Value = DateTime.Now.AddMonths(-DateTime.Now.Month + 1).AddDays(-DateTime.Now.Day + 1);
 
 
-            cusName.DataPropertyName = "ccusname";
-            outBoundDate.DataPropertyName = "ddate";
-            voucherId.DataPropertyName = "ccode";
+            cwhcode.DataPropertyName = "cwhcode";
+            cwhname.DataPropertyName = "cwhname";
+          
             cinvCode.DataPropertyName = "cInvCode";
             cinvName.DataPropertyName = "cInvName";
             cinvStd.DataPropertyName = "cinvStd";
             iQuantity.DataPropertyName = "iquantity";
-            boxId.DataPropertyName = "cdefine31";
 
+          
+            //iQuantity.copytodatatable
            
-
         }
 
         void InitialControlsStyle()
         {
             Utility.Style.DataGridViewStyle style = new Utility.Style.DataGridViewStyle(dgvReport);
+            
         }
 
 
 
-        private void RefCustomer(object sender, EventArgs e)
+        private void RefForm(object sender, EventArgs e)
         {
-            FrmRefCustomer f = new FrmRefCustomer();
-            f.ActionRefCustomerCode = s => txtCustomerCode.Text = s;
+            FrmRefWarehouse f = new FrmRefWarehouse();
+            f.ActionRefWarehouseCode = s => txtWarehouseCode.Text = s;
             f.Show();
         }
 
@@ -108,45 +118,42 @@ namespace DataMaintenance.UI.U8
            
             
             //filter
-            Func<rdrecord32, bool> funcHeader = d =>
+            Func<CurrentStock, bool> funcHeader = d =>
             {
-                bool result = true;
-                if (txtCustomerCode.Text != "")
+                bool result = d.iQuantity!=0;
+                if (txtWarehouseCode.Text != "")
                 {
-                    result &= d.cCusCode == txtCustomerCode.Text;
+                    result &= d.cWhCode == txtWarehouseCode.Text;
                 }
-
-                //if (txtInvcode.Text != "")
-                //{
-                //    result &= d.PickUpHeaderId == txtDeclareNo.Text;
-                //}
-
-                if (dtpStartDate.Value != null & dtpEndDate.Value != null)
-                {
-                    result &= d.dDate >= dtpStartDate.Value.Date & d.dDate <= dtpEndDate.Value.Date;
-                }
-
-                return result;
-            };
-
-            Func<rdrecords32, bool> funcDetail = t =>
-            {
-                bool result = true;
-
 
                 if (txtInvcode.Text != "")
                 {
-                    result &= t.cInvCode == txtInvcode.Text;
+                    result &= d.cInvCode == txtInvcode.Text;
                 }
 
               
+
                 return result;
             };
 
-            Rdrecord32Service s = new Rdrecord32Service();
+            Func<rdrecord10, bool> funcDetail = t =>
+            {
+                bool result = true;
+
+
+                if (dtpStartDate.Value != null )
+                {
+                    result &= t.dDate >= dtpStartDate.Value.Date ;
+                }
+
+
+                return result;
+            };
+
+            BoxIDExistService  s = new BoxIDExistService();
 
             //raw data
-            DataTable dt = s.GetRdrecord32(funcHeader, funcDetail);
+            DataTable dt = s.GetCurrentStock(funcHeader, funcDetail);
             return dt;
         }
 
@@ -171,6 +178,14 @@ namespace DataMaintenance.UI.U8
         {
             Utility.Excel.ExportExcel exportExcel = new Utility.Excel.ExportExcel();
             exportExcel.ExportExcelWithNPOI(GetData(), this.Text);
+        }
+
+        private void tsmQueryBoxId_Click(object sender, EventArgs e)
+        {
+            FrmBoxIdDetail f = new FrmBoxIdDetail();
+            f.GetBoxId(dgvReport.CurrentRow.Cells[cinvCode.Name].Value.ToString(),dtpStartDate.Value);
+            f.StartPosition = FormStartPosition.CenterScreen;
+            f.ShowDialog();
         }
     }
 }

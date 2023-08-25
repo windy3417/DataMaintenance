@@ -15,6 +15,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
     <PublishUrl>\\192.168.10.201\software\DevelopByXIMAI\DataMaintenance\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
@@ -30,12 +31,13 @@
     <SuiteName>信息平台管理</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>17</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
+    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>true</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
+    <BootstrapperComponentsUrl>\\192.168.10.201\software\dotnet\DotNetFX452\NDP452-KB2901907-x86-x64-AllOS-CHS.exe</BootstrapperComponentsUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -107,6 +109,7 @@
   <ItemGroup>
     <Compile Include="DAL\RefServices\U8services\VendorRefService.cs" />
     <Compile Include="DAL\TableServices\U8services\Rdrecord32Service.cs" />
+    <Compile Include="DAL\ViewServices\U8services\BoxIDExistService.cs" />
     <Compile Include="DAL\ViewServices\U8services\VendorAttachmentService.cs" />
     <Compile Include="DAL\ViewServices\U8services\CustomerAttachmentService.cs" />
     <Compile Include="DAL\RefServices\U8services\InventoryRefService.cs" />
@@ -131,11 +134,15 @@
     <Compile Include="Model\IT\MaxKeys.cs" />
     <Compile Include="Model\ItContext.cs" />
     <Compile Include="Model\U8\Attachfile.cs" />
+    <Compile Include="Model\U8\CurrentStock.cs" />
     <Compile Include="Model\U8\Customer.cs" />
     <Compile Include="Model\U8\InventoryClass.cs" />
+    <Compile Include="Model\U8\rdrecord10.cs" />
     <Compile Include="Model\U8\rdrecord32.cs" />
+    <Compile Include="Model\U8\rdrecords10.cs" />
     <Compile Include="Model\U8\rdrecords32.cs" />
     <Compile Include="Model\U8\Vendor.cs" />
+    <Compile Include="Model\U8\Warehouse.cs" />
     <Compile Include="Model\UfSsytmeContext.cs" />
     <Compile Include="Model\U8Context.cs" />
     <Compile Include="Model\IT\MenuAuthorizationModle.cs" />
@@ -164,6 +171,12 @@
     </Compile>
     <Compile Include="UI\ClearLocker\FrmDeleteLockedVendor.Designer.cs">
       <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\RefForm\FrmRefWarehouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\RefForm\FrmRefWarehouse.Designer.cs">
+      <DependentUpon>FrmRefWarehouse.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\RefForm\FrmRefInventoryWithAttachment.cs">
       <SubType>Form</SubType>
@@ -249,6 +262,18 @@
     <Compile Include="UI\Frm_user.designer.cs">
       <DependentUpon>Frm_user.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\U8\FrmBoxIdDetail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\U8\FrmBoxIdDetail.Designer.cs">
+      <DependentUpon>FrmBoxIdDetail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\U8\FrmBoxIdExist.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\U8\FrmBoxIdExist.Designer.cs">
+      <DependentUpon>FrmBoxIdExist.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\U8\Frm_PO.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -307,6 +332,9 @@
     <EmbeddedResource Include="UI\ClearLocker\FrmDeleteLockedVendor.resx">
       <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\RefForm\FrmRefWarehouse.resx">
+      <DependentUpon>FrmRefWarehouse.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\RefForm\FrmRefInventoryWithAttachment.resx">
       <DependentUpon>FrmRefInventoryWithAttachment.cs</DependentUpon>
     </EmbeddedResource>
@@ -345,6 +373,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Frm_user.resx">
       <DependentUpon>Frm_user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\U8\FrmBoxIdDetail.resx">
+      <DependentUpon>FrmBoxIdDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\U8\FrmBoxIdExist.resx">
+      <DependentUpon>FrmBoxIdExist.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\Frm_PO.resx">
       <DependentUpon>Frm_PO.cs</DependentUpon>
@@ -392,6 +426,11 @@
     <None Include="Resources\exit.gif" />
   </ItemGroup>
   <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
       <Visible>False</Visible>
       <ProductName>.NET Framework 3.5 SP1</ProductName>
@@ -405,6 +444,7 @@
     <None Include="Resources\Search.gif" />
     <None Include="Resources\download.png" />
     <None Include="Resources\预览.jpg" />
+    <None Include="Resources\打印.png" />
     <Content Include="setup.ico" />
   </ItemGroup>
   <ItemGroup>

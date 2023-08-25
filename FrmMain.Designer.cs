@@ -60,6 +60,7 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tstb_currentUser = new System.Windows.Forms.ToolStripTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.箱号结存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_main.SuspendLayout();
             this.panel1.SuspendLayout();
             this.ts_foot.SuspendLayout();
@@ -254,7 +255,8 @@
             // 箱号管理ToolStripMenuItem
             // 
             this.箱号管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.出库箱号ToolStripMenuItem});
+            this.出库箱号ToolStripMenuItem,
+            this.箱号结存ToolStripMenuItem});
             this.箱号管理ToolStripMenuItem.Name = "箱号管理ToolStripMenuItem";
             this.箱号管理ToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.箱号管理ToolStripMenuItem.Text = "箱号管理";
@@ -320,6 +322,14 @@
             this.tabControl1.Size = new System.Drawing.Size(786, 272);
             this.tabControl1.TabIndex = 0;
             // 
+            // 箱号结存ToolStripMenuItem
+            // 
+            this.箱号结存ToolStripMenuItem.Name = "箱号结存ToolStripMenuItem";
+            this.箱号结存ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.箱号结存ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.FrmBoxIdExist";
+            this.箱号结存ToolStripMenuItem.Text = "箱号结存";
+            this.箱号结存ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -377,6 +387,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmSmbConnectiongString;
         private System.Windows.Forms.ToolStripMenuItem 箱号管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 出库箱号ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 箱号结存ToolStripMenuItem;
     }
 }
 
