@@ -29,6 +29,7 @@ namespace DataMaintenance.DAL.TableServices.U8services
                              c.cCusName,
                              h.dDate,
                              h.cCode,
+                             h.cMemo,
                              d.cDefine31,
 
                              d.cInvCode,

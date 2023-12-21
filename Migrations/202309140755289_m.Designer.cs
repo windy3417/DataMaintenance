@@ -7,18 +7,18 @@ namespace DataMaintenance.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class changeColumn : IMigrationMetadata
+    public sealed partial class m : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(changeColumn));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(m));
         
         string IMigrationMetadata.Id
         {
-            get { return "202011120147389_changeColumn"; }
+            get { return "202309140755289_m"; }
         }
         
         string IMigrationMetadata.Source
         {
-            get { return Resources.GetString("Source"); }
+            get { return null; }
         }
         
         string IMigrationMetadata.Target

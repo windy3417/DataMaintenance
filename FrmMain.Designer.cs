@@ -36,6 +36,7 @@
             this.菜单清单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.权限设定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmSmbConnectiongString = new System.Windows.Forms.ToolStripMenuItem();
+            this.人员档案ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.刀具管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.属性修改ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.外借导入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,19 +49,18 @@
             this.任务清理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.授权ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.采购订单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.用户管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.人员档案ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.u8附件管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmArchiveAttachment = new System.Windows.Forms.ToolStripMenuItem();
+            this.采购订单附件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.箱号管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.出库箱号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.箱号结存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.重登录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ts_foot = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tstb_currentUser = new System.Windows.Forms.ToolStripTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.箱号结存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_main.SuspendLayout();
             this.panel1.SuspendLayout();
             this.ts_foot.SuspendLayout();
@@ -73,7 +73,6 @@
             this.刀具管理ToolStripMenuItem,
             this.清除锁定ToolStripMenuItem,
             this.授权ToolStripMenuItem,
-            this.用户管理ToolStripMenuItem,
             this.u8附件管理ToolStripMenuItem,
             this.箱号管理ToolStripMenuItem,
             this.重登录ToolStripMenuItem});
@@ -90,7 +89,8 @@
             this.权限生成ToolStripMenuItem,
             this.菜单清单ToolStripMenuItem,
             this.权限设定ToolStripMenuItem,
-            this.tsmSmbConnectiongString});
+            this.tsmSmbConnectiongString,
+            this.人员档案ToolStripMenuItem1});
             this.设置ToolStripMenuItem.Name = "设置ToolStripMenuItem";
             this.设置ToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.设置ToolStripMenuItem.Text = "设置";
@@ -129,6 +129,14 @@
             this.tsmSmbConnectiongString.Size = new System.Drawing.Size(163, 22);
             this.tsmSmbConnectiongString.Text = "SMB连接字符串";
             this.tsmSmbConnectiongString.Click += new System.EventHandler(this.tsmSmbConnectiongString_Click);
+            // 
+            // 人员档案ToolStripMenuItem1
+            // 
+            this.人员档案ToolStripMenuItem1.Name = "人员档案ToolStripMenuItem1";
+            this.人员档案ToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
+            this.人员档案ToolStripMenuItem1.Tag = "DataMaintenance.UI.FrmUserInfo";
+            this.人员档案ToolStripMenuItem1.Text = "人员档案";
+            this.人员档案ToolStripMenuItem1.Click += new System.EventHandler(this.MenuItemClick);
             // 
             // 刀具管理ToolStripMenuItem
             // 
@@ -222,25 +230,11 @@
             this.采购订单ToolStripMenuItem.Text = "采购订单";
             this.采购订单ToolStripMenuItem.Click += new System.EventHandler(this.采购订单ToolStripMenuItem_Click);
             // 
-            // 用户管理ToolStripMenuItem
-            // 
-            this.用户管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.人员档案ToolStripMenuItem});
-            this.用户管理ToolStripMenuItem.Name = "用户管理ToolStripMenuItem";
-            this.用户管理ToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.用户管理ToolStripMenuItem.Text = "用户管理";
-            // 
-            // 人员档案ToolStripMenuItem
-            // 
-            this.人员档案ToolStripMenuItem.Name = "人员档案ToolStripMenuItem";
-            this.人员档案ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.人员档案ToolStripMenuItem.Text = "人员档案";
-            this.人员档案ToolStripMenuItem.Click += new System.EventHandler(this.人员档案ToolStripMenuItem_Click);
-            // 
             // u8附件管理ToolStripMenuItem
             // 
             this.u8附件管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmArchiveAttachment});
+            this.tsmArchiveAttachment,
+            this.采购订单附件ToolStripMenuItem});
             this.u8附件管理ToolStripMenuItem.Name = "u8附件管理ToolStripMenuItem";
             this.u8附件管理ToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
             this.u8附件管理ToolStripMenuItem.Text = "U8附件管理";
@@ -251,6 +245,14 @@
             this.tsmArchiveAttachment.Size = new System.Drawing.Size(217, 22);
             this.tsmArchiveAttachment.Text = "客户供应商存货档案附件";
             this.tsmArchiveAttachment.Click += new System.EventHandler(this.tsmArchiveAttachment_Click);
+            // 
+            // 采购订单附件ToolStripMenuItem
+            // 
+            this.采购订单附件ToolStripMenuItem.Name = "采购订单附件ToolStripMenuItem";
+            this.采购订单附件ToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.采购订单附件ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.FrmPoAttachment";
+            this.采购订单附件ToolStripMenuItem.Text = "采购订单附件";
+            this.采购订单附件ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
             // 
             // 箱号管理ToolStripMenuItem
             // 
@@ -264,10 +266,18 @@
             // 出库箱号ToolStripMenuItem
             // 
             this.出库箱号ToolStripMenuItem.Name = "出库箱号ToolStripMenuItem";
-            this.出库箱号ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.出库箱号ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.出库箱号ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.FrmBoxIdDeliveryQuery";
             this.出库箱号ToolStripMenuItem.Text = "出库箱号";
             this.出库箱号ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
+            // 
+            // 箱号结存ToolStripMenuItem
+            // 
+            this.箱号结存ToolStripMenuItem.Name = "箱号结存ToolStripMenuItem";
+            this.箱号结存ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.箱号结存ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.FrmBoxIdExist";
+            this.箱号结存ToolStripMenuItem.Text = "箱号结存";
+            this.箱号结存ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
             // 
             // 重登录ToolStripMenuItem
             // 
@@ -301,8 +311,8 @@
             // toolStripLabel1
             // 
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(85, 22);
-            this.toolStripLabel1.Text = "当前用户有：";
+            this.toolStripLabel1.Size = new System.Drawing.Size(72, 22);
+            this.toolStripLabel1.Text = "当前用户：";
             this.toolStripLabel1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage;
             // 
             // tstb_currentUser
@@ -316,19 +326,14 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(786, 272);
-            this.tabControl1.TabIndex = 0;
-            // 
-            // 箱号结存ToolStripMenuItem
-            // 
-            this.箱号结存ToolStripMenuItem.Name = "箱号结存ToolStripMenuItem";
-            this.箱号结存ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.箱号结存ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.FrmBoxIdExist";
-            this.箱号结存ToolStripMenuItem.Text = "箱号结存";
-            this.箱号结存ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
+            this.tabControl1.TabIndex = 1;
+            this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
+            this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
             // 
             // FrmMain
             // 
@@ -369,8 +374,6 @@
         private System.Windows.Forms.ToolStripMenuItem 采购订单ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 数据库设置ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 用户管理ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 人员档案ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 权限生成ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 菜单清单ToolStripMenuItem;
 
@@ -388,6 +391,8 @@
         private System.Windows.Forms.ToolStripMenuItem 箱号管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 出库箱号ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 箱号结存ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 人员档案ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 采购订单附件ToolStripMenuItem;
     }
 }
 

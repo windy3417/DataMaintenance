@@ -1,4 +1,4 @@
-﻿using DataMaintenance.Model.IT;
+﻿using DataMaintenance.Model.Maintenance;
 using DataMaintenance.Model;
 using System;
 using System.Collections.Generic;

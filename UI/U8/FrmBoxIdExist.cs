@@ -143,7 +143,7 @@ namespace DataMaintenance.UI.U8
 
                 if (dtpStartDate.Value != null )
                 {
-                    result &= t.dDate >= dtpStartDate.Value.Date ;
+                    result &= t.dDate >= dtpStartDate.Value.Date.Date ;
                 }
 
 
@@ -183,7 +183,7 @@ namespace DataMaintenance.UI.U8
         private void tsmQueryBoxId_Click(object sender, EventArgs e)
         {
             FrmBoxIdDetail f = new FrmBoxIdDetail();
-            f.GetBoxId(dgvReport.CurrentRow.Cells[cinvCode.Name].Value.ToString(),dtpStartDate.Value);
+            f.GetBoxId(dgvReport.CurrentRow.Cells[cinvCode.Name].Value.ToString(),dtpStartDate.Value.Date);
             f.StartPosition = FormStartPosition.CenterScreen;
             f.ShowDialog();
         }

@@ -6,6 +6,7 @@ using DataMaintenance.Model;
 using System.Data;
 using System.Data.SqlClient;
 using static Utility.Sql.Sqlhelper;
+using DataMaintenance.Model.Maintenance;
 
 namespace DataMaintenance.DAL
 {
@@ -47,7 +48,7 @@ namespace DataMaintenance.DAL
         /// <returns></returns>
         public bool loginCheck(string userID,string pwd)
         {
-            using (var db=new DataMaitenanceContext())
+            using (var db=new DataMaintenanceContext())
             {
                 
                 var q = db.Users.Where( s =>s.userID==userID  & s.pwd == pwd).ToList();

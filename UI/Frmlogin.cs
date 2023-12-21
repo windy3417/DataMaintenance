@@ -18,9 +18,9 @@ namespace DataMaintenance.UI
     /// <summary>
     /// 重注册时要调用该窗体，故设定访问域为public
     /// </summary>
-    public partial class Frm_login : Form
+    public partial class Frmlogin : Form
     {
-        public Frm_login()
+        public Frmlogin()
         {
             InitializeComponent();
             intializeControlState();
@@ -59,8 +59,7 @@ namespace DataMaintenance.UI
 
         #region 事件
 
-        
-              
+                      
       
 
         /// <summary>
@@ -77,13 +76,13 @@ namespace DataMaintenance.UI
                 if (ch_changePWD.Checked == false)
                 {
                     string pwd = Encrypt.Encode(txt_pwd.Text);
-                   
 
+                    string userName;
 
-                    if (new UserService().loginCheckWithSqlparameters(txt_userID.Text, pwd))
+                    if (new UserService().loginCheckWithSqlparameters(txt_userID.Text, pwd,out userName))
                     {
                         CurrentUser.userID = txt_userID.Text;
-                        
+                        CurrentUser.userName = userName;
                        
                         DialogResult = DialogResult.OK;
 

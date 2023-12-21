@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Utility.Sql;
 using DataMaintenance.Model;
 using static DataMaintenance.UI.Frm_authorization;
+using DataMaintenance.Model.Maintenance;
 
 namespace DataMaintenance.UI
 {
@@ -119,7 +120,7 @@ namespace DataMaintenance.UI
         /// </summary>
         void authorizationLog()
         {
-            using (var db = new DataMaitenanceContext())
+            using (var db = new DataMaintenanceContext())
             {
 
                 AuthorizationModle m = new AuthorizationModle();

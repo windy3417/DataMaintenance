@@ -6,6 +6,7 @@ using DataMaintenance.Model;
 using System.Data;
 using System.Data.SqlClient;
 using static Utility.Sql.Sqlhelper;
+using DataMaintenance.Model.Maintenance;
 
 namespace DataMaintenance.DAL
 {
@@ -24,12 +25,12 @@ namespace DataMaintenance.DAL
                 new SqlParameter("@queryAll",1 )
             };
 
-            SqlDataReader sqlDataReader = Utility.Sql.Sqlhelper.GetSqlDataReader(sql, sqlParameters, DataSourceType.plug );
+            SqlDataReader sqlDataReader = Utility.Sql.Sqlhelper.GetSqlDataReader(sql, sqlParameters, DataSourceType.business );
             while (sqlDataReader.Read())
             {
                 UserModle m = new UserModle();
                 m.userID = sqlDataReader["userID"].ToString();
-                m.name = sqlDataReader["name"].ToString();
+                m.UserName = sqlDataReader["name"].ToString();
 
 
 
@@ -47,7 +48,7 @@ namespace DataMaintenance.DAL
         /// <returns></returns>
         public bool loginCheck(string userID,string pwd)
         {
-            using (var db=new DataMaitenanceContext())
+            using (var db=new DataMaintenanceContext())
             {
                 
                 var q = db.Users.Where( s =>s.userID==userID  & s.pwd == pwd).ToList();
@@ -69,7 +70,7 @@ namespace DataMaintenance.DAL
         /// </summary>
         /// <param name="pwd"></param>
         /// <returns></returns>
-        public bool loginCheckWithSqlparameters(string userID, string pwd)
+        public bool loginCheckWithSqlparameters(string userID, string pwd, out string userName)
         {
            
            
@@ -80,13 +81,16 @@ namespace DataMaintenance.DAL
                 new SqlParameter("@pwd",pwd ),
             };
 
-            SqlDataReader sqlDataReader = Utility.Sql.Sqlhelper.GetSqlDataReader(sql, sqlParameters, DataSourceType.plug );
+            SqlDataReader sqlDataReader = Utility.Sql.Sqlhelper.GetSqlDataReader(sql, sqlParameters, DataSourceType.business );
             if (sqlDataReader.HasRows)
             {
+                sqlDataReader.Read();
+                userName = sqlDataReader["UserName"].ToString();
                 return true;
 
                               
             }
+            userName = "";
             return false;
         }
 

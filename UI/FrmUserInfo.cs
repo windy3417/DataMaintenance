@@ -10,13 +10,13 @@ using DataMaintenance.Model;
 using System.Collections.Generic;
 using System.Configuration;
 using Utility;
-
+using DataMaintenance.Model.Maintenance;
 
 namespace DataMaintenance.UI
 {
-    public partial class Frm_user : Form
+    public partial class FrmUserInfo : Form
     {
-        public Frm_user()
+        public FrmUserInfo()
         {
             InitializeComponent();
             this.initialize();
@@ -142,7 +142,7 @@ namespace DataMaintenance.UI
                 if (DialogResult.Yes == MessageBox.Show("是否确定删除", "删除提醒", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
 
-                    DataMaitenanceContext db = new DataMaitenanceContext();
+                    DataMaintenanceContext db = new DataMaintenanceContext();
 
                     List<UserModle> d = (from del in db.Users
                                                   where del.userID ==selected
@@ -195,12 +195,12 @@ namespace DataMaintenance.UI
                 //新增后保存
                 if (saveOrModifQueryFlag == saveOrChangeOrQueryMolde.save.ToString())
                 {
-                    using (var db = new DataMaitenanceContext())
+                    using (var db = new DataMaintenanceContext())
                     {
 
                         UserModle m = new UserModle();
                         m.userID = txt_cusCode.Text;
-                        m.name = this.txt_cusName.Text;
+                        m.UserName = this.txt_cusName.Text;
                         m.pwd =Encrypt.Encode( txt_pwd.Text);
                         m.RegistrationDate = Convert.ToDateTime(this.tbd_effect.Text);
                         if (this.tbd_failure.Text != null & tbd_failure.Text != "")
@@ -239,13 +239,13 @@ namespace DataMaintenance.UI
                 //查询之后修改并保存
                 if (saveOrModifQueryFlag == saveOrChangeOrQueryMolde.query.ToString())
                 {
-                    using (var db = new DataMaitenanceContext())
+                    using (var db = new DataMaintenanceContext())
                     {
                         UserModle m = db.Users.Where(c => c.userID.ToString() == txt_cusCode.Text).FirstOrDefault();
 
                         m.userID = txt_cusCode.Text;
 
-                        m.name = this.txt_cusName.Text;
+                        m.UserName = this.txt_cusName.Text;
                         m.pwd = Encrypt.Encode(txt_pwd.Text);
                         m.RegistrationDate = Convert.ToDateTime(this.tbd_effect.Text);
 
@@ -409,7 +409,7 @@ namespace DataMaintenance.UI
             //查询状态的数据源
             if (saveOrModifQueryFlag == saveOrChangeOrQueryMolde.query.ToString())
             {
-                this.dataGridView1.DataSource = new DataMaitenanceContext().Users.ToList<UserModle>();
+                this.dataGridView1.DataSource = new DataMaintenanceContext().Users.ToList<UserModle>();
             }
             //新增状态的数据源
             else

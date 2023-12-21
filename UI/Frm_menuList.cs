@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using DataMaintenance.Model;
 using DataMaintenance;
 using System.Linq;
+using DataMaintenance.Model.Maintenance;
 
 namespace DataMaintenance.UI
 {
@@ -56,7 +57,7 @@ namespace DataMaintenance.UI
 
         protected override void query()
         {
-            using (var db = new DataMaitenanceContext())
+            using (var db = new DataMaintenanceContext())
             {
 
                 try
@@ -82,7 +83,7 @@ namespace DataMaintenance.UI
         protected override void deleteModle(object selected)
         {
             base.deleteModle(selected);
-            var db = new DataMaitenanceContext();
+            var db = new DataMaintenanceContext();
             MenuModle m = new MenuModle();
 
             List<MenuModle> del = (from d in db.Menus

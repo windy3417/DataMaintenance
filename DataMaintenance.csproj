@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>DataMaintenance</RootNamespace>
     <AssemblyName>DataMaintenance</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -31,7 +31,7 @@
     <SuiteName>信息平台管理</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>4</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -101,6 +101,9 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="U8services">
+      <HintPath>..\..\U8services\U8services\bin\Debug\U8services.dll</HintPath>
+    </Reference>
     <Reference Include="Utility, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Utility\bin\Debug\Utility.dll</HintPath>
@@ -124,14 +127,18 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011120147389_changeColumn.cs" />
-    <Compile Include="Migrations\202011120147389_changeColumn.designer.cs">
-      <DependentUpon>202011120147389_changeColumn.cs</DependentUpon>
+    <Compile Include="Migrations\202309140755289_m.cs" />
+    <Compile Include="Migrations\202309140755289_m.designer.cs">
+      <DependentUpon>202309140755289_m.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202309150851310_m1.cs" />
+    <Compile Include="Migrations\202309150851310_m1.designer.cs">
+      <DependentUpon>202309150851310_m1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Model\IT\DataMaitenanceContext.cs" />
-    <Compile Include="Model\IT\AuthorizationModle.cs" />
-    <Compile Include="Model\IT\MaxKeys.cs" />
+    <Compile Include="Model\DataMaintenanceContext.cs" />
+    <Compile Include="Model\Maintenance\AuthorizationModle.cs" />
+    <Compile Include="Model\Maintenance\MaxKeys.cs" />
     <Compile Include="Model\ItContext.cs" />
     <Compile Include="Model\U8\Attachfile.cs" />
     <Compile Include="Model\U8\CurrentStock.cs" />
@@ -142,15 +149,17 @@
     <Compile Include="Model\U8\rdrecords10.cs" />
     <Compile Include="Model\U8\rdrecords32.cs" />
     <Compile Include="Model\U8\Vendor.cs" />
+    <Compile Include="Model\U8\VoucherAccessories.cs" />
+    <Compile Include="Model\U8\VoucherBodyAccessories.cs" />
     <Compile Include="Model\U8\Warehouse.cs" />
     <Compile Include="Model\UfSsytmeContext.cs" />
     <Compile Include="Model\U8Context.cs" />
-    <Compile Include="Model\IT\MenuAuthorizationModle.cs" />
-    <Compile Include="Model\IT\MenuModle.cs" />
+    <Compile Include="Model\Maintenance\MenuAuthorizationModle.cs" />
+    <Compile Include="Model\Maintenance\MenuModle.cs" />
     <Compile Include="Model\U8\Inventory.cs" />
     <Compile Include="Model\U8\U8CUSTDEF_0058_E001.cs" />
     <Compile Include="Model\U8\U8CUSTDEF_0058_E002.cs" />
-    <Compile Include="Model\IT\UserModel.cs" />
+    <Compile Include="Model\Maintenance\UserModel.cs" />
     <Compile Include="Model\Ufsystem\UA_Auth.cs" />
     <Compile Include="Model\Ufsystem\ua_Task.cs" />
     <Compile Include="Model\Ufsystem\UA_TaskLog.cs" />
@@ -238,11 +247,11 @@
     <Compile Include="UI\Frm_config.Designer.cs">
       <DependentUpon>Frm_config.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Frm_login.cs">
+    <Compile Include="UI\Frmlogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Frm_login.Designer.cs">
-      <DependentUpon>Frm_login.cs</DependentUpon>
+    <Compile Include="UI\Frmlogin.Designer.cs">
+      <DependentUpon>Frmlogin.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Frm_authorization.cs">
       <SubType>Form</SubType>
@@ -256,11 +265,11 @@
     <Compile Include="UI\Frm_menuList.Designer.cs">
       <DependentUpon>Frm_menuList.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Frm_user.cs">
+    <Compile Include="UI\FrmUserInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Frm_user.designer.cs">
-      <DependentUpon>Frm_user.cs</DependentUpon>
+    <Compile Include="UI\FrmUserInfo.designer.cs">
+      <DependentUpon>FrmUserInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\U8\FrmBoxIdDetail.cs">
       <SubType>Form</SubType>
@@ -273,6 +282,12 @@
     </Compile>
     <Compile Include="UI\U8\FrmBoxIdExist.Designer.cs">
       <DependentUpon>FrmBoxIdExist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\U8\FrmPoAttachment.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\U8\FrmPoAttachment.Designer.cs">
+      <DependentUpon>FrmPoAttachment.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\U8\Frm_PO.cs">
       <SubType>Form</SubType>
@@ -313,8 +328,11 @@
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202011120147389_changeColumn.resx">
-      <DependentUpon>202011120147389_changeColumn.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202309140755289_m.resx">
+      <DependentUpon>202309140755289_m.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202309150851310_m1.resx">
+      <DependentUpon>202309150851310_m1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -362,8 +380,8 @@
     <EmbeddedResource Include="UI\Frm_authorize.resx">
       <DependentUpon>Frm_authorize.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Frm_login.resx">
-      <DependentUpon>Frm_login.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Frmlogin.resx">
+      <DependentUpon>Frmlogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Frm_authorization.resx">
       <DependentUpon>Frm_authorization.cs</DependentUpon>
@@ -371,14 +389,17 @@
     <EmbeddedResource Include="UI\Frm_menuList.resx">
       <DependentUpon>Frm_menuList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Frm_user.resx">
-      <DependentUpon>Frm_user.cs</DependentUpon>
+    <EmbeddedResource Include="UI\FrmUserInfo.resx">
+      <DependentUpon>FrmUserInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\FrmBoxIdDetail.resx">
       <DependentUpon>FrmBoxIdDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\FrmBoxIdExist.resx">
       <DependentUpon>FrmBoxIdExist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\U8\FrmPoAttachment.resx">
+      <DependentUpon>FrmPoAttachment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\Frm_PO.resx">
       <DependentUpon>Frm_PO.cs</DependentUpon>

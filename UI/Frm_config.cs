@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DataMaintenance.Model;
+using DataMaintenance.Model.Maintenance;
 using Utility;
 
 namespace DataMaintenance.UI
@@ -22,12 +23,12 @@ namespace DataMaintenance.UI
         /// </summary>
       protected  override void adminSetUp()
         {
-            using (var db = new DataMaitenanceContext())
+            using (var db = new DataMaintenanceContext())
             {
                 UserModle m = new UserModle();
 
                 m.userID = base.txt_adminCode.Text;
-                m.name = base.txt_adminName.Text;
+                m.UserName = base.txt_adminName.Text;
                 m.pwd = Utility.Encrypt.Encode(base.txt_adminPwd.Text);
                 m.RegistrationDate = DateTime.Now;
 

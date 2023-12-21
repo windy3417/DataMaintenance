@@ -38,6 +38,7 @@ namespace DataMaintenance.UI.U8
             cinvStd.DataPropertyName = "cinvStd";
             iQuantity.DataPropertyName = "iquantity";
             boxId.DataPropertyName = "cdefine31";
+            memo.DataPropertyName = "cMemo";
 
            
 

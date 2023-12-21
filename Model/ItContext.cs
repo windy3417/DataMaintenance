@@ -1,4 +1,4 @@
-namespace DataMaintenance.Model.IT
+namespace DataMaintenance.Model.Maintenance
 {
     using System;
     using System.Data.Entity;

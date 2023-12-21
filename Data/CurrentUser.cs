@@ -6,7 +6,11 @@ using System.Text;
 
 namespace DataMaintenance.Data
 {
- public   class CurrentUser
+
+    /// <summary>
+    /// Save the information of the  login user and display it in the status bar of the main form
+    /// </summary>
+ public   static class CurrentUser
     {
 
         public static  event EventHandler authorizPass;
@@ -40,6 +44,7 @@ namespace DataMaintenance.Data
             }
         }
         public static string pwd { get; set; }
+        public static string userName { get; set; }
 
     }
 }

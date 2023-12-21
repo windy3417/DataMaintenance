@@ -51,6 +51,12 @@ namespace DataMaintenance.UI.U8
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvReport = new System.Windows.Forms.DataGridView();
+            this.cwhcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cwhname = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cinvCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cinvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cinvStd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.iQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cms = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmQueryBoxId = new System.Windows.Forms.ToolStripMenuItem();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,12 +68,6 @@ namespace DataMaintenance.UI.U8
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.xmPagingReader1 = new Utility.UControl.XmPagingReader();
-            this.cwhcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cwhname = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cinvCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cinvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cinvStd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.iQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             this.panTitel.SuspendLayout();
             this.gpFilter.SuspendLayout();
@@ -95,7 +95,7 @@ namespace DataMaintenance.UI.U8
             this.tsbQuery.Name = "tsbQuery";
             this.tsbQuery.Size = new System.Drawing.Size(53, 22);
             this.tsbQuery.Text = "查询";
-            this.tsbQuery.ToolTipText = "入库日期的选择可以屏蔽一些有箱号入库，但未按徐箱号出库的无效箱号";
+            this.tsbQuery.ToolTipText = "入库日期的选择可以屏蔽一些有箱号入库，但未按箱号出库的无效箱号";
             this.tsbQuery.Click += new System.EventHandler(this.tsbQuery_Click);
             // 
             // toolStripDropDownButton1
@@ -274,6 +274,42 @@ namespace DataMaintenance.UI.U8
             this.dgvReport.Size = new System.Drawing.Size(853, 368);
             this.dgvReport.TabIndex = 3;
             // 
+            // cwhcode
+            // 
+            this.cwhcode.HeaderText = "仓库编码";
+            this.cwhcode.Name = "cwhcode";
+            this.cwhcode.ReadOnly = true;
+            // 
+            // cwhname
+            // 
+            this.cwhname.HeaderText = "仓库名称";
+            this.cwhname.Name = "cwhname";
+            this.cwhname.ReadOnly = true;
+            // 
+            // cinvCode
+            // 
+            this.cinvCode.HeaderText = "存货编码";
+            this.cinvCode.Name = "cinvCode";
+            this.cinvCode.ReadOnly = true;
+            // 
+            // cinvName
+            // 
+            this.cinvName.HeaderText = "存货名称";
+            this.cinvName.Name = "cinvName";
+            this.cinvName.ReadOnly = true;
+            // 
+            // cinvStd
+            // 
+            this.cinvStd.HeaderText = "规格型号";
+            this.cinvStd.Name = "cinvStd";
+            this.cinvStd.ReadOnly = true;
+            // 
+            // iQuantity
+            // 
+            this.iQuantity.HeaderText = "库存数量";
+            this.iQuantity.Name = "iQuantity";
+            this.iQuantity.ReadOnly = true;
+            // 
             // cms
             // 
             this.cms.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -358,42 +394,6 @@ namespace DataMaintenance.UI.U8
             0,
             0,
             0});
-            // 
-            // cwhcode
-            // 
-            this.cwhcode.HeaderText = "仓库编码";
-            this.cwhcode.Name = "cwhcode";
-            this.cwhcode.ReadOnly = true;
-            // 
-            // cwhname
-            // 
-            this.cwhname.HeaderText = "仓库名称";
-            this.cwhname.Name = "cwhname";
-            this.cwhname.ReadOnly = true;
-            // 
-            // cinvCode
-            // 
-            this.cinvCode.HeaderText = "存货编码";
-            this.cinvCode.Name = "cinvCode";
-            this.cinvCode.ReadOnly = true;
-            // 
-            // cinvName
-            // 
-            this.cinvName.HeaderText = "存货名称";
-            this.cinvName.Name = "cinvName";
-            this.cinvName.ReadOnly = true;
-            // 
-            // cinvStd
-            // 
-            this.cinvStd.HeaderText = "规格型号";
-            this.cinvStd.Name = "cinvStd";
-            this.cinvStd.ReadOnly = true;
-            // 
-            // iQuantity
-            // 
-            this.iQuantity.HeaderText = "库存数量";
-            this.iQuantity.Name = "iQuantity";
-            this.iQuantity.ReadOnly = true;
             // 
             // FrmBoxIdExist
             // 

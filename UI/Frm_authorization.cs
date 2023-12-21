@@ -29,7 +29,7 @@ namespace DataMaintenance.UI
         /// </summary>
         private void initializeDatasource()
         {
-            cmb_user.DataSource = new UserService().getUserList().Where<UserModle>(c => c.DateOfCancellation == null).Select((c) => new { c.userID, c.name,c.pwd,c.RegistrationDate }).ToList();
+            cmb_user.DataSource = new UserService().getUserList().Where<UserModle>(c => c.DateOfCancellation == null).Select((c) => new { c.userID, c.UserName,c.pwd,c.RegistrationDate }).ToList();
 
             cmb_user.DisplayMember = "name";
             cmb_user.ValueMember = "userID";

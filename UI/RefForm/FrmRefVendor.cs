@@ -32,7 +32,7 @@ namespace DataMaintenance.UI.Ref
         void InitializeContolState()
         {
             this.StartPosition = FormStartPosition.CenterScreen;
-            dataGridView1.AutoGenerateColumns = false;
+            dgvBody.AutoGenerateColumns = false;
         }
 
         #endregion
@@ -50,10 +50,10 @@ namespace DataMaintenance.UI.Ref
         void BindData()
         {
           
-            dataGridView1.DataSource = new VendorRefService().GetListVendorInArchive();
+            dgvBody.DataSource = new VendorRefService().GetListVendorInArchive();
 
 
-            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvBody.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
         }
 
         #endregion
@@ -62,15 +62,15 @@ namespace DataMaintenance.UI.Ref
 
         private void dataGridView1_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            new Utility.Style.DataGridViewStyle().DisplayRowNo(e, dataGridView1,false);
+            new Utility.Style.DataGridViewStyle().DisplayRowNo(e, dgvBody,false);
         }
         #endregion
 
         private void tsbConfirm_Click(object sender, EventArgs e)
         {
             Vendor m = new Vendor();
-            m.cVenCode = dataGridView1.CurrentRow.Cells["cVenCode"].Value.ToString();
-            m.cVenName = dataGridView1.CurrentRow.Cells["cVenName"].Value.ToString();
+            m.cVenCode = dgvBody.CurrentRow.Cells["cVenCode"].Value.ToString();
+            m.cVenName = dgvBody.CurrentRow.Cells["cVenName"].Value.ToString();
 
 
             ActionRefVendorEntity?.Invoke(m);

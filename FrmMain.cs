@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using DataMaintenance.UI.Tools;
 using DataMaintenance.UI.U8Attachment;
 using DataMaintenance.UI.SetUp;
+using DataMaintenance.Model.Maintenance;
 
 namespace DataMaintenance
 {
@@ -37,7 +38,7 @@ namespace DataMaintenance
             this.WindowState = FormWindowState.Maximized;
 
             //状态栏显示已经登录的用户信息
-            tstb_currentUser.Text = CurrentUser.userID;
+            tstb_currentUser.Text = CurrentUser.userID+" "+CurrentUser.userName;
             //用户重登录后即刻刷新登录状态栏
             CurrentUser.authorizPass += CurrentUser_authorizPass;
 
@@ -50,9 +51,12 @@ namespace DataMaintenance
         /// <param name="e"></param>
         private void CurrentUser_authorizPass(object sender, EventArgs e)
         {
-            tstb_currentUser.Text = CurrentUser.userID;
+            tstb_currentUser.Text = CurrentUser.userID +" "+ CurrentUser.userName;
+            
         }
         #endregion
+
+        #region tabpage process
 
         /// <summary>
         /// open form
@@ -74,10 +78,121 @@ namespace DataMaintenance
             embed.openForm(form, tabPageText, tabControl1, false);
 
 
+                   
 
 
 
         }
+
+        /// <summary>
+        /// custom header of tabpage
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+
+            TabPage tabPage = tabControl1.TabPages[e.Index];
+
+
+            string tabText = tabPage.Text;
+            tabPage.ToolTipText = tabText;
+
+
+            // Create a font for drawing the close button
+            var closeButtonFont = new Font("Segoe UI", 8, FontStyle.Bold);
+
+            // Calculate the bounds of the tab header text and the button
+            Rectangle tabBounds = tabControl1.GetTabRect(e.Index);
+
+            Rectangle textBounds = new Rectangle(tabBounds.Location, new Size(tabBounds.Width - 16, tabBounds.Height));
+
+            Rectangle buttonBounds = new Rectangle(tabBounds.Right - 16, tabBounds.Top, 16, 16);
+
+
+            // Use a Graphics object to measure the text width
+
+
+            SizeF textSize = e.Graphics.MeasureString(tabText, tabPage.Font);
+
+            // If the text overflows, replace the excess characters with an ellipsis
+            if (textSize.Width > textBounds.Width)
+            {
+                int ellipsisWidth = TextRenderer.MeasureText("...", tabPage.Font).Width;
+                int cutoff = 0;
+                for (int i = tabText.Length - 1; i >= 0; i--)
+                {
+                    textSize = e.Graphics.MeasureString(tabText.Substring(0, i) + "...", tabPage.Font);
+                    if (textSize.Width + ellipsisWidth <= e.Bounds.Width)
+                    {
+                        cutoff = i;
+                        break;
+                    }
+                }
+                tabText = tabText.Substring(0, cutoff) + "...";
+            }
+
+            StringFormat sf = new StringFormat()
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+
+
+            // Draw the tab header text in unslected status of tabpage 
+            //TextRenderer.DrawText(e.Graphics, tabText, tabPage.Font, textBounds, tabPage.ForeColor,TextFormatFlags.VerticalCenter);
+
+            e.Graphics.DrawString(tabText, tabPage.Font, Brushes.Black, tabBounds, sf);
+
+
+            // Draw the button and fill backgroud when selected the tabpage
+
+
+            if (e.Index == tabControl1.SelectedIndex)
+            {
+                e.Graphics.FillRectangle(new SolidBrush(Color.SkyBlue), tabBounds);
+                e.Graphics.DrawString(tabText, tabPage.Font, Brushes.Black, textBounds, sf);
+
+                e.Graphics.DrawString("X", closeButtonFont, Brushes.Red, buttonBounds);
+            }
+
+
+            // Store the button bounds in the Tag property of the tabPage
+            tabPage.Tag = buttonBounds;
+
+        }
+
+
+        /// <summary>
+        /// colse the child form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tabControl1_MouseClick(object sender, MouseEventArgs e)
+        {
+
+            for (int i = 0; i < tabControl1.TabPages.Count; i++)
+            {
+                TabPage tabPage = tabControl1.TabPages[i];
+                Rectangle buttonBounds = (Rectangle)tabPage.Tag;
+
+                if (buttonBounds.Contains(e.Location))
+                {
+                    // Close the child form of the tabPage
+                    Form childForm = tabPage.Controls[0] as Form;
+                    childForm.Close();
+
+                    //Remove the tabPage from the tabControl
+                    tabControl1.TabPages.RemoveAt(i);
+                    break;
+                }
+            }
+
+
+        }
+
+        #endregion
+
 
 
         private void 刀具管理ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -123,13 +238,13 @@ namespace DataMaintenance
 
         private void 人员档案ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Frm_user config = new Frm_user();
+            FrmUserInfo config = new FrmUserInfo();
             embedForm(config);
         }
 
         private void 权限生成ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var db=new DataMaitenanceContext())
+            using (var db=new DataMaintenanceContext())
             {
                 //List<MenuModle> mList = new List<MenuModle>();
                 MenuModle m = new MenuModle();
@@ -162,13 +277,13 @@ namespace DataMaintenance
 
         private void 重登录ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            UI.Frm_login frm_Login = new UI.Frm_login();
+            UI.Frmlogin frm_Login = new UI.Frmlogin();
             frm_Login.ShowDialog();
-            if (frm_Login.DialogResult==DialogResult.OK)
-            {
-                //new Task
+            //if (frm_Login.DialogResult==DialogResult.OK)
+            //{
+            //    //new Task
                     
-            }
+            //}
         }
 
         private void 权限设定ToolStripMenuItem_Click(object sender, EventArgs e)
