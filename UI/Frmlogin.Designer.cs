@@ -71,6 +71,7 @@
             this.txt_pwd.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txt_pwd.Location = new System.Drawing.Point(59, 52);
             this.txt_pwd.Name = "txt_pwd";
+            this.txt_pwd.PasswordChar = '*';
             this.txt_pwd.Size = new System.Drawing.Size(112, 21);
             this.txt_pwd.TabIndex = 1;
             this.txt_pwd.Tag = "密码";
@@ -177,7 +178,7 @@
             this.toolStrip1.Text = "toolStrip1";
             this.toolStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.toolStrip1_ItemClicked);
             // 
-            // Frm_login
+            // Frmlogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -193,7 +194,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Frm_login";
+            this.Name = "Frmlogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "系统登录";
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Frm_login_KeyPress);

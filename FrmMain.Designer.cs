@@ -192,26 +192,30 @@
             // 客商解锁ToolStripMenuItem
             // 
             this.客商解锁ToolStripMenuItem.Name = "客商解锁ToolStripMenuItem";
-            this.客商解锁ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.客商解锁ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.客商解锁ToolStripMenuItem.Text = "客商解锁";
             this.客商解锁ToolStripMenuItem.Click += new System.EventHandler(this.客商解锁ToolStripMenuItem_Click);
             // 
             // 凭证解锁ToolStripMenuItem
             // 
             this.凭证解锁ToolStripMenuItem.Name = "凭证解锁ToolStripMenuItem";
-            this.凭证解锁ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.凭证解锁ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.凭证解锁ToolStripMenuItem.Tag = "DataMaintenance.UI.ClearLocker.FrmDeleteLockedAccountVoucher";
             this.凭证解锁ToolStripMenuItem.Text = "凭证解锁";
+            this.凭证解锁ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
             // 
             // 科目解锁ToolStripMenuItem
             // 
             this.科目解锁ToolStripMenuItem.Name = "科目解锁ToolStripMenuItem";
-            this.科目解锁ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.科目解锁ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.科目解锁ToolStripMenuItem.Tag = "DataMaintenance.UI.ClearLocker.FrmDeleteLockedAccountCode";
             this.科目解锁ToolStripMenuItem.Text = "科目解锁";
+            this.科目解锁ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
             // 
             // 任务清理ToolStripMenuItem
             // 
             this.任务清理ToolStripMenuItem.Name = "任务清理ToolStripMenuItem";
-            this.任务清理ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.任务清理ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.任务清理ToolStripMenuItem.Text = "任务清理";
             this.任务清理ToolStripMenuItem.Click += new System.EventHandler(this.任务清理ToolStripMenuItem_Click);
             // 

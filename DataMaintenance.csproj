@@ -31,7 +31,7 @@
     <SuiteName>信息平台管理</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>9</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -174,6 +174,18 @@
     </Compile>
     <Compile Include="UI\ClearLocker\FrmClearU8Task.Designer.cs">
       <DependentUpon>FrmClearU8Task.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ClearLocker\FrmDeleteLockedAccountCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ClearLocker\FrmDeleteLockedAccountCode.Designer.cs">
+      <DependentUpon>FrmDeleteLockedAccountCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\ClearLocker\FrmDeleteLockedAccountVoucher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\ClearLocker\FrmDeleteLockedAccountVoucher.Designer.cs">
+      <DependentUpon>FrmDeleteLockedAccountVoucher.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\ClearLocker\FrmDeleteLockedVendor.cs">
       <SubType>Form</SubType>
@@ -346,6 +358,12 @@
     </Compile>
     <EmbeddedResource Include="UI\ClearLocker\FrmClearU8Task.resx">
       <DependentUpon>FrmClearU8Task.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ClearLocker\FrmDeleteLockedAccountCode.resx">
+      <DependentUpon>FrmDeleteLockedAccountCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\ClearLocker\FrmDeleteLockedAccountVoucher.resx">
+      <DependentUpon>FrmDeleteLockedAccountVoucher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ClearLocker\FrmDeleteLockedVendor.resx">
       <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
