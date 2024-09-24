@@ -44,9 +44,8 @@ namespace DataMaintenance.UI.Ref
 
         void InitializeControlDataSource()
         {
-            //dataGridView1.DataSource = new CustomerAttachmentService().GetListArchiveEntiy();
+            
             dgvArchive.DataSource = new CustomerRefService().GetListCustomerInArchive();
-
 
 
             dgvArchive.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;

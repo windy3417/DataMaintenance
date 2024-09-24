@@ -115,8 +115,7 @@ namespace DataMaintenance.UI.U8
 
         private DataTable GetData()
         {
-           
-            
+                       
             //filter
             Func<CurrentStock, bool> funcHeader = d =>
             {
@@ -153,7 +152,7 @@ namespace DataMaintenance.UI.U8
             BoxIDExistService  s = new BoxIDExistService();
 
             //raw data
-            DataTable dt = s.GetCurrentStock(funcHeader, funcDetail);
+            DataTable dt = s.GetCurrentStock(funcHeader, funcDetail,cmbAccountNo.Text);
             return dt;
         }
 
@@ -183,7 +182,7 @@ namespace DataMaintenance.UI.U8
         private void tsmQueryBoxId_Click(object sender, EventArgs e)
         {
             FrmBoxIdDetail f = new FrmBoxIdDetail();
-            f.GetBoxId(dgvReport.CurrentRow.Cells[cinvCode.Name].Value.ToString(),dtpStartDate.Value.Date);
+            f.GetBoxId(dgvReport.CurrentRow.Cells[cinvCode.Name].Value.ToString(),dtpStartDate.Value.Date,cmbAccountNo.Text);
             f.StartPosition = FormStartPosition.CenterScreen;
             f.ShowDialog();
         }

@@ -178,10 +178,10 @@ namespace DataMaintenance.UI.Ref
         private System.Windows.Forms.DataGridView dgvArchive;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbCertain;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.TreeView treeView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn cInvCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn cInvName;
         private System.Windows.Forms.DataGridViewTextBoxColumn std;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.TreeView treeView1;
     }
 }

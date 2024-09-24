@@ -29,6 +29,7 @@ namespace DataMaintenance.UI.U8
             txtInvcode.RefButton.Click += RefInventory;
             txtCustomerCode.RefButton.Click += RefCustomer;
 
+            cmbAccountNo.Text = "017";
 
             cusName.DataPropertyName = "ccusname";
             outBoundDate.DataPropertyName = "ddate";
@@ -147,7 +148,7 @@ namespace DataMaintenance.UI.U8
             Rdrecord32Service s = new Rdrecord32Service();
 
             //raw data
-            DataTable dt = s.GetRdrecord32(funcHeader, funcDetail);
+            DataTable dt = s.GetRdrecord32(funcHeader, funcDetail,cmbAccountNo.Text);
             return dt;
         }
 

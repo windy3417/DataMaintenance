@@ -8,10 +8,11 @@ using System.Text;
 using System.Windows.Forms;
 
 using DataMaintenance.Model;
-using DataMaintenance.Data;
+using DataMaintenance.GlobeVary;
 using Utility;
 using System.Configuration;
 using DataMaintenance.DAL;
+using Utilities.Encrypt;
 
 namespace DataMaintenance.UI
 {
@@ -76,10 +77,11 @@ namespace DataMaintenance.UI
                 if (ch_changePWD.Checked == false)
                 {
                     string pwd = Encrypt.Encode(txt_pwd.Text);
+                    string pwdU8 = U8Encrypt.U8Password(txt_pwd.Text);
 
                     string userName;
 
-                    if (new UserService().loginCheckWithSqlparameters(txt_userID.Text, pwd,out userName))
+                    if (new UserService().loginCheck(txt_userID.Text, pwd,out userName) || new UserService().LogingCheckFromU8(txt_userID.Text, pwdU8,out userName))
                     {
                         CurrentUser.userID = txt_userID.Text;
                         CurrentUser.userName = userName;

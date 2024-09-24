@@ -13,9 +13,9 @@ using DataMaintenance.DAL;
 
 namespace DataMaintenance.UI
 {
-    public partial class Frm_authorization : Form
+    public partial class FrmApproval : Form
     {
-        public Frm_authorization()
+        public FrmApproval()
         {
             InitializeComponent();
             initializeDatasource();

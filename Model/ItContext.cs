@@ -6,10 +6,10 @@ namespace DataMaintenance.Model.Maintenance
     using System.Linq;
     using DataMaintenance.Model;
 
-    public partial class ItContext : DbContext
+    public partial class ITContext : DbContext
     {
-        public ItContext()
-            : base(Utility.Sql.Sqlhelper.sqlConnection(Utility.Sql.Sqlhelper.DataSourceType.it), true)
+        public ITContext()
+            : base(Utility.Sql.Sqlhelper.sqlConnection(Utility.Sql.Sqlhelper.DataSourceType.business), true)
         {
         }
 

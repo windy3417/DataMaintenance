@@ -1,6 +1,6 @@
 ﻿namespace DataMaintenance.UI
 {
-    partial class Frm_authorization
+    partial class FrmApproval
     {
         /// <summary>
         /// Required designer variable.

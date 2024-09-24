@@ -10,8 +10,8 @@ namespace DataMaintenance.Model
 
     public partial class U8Context : DbContext
     {
-        public U8Context()
-            : base(Utility.Sql.Sqlhelper.sqlConnection(Utility.Sql.Sqlhelper.DataSourceType.u8), true)
+        public U8Context(string accountNo)
+            : base(Utility.Sql.Sqlhelper.sqlConnection(Utility.Sql.Sqlhelper.DataSourceType.u8,accountNo), true)
         {
         }
 
@@ -29,6 +29,7 @@ namespace DataMaintenance.Model
         public virtual DbSet<rdrecord10> rdrecord10 { get; set; }
         public virtual DbSet<rdrecords10> rdrecords10 { get; set; }
         public virtual DbSet<CurrentStock> CurrentStock { get; set; }
+        public virtual DbSet<InventoryClass> InventoryClasse { get; set; }
 
 
 

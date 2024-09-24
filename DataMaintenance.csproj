@@ -31,7 +31,7 @@
     <SuiteName>信息平台管理</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>9</ApplicationRevision>
+    <ApplicationRevision>11</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -112,6 +112,9 @@
   <ItemGroup>
     <Compile Include="DAL\RefServices\U8services\VendorRefService.cs" />
     <Compile Include="DAL\TableServices\U8services\Rdrecord32Service.cs" />
+    <Compile Include="DAL\U8services\InventoryClassService.cs" />
+    <Compile Include="DAL\U8services\InventoryService.cs" />
+    <Compile Include="DAL\U8services\Rdrecord32Service.cs" />
     <Compile Include="DAL\ViewServices\U8services\BoxIDExistService.cs" />
     <Compile Include="DAL\ViewServices\U8services\VendorAttachmentService.cs" />
     <Compile Include="DAL\ViewServices\U8services\CustomerAttachmentService.cs" />
@@ -120,7 +123,7 @@
     <Compile Include="DAL\TableServices\U8services\AttacheFileService.cs" />
     <Compile Include="DAL\TableServices\U8services\MasterDataService.cs" />
     <Compile Include="DAL\ViewServices\U8services\InventoryAttachmentService.cs" />
-    <Compile Include="Data\CurrentUser.cs" />
+    <Compile Include="GlobalVary\CurrentUser.cs" />
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,11 +138,28 @@
     <Compile Include="Migrations\202309150851310_m1.designer.cs">
       <DependentUpon>202309150851310_m1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202409230847215_m2.cs" />
+    <Compile Include="Migrations\202409230847215_m2.designer.cs">
+      <DependentUpon>202409230847215_m2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202409240554053_m3.cs" />
+    <Compile Include="Migrations\202409240554053_m3.designer.cs">
+      <DependentUpon>202409240554053_m3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202409240618535_m4.cs" />
+    <Compile Include="Migrations\202409240618535_m4.designer.cs">
+      <DependentUpon>202409240618535_m4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202409240836454_m5.cs" />
+    <Compile Include="Migrations\202409240836454_m5.designer.cs">
+      <DependentUpon>202409240836454_m5.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\DataMaintenanceContext.cs" />
     <Compile Include="Model\Maintenance\AuthorizationModle.cs" />
     <Compile Include="Model\Maintenance\MaxKeys.cs" />
-    <Compile Include="Model\ItContext.cs" />
+    <Compile Include="Model\ITContext.cs" />
+    <Compile Include="Model\Maintenance\UnitProductionCost.cs" />
     <Compile Include="Model\U8\Attachfile.cs" />
     <Compile Include="Model\U8\CurrentStock.cs" />
     <Compile Include="Model\U8\Customer.cs" />
@@ -165,6 +185,9 @@
     <Compile Include="Model\Ufsystem\UA_TaskLog.cs" />
     <Compile Include="Model\Ufsystem\UA_User.cs" />
     <Compile Include="Model\ViewModel\ArchiveVModel.cs" />
+    <Compile Include="UI\FrmHelp.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DAL\MenuService.cs" />
@@ -192,6 +215,12 @@
     </Compile>
     <Compile Include="UI\ClearLocker\FrmDeleteLockedVendor.Designer.cs">
       <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\RefForm\FrmRefInvClass.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\RefForm\FrmRefInvClass.Designer.cs">
+      <DependentUpon>FrmRefInvClass.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\RefForm\FrmRefWarehouse.cs">
       <SubType>Form</SubType>
@@ -265,23 +294,23 @@
     <Compile Include="UI\Frmlogin.Designer.cs">
       <DependentUpon>Frmlogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Frm_authorization.cs">
+    <Compile Include="UI\FrmApproval.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Frm_authorization.Designer.cs">
-      <DependentUpon>Frm_authorization.cs</DependentUpon>
+    <Compile Include="UI\FrmApproval.Designer.cs">
+      <DependentUpon>FrmApproval.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Frm_menuList.cs">
+    <Compile Include="UI\FrmMenuList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Frm_menuList.Designer.cs">
-      <DependentUpon>Frm_menuList.cs</DependentUpon>
+    <Compile Include="UI\FrmMenuList.Designer.cs">
+      <DependentUpon>FrmMenuList.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\FrmUserInfo.cs">
+    <Compile Include="UI\FrmPerson.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\FrmUserInfo.designer.cs">
-      <DependentUpon>FrmUserInfo.cs</DependentUpon>
+    <Compile Include="UI\FrmPerson.designer.cs">
+      <DependentUpon>FrmPerson.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\U8\FrmBoxIdDetail.cs">
       <SubType>Form</SubType>
@@ -300,6 +329,12 @@
     </Compile>
     <Compile Include="UI\U8\FrmPoAttachment.Designer.cs">
       <DependentUpon>FrmPoAttachment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\U8\FrmUnitCostInput.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\U8\FrmUnitCostInput.Designer.cs">
+      <DependentUpon>FrmUnitCostInput.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\U8\Frm_PO.cs">
       <SubType>Form</SubType>
@@ -346,6 +381,18 @@
     <EmbeddedResource Include="Migrations\202309150851310_m1.resx">
       <DependentUpon>202309150851310_m1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202409230847215_m2.resx">
+      <DependentUpon>202409230847215_m2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202409240554053_m3.resx">
+      <DependentUpon>202409240554053_m3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202409240618535_m4.resx">
+      <DependentUpon>202409240618535_m4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202409240836454_m5.resx">
+      <DependentUpon>202409240836454_m5.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -367,6 +414,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\ClearLocker\FrmDeleteLockedVendor.resx">
       <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\RefForm\FrmRefInvClass.resx">
+      <DependentUpon>FrmRefInvClass.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\RefForm\FrmRefWarehouse.resx">
       <DependentUpon>FrmRefWarehouse.cs</DependentUpon>
@@ -401,14 +451,14 @@
     <EmbeddedResource Include="UI\Frmlogin.resx">
       <DependentUpon>Frmlogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Frm_authorization.resx">
-      <DependentUpon>Frm_authorization.cs</DependentUpon>
+    <EmbeddedResource Include="UI\FrmApproval.resx">
+      <DependentUpon>FrmApproval.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Frm_menuList.resx">
-      <DependentUpon>Frm_menuList.cs</DependentUpon>
+    <EmbeddedResource Include="UI\FrmMenuList.resx">
+      <DependentUpon>FrmMenuList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\FrmUserInfo.resx">
-      <DependentUpon>FrmUserInfo.cs</DependentUpon>
+    <EmbeddedResource Include="UI\FrmPerson.resx">
+      <DependentUpon>FrmPerson.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\FrmBoxIdDetail.resx">
       <DependentUpon>FrmBoxIdDetail.cs</DependentUpon>
@@ -418,6 +468,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\FrmPoAttachment.resx">
       <DependentUpon>FrmPoAttachment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\U8\FrmUnitCostInput.resx">
+      <DependentUpon>FrmUnitCostInput.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\Frm_PO.resx">
       <DependentUpon>Frm_PO.cs</DependentUpon>
@@ -454,6 +507,16 @@
     <None Include="Resources\delete multipleRows.bmp" />
     <None Include="Resources\button.BMP" />
     <None Include="Resources\enable.bmp" />
+    <None Include="Resources\edit.gif" />
+    <None Include="Resources\add.bmp" />
+    <None Include="Resources\reference.png" />
+    <None Include="Resources\DeleteRow.gif" />
+    <None Include="Resources\add a row.gif" />
+    <None Include="Resources\Last page.png" />
+    <None Include="Resources\first page.bmp" />
+    <None Include="Resources\Next page.png" />
+    <None Include="Resources\previous page.png" />
+    <None Include="Resources\delete.gif" />
     <Content Include="Resources\template\外发需返资产清单导入模板.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -484,10 +547,12 @@
     <None Include="Resources\download.png" />
     <None Include="Resources\预览.jpg" />
     <None Include="Resources\打印.png" />
+    <None Include="Resources\update.gif" />
     <Content Include="setup.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
+    <Folder Include="UI\MarsterData\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

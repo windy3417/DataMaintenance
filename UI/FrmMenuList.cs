@@ -12,9 +12,9 @@ using DataMaintenance.Model.Maintenance;
 
 namespace DataMaintenance.UI
 {
-    public partial class Frm_menuList : Utility.UI.Frm_archiveList
+    public partial class FrmMenuList : Utility.UI.Frm_archiveList
     {
-        public Frm_menuList()
+        public FrmMenuList()
         {
             InitializeComponent();
             initializeControlState();

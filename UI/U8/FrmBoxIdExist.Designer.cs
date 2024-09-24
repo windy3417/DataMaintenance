@@ -44,6 +44,8 @@ namespace DataMaintenance.UI.U8
             this.panTitel = new System.Windows.Forms.Panel();
             this.labTitel = new System.Windows.Forms.Label();
             this.gpFilter = new System.Windows.Forms.GroupBox();
+            this.cmbAccountNo = new System.Windows.Forms.ComboBox();
+            this.lblAccountNo = new System.Windows.Forms.Label();
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.txtWarehouseCode = new Utility.UControl.XmTextBoxWithButton();
             this.txtInvcode = new Utility.UControl.XmTextBoxWithButton();
@@ -165,6 +167,8 @@ namespace DataMaintenance.UI.U8
             // 
             this.gpFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gpFilter.Controls.Add(this.cmbAccountNo);
+            this.gpFilter.Controls.Add(this.lblAccountNo);
             this.gpFilter.Controls.Add(this.dtpStartDate);
             this.gpFilter.Controls.Add(this.txtWarehouseCode);
             this.gpFilter.Controls.Add(this.txtInvcode);
@@ -178,9 +182,29 @@ namespace DataMaintenance.UI.U8
             this.gpFilter.TabStop = false;
             this.gpFilter.Text = "查询条件";
             // 
+            // cmbAccountNo
+            // 
+            this.cmbAccountNo.FormattingEnabled = true;
+            this.cmbAccountNo.Items.AddRange(new object[] {
+            "017",
+            "018"});
+            this.cmbAccountNo.Location = new System.Drawing.Point(83, 26);
+            this.cmbAccountNo.Name = "cmbAccountNo";
+            this.cmbAccountNo.Size = new System.Drawing.Size(200, 20);
+            this.cmbAccountNo.TabIndex = 4;
+            // 
+            // lblAccountNo
+            // 
+            this.lblAccountNo.AutoSize = true;
+            this.lblAccountNo.Location = new System.Drawing.Point(24, 29);
+            this.lblAccountNo.Name = "lblAccountNo";
+            this.lblAccountNo.Size = new System.Drawing.Size(41, 12);
+            this.lblAccountNo.TabIndex = 3;
+            this.lblAccountNo.Text = "账套号";
+            // 
             // dtpStartDate
             // 
-            this.dtpStartDate.Location = new System.Drawing.Point(429, 34);
+            this.dtpStartDate.Location = new System.Drawing.Point(429, 25);
             this.dtpStartDate.Name = "dtpStartDate";
             this.dtpStartDate.Size = new System.Drawing.Size(200, 21);
             this.dtpStartDate.TabIndex = 2;
@@ -194,7 +218,7 @@ namespace DataMaintenance.UI.U8
             // 
             // txtInvcode
             // 
-            this.txtInvcode.Location = new System.Drawing.Point(83, 35);
+            this.txtInvcode.Location = new System.Drawing.Point(429, 66);
             this.txtInvcode.Name = "txtInvcode";
             this.txtInvcode.Size = new System.Drawing.Size(200, 21);
             this.txtInvcode.TabIndex = 1;
@@ -211,7 +235,7 @@ namespace DataMaintenance.UI.U8
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(342, 39);
+            this.label3.Location = new System.Drawing.Point(342, 29);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 12);
             this.label3.TabIndex = 0;
@@ -220,7 +244,7 @@ namespace DataMaintenance.UI.U8
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 39);
+            this.label2.Location = new System.Drawing.Point(342, 69);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 0;
@@ -456,5 +480,7 @@ namespace DataMaintenance.UI.U8
         private System.Windows.Forms.DataGridViewTextBoxColumn cinvName;
         private System.Windows.Forms.DataGridViewTextBoxColumn cinvStd;
         private System.Windows.Forms.DataGridViewTextBoxColumn iQuantity;
+        private System.Windows.Forms.ComboBox cmbAccountNo;
+        private System.Windows.Forms.Label lblAccountNo;
     }
 }

@@ -14,9 +14,9 @@ using DataMaintenance.Model.Maintenance;
 
 namespace DataMaintenance.UI
 {
-    public partial class FrmUserInfo : Form
+    public partial class FrmPerson : Form
     {
-        public FrmUserInfo()
+        public FrmPerson()
         {
             InitializeComponent();
             this.initialize();
@@ -57,7 +57,7 @@ namespace DataMaintenance.UI
             this.tsb_modify.Enabled = false;
             this.tsb_delete.Enabled = false;
             tsb_abandon.Enabled = false;
-            this.dataGridView1.AutoGenerateColumns = false;
+            this.dgvDetail.AutoGenerateColumns = false;
             this.tableLayoutPanel1.Enabled = false;
             lbl_voucherStatus.Visible = false;
 
@@ -83,7 +83,7 @@ namespace DataMaintenance.UI
             if (saveOrModifQueryFlag != saveOrChangeOrQueryMolde.save.ToString())
             {
                 saveOrModifQueryFlag = saveOrChangeOrQueryMolde.save.ToString();
-                this.dataGridView1.DataSource = null;
+                this.dgvDetail.DataSource = null;
             }
 
             this.tsb_save.Enabled = true;
@@ -136,9 +136,9 @@ namespace DataMaintenance.UI
         private void tsb_delete_Click(object sender, EventArgs e)
         {
 
-            if (dataGridView1.Rows.Count > 0)
+            if (dgvDetail.Rows.Count > 0)
             {
-               string selected = this.dataGridView1.SelectedRows[0].Cells[0].Value.ToString();
+               string selected = this.dgvDetail.SelectedRows[0].Cells[0].Value.ToString();
                 if (DialogResult.Yes == MessageBox.Show("是否确定删除", "删除提醒", MessageBoxButtons.YesNo, MessageBoxIcon.Warning))
                 {
 
@@ -303,9 +303,9 @@ namespace DataMaintenance.UI
             this.tsb_modify.Enabled = true;
 
             this.tsb_delete.Enabled = true;
-            if (dataGridView1.Rows.Count>0)
+            if (dgvDetail.Rows.Count>0)
             {
-                this.dataGridView1.Rows[0].Selected = true;
+                this.dgvDetail.Rows[0].Selected = true;
             }
 
 
@@ -404,17 +404,17 @@ namespace DataMaintenance.UI
         /// </summary>
         private void bind_gv_dateSource()
         {
-            this.dataGridView1.DataSource = null;
+            this.dgvDetail.DataSource = null;
             //使用EF速度很慢,不使用默认的DBContext连接字符串后，效率有提升???
             //查询状态的数据源
             if (saveOrModifQueryFlag == saveOrChangeOrQueryMolde.query.ToString())
             {
-                this.dataGridView1.DataSource = new DataMaintenanceContext().Users.ToList<UserModle>();
+                this.dgvDetail.DataSource = new DataMaintenanceContext().Users.ToList<UserModle>();
             }
             //新增状态的数据源
             else
             {
-                this.dataGridView1.DataSource = mList;
+                this.dgvDetail.DataSource = mList;
             }
 
 
@@ -458,8 +458,8 @@ namespace DataMaintenance.UI
             clearDate();
             if (e.RowIndex > -1)
             {
-                this.txt_cusCode.Text = this.dataGridView1.Rows[e.RowIndex].Cells[0].Value.ToString();
-                this.txt_cusName.Text = this.dataGridView1.Rows[e.RowIndex].Cells[1].Value.ToString();
+                this.txt_cusCode.Text = this.dgvDetail.Rows[e.RowIndex].Cells[0].Value.ToString();
+                this.txt_cusName.Text = this.dgvDetail.Rows[e.RowIndex].Cells[1].Value.ToString();
                 
             }
 

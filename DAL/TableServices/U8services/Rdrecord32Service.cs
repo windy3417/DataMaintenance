@@ -12,10 +12,10 @@ namespace DataMaintenance.DAL.TableServices.U8services
 {
   public  class Rdrecord32Service
     {
-        public DataTable GetRdrecord32(Func<rdrecord32, Boolean> headerFilter, Func<rdrecords32, Boolean> funcDetail)
+        public DataTable GetRdrecord32(Func<rdrecord32, Boolean> headerFilter, Func<rdrecords32, Boolean> funcDetail,string accountNo)
 
         {
-            using (var db = new U8Context())
+            using (var db = new U8Context(accountNo))
             {
 
 

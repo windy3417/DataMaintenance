@@ -19,6 +19,9 @@ namespace DataMaintenance.Model.Maintenance
         public virtual DbSet<AuthorizationModle> Authorizoations { get; set; }
         public virtual DbSet<MenuModle> Menus { get; set; }
         public virtual DbSet<MenuAuthorizationModle> MenuAuthorization { get; set; }
+        public virtual DbSet<UnitProductionCost> UnitProductionCost{ get; set; }
+
+     
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

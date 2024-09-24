@@ -42,7 +42,7 @@ namespace DataMaintenance.DAL.RefServices.U8services
         public List<Inventory> GetListInventoryInArchiveWithEF()
 
         {
-            using (var db = new U8Context())
+            using (var db = new U8Context("017"))
             {
                 var q = from s in db.Inventory
                         join a in db.Attachfile.Where(s => s.cTableName == "inventory")

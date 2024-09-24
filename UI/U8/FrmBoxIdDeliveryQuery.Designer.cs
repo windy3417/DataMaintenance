@@ -52,15 +52,6 @@ namespace DataMaintenance.UI.U8
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dgvReport = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.xmPagingReader1 = new Utility.UControl.XmPagingReader();
             this.cusName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.outBoundDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.voucherId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,6 +61,17 @@ namespace DataMaintenance.UI.U8
             this.iQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.boxId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.memo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.xmPagingReader1 = new Utility.UControl.XmPagingReader();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cmbAccountNo = new System.Windows.Forms.ComboBox();
             this.toolStrip1.SuspendLayout();
             this.panTitel.SuspendLayout();
             this.gpFilter.SuspendLayout();
@@ -165,6 +167,8 @@ namespace DataMaintenance.UI.U8
             // 
             this.gpFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gpFilter.Controls.Add(this.cmbAccountNo);
+            this.gpFilter.Controls.Add(this.label1);
             this.gpFilter.Controls.Add(this.dtpEndDate);
             this.gpFilter.Controls.Add(this.dtpStartDate);
             this.gpFilter.Controls.Add(this.txtCustomerCode);
@@ -182,7 +186,7 @@ namespace DataMaintenance.UI.U8
             // 
             // dtpEndDate
             // 
-            this.dtpEndDate.Location = new System.Drawing.Point(420, 66);
+            this.dtpEndDate.Location = new System.Drawing.Point(684, 34);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(200, 21);
             this.dtpEndDate.TabIndex = 2;
@@ -203,7 +207,7 @@ namespace DataMaintenance.UI.U8
             // 
             // txtInvcode
             // 
-            this.txtInvcode.Location = new System.Drawing.Point(83, 35);
+            this.txtInvcode.Location = new System.Drawing.Point(420, 69);
             this.txtInvcode.Name = "txtInvcode";
             this.txtInvcode.Size = new System.Drawing.Size(200, 21);
             this.txtInvcode.TabIndex = 1;
@@ -220,7 +224,7 @@ namespace DataMaintenance.UI.U8
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(342, 69);
+            this.label5.Location = new System.Drawing.Point(651, 38);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(17, 12);
             this.label5.TabIndex = 0;
@@ -238,7 +242,7 @@ namespace DataMaintenance.UI.U8
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(24, 39);
+            this.label2.Location = new System.Drawing.Point(342, 72);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 0;
@@ -293,6 +297,60 @@ namespace DataMaintenance.UI.U8
             this.dgvReport.RowTemplate.Height = 23;
             this.dgvReport.Size = new System.Drawing.Size(1049, 368);
             this.dgvReport.TabIndex = 3;
+            // 
+            // cusName
+            // 
+            this.cusName.HeaderText = "客户名称";
+            this.cusName.Name = "cusName";
+            this.cusName.ReadOnly = true;
+            // 
+            // outBoundDate
+            // 
+            this.outBoundDate.HeaderText = "出库日期";
+            this.outBoundDate.Name = "outBoundDate";
+            this.outBoundDate.ReadOnly = true;
+            // 
+            // voucherId
+            // 
+            this.voucherId.HeaderText = "出库单号";
+            this.voucherId.Name = "voucherId";
+            this.voucherId.ReadOnly = true;
+            // 
+            // cinvCode
+            // 
+            this.cinvCode.HeaderText = "存货编码";
+            this.cinvCode.Name = "cinvCode";
+            this.cinvCode.ReadOnly = true;
+            // 
+            // cinvName
+            // 
+            this.cinvName.HeaderText = "存货名称";
+            this.cinvName.Name = "cinvName";
+            this.cinvName.ReadOnly = true;
+            // 
+            // cinvStd
+            // 
+            this.cinvStd.HeaderText = "规格型号";
+            this.cinvStd.Name = "cinvStd";
+            this.cinvStd.ReadOnly = true;
+            // 
+            // iQuantity
+            // 
+            this.iQuantity.HeaderText = "出库数量";
+            this.iQuantity.Name = "iQuantity";
+            this.iQuantity.ReadOnly = true;
+            // 
+            // boxId
+            // 
+            this.boxId.HeaderText = "出库箱号";
+            this.boxId.Name = "boxId";
+            this.boxId.ReadOnly = true;
+            // 
+            // memo
+            // 
+            this.memo.HeaderText = "备注";
+            this.memo.Name = "memo";
+            this.memo.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -365,59 +423,25 @@ namespace DataMaintenance.UI.U8
             0,
             0});
             // 
-            // cusName
+            // label1
             // 
-            this.cusName.HeaderText = "客户名称";
-            this.cusName.Name = "cusName";
-            this.cusName.ReadOnly = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(24, 37);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "账套号";
             // 
-            // outBoundDate
+            // cmbAccountNo
             // 
-            this.outBoundDate.HeaderText = "出库日期";
-            this.outBoundDate.Name = "outBoundDate";
-            this.outBoundDate.ReadOnly = true;
-            // 
-            // voucherId
-            // 
-            this.voucherId.HeaderText = "出库单号";
-            this.voucherId.Name = "voucherId";
-            this.voucherId.ReadOnly = true;
-            // 
-            // cinvCode
-            // 
-            this.cinvCode.HeaderText = "存货编码";
-            this.cinvCode.Name = "cinvCode";
-            this.cinvCode.ReadOnly = true;
-            // 
-            // cinvName
-            // 
-            this.cinvName.HeaderText = "存货名称";
-            this.cinvName.Name = "cinvName";
-            this.cinvName.ReadOnly = true;
-            // 
-            // cinvStd
-            // 
-            this.cinvStd.HeaderText = "规格型号";
-            this.cinvStd.Name = "cinvStd";
-            this.cinvStd.ReadOnly = true;
-            // 
-            // iQuantity
-            // 
-            this.iQuantity.HeaderText = "出库数量";
-            this.iQuantity.Name = "iQuantity";
-            this.iQuantity.ReadOnly = true;
-            // 
-            // boxId
-            // 
-            this.boxId.HeaderText = "出库箱号";
-            this.boxId.Name = "boxId";
-            this.boxId.ReadOnly = true;
-            // 
-            // memo
-            // 
-            this.memo.HeaderText = "备注";
-            this.memo.Name = "memo";
-            this.memo.ReadOnly = true;
+            this.cmbAccountNo.FormattingEnabled = true;
+            this.cmbAccountNo.Items.AddRange(new object[] {
+            "017",
+            "018"});
+            this.cmbAccountNo.Location = new System.Drawing.Point(83, 34);
+            this.cmbAccountNo.Name = "cmbAccountNo";
+            this.cmbAccountNo.Size = new System.Drawing.Size(200, 20);
+            this.cmbAccountNo.TabIndex = 4;
             // 
             // FrmBoxIdDeliveryQuery
             // 
@@ -482,5 +506,7 @@ namespace DataMaintenance.UI.U8
         private System.Windows.Forms.DataGridViewTextBoxColumn iQuantity;
         private System.Windows.Forms.DataGridViewTextBoxColumn boxId;
         private System.Windows.Forms.DataGridViewTextBoxColumn memo;
+        private System.Windows.Forms.ComboBox cmbAccountNo;
+        private System.Windows.Forms.Label label1;
     }
 }

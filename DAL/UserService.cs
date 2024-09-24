@@ -41,6 +41,62 @@ namespace DataMaintenance.DAL
         }
 
 
+        #region login check
+
+        /// <summary>
+        /// login check from buseness db
+        /// </summary>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
+        public bool loginCheck(string userID, string pwd, out string userName)
+        {
+
+
+            string sql = "select  *  from  [user] where userID=@userID and pwd=@pwd  ";
+            SqlParameter[] sqlParameters =
+            {
+                new SqlParameter("@userID",userID ),
+                new SqlParameter("@pwd",pwd ),
+            };
+
+            SqlDataReader sqlDataReader = Utility.Sql.Sqlhelper.GetSqlDataReader(sql, sqlParameters, DataSourceType.business);
+            if (sqlDataReader.HasRows)
+            {
+                sqlDataReader.Read();
+                userName = sqlDataReader["UserName"].ToString();
+                return true;
+
+
+            }
+            userName = "";
+            return false;
+        }
+
+        public bool LogingCheckFromU8(string userID, string pwd, out string userName)
+        {
+            string sql = @"select cUser_Id,cUser_Name,cPassword,nState from UA_User where cUser_Id = @cUser_Id and cPassword = @cPassword";
+            SqlParameter[] sqlParameters =
+           {
+                new SqlParameter("@cUser_Id",userID ),
+                new SqlParameter("@cPassword",pwd ),
+            };
+
+            SqlDataReader sqlDataReader = Utility.Sql.Sqlhelper.GetSqlDataReader(sql, sqlParameters, DataSourceType.ufsystem);
+            if (sqlDataReader.HasRows)
+            {
+                sqlDataReader.Read();
+                userName = sqlDataReader["cUser_Name"].ToString();
+                return true;
+
+
+            }
+            userName = "";
+            return false;
+
+        }
+
+
+        #endregion
         /// <summary>
         /// 检测登录密码与用户名
         /// </summary>
@@ -65,34 +121,9 @@ namespace DataMaintenance.DAL
 
         }
 
-        /// <summary>
-        /// 使用Sqlparameters检测登录密码与用户名
-        /// </summary>
-        /// <param name="pwd"></param>
-        /// <returns></returns>
-        public bool loginCheckWithSqlparameters(string userID, string pwd, out string userName)
-        {
-           
-           
-            string sql = "select  *  from  [user] where userID=@userID and pwd=@pwd  ";
-            SqlParameter[] sqlParameters =
-            {
-                new SqlParameter("@userID",userID ),
-                new SqlParameter("@pwd",pwd ),
-            };
+   
 
-            SqlDataReader sqlDataReader = Utility.Sql.Sqlhelper.GetSqlDataReader(sql, sqlParameters, DataSourceType.business );
-            if (sqlDataReader.HasRows)
-            {
-                sqlDataReader.Read();
-                userName = sqlDataReader["UserName"].ToString();
-                return true;
-
-                              
-            }
-            userName = "";
-            return false;
-        }
+     
 
         public void updateCustomer()
         {

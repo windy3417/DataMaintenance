@@ -9,7 +9,7 @@ using System.Text;
 using System.Windows.Forms;
 using Utility.Sql;
 using DataMaintenance.Model;
-using static DataMaintenance.UI.Frm_authorization;
+using static DataMaintenance.UI.FrmApproval;
 using DataMaintenance.Model.Maintenance;
 
 namespace DataMaintenance.UI
@@ -51,7 +51,7 @@ namespace DataMaintenance.UI
         /// <param name="e"></param>
         private void btn_mend_Click(object sender, EventArgs e)
         {
-            Frm_authorization f = new Frm_authorization();
+            FrmApproval f = new FrmApproval();
             f.authorizPass += modifyTemple;
 
             f.ShowDialog();

@@ -21,7 +21,7 @@ namespace DataMaintenance.DAL.TableServices.U8services
         /// <returns></returns>
         public List<string> GetListCustomerInAttachfiles()
         {
-             return QueryService.GetDataList<Attachfile>(DataSourceType.u8).Where(s => s.cTableName== "Customer").
+             return QueryService.GetListFromSingleTable<Attachfile>(DataSourceType.u8,"017").Where(s => s.cTableName== "Customer").
                 Select(x =>x.cInvCode).Distinct().ToList();
            
         }

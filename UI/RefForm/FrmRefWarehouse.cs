@@ -45,7 +45,7 @@ namespace DataMaintenance.UI.Ref
 
         void InitializeControlDataSource()
         {
-            var dataSource = QueryService.GetSingleTable<Warehouse>(Utility.Sql.Sqlhelper.DataSourceType.u8).OrderBy(s => s.cWhCode);
+            var dataSource = QueryService.GetListFromSingleTable<Warehouse>(Utility.Sql.Sqlhelper.DataSourceType.u8).OrderBy(s => s.cWhCode);
             dgvArchive.DataSource = dataSource.ToList();
 
 

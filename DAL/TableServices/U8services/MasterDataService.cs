@@ -12,22 +12,22 @@ namespace DataMaintenance.DAL.TableServices.U8services
 
         public List<Customer> GetListCustomer()
         {
-            return Utility.DAL.QueryService.GetDataList<Customer>(DataSourceType.u8);
+            return Utility.DAL.QueryService.GetListFromSingleTable<Customer>(DataSourceType.u8,"017");
         }
 
         public List<Vendor> GetListVendor()
         {
-            return Utility.DAL.QueryService.GetDataList<Vendor>(DataSourceType.u8);
+            return Utility.DAL.QueryService.GetListFromSingleTable<Vendor>(DataSourceType.u8,"017");
         }
 
         public List<Inventory> GetListInventory()
         {
-            return Utility.DAL.QueryService.GetDataList<Inventory>(DataSourceType.u8);
+            return Utility.DAL.QueryService.GetListFromSingleTable<Inventory>(DataSourceType.u8,"017");
         }
 
         public List<InventoryClass> GetListInventoryClass()
         {
-            return Utility.DAL.QueryService.GetDataList<InventoryClass>(DataSourceType.u8);
+            return Utility.DAL.QueryService.GetListFromSingleTable<InventoryClass>(DataSourceType.u8,"017");
         }
     }
 }

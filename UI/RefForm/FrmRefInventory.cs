@@ -35,7 +35,7 @@ namespace DataMaintenance.UI.Ref
 
         #region delegate
 
-        public Action<Inventory> ActionRefIventoryEntity;
+        public Action<Inventory> ActionRefIventoryItem;
 
 
         public Action<string> ActionRefInventoryCode;
@@ -119,7 +119,7 @@ namespace DataMaintenance.UI.Ref
 
 
         /// <summary>
-        /// get inventory after checking inventory class 
+        /// get inventory list after checking inventory class 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -130,7 +130,7 @@ namespace DataMaintenance.UI.Ref
             Inventory m = new Inventory();
             SqlParameter[] sqlParameters = { new SqlParameter("@cInvCCode", ccode) };
 
-            var inventory= QueryService.GetSingleTable<Inventory>( sqlParameters, Utility.Sql.Sqlhelper.DataSourceType.u8);
+            var inventory= QueryService.GetListFromSingleTable<Inventory>( sqlParameters, Utility.Sql.Sqlhelper.DataSourceType.u8,"017");
 
                    
             dgvArchive.DataSource = inventory.ToList();
@@ -169,14 +169,20 @@ namespace DataMaintenance.UI.Ref
         /// <param name="e"></param>
         private void tsbConfirm_Click(object sender, EventArgs e)
         {
+            // 检查是否有选中的行
+            if (dgvArchive.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("请选择一行数据！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             Inventory m = new Inventory();
             m.cInvCode = dgvArchive.CurrentRow.Cells["cinvCode"].Value.ToString();
             m.cInvName = dgvArchive.CurrentRow.Cells["cinvName"].Value.ToString();
             m.cInvStd = dgvArchive.CurrentRow.Cells["std"].Value.ToString();
 
-            if (ActionRefIventoryEntity != null)
+            if (ActionRefIventoryItem != null)
             {
-                ActionRefIventoryEntity.Invoke(m);
+                ActionRefIventoryItem.Invoke(m);
             }
 
             ActionRefInventoryCode?.Invoke(m.cInvCode);
@@ -185,5 +191,6 @@ namespace DataMaintenance.UI.Ref
 
 
         #endregion
+
     }
 }

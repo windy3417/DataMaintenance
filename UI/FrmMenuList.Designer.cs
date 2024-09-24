@@ -1,6 +1,6 @@
 ﻿namespace DataMaintenance.UI
 {
-    partial class Frm_menuList
+    partial class FrmMenuList
     {
         /// <summary>
         /// 必需的设计器变量。

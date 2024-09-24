@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using DataMaintenance.Model;
-using DataMaintenance.Data;
+using DataMaintenance.GlobeVary;
 using Utility;
 using Utility.UI;
 using DataMaintenance.UI.ClearLocker;
@@ -238,7 +238,7 @@ namespace DataMaintenance
 
         private void 人员档案ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmUserInfo config = new FrmUserInfo();
+            FrmPerson config = new FrmPerson();
             embedForm(config);
         }
 
@@ -271,19 +271,17 @@ namespace DataMaintenance
 
         private void 菜单清单ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Frm_menuList f = new Frm_menuList();
+            FrmMenuList f = new FrmMenuList();
             embedForm(f);
         }
 
         private void 重登录ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+          
+            Application.Restart();
             UI.Frmlogin frm_Login = new UI.Frmlogin();
             frm_Login.ShowDialog();
-            //if (frm_Login.DialogResult==DialogResult.OK)
-            //{
-            //    //new Task
-                    
-            //}
+           
         }
 
         private void 权限设定ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -325,6 +323,14 @@ namespace DataMaintenance
         {
             FrmSmbConfig f = new FrmSmbConfig();
             embedForm(f);
+        }
+
+        private void FrmMain_Load(object sender, EventArgs e)
+        {
+            if (CurrentUser.userID!="2007")
+            {
+                this.成本管理ToolStripMenuItem.Visible = false;
+            }
         }
     }
 }

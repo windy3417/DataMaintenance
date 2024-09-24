@@ -48,13 +48,13 @@ namespace DataMaintenance.UI
         private void TsbSave_Click(object sender, EventArgs e)
         {
           try  {
-                var itdb = new ItContext();
+                var itdb = new ITContext();
                 int maxID = 1000000;
                 //待变更实体的最大PK值
                 var maxIDloader = itdb.MaxKeys.Where(s => s.VoucherName == "外发需返资产登记表").FirstOrDefault();
 
                 maxID = maxIDloader.CurrentKeyValue;
-                using (var db = new U8Context())
+                using (var db = new U8Context(cmbAccountNo.Text))
                 {
                     //外键PK
                     var fpkLoader = db.U8CUSTDEF_0058_E001.Select(s => s.U8CUSTDEF_0058_E001_PK).Max();

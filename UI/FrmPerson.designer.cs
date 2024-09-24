@@ -1,6 +1,6 @@
 ﻿namespace DataMaintenance.UI
 {
-    partial class FrmUserInfo
+    partial class FrmPerson
     {
         /// <summary>
         /// Required designer variable.
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmUserInfo));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPerson));
             this.panel1 = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,7 +45,12 @@
             this.txt_pwd = new System.Windows.Forms.TextBox();
             this.lbl_voucherStatus = new System.Windows.Forms.Label();
             this.lbl_customer = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvDetail = new System.Windows.Forms.DataGridView();
+            this.userID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.usersName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.登录密码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.registrationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.failuerDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsb_add = new System.Windows.Forms.ToolStripButton();
             this.tsb_abandon = new System.Windows.Forms.ToolStripButton();
@@ -55,14 +60,9 @@
             this.tsb_delete = new System.Windows.Forms.ToolStripButton();
             this.tsb_close = new System.Windows.Forms.ToolStripButton();
             this.panTitel = new System.Windows.Forms.Panel();
-            this.userID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.usersName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.登录密码 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.registrationDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.failuerDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetail)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.panTitel.SuspendLayout();
             this.SuspendLayout();
@@ -70,9 +70,9 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.tableLayoutPanel1);
-            this.panel1.Location = new System.Drawing.Point(35, 90);
+            this.panel1.Location = new System.Drawing.Point(12, 90);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(744, 159);
+            this.panel1.Size = new System.Drawing.Size(793, 159);
             this.panel1.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -226,14 +226,15 @@
             this.lbl_customer.TabIndex = 1;
             this.lbl_customer.Text = "人 员 档 案";
             // 
-            // dataGridView1
+            // dgvDetail
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.dgvDetail.AllowUserToAddRows = false;
+            this.dgvDetail.AllowUserToDeleteRows = false;
+            this.dgvDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDetail.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDetail.BackgroundColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -241,23 +242,65 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.userID,
             this.usersName,
             this.登录密码,
             this.registrationDate,
             this.failuerDate});
-            this.dataGridView1.Location = new System.Drawing.Point(35, 274);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(744, 287);
-            this.dataGridView1.TabIndex = 2;
-            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
-            this.dataGridView1.SelectionChanged += new System.EventHandler(this.DataGridView1_SelectionChanged);
+            this.dgvDetail.Location = new System.Drawing.Point(12, 274);
+            this.dgvDetail.Name = "dgvDetail";
+            this.dgvDetail.ReadOnly = true;
+            this.dgvDetail.RowTemplate.Height = 23;
+            this.dgvDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDetail.Size = new System.Drawing.Size(793, 287);
+            this.dgvDetail.TabIndex = 2;
+            this.dgvDetail.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
+            this.dgvDetail.SelectionChanged += new System.EventHandler(this.DataGridView1_SelectionChanged);
+            // 
+            // userID
+            // 
+            this.userID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.userID.DataPropertyName = "userID";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            this.userID.DefaultCellStyle = dataGridViewCellStyle2;
+            this.userID.FillWeight = 50.76142F;
+            this.userID.Frozen = true;
+            this.userID.HeaderText = "人员编码";
+            this.userID.Name = "userID";
+            this.userID.ReadOnly = true;
+            // 
+            // usersName
+            // 
+            this.usersName.DataPropertyName = "userName";
+            this.usersName.FillWeight = 149.2386F;
+            this.usersName.HeaderText = "人员姓名";
+            this.usersName.Name = "usersName";
+            this.usersName.ReadOnly = true;
+            // 
+            // 登录密码
+            // 
+            this.登录密码.DataPropertyName = "pwd";
+            this.登录密码.HeaderText = "登录密码";
+            this.登录密码.Name = "登录密码";
+            this.登录密码.ReadOnly = true;
+            // 
+            // registrationDate
+            // 
+            this.registrationDate.DataPropertyName = "RegistrationDate";
+            this.registrationDate.HeaderText = "注册日期";
+            this.registrationDate.Name = "registrationDate";
+            this.registrationDate.ReadOnly = true;
+            // 
+            // failuerDate
+            // 
+            this.failuerDate.DataPropertyName = "failuerDate";
+            this.failuerDate.HeaderText = "注销日期";
+            this.failuerDate.Name = "failuerDate";
+            this.failuerDate.ReadOnly = true;
             // 
             // toolStrip1
             // 
@@ -351,48 +394,6 @@
             this.panTitel.Size = new System.Drawing.Size(817, 55);
             this.panTitel.TabIndex = 4;
             // 
-            // userID
-            // 
-            this.userID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.userID.DataPropertyName = "userID";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            this.userID.DefaultCellStyle = dataGridViewCellStyle2;
-            this.userID.FillWeight = 50.76142F;
-            this.userID.Frozen = true;
-            this.userID.HeaderText = "人员编码";
-            this.userID.Name = "userID";
-            this.userID.ReadOnly = true;
-            // 
-            // usersName
-            // 
-            this.usersName.DataPropertyName = "userName";
-            this.usersName.FillWeight = 149.2386F;
-            this.usersName.HeaderText = "人员姓名";
-            this.usersName.Name = "usersName";
-            this.usersName.ReadOnly = true;
-            // 
-            // 登录密码
-            // 
-            this.登录密码.DataPropertyName = "pwd";
-            this.登录密码.HeaderText = "登录密码";
-            this.登录密码.Name = "登录密码";
-            this.登录密码.ReadOnly = true;
-            // 
-            // registrationDate
-            // 
-            this.registrationDate.DataPropertyName = "RegistrationDate";
-            this.registrationDate.HeaderText = "注册日期";
-            this.registrationDate.Name = "registrationDate";
-            this.registrationDate.ReadOnly = true;
-            // 
-            // failuerDate
-            // 
-            this.failuerDate.DataPropertyName = "failuerDate";
-            this.failuerDate.HeaderText = "注销日期";
-            this.failuerDate.Name = "failuerDate";
-            this.failuerDate.ReadOnly = true;
-            // 
             // FrmUserInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -400,7 +401,7 @@
             this.ClientSize = new System.Drawing.Size(817, 573);
             this.Controls.Add(this.panTitel);
             this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvDetail);
             this.Controls.Add(this.panel1);
             this.KeyPreview = true;
             this.Name = "FrmUserInfo";
@@ -410,7 +411,7 @@
             this.panel1.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDetail)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panTitel.ResumeLayout(false);
@@ -437,7 +438,7 @@
         private Utility.UControl.XmTxtBoxWithDate tbd_effect;
         private Utility.UControl.XmTxtBoxWithDate tbd_failure;
         private System.Windows.Forms.ToolStripButton tsb_add;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvDetail;
         private System.Windows.Forms.ToolStripButton tsb_modify;
         private System.Windows.Forms.ToolStripButton tsb_query;
         private System.Windows.Forms.ToolStripButton tsb_delete;

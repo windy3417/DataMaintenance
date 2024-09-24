@@ -32,7 +32,7 @@ namespace DataMaintenance.UI.Tools
             this.Cursor = Cursors.WaitCursor;
             try
             {
-                using (var db = new U8Context())
+                using (var db = new U8Context("017"))
                 {
 
 
@@ -89,7 +89,7 @@ namespace DataMaintenance.UI.Tools
             try
             {
                
-                using (var db=new U8Context())
+                using (var db=new U8Context("017"))
                 {
                     var q=from s in db.Inventory.Where(s =>s.cInvStd==cinvstd && s.cInvCCode.StartsWith("9"))
                           where !s.cInvCode.ToUpper().StartsWith("X")

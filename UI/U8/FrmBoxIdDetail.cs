@@ -34,10 +34,10 @@ namespace DataMaintenance.UI.U8
 
         }
 
-        public void GetBoxId(string invCode,DateTime stockInDate)
+        public void GetBoxId(string invCode,DateTime stockInDate,string accountNo)
         {
 
-            DataTable dt = new BoxIDExistService().GetBoxIdExist(invCode,stockInDate);
+            DataTable dt = new BoxIDExistService().GetBoxIdExist(invCode,stockInDate,accountNo);
 
             #region create datasource for paging
 
