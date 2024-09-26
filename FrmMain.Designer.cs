@@ -58,13 +58,14 @@
             this.成本管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.成本录入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.重登录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ts_foot = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tstb_currentUser = new System.Windows.Forms.ToolStripTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.单位成本列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_main.SuspendLayout();
             this.panel1.SuspendLayout();
             this.ts_foot.SuspendLayout();
@@ -292,7 +293,8 @@
             // 成本管理ToolStripMenuItem
             // 
             this.成本管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.成本录入ToolStripMenuItem});
+            this.成本录入ToolStripMenuItem,
+            this.单位成本列表ToolStripMenuItem});
             this.成本管理ToolStripMenuItem.Name = "成本管理ToolStripMenuItem";
             this.成本管理ToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.成本管理ToolStripMenuItem.Text = "成本管理";
@@ -300,7 +302,7 @@
             // 成本录入ToolStripMenuItem
             // 
             this.成本录入ToolStripMenuItem.Name = "成本录入ToolStripMenuItem";
-            this.成本录入ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.成本录入ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.成本录入ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.FrmUnitCostInput";
             this.成本录入ToolStripMenuItem.Text = "成本录入";
             this.成本录入ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
@@ -311,6 +313,22 @@
             this.重登录ToolStripMenuItem.Size = new System.Drawing.Size(58, 20);
             this.重登录ToolStripMenuItem.Text = "重登录";
             this.重登录ToolStripMenuItem.Click += new System.EventHandler(this.重登录ToolStripMenuItem_Click);
+            // 
+            // 帮助ToolStripMenuItem
+            // 
+            this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.关于ToolStripMenuItem});
+            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
+            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.帮助ToolStripMenuItem.Text = "帮助";
+            // 
+            // 关于ToolStripMenuItem
+            // 
+            this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
+            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.关于ToolStripMenuItem.Tag = "DataMaintenance.UI.FrmHelp";
+            this.关于ToolStripMenuItem.Text = "关于";
+            this.关于ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
             // 
             // panel1
             // 
@@ -361,21 +379,13 @@
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
             // 
-            // 帮助ToolStripMenuItem
+            // 单位成本列表ToolStripMenuItem
             // 
-            this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.关于ToolStripMenuItem});
-            this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
-            this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
-            this.帮助ToolStripMenuItem.Text = "帮助";
-            // 
-            // 关于ToolStripMenuItem
-            // 
-            this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
-            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.关于ToolStripMenuItem.Tag = "DataMaintenance.UI.FrmHelp";
-            this.关于ToolStripMenuItem.Text = "关于";
-            this.关于ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
+            this.单位成本列表ToolStripMenuItem.Name = "单位成本列表ToolStripMenuItem";
+            this.单位成本列表ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.单位成本列表ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.VoucherList.FrmUnitProductionCostList";
+            this.单位成本列表ToolStripMenuItem.Text = "单位成本列表";
+            this.单位成本列表ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
             // 
             // FrmMain
             // 
@@ -440,6 +450,7 @@
         private System.Windows.Forms.ToolStripMenuItem 成本录入ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 单位成本列表ToolStripMenuItem;
     }
 }
 

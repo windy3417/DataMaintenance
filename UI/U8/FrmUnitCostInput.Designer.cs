@@ -29,9 +29,9 @@ namespace DataMaintenance.UI.U8
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbAdd = new System.Windows.Forms.ToolStripButton();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
@@ -47,7 +47,7 @@ namespace DataMaintenance.UI.U8
             this.gbHeader = new System.Windows.Forms.GroupBox();
             this.lblCostType = new System.Windows.Forms.Label();
             this.lblAccountNo = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbCostType = new System.Windows.Forms.ComboBox();
             this.cmbMonth = new System.Windows.Forms.ComboBox();
             this.cmbAccountNo = new System.Windows.Forms.ComboBox();
             this.cmbYear = new System.Windows.Forms.ComboBox();
@@ -58,7 +58,7 @@ namespace DataMaintenance.UI.U8
             this.cinvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cinvStd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unitCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panTitel = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -67,7 +67,7 @@ namespace DataMaintenance.UI.U8
             this.toolStrip1.SuspendLayout();
             this.gbHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetail)).BeginInit();
-            this.panel1.SuspendLayout();
+            this.panTitel.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -117,6 +117,7 @@ namespace DataMaintenance.UI.U8
             this.tsbUpdate.Name = "tsbUpdate";
             this.tsbUpdate.Size = new System.Drawing.Size(53, 22);
             this.tsbUpdate.Text = "更新";
+            this.tsbUpdate.Click += new System.EventHandler(this.tsbUpdateU8Cost_Click);
             // 
             // tsbEdit
             // 
@@ -171,6 +172,7 @@ namespace DataMaintenance.UI.U8
             this.tsbNext.Name = "tsbNext";
             this.tsbNext.Size = new System.Drawing.Size(23, 22);
             this.tsbNext.Text = "下期";
+            this.tsbNext.Click += new System.EventHandler(this.tsbNext_Click);
             // 
             // tsbPrevious
             // 
@@ -199,7 +201,7 @@ namespace DataMaintenance.UI.U8
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbHeader.Controls.Add(this.lblCostType);
             this.gbHeader.Controls.Add(this.lblAccountNo);
-            this.gbHeader.Controls.Add(this.comboBox1);
+            this.gbHeader.Controls.Add(this.cmbCostType);
             this.gbHeader.Controls.Add(this.cmbMonth);
             this.gbHeader.Controls.Add(this.cmbAccountNo);
             this.gbHeader.Controls.Add(this.cmbYear);
@@ -230,16 +232,16 @@ namespace DataMaintenance.UI.U8
             this.lblAccountNo.TabIndex = 3;
             this.lblAccountNo.Text = "账套";
             // 
-            // comboBox1
+            // cmbCostType
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "入库成本",
-            "销售成本"});
-            this.comboBox1.Location = new System.Drawing.Point(840, 42);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 20);
-            this.comboBox1.TabIndex = 2;
+            this.cmbCostType.FormattingEnabled = true;
+            this.cmbCostType.Items.AddRange(new object[] {
+            "生产单位成本",
+            "销售单位成本"});
+            this.cmbCostType.Location = new System.Drawing.Point(840, 42);
+            this.cmbCostType.Name = "cmbCostType";
+            this.cmbCostType.Size = new System.Drawing.Size(121, 20);
+            this.cmbCostType.TabIndex = 2;
             // 
             // cmbMonth
             // 
@@ -253,7 +255,7 @@ namespace DataMaintenance.UI.U8
             // 
             this.cmbAccountNo.FormattingEnabled = true;
             this.cmbAccountNo.Items.AddRange(new object[] {
-            "018"});
+            "027"});
             this.cmbAccountNo.Location = new System.Drawing.Point(82, 42);
             this.cmbAccountNo.Name = "cmbAccountNo";
             this.cmbAccountNo.Size = new System.Drawing.Size(121, 20);
@@ -291,38 +293,38 @@ namespace DataMaintenance.UI.U8
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDetail.BackgroundColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetail.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDetail.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.cinvCode,
             this.cinvName,
             this.cinvStd,
             this.unitCost});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvDetail.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvDetail.DefaultCellStyle = dataGridViewCellStyle11;
             this.dgvDetail.Location = new System.Drawing.Point(12, 207);
             this.dgvDetail.Name = "dgvDetail";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvDetail.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvDetail.RowTemplate.Height = 23;
             this.dgvDetail.Size = new System.Drawing.Size(1027, 339);
             this.dgvDetail.TabIndex = 2;
@@ -356,16 +358,16 @@ namespace DataMaintenance.UI.U8
             this.unitCost.HeaderText = "单位成本";
             this.unitCost.Name = "unitCost";
             // 
-            // panel1
+            // panTitel
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.panTitel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel1.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.panel1.Controls.Add(this.lblTitle);
-            this.panel1.Location = new System.Drawing.Point(12, 29);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1027, 43);
-            this.panel1.TabIndex = 3;
+            this.panTitel.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.panTitel.Controls.Add(this.lblTitle);
+            this.panTitel.Location = new System.Drawing.Point(12, 29);
+            this.panTitel.Name = "panTitel";
+            this.panTitel.Size = new System.Drawing.Size(1027, 43);
+            this.panTitel.TabIndex = 3;
             // 
             // lblTitle
             // 
@@ -405,7 +407,7 @@ namespace DataMaintenance.UI.U8
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1051, 558);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panTitel);
             this.Controls.Add(this.dgvDetail);
             this.Controls.Add(this.gbHeader);
             this.Controls.Add(this.toolStrip1);
@@ -416,8 +418,8 @@ namespace DataMaintenance.UI.U8
             this.gbHeader.ResumeLayout(false);
             this.gbHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetail)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.panTitel.ResumeLayout(false);
+            this.panTitel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -432,7 +434,7 @@ namespace DataMaintenance.UI.U8
         private System.Windows.Forms.ComboBox cmbYear;
         private System.Windows.Forms.Label lblYear;
         private System.Windows.Forms.Label lblMonth;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panTitel;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.ToolStripButton tsbSave;
         private System.Windows.Forms.ToolStripButton tsbUpdate;
@@ -440,7 +442,7 @@ namespace DataMaintenance.UI.U8
         private System.Windows.Forms.ComboBox cmbAccountNo;
         private System.Windows.Forms.ToolStripButton tsbEdit;
         private System.Windows.Forms.Label lblCostType;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbCostType;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;

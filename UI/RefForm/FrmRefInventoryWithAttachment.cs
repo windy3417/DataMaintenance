@@ -25,6 +25,7 @@ namespace DataMaintenance.UI.Ref
             DataBind();
            
         }
+        public string U8AccountNo { get; set;}
 
         #region vary
 
@@ -59,7 +60,7 @@ namespace DataMaintenance.UI.Ref
 
             #region treeView dataSource
 
-            listClass = (from s in new MasterDataService().GetListInventoryClass()
+            listClass = (from s in new MasterDataService().GetListInventoryClass(U8AccountNo)
                         select s). ToList();
 
 

@@ -253,6 +253,16 @@ namespace DataMaintenance.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap query {
+            get {
+                object obj = ResourceManager.GetObject("query", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap reference {
             get {
                 object obj = ResourceManager.GetObject("reference", resourceCulture);

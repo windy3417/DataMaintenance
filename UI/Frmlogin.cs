@@ -42,8 +42,9 @@ namespace DataMaintenance.UI
             lbl_information.Visible = false;
             
             checkDatabaseConect();
-            txt_userID.Focus();
-            //txt_userID.TabIndex = 0;
+
+            //activate txt_userID as first input
+            txt_userID.Select();
         }
 
         /// <summary>

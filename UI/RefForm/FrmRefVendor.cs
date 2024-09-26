@@ -26,6 +26,9 @@ namespace DataMaintenance.UI.Ref
 
         }
 
+        public string U8AccountNo { get; set;}
+        
+
         #region Intial
 
 
@@ -50,7 +53,7 @@ namespace DataMaintenance.UI.Ref
         void BindData()
         {
           
-            dgvBody.DataSource = new VendorRefService().GetListVendorInArchive();
+            dgvBody.DataSource = new VendorRefService().GetListVendorInArchive(U8AccountNo);
 
 
             dgvBody.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;

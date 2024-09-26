@@ -17,17 +17,18 @@ namespace DataMaintenance.UI.Ref
     public partial class FrmRefInventory : Form
 
     {
-        public FrmRefInventory()
+        public FrmRefInventory(String u8Account)
         {
+            _u8Account = u8Account;
             InitializeComponent();
             InitializeContolState();
-            InitailTreeViewDataSource();
+            InitailTreeViewDataSource(_u8Account);
            
         }
 
         #region vary
 
-
+          string _u8Account { get; set; }
         List<InventoryClass> listClass = new List<InventoryClass>();
         List<Inventory> inventoryList;
 
@@ -44,12 +45,12 @@ namespace DataMaintenance.UI.Ref
 
        
         #region Get data
-        void InitailTreeViewDataSource()
+        void InitailTreeViewDataSource(String u8Account)
         {
                      
             #region treeView dataSource
 
-            listClass = (from s in new MasterDataService().GetListInventoryClass()
+            listClass = (from s in new MasterDataService().GetListInventoryClass(u8Account)
                         select s). ToList();
 
 
@@ -130,7 +131,7 @@ namespace DataMaintenance.UI.Ref
             Inventory m = new Inventory();
             SqlParameter[] sqlParameters = { new SqlParameter("@cInvCCode", ccode) };
 
-            var inventory= QueryService.GetListFromSingleTable<Inventory>( sqlParameters, Utility.Sql.Sqlhelper.DataSourceType.u8,"017");
+            var inventory= QueryService.GetListFromSingleTable<Inventory>( sqlParameters, Utility.Sql.Sqlhelper.DataSourceType.u8,_u8Account);
 
                    
             dgvArchive.DataSource = inventory.ToList();

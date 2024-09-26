@@ -372,6 +372,12 @@
     <Compile Include="UI\U8\FrmBoxIdDeliveryQuery.Designer.cs">
       <DependentUpon>FrmBoxIdDeliveryQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\U8\VoucherList\FrmUnitProductionCostList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\U8\VoucherList\FrmUnitProductionCostList.Designer.cs">
+      <DependentUpon>FrmUnitProductionCostList.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -490,6 +496,9 @@
     <EmbeddedResource Include="UI\U8\FrmBoxIdDeliveryQuery.resx">
       <DependentUpon>FrmBoxIdDeliveryQuery.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\U8\VoucherList\FrmUnitProductionCostList.resx">
+      <DependentUpon>FrmUnitProductionCostList.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="DataMaintenance_TemporaryKey.pfx" />
     <None Include="packages.config" />
@@ -517,6 +526,7 @@
     <None Include="Resources\Next page.png" />
     <None Include="Resources\previous page.png" />
     <None Include="Resources\delete.gif" />
+    <None Include="Resources\query.gif" />
     <Content Include="Resources\template\外发需返资产清单导入模板.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -553,6 +563,7 @@
   <ItemGroup>
     <Folder Include="Common\" />
     <Folder Include="UI\MarsterData\" />
+    <Folder Include="UI\U8\Report\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

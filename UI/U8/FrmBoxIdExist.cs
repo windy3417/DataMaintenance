@@ -69,7 +69,7 @@ namespace DataMaintenance.UI.U8
 
         private void RefInventory(object sender, EventArgs e)
         {
-            FrmRefInventory f = new FrmRefInventory();
+            FrmRefInventory f = new FrmRefInventory(cmbAccountNo.Text);
             f.ActionRefInventoryCode = s => txtInvcode.Text = s;
             f.Show();
         }

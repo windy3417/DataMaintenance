@@ -73,7 +73,7 @@ namespace DataMaintenance.UI.U8
 
             #endregion
             //default value of accont number
-            cmbAccountNo.Text = "018";
+            //cmbAccountNo.Text = "018";
 
 
         }
@@ -82,7 +82,7 @@ namespace DataMaintenance.UI.U8
         {
             Utility.Style.DataGridViewStyle style = new Utility.Style.DataGridViewStyle();
             style.DataGridViewColumnHeaderStyle(dgvDetail);
-
+            tsbSave.Enabled = false;
             dgvDetail.AllowUserToAddRows = false;
             dgvDetail.AutoGenerateColumns = false;
             //display row number
@@ -102,56 +102,8 @@ namespace DataMaintenance.UI.U8
 
         }
 
-
-        /// <summary>
-        /// show the wondows for inputing
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BtnRef_Click(object sender, EventArgs e)
-        {
-            FrmRefInventory f = new FrmRefInventory();
-            f.ActionRefIventoryItem = InputInvntoryItem;
-            //f.RefInitialize();
-            f.ShowDialog();
-        }
-
-
-        #region CRUD
-
-
-
-        /// <summary>
-        /// display the refered button from actived cell
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DgvBody_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
-        {
-            if (e.ColumnIndex == 0)
-            {
-
-                try
-                {
-                    Rectangle rect = this.dgvDetail.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
-
-
-                    btnRef.Size = new Size(rect.Height - 4, rect.Height - 4);
-
-
-                    btnRef.Location = new Point(rect.Location.X + rect.Width - 25, rect.Location.Y + 2);
-
-                    btnRef.Parent = dgvDetail;
-                    btnRef.Visible = true;
-
-
-
-                }
-                catch (Exception) { }
-            }
-        }
-
-
+      
+        #region refer other windows
         /// <summary>
         /// display the inventory item after put down entery key
         /// </summary>
@@ -173,7 +125,7 @@ namespace DataMaintenance.UI.U8
                 if (!string.IsNullOrEmpty(invCode))
                 {
                     // 调用数据库查询方法
-                    Inventory inventory = QueryDatabaseForInventory(invCode);
+                    Inventory inventory = QueryDatabaseForInventory(invCode,cmbAccountNo.Text);
 
                     // 如果查询成功，则填充其他单元格
                     if (inventory != null)
@@ -219,6 +171,59 @@ namespace DataMaintenance.UI.U8
 
             }
         }
+
+        /// <summary>
+        /// show the wondows for inputing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnRef_Click(object sender, EventArgs e)
+        {
+            FrmRefInventory f = new FrmRefInventory(cmbAccountNo.Text);
+
+            f.ActionRefIventoryItem = InputInvntoryItem;
+            //f.RefInitialize();
+            f.ShowDialog();
+        }
+
+        #endregion
+
+
+
+        #region CRUD
+
+
+
+        /// <summary>
+        /// display the refered button from actived cell
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DgvBody_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            if (e.ColumnIndex == 0)
+            {
+
+                try
+                {
+                    Rectangle rect = this.dgvDetail.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, true);
+
+
+                    btnRef.Size = new Size(rect.Height - 4, rect.Height - 4);
+
+
+                    btnRef.Location = new Point(rect.Location.X + rect.Width - 25, rect.Location.Y + 2);
+
+                    btnRef.Parent = dgvDetail;
+                    btnRef.Visible = true;
+
+
+
+                }
+                catch (Exception) { }
+            }
+        }
+
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
@@ -293,12 +298,12 @@ namespace DataMaintenance.UI.U8
                 }
 
             }
-                               
-                               
-
-                #endregion
 
 
+
+            #endregion
+
+                List<UnitProductionCost> list = new List<UnitProductionCost>();
                 SaveService saveService = new SaveService();
                 foreach (DataGridViewRow row in dgvDetail.Rows)
                 {
@@ -311,10 +316,14 @@ namespace DataMaintenance.UI.U8
                     unitProductionCost.cMonth = cmbMonth.Text;
                     unitProductionCost.AccountNo = cmbAccountNo.Text;
 
-                    saveService.SaveRow<UnitProductionCost, DataMaintenanceContext>(unitProductionCost);
+                list.Add(unitProductionCost);
+                  
+                    
                 }
-
-                tsbSave.Enabled = false;
+            this.Cursor = Cursors.WaitCursor;
+            saveService.SaveRows<UnitProductionCost, DataMaintenanceContext>(list);
+            tsbSave.Enabled = false;
+            this.Cursor = Cursors.Default;
             
         }
 
@@ -357,20 +366,77 @@ namespace DataMaintenance.UI.U8
             }
         }
 
-        private void QueryVoucher(string sql)
+
+        private void tsbPrevious_Click(object sender, EventArgs e)
+        {
+
+            // 获取当前年份
+            int currentYear = int.Parse(cmbYear.Text);
+
+            // 计算上一个记录的年份和月份
+            int previousMonth = int.Parse(cmbMonth.Text) - 1;
+            int previousYear = currentYear;
+
+            if (previousMonth == 0)
+            {
+                previousMonth = 12;
+                previousYear--;
+            }
+            string sql = @"select  * 
+                     from UnitProductionCost
+                    where AccountNo=@AccountNo and iYear=@iYear and cMonth=@cMonth ";
+            SqlParameter[] sqlParameters = { new SqlParameter("@AccountNo", cmbAccountNo.Text),
+                new SqlParameter("@iYear", previousYear),
+                new SqlParameter("@cMonth", previousMonth) };
+            QueryVoucher(sql, sqlParameters);
+
+        }
+
+        private void tsbNext_Click(object sender, EventArgs e)
+        {
+            // 获取当前年份
+            int currentYear = int.Parse(cmbYear.Text);
+
+            // 计算下一个记录的年份和月份
+            int nextMonth = int.Parse(cmbMonth.Text) + 1;
+            int nextYear = currentYear;
+
+            if (nextMonth == 13)
+            {
+                nextMonth = 1;
+                nextYear++;
+            }
+            string sql = @"select  * 
+                     from UnitProductionCost
+                    where AccountNo=@AccountNo and iYear=@iYear and cMonth=@cMonth ";
+            SqlParameter[] sqlParameters = { new SqlParameter("@AccountNo", cmbAccountNo.Text),
+                new SqlParameter("@iYear", nextYear),
+                new SqlParameter("@cMonth", nextMonth) };
+            QueryVoucher(sql, sqlParameters);
+
+        }
+
+        private void QueryVoucher(string sql,SqlParameter[] parameters=null)
         {
             dgvDetail.DataSource = null;
             dgvDetail.Rows.Clear();
             //disable edit feature of datagridview
             dgvDetail.ReadOnly = true;
-
-
-            SqlParameter[] sqlParameters =
+            SqlDataReader sqlDataReader;
+            if (parameters != null)
             {
-                 new SqlParameter("@AccountNo",cmbAccountNo.Text)
-            };
-            SqlDataReader sqlDataReader = Sqlhelper.GetSqlDataReader(
-                 sql, sqlParameters, Sqlhelper.DataSourceType.business);
+                sqlDataReader = Sqlhelper.GetSqlDataReader( sql, parameters, Sqlhelper.DataSourceType.business);
+            }
+            else
+            {
+                SqlParameter[] sqlParameters = { new SqlParameter("@AccountNo", cmbAccountNo.Text) };
+
+
+                sqlDataReader = Sqlhelper.GetSqlDataReader(sql, sqlParameters, Sqlhelper.DataSourceType.business);
+
+                             
+            }
+                 
 
             List<UnitProductionCost> list = new List<UnitProductionCost>();
 
@@ -402,7 +468,7 @@ namespace DataMaintenance.UI.U8
         /// </summary>
         /// <param name="invCode"></param>
         /// <returns></returns>
-        private Inventory QueryDatabaseForInventory(string invCode)
+        private Inventory QueryDatabaseForInventory(string invCode,String u8AccountNo)
         {
             // 假设这里是你的数据库查询逻辑
             // 使用实际的数据库查询代码替换下面的示例
@@ -410,7 +476,7 @@ namespace DataMaintenance.UI.U8
             SqlParameter[] sqlParameters = { new SqlParameter("@cInvCode", invCode) };
 
             // 调用查询服务
-            var item = QueryService.GetItemFromSingleTable<Inventory>(sqlParameters, Utility.Sql.Sqlhelper.DataSourceType.u8, "017");
+            var item = QueryService.GetItemFromSingleTable<Inventory>(sqlParameters, Utility.Sql.Sqlhelper.DataSourceType.u8, u8AccountNo);
 
             return item;
         }
@@ -451,11 +517,6 @@ namespace DataMaintenance.UI.U8
         }
 
 
-        private void dgvDetail_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            Utility.Style.DataGridViewStyle style = new Utility.Style.DataGridViewStyle();
-            style.DisplayRowNo(e, dgvDetail, false);
-        }
 
 
         #region validate 
@@ -509,14 +570,23 @@ namespace DataMaintenance.UI.U8
 
         }
 
-     
+
         #endregion
 
+        #region UI logic
+
+
+        private void dgvDetail_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Utility.Style.DataGridViewStyle style = new Utility.Style.DataGridViewStyle();
+            style.DisplayRowNo(e, dgvDetail, false);
+        }
 
         private void tsbAdd_Click(object sender, EventArgs e)
         {
-            tsbSave.Enabled=true;
-            dgvDetail.ReadOnly=false;
+            tsbSave.Enabled = true;
+            dgvDetail.ReadOnly = false;
+            dgvDetail.DataSource = null;
             dgvDetail.Rows.Clear();
             dgvDetail.Rows.Add();
         }
@@ -537,11 +607,125 @@ namespace DataMaintenance.UI.U8
             dgvDetail.Rows.RemoveAt(dgvDetail.CurrentRow.Index);
         }
 
-        private void tsbPrevious_Click(object sender, EventArgs e)
+
+        #endregion
+
+
+        private void tsbUpdateU8Cost_Click(object sender, EventArgs e)
         {
-            string sql=@"select * 
-                    AccountNo,cInvCode,UnitCost from UnitProductionCost
-                    where AccountNo@AccountNo and iYear=@iYear and cMonth=@cMonth ";
+            //check input of cmbCostType
+            if (cmbCostType.SelectedIndex == -1)
+            { 
+            MessageBox.Show("请选择成本类型!");
+                return;}
+
+            //update record with defferent costType of cmbCostType
+            switch (cmbCostType.SelectedItem.ToString()) 
+            {
+                case "生产单位成本":
+                    if (DialogResult.OK== MessageBox.Show($"你确认要修改{cmbAccountNo.Text}账套{cmbYear.Text}年{cmbMonth}月的【生产单位成本吗？】","更新确认",MessageBoxButtons.OKCancel,MessageBoxIcon.Warning))
+                    {
+                        UpdateCostRecored(1); break;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    
+                    case  "销售单位成本":
+                    if (DialogResult.OK == MessageBox.Show($"你确认要修改{cmbAccountNo.Text}账套{cmbYear.Text}年{cmbMonth}月的【销售单位成本吗？】", "更新确认", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning))
+                    {
+                        UpdateCostRecored(2); break;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                    
+
+            }
+
         }
+
+
+        private void UpdateCostRecored(int costType)
+        {
+
+            if (dgvDetail.Rows.Count == 0 || tsbSave.Enabled == true)
+            {
+                MessageBox.Show("请先输入明细数据!");
+                return;
+            }
+
+            var firstDay = GetFirstDayOfMonth(Int32.Parse(cmbYear.Text), Int32.Parse(cmbMonth.Text));
+            var lastDay = GetLastDayOfMonth(Int32.Parse(cmbYear.Text), Int32.Parse(cmbMonth.Text));
+            //generate sql statement
+            SqlParameter[] sqlParameters = {
+                                               new SqlParameter("@endDate", lastDay),
+                        new SqlParameter("@startDate", firstDay)
+                    };
+
+            Decimal dUntiCost;
+            String invCode;
+            StringBuilder stringbuilder = new StringBuilder();
+            if (costType == 1)
+
+            {
+                this.Cursor = Cursors.WaitCursor;
+                foreach ( DataGridViewRow item in dgvDetail.Rows)
+                {
+                    dUntiCost = Convert.ToDecimal( item.Cells["unitCost"].Value);
+                    invCode = item.Cells["cInvCode"].Value.ToString();
+                    string sql = $"update  rdrecords10 set iUnitCost ={dUntiCost}, iprice ={dUntiCost}  * iQuantity  from  rdrecord10 r10 inner join  rdrecords10 rd10"
+                        +$" on rd10.id=rd10 .id"
+                       
+                       + $" where cInvCode='{invCode}' " +
+                       $"and dDate between @startDate and @endDate; ";
+
+
+                    stringbuilder.Append(sql);
+
+                 
+                };
+                Utility.Sql.Sqlhelper.ExecuteSqlTransaction(stringbuilder.ToString(), sqlParameters, Sqlhelper.DataSourceType.u8,cmbAccountNo.Text);
+                stringbuilder.Clear();
+                MessageBox.Show("更新成功！", "更新提示");
+                this.Cursor = Cursors.Default;
+
+            }
+        }
+
+        void UpdateUnitProductionCost(UnitProductionCost m)
+        {
+          
+            //generate nature first  day and end day in the month of cmbMonth and cmbYear
+            //
+            string sql = @"update  rdrecords10 set iUnitCost =871.08, --变更单价
+
+                    iprice = 871.08 * iQuantity--变更金额
+from  rdrecord10 r10 --产成品入库单
+inner join  rdrecords10 rd10
+
+    on r10.id = rd10.id
+where dDate between '2024-07-01 ' AND '2024-07-31'
+
+        and cInvCode = '40400002'";
+
+        }
+
+        #region get datatime
+        private DateTime GetFirstDayOfMonth(int year, int month)
+        {
+            return new DateTime(year, month, 1);
+        }
+
+        private DateTime GetLastDayOfMonth(int year, int month)
+        {
+            DateTime firstDayOfNextMonth = new DateTime(year, month, 1).AddMonths(1);
+            return firstDayOfNextMonth.AddDays(-1);
+        }
+
+        #endregion
+
     }
 } 

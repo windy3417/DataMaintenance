@@ -34,6 +34,7 @@ namespace DataMaintenance.UI.Ref
 
         #endregion
 
+        public string U8AccountNo { get; set; }
         #region delegate
 
         public Action<Customer> ActionRefCustomerEntity;
@@ -45,7 +46,7 @@ namespace DataMaintenance.UI.Ref
         void InitializeControlDataSource()
         {
             
-            dgvArchive.DataSource = new CustomerRefService().GetListCustomerInArchive();
+            dgvArchive.DataSource = new CustomerRefService().GetListCustomerInArchive(U8AccountNo);
 
 
             dgvArchive.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;

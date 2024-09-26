@@ -14,11 +14,11 @@ namespace DataMaintenance.DAL.RefServices.U8services
 
     {
 
-        public List<Inventory> GetListInventoryInArchive()
+        public List<Inventory> GetListInventoryInArchive(String u8Account)
 
         {
 
-            var q = from s in new MasterDataService().GetListInventory()
+            var q = from s in new MasterDataService().GetListInventory(u8Account)
                     join y in new AttacheFileService().GetListInventoryInAttachfiles()
                     on s.cInvCode equals y
                     select new { s.cInvCode, s.cInvName, s.cInvStd };

@@ -14,10 +14,10 @@ namespace DataMaintenance.DAL.ViewServices.U8services
 {
   public  class CustomerAttachmentService
     {
-        public List<ArchiveVModel> GetListArchiveEntiy()
+        public List<ArchiveVModel> GetListArchiveEntiy(String u8Account)
         {
 
-            var q = from s in new MasterDataService().GetListCustomer()
+            var q = from s in new MasterDataService().GetListCustomer(u8Account)
                     join y in new AttacheFileService().GetListAttachfile()
                     on s.cCusCode equals y.cInvCode
                     select new { s.cCusCode, s.cCusName, y.cFileName, y.AttachFileGUID };

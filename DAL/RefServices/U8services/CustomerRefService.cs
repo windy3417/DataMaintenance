@@ -12,10 +12,10 @@ namespace DataMaintenance.DAL.RefServices.U8services
 
     {
 
-        public List<Customer> GetListCustomerInArchive()
+        public List<Customer> GetListCustomerInArchive(String u8Account)
         {
 
-            var q = from s in new MasterDataService().GetListCustomer()
+            var q = from s in new MasterDataService().GetListCustomer(u8Account)
                     join y in new AttacheFileService().GetListCustomerInAttachfiles()
                     on s.cCusCode equals y
                     select new { s.cCusCode, s.cCusName };

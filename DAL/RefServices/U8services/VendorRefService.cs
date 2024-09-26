@@ -13,10 +13,10 @@ namespace DataMaintenance.DAL.RefServices.U8services
 
     {
 
-        public List<Vendor> GetListVendorInArchive()
+        public List<Vendor> GetListVendorInArchive(String u8Account)
         {
 
-            var q = from s in new MasterDataService().GetListVendor()
+            var q = from s in new MasterDataService().GetListVendor(u8Account)
                     join y in new AttacheFileService().GetListVendorInAttachfiles()
                     on s.cVenCode equals y
                     select new { s.cVenCode, s.cVenName };
