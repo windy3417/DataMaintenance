@@ -40,6 +40,8 @@ namespace DataMaintenance.UI.Ref
 
 
         public Action<string> ActionRefInventoryCode;
+        //using func delegate can exchange data each other
+        //Func<int, Inventory> FuncTestl;
 
         #endregion
 
@@ -187,6 +189,8 @@ namespace DataMaintenance.UI.Ref
             }
 
             ActionRefInventoryCode?.Invoke(m.cInvCode);
+            //can call the resulte provided insistance of Func delegate
+            //FuncTestl?.Invoke(3).
             this.Close();
         }
 

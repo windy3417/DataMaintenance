@@ -33,18 +33,11 @@ namespace DataMaintenance.UI.U8.VoucherList
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.tsbExport = new System.Windows.Forms.ToolStripButton();
             this.tsbQuery = new System.Windows.Forms.ToolStripButton();
+            this.tsbExport = new System.Windows.Forms.ToolStripButton();
             this.panTitlel = new System.Windows.Forms.Panel();
             this.lblTitel = new System.Windows.Forms.Label();
             this.dgvBody = new System.Windows.Forms.DataGridView();
-            this.gbHeader = new System.Windows.Forms.GroupBox();
-            this.lblAccountNo = new System.Windows.Forms.Label();
-            this.cmbMonth = new System.Windows.Forms.ComboBox();
-            this.cmbAccountNo = new System.Windows.Forms.ComboBox();
-            this.cmbYear = new System.Windows.Forms.ComboBox();
-            this.lblYear = new System.Windows.Forms.Label();
-            this.lblMonth = new System.Windows.Forms.Label();
             this.accountNo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cMonth = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,6 +45,13 @@ namespace DataMaintenance.UI.U8.VoucherList
             this.cInvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clnvStd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unitCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gbHeader = new System.Windows.Forms.GroupBox();
+            this.lblAccountNo = new System.Windows.Forms.Label();
+            this.cmbMonth = new System.Windows.Forms.ComboBox();
+            this.cmbAccountNo = new System.Windows.Forms.ComboBox();
+            this.cmbYear = new System.Windows.Forms.ComboBox();
+            this.lblYear = new System.Windows.Forms.Label();
+            this.lblMonth = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.panTitlel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBody)).BeginInit();
@@ -69,15 +69,6 @@ namespace DataMaintenance.UI.U8.VoucherList
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
-            // tsbExport
-            // 
-            this.tsbExport.Image = global::DataMaintenance.Properties.Resources.export;
-            this.tsbExport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbExport.Name = "tsbExport";
-            this.tsbExport.Size = new System.Drawing.Size(53, 22);
-            this.tsbExport.Text = "导出";
-            this.tsbExport.Click += new System.EventHandler(this.tsbExport_Click);
-            // 
             // tsbQuery
             // 
             this.tsbQuery.Image = global::DataMaintenance.Properties.Resources.query;
@@ -86,6 +77,15 @@ namespace DataMaintenance.UI.U8.VoucherList
             this.tsbQuery.Size = new System.Drawing.Size(53, 22);
             this.tsbQuery.Text = "查询";
             this.tsbQuery.Click += new System.EventHandler(this.tsbQuery_Click);
+            // 
+            // tsbExport
+            // 
+            this.tsbExport.Image = global::DataMaintenance.Properties.Resources.export;
+            this.tsbExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbExport.Name = "tsbExport";
+            this.tsbExport.Size = new System.Drawing.Size(53, 22);
+            this.tsbExport.Text = "导出";
+            this.tsbExport.Click += new System.EventHandler(this.tsbExport_Click);
             // 
             // panTitlel
             // 
@@ -156,7 +156,57 @@ namespace DataMaintenance.UI.U8.VoucherList
             this.dgvBody.RowTemplate.Height = 23;
             this.dgvBody.Size = new System.Drawing.Size(776, 277);
             this.dgvBody.TabIndex = 3;
+            this.dgvBody.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBody_CellDoubleClick);
             this.dgvBody.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBody_RowPostPaint);
+            // 
+            // accountNo
+            // 
+            this.accountNo.DataPropertyName = "accountNo";
+            this.accountNo.HeaderText = "账套号";
+            this.accountNo.Name = "accountNo";
+            this.accountNo.ReadOnly = true;
+            // 
+            // iYear
+            // 
+            this.iYear.DataPropertyName = "iYear";
+            this.iYear.HeaderText = "会计年度";
+            this.iYear.Name = "iYear";
+            this.iYear.ReadOnly = true;
+            // 
+            // cMonth
+            // 
+            this.cMonth.DataPropertyName = "cMonth";
+            this.cMonth.HeaderText = "会计期间";
+            this.cMonth.Name = "cMonth";
+            this.cMonth.ReadOnly = true;
+            // 
+            // cInvCode
+            // 
+            this.cInvCode.DataPropertyName = "cInvCode";
+            this.cInvCode.HeaderText = "存货编码";
+            this.cInvCode.Name = "cInvCode";
+            this.cInvCode.ReadOnly = true;
+            // 
+            // cInvName
+            // 
+            this.cInvName.DataPropertyName = "cInvName";
+            this.cInvName.HeaderText = "存货名称";
+            this.cInvName.Name = "cInvName";
+            this.cInvName.ReadOnly = true;
+            // 
+            // clnvStd
+            // 
+            this.clnvStd.DataPropertyName = "cInvStd";
+            this.clnvStd.HeaderText = "规格型号";
+            this.clnvStd.Name = "clnvStd";
+            this.clnvStd.ReadOnly = true;
+            // 
+            // unitCost
+            // 
+            this.unitCost.DataPropertyName = "unitCost";
+            this.unitCost.HeaderText = "单位成本";
+            this.unitCost.Name = "unitCost";
+            this.unitCost.ReadOnly = true;
             // 
             // gbHeader
             // 
@@ -227,55 +277,6 @@ namespace DataMaintenance.UI.U8.VoucherList
             this.lblMonth.Size = new System.Drawing.Size(53, 12);
             this.lblMonth.TabIndex = 0;
             this.lblMonth.Text = "会计期间";
-            // 
-            // accountNo
-            // 
-            this.accountNo.DataPropertyName = "accountNo";
-            this.accountNo.HeaderText = "账套号";
-            this.accountNo.Name = "accountNo";
-            this.accountNo.ReadOnly = true;
-            // 
-            // iYear
-            // 
-            this.iYear.DataPropertyName = "iYear";
-            this.iYear.HeaderText = "会计年度";
-            this.iYear.Name = "iYear";
-            this.iYear.ReadOnly = true;
-            // 
-            // cMonth
-            // 
-            this.cMonth.DataPropertyName = "cMonth";
-            this.cMonth.HeaderText = "会计期间";
-            this.cMonth.Name = "cMonth";
-            this.cMonth.ReadOnly = true;
-            // 
-            // cInvCode
-            // 
-            this.cInvCode.DataPropertyName = "cInvCode";
-            this.cInvCode.HeaderText = "存货编码";
-            this.cInvCode.Name = "cInvCode";
-            this.cInvCode.ReadOnly = true;
-            // 
-            // cInvName
-            // 
-            this.cInvName.DataPropertyName = "cInvName";
-            this.cInvName.HeaderText = "存货名称";
-            this.cInvName.Name = "cInvName";
-            this.cInvName.ReadOnly = true;
-            // 
-            // clnvStd
-            // 
-            this.clnvStd.DataPropertyName = "cInvStd";
-            this.clnvStd.HeaderText = "规格型号";
-            this.clnvStd.Name = "clnvStd";
-            this.clnvStd.ReadOnly = true;
-            // 
-            // unitCost
-            // 
-            this.unitCost.DataPropertyName = "unitCost";
-            this.unitCost.HeaderText = "单位成本";
-            this.unitCost.Name = "unitCost";
-            this.unitCost.ReadOnly = true;
             // 
             // FrmUnitProductionCostList
             // 

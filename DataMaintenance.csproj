@@ -31,7 +31,7 @@
     <SuiteName>信息平台管理</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationRevision>14</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -112,8 +112,8 @@
   <ItemGroup>
     <Compile Include="DAL\RefServices\U8services\VendorRefService.cs" />
     <Compile Include="DAL\TableServices\U8services\Rdrecord32Service.cs" />
-    <Compile Include="DAL\U8services\InventoryClassService.cs" />
-    <Compile Include="DAL\U8services\InventoryService.cs" />
+    <Compile Include="DAL\TableServices\U8services\InventoryClassService.cs" />
+    <Compile Include="DAL\TableServices\U8services\InventoryService.cs" />
     <Compile Include="DAL\U8services\Rdrecord32Service.cs" />
     <Compile Include="DAL\ViewServices\U8services\BoxIDExistService.cs" />
     <Compile Include="DAL\ViewServices\U8services\VendorAttachmentService.cs" />
@@ -123,6 +123,9 @@
     <Compile Include="DAL\TableServices\U8services\AttacheFileService.cs" />
     <Compile Include="DAL\TableServices\U8services\MasterDataService.cs" />
     <Compile Include="DAL\ViewServices\U8services\InventoryAttachmentService.cs" />
+    <Compile Include="FrmTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="GlobalVary\CurrentUser.cs" />
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
@@ -163,6 +166,7 @@
     <Compile Include="Model\U8\Attachfile.cs" />
     <Compile Include="Model\U8\CurrentStock.cs" />
     <Compile Include="Model\U8\Customer.cs" />
+    <Compile Include="Model\U8\GL_mend.cs" />
     <Compile Include="Model\U8\InventoryClass.cs" />
     <Compile Include="Model\U8\rdrecord10.cs" />
     <Compile Include="Model\U8\rdrecord32.cs" />
@@ -312,16 +316,16 @@
     <Compile Include="UI\FrmPerson.designer.cs">
       <DependentUpon>FrmPerson.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\U8\FrmBoxIdDetail.cs">
+    <Compile Include="UI\U8\Report\FrmBoxIdDetail.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\U8\FrmBoxIdDetail.Designer.cs">
+    <Compile Include="UI\U8\Report\FrmBoxIdDetail.Designer.cs">
       <DependentUpon>FrmBoxIdDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\U8\FrmBoxIdExist.cs">
+    <Compile Include="UI\U8\Report\FrmBoxIdExist.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\U8\FrmBoxIdExist.Designer.cs">
+    <Compile Include="UI\U8\Report\FrmBoxIdExist.Designer.cs">
       <DependentUpon>FrmBoxIdExist.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\U8\FrmPoAttachment.cs">
@@ -366,11 +370,23 @@
     <Compile Include="UI\U8\FrmArchiveAttachment.Designer.cs">
       <DependentUpon>FrmArchiveAttachment.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\U8\FrmBoxIdDeliveryQuery.cs">
+    <Compile Include="UI\U8\Report\FrmBoxIdDeliveryQuery.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\U8\FrmBoxIdDeliveryQuery.Designer.cs">
+    <Compile Include="UI\U8\Report\FrmBoxIdDeliveryQuery.Designer.cs">
       <DependentUpon>FrmBoxIdDeliveryQuery.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\U8\Report\FrmSaleProduceIncosistency.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\U8\Report\FrmSaleProduceIncosistency.Designer.cs">
+      <DependentUpon>FrmSaleProduceIncosistency.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\U8\Report\FrmU8FinishedGoodsUnitPriceReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\U8\Report\FrmU8FinishedGoodsUnitPriceReport.Designer.cs">
+      <DependentUpon>FrmU8FinishedGoodsUnitPriceReport.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\U8\VoucherList\FrmUnitProductionCostList.cs">
       <SubType>Form</SubType>
@@ -380,6 +396,9 @@
     </Compile>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmTest.resx">
+      <DependentUpon>FrmTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202309140755289_m.resx">
       <DependentUpon>202309140755289_m.cs</DependentUpon>
@@ -466,10 +485,10 @@
     <EmbeddedResource Include="UI\FrmPerson.resx">
       <DependentUpon>FrmPerson.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\U8\FrmBoxIdDetail.resx">
+    <EmbeddedResource Include="UI\U8\Report\FrmBoxIdDetail.resx">
       <DependentUpon>FrmBoxIdDetail.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\U8\FrmBoxIdExist.resx">
+    <EmbeddedResource Include="UI\U8\Report\FrmBoxIdExist.resx">
       <DependentUpon>FrmBoxIdExist.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\FrmPoAttachment.resx">
@@ -493,8 +512,14 @@
     <EmbeddedResource Include="UI\U8\FrmArchiveAttachment.resx">
       <DependentUpon>FrmArchiveAttachment.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\U8\FrmBoxIdDeliveryQuery.resx">
+    <EmbeddedResource Include="UI\U8\Report\FrmBoxIdDeliveryQuery.resx">
       <DependentUpon>FrmBoxIdDeliveryQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\U8\Report\FrmSaleProduceIncosistency.resx">
+      <DependentUpon>FrmSaleProduceIncosistency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\U8\Report\FrmU8FinishedGoodsUnitPriceReport.resx">
+      <DependentUpon>FrmU8FinishedGoodsUnitPriceReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\VoucherList\FrmUnitProductionCostList.resx">
       <DependentUpon>FrmUnitProductionCostList.cs</DependentUpon>
@@ -527,6 +552,7 @@
     <None Include="Resources\previous page.png" />
     <None Include="Resources\delete.gif" />
     <None Include="Resources\query.gif" />
+    <None Include="Resources\filter.gif" />
     <Content Include="Resources\template\外发需返资产清单导入模板.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -563,7 +589,6 @@
   <ItemGroup>
     <Folder Include="Common\" />
     <Folder Include="UI\MarsterData\" />
-    <Folder Include="UI\U8\Report\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

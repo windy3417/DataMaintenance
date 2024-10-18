@@ -57,15 +57,20 @@
             this.箱号结存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.成本管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.成本录入ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.单位成本列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.u8产成品入库单价列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.重登录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.测试ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableLayOutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.ts_foot = new System.Windows.Forms.ToolStrip();
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tstb_currentUser = new System.Windows.Forms.ToolStripTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.单位成本列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.当期有销售无入库清单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_main.SuspendLayout();
             this.panel1.SuspendLayout();
             this.ts_foot.SuspendLayout();
@@ -82,7 +87,9 @@
             this.箱号管理ToolStripMenuItem,
             this.成本管理ToolStripMenuItem,
             this.重登录ToolStripMenuItem,
-            this.帮助ToolStripMenuItem});
+            this.帮助ToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.测试ToolStripMenuItem});
             this.ms_main.Location = new System.Drawing.Point(0, 0);
             this.ms_main.Name = "ms_main";
             this.ms_main.Size = new System.Drawing.Size(885, 24);
@@ -141,7 +148,7 @@
             // 
             this.人员档案ToolStripMenuItem1.Name = "人员档案ToolStripMenuItem1";
             this.人员档案ToolStripMenuItem1.Size = new System.Drawing.Size(163, 22);
-            this.人员档案ToolStripMenuItem1.Tag = "DataMaintenance.UI.FrmUserInfo";
+            this.人员档案ToolStripMenuItem1.Tag = "DataMaintenance.UI.FrmPerson";
             this.人员档案ToolStripMenuItem1.Text = "人员档案";
             this.人员档案ToolStripMenuItem1.Click += new System.EventHandler(this.MenuItemClick);
             // 
@@ -294,7 +301,9 @@
             // 
             this.成本管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.成本录入ToolStripMenuItem,
-            this.单位成本列表ToolStripMenuItem});
+            this.单位成本列表ToolStripMenuItem,
+            this.u8产成品入库单价列表ToolStripMenuItem,
+            this.当期有销售无入库清单ToolStripMenuItem});
             this.成本管理ToolStripMenuItem.Name = "成本管理ToolStripMenuItem";
             this.成本管理ToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
             this.成本管理ToolStripMenuItem.Text = "成本管理";
@@ -302,10 +311,26 @@
             // 成本录入ToolStripMenuItem
             // 
             this.成本录入ToolStripMenuItem.Name = "成本录入ToolStripMenuItem";
-            this.成本录入ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.成本录入ToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
             this.成本录入ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.FrmUnitCostInput";
             this.成本录入ToolStripMenuItem.Text = "成本录入";
             this.成本录入ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
+            // 
+            // 单位成本列表ToolStripMenuItem
+            // 
+            this.单位成本列表ToolStripMenuItem.Name = "单位成本列表ToolStripMenuItem";
+            this.单位成本列表ToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.单位成本列表ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.VoucherList.FrmUnitProductionCostList";
+            this.单位成本列表ToolStripMenuItem.Text = "单位成本列表";
+            this.单位成本列表ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
+            // 
+            // u8产成品入库单价列表ToolStripMenuItem
+            // 
+            this.u8产成品入库单价列表ToolStripMenuItem.Name = "u8产成品入库单价列表ToolStripMenuItem";
+            this.u8产成品入库单价列表ToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.u8产成品入库单价列表ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.Report.FrmU8FinishedGoodsUnitPriceReport";
+            this.u8产成品入库单价列表ToolStripMenuItem.Text = "U8产成品入库单价列表";
+            this.u8产成品入库单价列表ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
             // 
             // 重登录ToolStripMenuItem
             // 
@@ -329,6 +354,27 @@
             this.关于ToolStripMenuItem.Tag = "DataMaintenance.UI.FrmHelp";
             this.关于ToolStripMenuItem.Text = "关于";
             this.关于ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(12, 20);
+            // 
+            // 测试ToolStripMenuItem
+            // 
+            this.测试ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tableLayOutToolStripMenuItem});
+            this.测试ToolStripMenuItem.Name = "测试ToolStripMenuItem";
+            this.测试ToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.测试ToolStripMenuItem.Text = "测试";
+            // 
+            // tableLayOutToolStripMenuItem
+            // 
+            this.tableLayOutToolStripMenuItem.Name = "tableLayOutToolStripMenuItem";
+            this.tableLayOutToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
+            this.tableLayOutToolStripMenuItem.Tag = "DataMaintenance.FrmTest";
+            this.tableLayOutToolStripMenuItem.Text = "TableLayOut";
+            this.tableLayOutToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
             // 
             // panel1
             // 
@@ -379,13 +425,13 @@
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
             // 
-            // 单位成本列表ToolStripMenuItem
+            // 当期有销售无入库清单ToolStripMenuItem
             // 
-            this.单位成本列表ToolStripMenuItem.Name = "单位成本列表ToolStripMenuItem";
-            this.单位成本列表ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.单位成本列表ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.VoucherList.FrmUnitProductionCostList";
-            this.单位成本列表ToolStripMenuItem.Text = "单位成本列表";
-            this.单位成本列表ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
+            this.当期有销售无入库清单ToolStripMenuItem.Name = "当期有销售无入库清单ToolStripMenuItem";
+            this.当期有销售无入库清单ToolStripMenuItem.Size = new System.Drawing.Size(205, 22);
+            this.当期有销售无入库清单ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.Report.FrmSaleProduceIncosistency";
+            this.当期有销售无入库清单ToolStripMenuItem.Text = "当期有销售无入库清单";
+            this.当期有销售无入库清单ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
             // 
             // FrmMain
             // 
@@ -451,6 +497,11 @@
         private System.Windows.Forms.ToolStripMenuItem 帮助ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 关于ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 单位成本列表ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem u8产成品入库单价列表ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 测试ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tableLayOutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 当期有销售无入库清单ToolStripMenuItem;
     }
 }
 

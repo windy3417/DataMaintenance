@@ -327,7 +327,7 @@ namespace DataMaintenance
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            if (CurrentUser.userID!="2007")
+            if (CurrentUser.userID!="2007" || CurrentUser.userID=="043")
             {
                 this.成本管理ToolStripMenuItem.Visible = false;
             }

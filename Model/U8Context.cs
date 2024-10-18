@@ -30,6 +30,8 @@ namespace DataMaintenance.Model
         public virtual DbSet<rdrecords10> rdrecords10 { get; set; }
         public virtual DbSet<CurrentStock> CurrentStock { get; set; }
         public virtual DbSet<InventoryClass> InventoryClasse { get; set; }
+        public virtual DbSet<GL_mend> GL_mend { get; set; }
+
 
 
 

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Utility.DAL;
 using Utility.Sql;
+using Utility.UI;
 using static Utility.Sql.Sqlhelper;
 
 namespace DataMaintenance.UI.U8.VoucherList
@@ -88,6 +89,36 @@ namespace DataMaintenance.UI.U8.VoucherList
             Utility.Style.DataGridViewStyle style = new Utility.Style.DataGridViewStyle();
             style.DisplayRowNo(e, dgvBody, false);
         }
-        
+
+        private void dgvBody_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (e.RowIndex < 0) return;
+
+            DataGridViewRow row = dgvBody.Rows[e.RowIndex];
+
+            string invCode = row.Cells["cInvCode"].Value.ToString();
+            int iYear = Convert.ToInt32(row.Cells["iYear"].Value);
+            int cMonth = Convert.ToInt32(row.Cells["cMonth"].Value);
+            string cAccountNo = row.Cells["accountNo"].Value.ToString();
+            SqlParameter[] sqlParameters=new SqlParameter[]
+            {
+                new SqlParameter("@iYear", iYear),
+                new SqlParameter("@cMonth", cMonth),
+                new SqlParameter("@cInvCode", invCode),
+                new SqlParameter("@cAccountNo",cAccountNo)
+            };
+
+            string sql = @"select  * 
+                     from UnitProductionCost
+                    where  iYear=@iYear and AccountNo=@cAccountNo  and cMonth=@cMonth ";
+
+            FrmUnitCostInput f = new FrmUnitCostInput();
+            f.QueryVoucher(sql,sqlParameters);
+            EmbedForm embed = new EmbedForm();
+            embed.openForm(f, f.Text, (TabControl)this.Parent.Parent.Parent.Controls["tabControl1"], false);
+            f.Show();
+            
+        }
     }
 }
