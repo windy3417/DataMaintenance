@@ -1,5 +1,6 @@
 ﻿using DataMaintenance.Model.Maintenance;
 using DataMaintenance.Model.U8;
+using DataMaintenance.Properties;
 using DataMaintenance.UI.Ref;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,9 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -27,6 +30,15 @@ namespace DataMaintenance.UI.U8
         }
 
         Button btnRef = new Button();
+        ToolStripButton tsbSaveEdit = new ToolStripButton();
+        private bool isDeletingEmptyRow = false; // Flag to track row deletion
+        private bool isMouseClick = false; // Flag to track if the edit mode ended due to a mouse click
+        private bool isEditing = false;
+
+
+        // when edit the record , record the initial data
+        private List<UnitProductionCost> initialData;
+     
 
         /// <summary>
         /// 初始化控件数据源
@@ -113,35 +125,48 @@ namespace DataMaintenance.UI.U8
 
         #endregion
 
-
-        #region CRUD
+            
 
         #region add
 
         private void tsbAdd_Click(object sender, EventArgs e)
         {
+            if (isEditing)
+            {
+                if (DialogResult.OK== MessageBox.Show("是否保存当前编辑行", "提示", MessageBoxButtons.YesNo))
+                {
+                   tsbSave.PerformClick();
+                    return;
+                }  
+                
+            }
 
-            tsbEdit.Enabled = false;
-            tsbDelete.Enabled = false;
+            else
+            {
+                tsbEdit.Enabled = false;
+                tsbDelete.Enabled = false;
+                tsbSaveEdit.Visible = false;
 
-            tsbSave.Enabled = true;
-            tsbDeleteRow.Enabled = true;
-            tsbAddRow.Enabled = true;
+                tsbSave.Enabled = true;
+                tsbSave.Visible = true;
+                
+                tsbDeleteRow.Enabled = true;
+                tsbAddRow.Enabled = true;
 
-            cmbAccountNo.Enabled = true;
-            cmbYear.Enabled = true;
-            cmbMonth.Enabled = true;
+                cmbAccountNo.Enabled = true;
+                cmbYear.Enabled = true;
+                cmbMonth.Enabled = true;
 
-            dgvDetail.Enabled = true;
-
-
+                dgvDetail.Enabled = true;
 
 
-            dgvDetail.ReadOnly = false;
-            dgvDetail.DataSource = null;
-            dgvDetail.Rows.Clear();
-            dgvDetail.Rows.Add();
-            dgvDetail.BeginEdit(true);
+                dgvDetail.ReadOnly = false;
+                dgvDetail.DataSource = null;
+                dgvDetail.Rows.Clear();
+                dgvDetail.Rows.Add();
+                dgvDetail.BeginEdit(true);
+            }
+         
         }
 
         /// <summary>
@@ -170,7 +195,7 @@ namespace DataMaintenance.UI.U8
         /// input manually,this method will be triggered also when user input reference window  
         /// but it doesn't matter,because the result will be the same
         /// </summary>
-        private void GetInventoryManually()
+        private bool GetInventoryManually()
         {
             // 获取当前选中的单元格
             DataGridViewCell currentCell = dgvDetail.CurrentCell;
@@ -192,30 +217,33 @@ namespace DataMaintenance.UI.U8
                         dgvDetail.Rows[currentCell.RowIndex].Cells["cInvCode"].Value = inventory.cInvCode;
                         dgvDetail.Rows[currentCell.RowIndex].Cells["cInvName"].Value = inventory.cInvName;
                         dgvDetail.Rows[currentCell.RowIndex].Cells["cInvStd"].Value = inventory.cInvStd is null ? "" : inventory.cInvStd;
-                                                          
-                                           
-                            FocusCell(currentCell.RowIndex, "unitCost");
 
-                                              
+                        return true;            
+                        
+                                                                                          
 
                     }
 
                     else
                     {
                         MessageBox.Show("未找到匹配的存货信息");
-
-                        return;
+                      
+                        return false;
                     }   
                 }
                 else
                 {
                     MessageBox.Show("请输入存货编码");
-
-                    return;
+                    
+                                  return false;
+                 
                 }
 
 
+
             }
+
+            return false;
         }
 
         /// <summary>
@@ -224,10 +252,38 @@ namespace DataMaintenance.UI.U8
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-
         private void dgvDetail_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            GetInventoryManually();
+            //avoid triggering this event when deleting empty row or mouse click
+            if (this.isDeletingEmptyRow)
+            {
+                return;
+            }
+            if (this.isMouseClick)
+            {
+                return;
+            }
+            if (e.ColumnIndex == 0)
+            {
+                if (GetInventoryManually())
+                {
+                    FocusCell(e.RowIndex, "unitCost");
+                    btnRef.Visible = false;
+                }
+
+                else
+                {
+                    dgvDetail.Rows[e.RowIndex].Cells[e.ColumnIndex].Value=null;
+                    
+                }
+               
+            }
+
+            else if ( !String.IsNullOrEmpty(dgvDetail.Rows[e.RowIndex].Cells["unitCost"].Value?.ToString()))
+            {
+                FocusCell(e.RowIndex, "cInvCode");
+            }
+          
         }
 
         /// <summary>
@@ -237,6 +293,8 @@ namespace DataMaintenance.UI.U8
         /// <param name="e"></param>
         private void DgvBody_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
+          
+            
             if (e.ColumnIndex == 0)
             {
 
@@ -260,81 +318,12 @@ namespace DataMaintenance.UI.U8
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
-            #region delete empty row
+            DeleteEmptyRows();
 
-            // 创建一个列表来存储需要删除的空白行索引
-            List<int> rowsToDelete = new List<int>();
-
-            // 遍历 DataGridView 中的所有行
-            for (int i = dgvDetail.Rows.Count - 1; i >= 0; i--)
+            if (!this.ValidatingBeforeSaving())
             {
-                DataGridViewRow row = dgvDetail.Rows[i];
-
-                // 检查当前行是否为空
-                if (IsRowEmpty(row))
-                {
-                    // 添加到删除列表
-                    rowsToDelete.Add(i);
-                }
-            }
-
-            // 删除空白行
-            foreach (int rowIndex in rowsToDelete)
-            {
-                dgvDetail.Rows.RemoveAt(rowIndex);
-            }
-
-            #endregion
-
-            #region validation
-            // 检查 DataGridView 是否为空
-            if (dgvDetail.Rows.Count == 0)
-            {
-                MessageBox.Show("表体数据不能为空", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
-            // 检查所有文本框和组合框是否为空
-            if (!CheckTextBoxesAndComboBoxes())
-            {
-                MessageBox.Show("表头数据不能为空", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // add list from cinvcode column of dgvDetail
-            List<string> cinvCodeList = new List<string>();
-            foreach (DataGridViewRow row in dgvDetail.Rows)
-            {
-                cinvCodeList.Add(row.Cells["cInvCode"].Value.ToString());
-            }
-
-            //check duplicate from datagridview
-            foreach (string cinvCode in cinvCodeList)
-            {
-                if (cinvCodeList.Count(x => x == cinvCode) > 1)
-                {
-                    MessageBox.Show($"存货 '{cinvCode}'在表体行中重复", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                //check duplicate from database
-                if (CheckDuplicate(cmbYear.Text, cmbMonth.Text, cmbAccountNo.Text, cinvCode))
-                {
-
-
-                    // 如果存在，则显示错误消息
-
-                    MessageBox.Show($"存货 '{cinvCode}'的单位成本 在 {cmbAccountNo.Text}账套的{cmbYear.Text} - {cmbMonth.Text}会计期间" +
-                        $"已经存在", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-
-                }
-
-            }
-
-
-
-            #endregion
 
             List<UnitProductionCost> list = new List<UnitProductionCost>();
             SaveService saveService = new SaveService();
@@ -358,8 +347,9 @@ namespace DataMaintenance.UI.U8
             tsbSave.Enabled = false;
             tsbDeleteRow.Enabled = false;
             tsbAddRow.Enabled = false;
-
             tsbDelete.Enabled = false;
+
+            tsbEdit.Enabled= true;
 
             cmbAccountNo.Enabled = false;
             cmbYear.Enabled = false;
@@ -368,6 +358,42 @@ namespace DataMaintenance.UI.U8
 
             this.Cursor = Cursors.Default;
 
+        }
+
+        private void DeleteEmptyRows()
+        {
+            #region delete empty row
+
+            // 创建一个列表来存储需要删除的空白行索引
+            List<int> rowsToDelete = new List<int>();
+
+            // 遍历 DataGridView 中的所有行
+            for (int i = dgvDetail.Rows.Count - 1; i >= 0; i--)
+            {
+                DataGridViewRow row = dgvDetail.Rows[i];
+
+                // 检查当前行是否为空
+                if (IsRowEmpty(row))
+                {
+                    // 添加到删除列表
+                    rowsToDelete.Add(i);
+
+                }
+            }
+
+            // 删除空白行
+            foreach (int rowIndex in rowsToDelete)
+            {
+                isDeletingEmptyRow = true; // Set the flag
+                this.btnRef.Visible = false;
+                dgvDetail.Rows.RemoveAt(rowIndex);
+
+            }
+
+            //restore to the editing staus
+            isDeletingEmptyRow = false;
+
+            #endregion
         }
 
         void InputInvntoryItem(Inventory m)
@@ -445,7 +471,10 @@ namespace DataMaintenance.UI.U8
                 previousYear--;
 
             }
-            cmbMonth.Text = previousMonth.ToString();
+            //add 0 character to the month if it is less than 10
+            cmbMonth.Text = previousMonth < 10 ? "0" + previousMonth.ToString() : previousMonth.ToString();
+
+           
             cmbYear.Text = previousYear.ToString();
 
             string sql = @"select  * 
@@ -520,6 +549,7 @@ namespace DataMaintenance.UI.U8
 
 
             List<UnitProductionCost> list = new List<UnitProductionCost>();
+       
 
             //fetch the first batch record with same year and month and accountNo
             while (sqlDataReader.Read())
@@ -534,12 +564,33 @@ namespace DataMaintenance.UI.U8
                 m.cInvName = sqlDataReader["cInvName"].ToString();
                 m.cInvStd = sqlDataReader["cInvStd"].ToString();
                 m.UnitCost = Convert.ToDecimal(sqlDataReader["UnitCost"]);
+                m.Id = Convert.ToInt32(sqlDataReader["ID"]);
                 list.Add(m);
+           
 
             }
 
             sqlDataReader.Close();
+
             dgvDetail.DataSource = list;
+        }
+
+        /// <summary>
+        /// get invetory item from u8
+        /// </summary>
+        /// <param name="invCode"></param>
+        /// <returns></returns>
+        private Inventory QueryDatabaseForInventory(string invCode, String u8AccountNo)
+        {
+            // 假设这里是你的数据库查询逻辑
+            // 使用实际的数据库查询代码替换下面的示例
+            Inventory m = new Inventory();
+            SqlParameter[] sqlParameters = { new SqlParameter("@cInvCode", invCode) };
+
+            // 调用查询服务
+            var item = QueryService.GetItemFromSingleTable<Inventory>(sqlParameters, Utility.Sql.Sqlhelper.DataSourceType.u8, u8AccountNo);
+
+            return item;
         }
         #endregion
 
@@ -583,136 +634,181 @@ namespace DataMaintenance.UI.U8
 
         #endregion
 
-        /// <summary>
-        /// input inventory item by manual
-        /// </summary>
-        /// <param name="invCode"></param>
-        /// <returns></returns>
-        private Inventory QueryDatabaseForInventory(string invCode, String u8AccountNo)
+  
+        #region update
+
+
+        private void tsbEdit_Click(object sender, EventArgs e)
         {
-            // 假设这里是你的数据库查询逻辑
-            // 使用实际的数据库查询代码替换下面的示例
-            Inventory m = new Inventory();
-            SqlParameter[] sqlParameters = { new SqlParameter("@cInvCode", invCode) };
+            isEditing = true;
+            this.Cursor = Cursors.WaitCursor;
+            //replace the tsbSave button of toolstrip  with a new save button in the same location
+            tsbSave.Visible = false;
+           
+            tsbSaveEdit.Text = "保存";
+            tsbSaveEdit.Image = Resources.save;
+            toolStrip1.Items.Insert(toolStrip1.Items.IndexOf(tsbSave), tsbSaveEdit);
 
-            // 调用查询服务
-            var item = QueryService.GetItemFromSingleTable<Inventory>(sqlParameters, Utility.Sql.Sqlhelper.DataSourceType.u8, u8AccountNo);
+            tsbEdit.Enabled = false;
 
-            return item;
-        }
-
-
-        #endregion
-
-
-        #region validate 
-        // 检查行是否为空的方法
-        private bool IsRowEmpty(DataGridViewRow row)
-        {
-            // 检查所有列是否为空或空白
-            foreach (DataGridViewCell cell in row.Cells)
-            {
-                if (cell.Value != null && !string.IsNullOrWhiteSpace(cell.Value.ToString()))
-                {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        // 检查所有文本框和组合框是否为空
-        private bool CheckTextBoxesAndComboBoxes()
-        {
-            // 假设你有多个文本框和组合框
-            if (string.IsNullOrWhiteSpace(cmbYear.Text) ||
-                string.IsNullOrWhiteSpace(cmbMonth.Text) ||
-                string.IsNullOrWhiteSpace(cmbAccountNo.Text))
-            {
-                return false;
-            }
+            tsbAddRow.Enabled = true;
+            tsbDeleteRow.Enabled = true;
+            dgvDetail.Enabled = true;
+            dgvDetail.ReadOnly = false;
+            //dgvDetail.AllowUserToAddRows = true;
+            dgvDetail.AllowUserToDeleteRows = true;
+            dgvDetail.AllowUserToOrderColumns = true;
+            dgvDetail.AllowUserToResizeColumns = true;
+            dgvDetail.AllowUserToResizeRows = true;
+            tsbSaveEdit.Click += new System.EventHandler(this.tsbSaveEdit_Click);
 
 
+           
+                    
 
-            return true;
-        }
-
-        //check identity  in database with year and month and accountNo and invcode before save
-        private bool CheckDuplicate(string year, string month, string accountNo, string invCode)
-        {
+            var y = Convert.ToInt32(cmbYear.Text);
             using (DataMaintenanceContext db = new DataMaintenanceContext())
             {
-                var y = Convert.ToInt32(year);
-                var query = from u in db.UnitProductionCost
-                            where u.iYear == y && u.cMonth == month && u.AccountNo == accountNo && u.cInvCode == invCode
-                            select u;
-
-                return query.Any();
+              var  query  = from u in db.UnitProductionCost
+                              where u.iYear == y && u.cMonth == cmbMonth.Text && u.AccountNo == cmbAccountNo.Text
+                              select u;
+                this.initialData = query.ToList();
             }
 
-        }
+            dgvDetail.DataSource = null;
+            //delete all rows of data grid view
+            dgvDetail.Rows.Clear();
+            dgvDetail.Refresh();
+            dgvDetail.Rows.Add(initialData.Count);
 
-
-        #endregion
-
-        #region UI logic
-
-        private void FocusCell(int rowIndex, string columnName)
-        {
-            // 获取当前选中的行
-            DataGridViewRow currentRow = dgvDetail.Rows[rowIndex];
-
-            // 设置焦点到 "unitCost" 列所在的单元格
-            DataGridViewCell unitCostCell = currentRow.Cells[columnName];
-            if (columnName == "unitCost")
+            //set each column value from intialData without binding data source
+               
+            for (int i = 0; i < initialData.Count; i++)
             {
-                dgvDetail.CurrentCell = unitCostCell;
-                dgvDetail.BeginEdit(true); // 开始编辑该单元格
+                dgvDetail.Rows[i].Cells["cInvcode"].Value = this.initialData[i].cInvCode;
+                dgvDetail.Rows[i].Cells["cInvName"].Value = this.initialData[i].cInvName;
+                dgvDetail.Rows[i].Cells["UnitCost"].Value = this.initialData[i].UnitCost;
+                dgvDetail.Rows[i].Cells["cInvStd"].Value = this.initialData[i].cInvStd;
+                dgvDetail.Rows[i].Cells["unitCost"].Value = this.initialData[i].UnitCost;
+               
+                dgvDetail.Rows[i].Cells["ID"].Value = this.initialData[i].Id;
+
+
             }
-            else if (columnName == "cInvCode")
+       
+            this.Cursor = Cursors.Default;
+          
+
+
+        }
+
+
+
+        private void tsbSaveEdit_Click(object sender, EventArgs e)
+        {
+            //add new record to database and update the current record edited in the datagridview to database and delete the record deleted in datagridview from database
+
+            try
             {
-                dgvDetail.Rows.Add();
-                // 设置焦点到 "cinvcode" 列所在的单元格
-                DataGridViewCell invCodeCell = dgvDetail.Rows[rowIndex + 1].Cells[columnName];
+                using (DataMaintenanceContext db = new DataMaintenanceContext())
+                {
+                    this.Cursor = Cursors.WaitCursor;
 
-                dgvDetail.CurrentCell = invCodeCell;
-                dgvDetail.BeginEdit(true); // 开始编辑该单元格
+                    DeleteEmptyRows();
 
+                    if (!ValidatingBeforeSaving())
+                    {
+                        return;
+                    }
+                    List<UnitProductionCost> addList = new List<UnitProductionCost>();
+                    List<UnitProductionCost> updateList = new List<UnitProductionCost>();
+                    List<UnitProductionCost> deleteList = new List<UnitProductionCost>();
+
+                    List<UnitProductionCost> dgvlist =GetRowsDateFromDataGridView();
+
+                    //the list of  datagridview left join initial data to get the list of records to be added
+
+
+                    addList = dgvlist.Except(this.initialData).ToList();
+
+                    //the list of  datagridview right join initial data to get the list of records to be deleted
+                    deleteList = this.initialData.Except(dgvlist).ToList();
+                    updateList= dgvlist.Intersect(this.initialData).ToList();
+                  
+                    db.UnitProductionCost.AddRange(addList);
+                     foreach (var item in deleteList)
+                    {
+                        // Attach the entity to the context
+                        db.UnitProductionCost.Attach(item);
+                        // Mark the entity for deletion
+                        db.UnitProductionCost.Remove(item);
+                    }
+
+                    foreach (var item in updateList)
+                    {
+                        // Attach the entity to the context
+                        db.UnitProductionCost.Attach(item);
+                        // Mark the entity for update
+                        db.Entry(item).State = System.Data.Entity.EntityState.Modified;
+                    }
+                    db.SaveChanges();
+
+                    MessageBox.Show("Record saved successfully!");
+
+                    initialData.Clear();
+
+                    tsbSaveEdit.Enabled=false;
+                    isEditing = false;
+                    tsbDeleteRow.Enabled = false;
+                    tsbAddRow.Enabled = false;
+                    tsbDelete.Enabled = false;
+
+                    tsbEdit.Enabled = true;
+
+
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message+ex.InnerException);
+            }
+
+            finally
+            {
+                this.Cursor= Cursors.Default;
+            }
+            
+        }
+
+        private List<UnitProductionCost> GetRowsDateFromDataGridView()
+        {
+            List<UnitProductionCost> dgvlist = new List<UnitProductionCost>();
+            foreach (DataGridViewRow row in dgvDetail.Rows)
+            {
+                UnitProductionCost m = new UnitProductionCost();
+                m.Id = Convert.ToInt32(row.Cells["Id"].Value);
+                m.cInvCode = row.Cells["cInvCode"].Value.ToString();
+                m.cInvName = row.Cells["cInvName"].Value.ToString();
+                m.cInvStd = row.Cells["cInvStd"].Value.ToString();
+                m.UnitCost = Convert.ToDecimal(row.Cells["UnitCost"].Value);
+                m.iYear = Convert.ToInt32(cmbYear.Text);
+                m.cMonth = cmbMonth.Text;
+                m.AccountNo = cmbAccountNo.Text;
+                dgvlist.Add(m);
 
             }
+
+            return dgvlist;
         }
-
-        private void dgvDetail_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            Utility.Style.DataGridViewStyle style = new Utility.Style.DataGridViewStyle();
-            style.DisplayRowNo(e, dgvDetail, false);
-        }
-
-
-        private void tsbAddRow_Click(object sender, EventArgs e)
-        {
-            dgvDetail.Rows.Add();
-        }
-
-        /// <summary>
-        /// delete row selected
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void tsbDeleteRow_Click(object sender, EventArgs e)
-        {
-            //delete row selected
-            dgvDetail.Rows.RemoveAt(dgvDetail.CurrentRow.Index);
-        }
-
-
-        #endregion
-
 
         private void tsbUpdateU8Cost_Click(object sender, EventArgs e)
         {
 
             //check closed flag of ST module of U8 
-            if (CheckSTModuleClosed())
+            if (IsSTModuleClosed())
             {
                 MessageBox.Show($"U8的【库存成本】模块{cmbYear.Text}-{cmbMonth.Text}期间已经结账，不能更新单价！");
                 return;
@@ -850,6 +946,209 @@ namespace DataMaintenance.UI.U8
 
         }
 
+
+        #endregion
+
+        #region valitate
+
+        bool ValidatingBeforeSaving()
+        {
+            
+            // 检查 DataGridView 是否为空
+            if (dgvDetail.Rows.Count == 0)
+            {
+                MessageBox.Show("表体数据不能为空", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            // 检查所有文本框和组合框是否为空
+            else if (!CheckTextBoxesAndComboBoxes())
+            {
+                MessageBox.Show("表头数据不能为空", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            else
+            {
+
+                // add list from cinvcode column of dgvDetail
+                Dictionary < string, string>  keyValuePairs = new Dictionary<string, string>();
+
+                List<string> cinvCodeList = new List<string>();
+                foreach (DataGridViewRow row in dgvDetail.Rows)
+                {
+                   
+                    keyValuePairs.Add(row.Cells["cInvCode"].Value.ToString(), row.Cells["ID"].Value is null ? "" : row.Cells["ID"].Value.ToString());
+                }
+
+                //check duplicate from datagridview
+
+                foreach (var item in keyValuePairs)
+                {
+                    if (keyValuePairs.Count(x => x.Key == item.Key) > 1)
+                    {
+                        MessageBox.Show($"存货 '{cinvCode}'在表体行中重复", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+
+
+                    //check duplicate from database
+                    //if the ID is empty, it is new record
+
+                    if (String.IsNullOrEmpty(item.Value))
+                    {
+                        if (CheckDuplicate(cmbYear.Text, cmbMonth.Text, cmbAccountNo.Text, item.Key))
+                        {
+
+
+                            // 如果存在，则显示错误消息
+
+                            MessageBox.Show($"存货 '{cinvCode}'的单位成本 在 {cmbAccountNo.Text}账套的{cmbYear.Text} - {cmbMonth.Text}会计期间" +
+                                $"已经存在", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+
+                        }
+
+                    }
+
+                }
+
+                return true;
+
+            }
+
+
+
+
+        }
+        // 检查行是否为空的方法
+        private bool IsRowEmpty(DataGridViewRow row)
+        {
+
+            // 检查所有列是否为空或空白
+            foreach (DataGridViewCell cell in row.Cells)
+            {
+                if (cell.ColumnIndex!=4)
+                {
+                    if (cell.Value == null || string.IsNullOrWhiteSpace(cell.Value.ToString()))
+                    {
+                        return true;
+                    }
+                }
+              
+            }
+            return false;
+        }
+
+        // 检查所有文本框和组合框是否为空
+        private bool CheckTextBoxesAndComboBoxes()
+        {
+            // 假设你有多个文本框和组合框
+            if (string.IsNullOrWhiteSpace(cmbYear.Text) ||
+                string.IsNullOrWhiteSpace(cmbMonth.Text) ||
+                string.IsNullOrWhiteSpace(cmbAccountNo.Text))
+            {
+                return false;
+            }
+
+
+
+            return true;
+        }
+
+        //check identity  in database with year and month and accountNo and invcode before save
+        private bool CheckDuplicate(string year, string month, string accountNo, string invCode)
+        {
+            using (DataMaintenanceContext db = new DataMaintenanceContext())
+            {
+                var y = Convert.ToInt32(year);
+                var query = from u in db.UnitProductionCost
+                            where u.iYear == y && u.cMonth == month && u.AccountNo == accountNo && u.cInvCode == invCode
+                            select u;
+
+                return query.Any();
+            }
+
+        }
+
+
+
+        #endregion
+
+
+        #region UI operation
+
+        private void FocusCell(int rowIndex, string columnName)
+        {
+            // 获取当前选中的行
+            DataGridViewRow currentRow = dgvDetail.Rows[rowIndex];
+
+            // 设置焦点到 "unitCost" 列所在的单元格
+            DataGridViewCell unitCostCell = currentRow.Cells[columnName];
+            if (columnName == "unitCost")
+            {
+                dgvDetail.CurrentCell = unitCostCell;
+                dgvDetail.BeginEdit(true); // 开始编辑该单元格
+            }
+            else if (columnName == "cInvCode")
+            {
+
+                //if there erroor pops up, focus currenter cell
+
+              
+                    dgvDetail.Rows.Add();
+                    // 设置焦点到 "cinvcode" 列所在的单元格
+                    DataGridViewCell invCodeCell = dgvDetail.Rows[rowIndex + 1].Cells[columnName];
+
+                    dgvDetail.CurrentCell = invCodeCell;
+                    dgvDetail.BeginEdit(true); // 开始编辑该单元格
+                
+                
+
+
+            }
+        }
+
+        private void dgvDetail_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Utility.Style.DataGridViewStyle style = new Utility.Style.DataGridViewStyle();
+            style.DisplayRowNo(e, dgvDetail, false);
+        }
+
+
+        private void tsbAddRow_Click(object sender, EventArgs e)
+        {
+           
+            dgvDetail.Rows.Add();
+            
+         
+        }
+
+        /// <summary>
+        /// delete row selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tsbDeleteRow_Click(object sender, EventArgs e)
+        {
+            //delete row selected
+            try
+            {
+                btnRef.Visible = false;
+                dgvDetail.Rows.RemoveAt(dgvDetail.CurrentRow.Index);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("此行不能被删除");
+                
+            }
+           
+        }
+
+
+        #endregion
+
+
         #region get datatime
         private DateTime GetFirstDayOfMonth(int year, int month)
         {
@@ -865,11 +1164,29 @@ namespace DataMaintenance.UI.U8
         #endregion
 
         //check closed flag of ST Module in U8
-        private bool CheckSTModuleClosed()
+        private bool IsSTModuleClosed()
         {
 
-            bool? flag = QueryService.GetItemFromSingleTable<GL_mend>(new SqlParameter[] { new SqlParameter(@"iYPeriod", cmbYear.Text + cmbMonth.Text) }, Sqlhelper.DataSourceType.u8, cmbAccountNo.Text).bflag_ST;
+            bool? flag = QueryService.GetItemFromSingleTable<GL_mend>(new SqlParameter[] { new SqlParameter(@"iYPeriod", cmbYear.Text + cmbMonth.Text) },
+                Sqlhelper.DataSourceType.u8, cmbAccountNo.Text).bflag_ST;
             return flag.Value;
+        }
+
+        private void dgvDetail_KeyDown(object sender, KeyEventArgs e)
+        {
+            isMouseClick = false;
+        }
+
+        private void dgvDetail_MouseClick(object sender, MouseEventArgs e)
+        {
+           
+            if (e.Button == MouseButtons.Right) return; 
+            else if (dgvDetail.CurrentCell.ColumnIndex == 0)
+            {   
+                isMouseClick=false;
+                return;
+            }
+            isMouseClick = true;
         }
 
     }

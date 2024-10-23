@@ -74,6 +74,8 @@ namespace DataMaintenance.UI.U8.VoucherList
         
 
             List<UnitProductionCost> list = QueryService.GetListFromSingleTable<UnitProductionCost>(sqlParameters, DataSourceType.business, cmbAccountNo.Text);
+            //order by  iYear,cMonth,cinvcode
+            list = list.OrderBy(x => x.AccountNo).ThenBy(x => x.iYear).ThenBy(x => x.cMonth).ThenBy(x => x.cInvCode).ToList();
             dgvBody.DataSource = list;
         }
 
@@ -114,11 +116,12 @@ namespace DataMaintenance.UI.U8.VoucherList
                     where  iYear=@iYear and AccountNo=@cAccountNo  and cMonth=@cMonth ";
 
             FrmUnitCostInput f = new FrmUnitCostInput();
-            f.QueryVoucher(sql,sqlParameters);
+          
             EmbedForm embed = new EmbedForm();
             embed.openForm(f, f.Text, (TabControl)this.Parent.Parent.Parent.Controls["tabControl1"], false);
             f.Show();
-            
+            f.QueryVoucher(sql, sqlParameters);
+
         }
     }
 }

@@ -58,6 +58,7 @@ namespace DataMaintenance.UI.U8
             this.cinvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cinvStd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unitCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panTitel = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -126,6 +127,7 @@ namespace DataMaintenance.UI.U8
             this.tsbEdit.Name = "tsbEdit";
             this.tsbEdit.Size = new System.Drawing.Size(53, 22);
             this.tsbEdit.Text = "编辑";
+            this.tsbEdit.Click += new System.EventHandler(this.tsbEdit_Click);
             // 
             // tsbAddRow
             // 
@@ -306,7 +308,8 @@ namespace DataMaintenance.UI.U8
             this.cinvCode,
             this.cinvName,
             this.cinvStd,
-            this.unitCost});
+            this.unitCost,
+            this.ID});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -331,7 +334,8 @@ namespace DataMaintenance.UI.U8
             this.dgvDetail.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.DgvBody_CellBeginEdit);
             this.dgvDetail.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDetail_CellEndEdit);
             this.dgvDetail.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvDetail_RowPostPaint);
-            //this.dgvDetail.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvDetail_KeyDown);
+            this.dgvDetail.KeyDown += new System.Windows.Forms.KeyEventHandler(this.dgvDetail_KeyDown);
+            this.dgvDetail.MouseClick += new System.Windows.Forms.MouseEventHandler(this.dgvDetail_MouseClick);
             // 
             // cinvCode
             // 
@@ -358,6 +362,13 @@ namespace DataMaintenance.UI.U8
             this.unitCost.DataPropertyName = "unitCost";
             this.unitCost.HeaderText = "单位成本";
             this.unitCost.Name = "unitCost";
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.Visible = false;
             // 
             // panTitel
             // 
@@ -460,5 +471,6 @@ namespace DataMaintenance.UI.U8
         private System.Windows.Forms.DataGridViewTextBoxColumn cinvName;
         private System.Windows.Forms.DataGridViewTextBoxColumn cinvStd;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitCost;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
     }
 }
