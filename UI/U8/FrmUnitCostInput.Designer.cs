@@ -37,6 +37,7 @@ namespace DataMaintenance.UI.U8
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
             this.tsbUpdate = new System.Windows.Forms.ToolStripButton();
             this.tsbEdit = new System.Windows.Forms.ToolStripButton();
+            this.tsbGiveUp = new System.Windows.Forms.ToolStripButton();
             this.tsbAddRow = new System.Windows.Forms.ToolStripButton();
             this.tsbDeleteRow = new System.Windows.Forms.ToolStripButton();
             this.tsbDelete = new System.Windows.Forms.ToolStripButton();
@@ -78,6 +79,7 @@ namespace DataMaintenance.UI.U8
             this.tsbSave,
             this.tsbUpdate,
             this.tsbEdit,
+            this.tsbGiveUp,
             this.tsbAddRow,
             this.tsbDeleteRow,
             this.tsbDelete,
@@ -93,21 +95,19 @@ namespace DataMaintenance.UI.U8
             // 
             // tsbAdd
             // 
-            this.tsbAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbAdd.Image = global::DataMaintenance.Properties.Resources.add;
             this.tsbAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbAdd.Name = "tsbAdd";
-            this.tsbAdd.Size = new System.Drawing.Size(23, 22);
+            this.tsbAdd.Size = new System.Drawing.Size(53, 22);
             this.tsbAdd.Text = "新增";
             this.tsbAdd.Click += new System.EventHandler(this.tsbAdd_Click);
             // 
             // tsbSave
             // 
-            this.tsbSave.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.tsbSave.Image = global::DataMaintenance.Properties.Resources.save;
             this.tsbSave.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbSave.Name = "tsbSave";
-            this.tsbSave.Size = new System.Drawing.Size(23, 22);
+            this.tsbSave.Size = new System.Drawing.Size(53, 22);
             this.tsbSave.Text = "保存";
             this.tsbSave.Click += new System.EventHandler(this.tsbSave_Click);
             // 
@@ -128,6 +128,15 @@ namespace DataMaintenance.UI.U8
             this.tsbEdit.Size = new System.Drawing.Size(53, 22);
             this.tsbEdit.Text = "编辑";
             this.tsbEdit.Click += new System.EventHandler(this.tsbEdit_Click);
+            // 
+            // tsbGiveUp
+            // 
+            this.tsbGiveUp.Image = global::DataMaintenance.Properties.Resources.giveUpAudit;
+            this.tsbGiveUp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbGiveUp.Name = "tsbGiveUp";
+            this.tsbGiveUp.Size = new System.Drawing.Size(53, 22);
+            this.tsbGiveUp.Text = "放弃";
+            this.tsbGiveUp.Click += new System.EventHandler(this.tsbGiveUp_Click);
             // 
             // tsbAddRow
             // 
@@ -472,5 +481,6 @@ namespace DataMaintenance.UI.U8
         private System.Windows.Forms.DataGridViewTextBoxColumn cinvStd;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitCost;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.ToolStripButton tsbGiveUp;
     }
 }

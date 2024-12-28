@@ -130,7 +130,7 @@ namespace DataMaintenance.UI.U8.Report
                                 i.iUnitCost,
                             };
                 
-              dgvBody.DataSource=  query.Distinct().OrderBy(s =>s.cInvCode ).ThenBy(s => s.year).ThenBy(s => s.month). ToList();
+              dgvBody.DataSource=  query.Distinct().OrderBy(s => s.year).ThenBy(s => s.month). ToList();
             this.Cursor = Cursors.Default;
             }
 

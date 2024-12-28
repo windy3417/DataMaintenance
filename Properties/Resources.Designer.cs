@@ -103,6 +103,16 @@ namespace DataMaintenance.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
+        internal static System.Drawing.Bitmap calculate_banlance {
+            get {
+                object obj = ResourceManager.GetObject("calculate banlance", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
         internal static System.Drawing.Bitmap corresponding {
             get {
                 object obj = ResourceManager.GetObject("corresponding", resourceCulture);
@@ -211,6 +221,16 @@ namespace DataMaintenance.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap giveUpAudit {
+            get {
+                object obj = ResourceManager.GetObject("giveUpAudit", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Icon icon_quit {
@@ -296,6 +316,16 @@ namespace DataMaintenance.Properties {
         internal static System.Drawing.Bitmap Search {
             get {
                 object obj = ResourceManager.GetObject("Search", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap toolbar_checkbox_select {
+            get {
+                object obj = ResourceManager.GetObject("toolbar_checkbox_select", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

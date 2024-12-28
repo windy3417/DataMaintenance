@@ -31,7 +31,7 @@
     <SuiteName>信息平台管理</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>15</ApplicationRevision>
+    <ApplicationRevision>19</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -114,6 +114,9 @@
     <Compile Include="DAL\TableServices\U8services\Rdrecord32Service.cs" />
     <Compile Include="DAL\TableServices\U8services\InventoryClassService.cs" />
     <Compile Include="DAL\TableServices\U8services\InventoryService.cs" />
+    <Compile Include="DAL\U8services\BomService.cs" />
+    <Compile Include="DAL\U8services\MateriaOutService.cs" />
+    <Compile Include="DAL\U8services\PruchaseInService.cs" />
     <Compile Include="DAL\U8services\Rdrecord32Service.cs" />
     <Compile Include="DAL\ViewServices\U8services\BoxIDExistService.cs" />
     <Compile Include="DAL\ViewServices\U8services\VendorAttachmentService.cs" />
@@ -164,13 +167,23 @@
     <Compile Include="Model\ITContext.cs" />
     <Compile Include="Model\Maintenance\UnitProductionCost.cs" />
     <Compile Include="Model\U8\Attachfile.cs" />
+    <Compile Include="Model\U8\bas_part.cs" />
+    <Compile Include="Model\U8\bom_bom.cs" />
+    <Compile Include="Model\U8\bom_opcomponent.cs" />
+    <Compile Include="Model\U8\bom_opcomponentopt.cs" />
+    <Compile Include="Model\U8\bom_opcomponentsub.cs" />
+    <Compile Include="Model\U8\bom_parent.cs" />
     <Compile Include="Model\U8\CurrentStock.cs" />
     <Compile Include="Model\U8\Customer.cs" />
     <Compile Include="Model\U8\GL_mend.cs" />
     <Compile Include="Model\U8\InventoryClass.cs" />
+    <Compile Include="Model\U8\RdRecord01.cs" />
     <Compile Include="Model\U8\rdrecord10.cs" />
+    <Compile Include="Model\U8\rdrecord11.cs" />
     <Compile Include="Model\U8\rdrecord32.cs" />
+    <Compile Include="Model\U8\rdrecords01.cs" />
     <Compile Include="Model\U8\rdrecords10.cs" />
+    <Compile Include="Model\U8\rdrecords11.cs" />
     <Compile Include="Model\U8\rdrecords32.cs" />
     <Compile Include="Model\U8\Vendor.cs" />
     <Compile Include="Model\U8\VoucherAccessories.cs" />
@@ -196,28 +209,40 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DAL\MenuService.cs" />
     <Compile Include="DAL\UserService.cs" />
-    <Compile Include="UI\ClearLocker\FrmClearU8Task.cs">
+    <Compile Include="UI\RefForm\FrmRefInvClassTree.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\ClearLocker\FrmClearU8Task.Designer.cs">
+    <Compile Include="UI\RefForm\FrmRefInvClassTree.Designer.cs">
+      <DependentUpon>FrmRefInvClassTree.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\U8\CheckInvetory\FrmInference.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\U8\CheckInvetory\FrmInference.Designer.cs">
+      <DependentUpon>FrmInference.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\U8\ClearLocker\FrmClearU8Task.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\U8\ClearLocker\FrmClearU8Task.Designer.cs">
       <DependentUpon>FrmClearU8Task.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ClearLocker\FrmDeleteLockedAccountCode.cs">
+    <Compile Include="UI\U8\ClearLocker\FrmDeleteLockedAccountCode.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\ClearLocker\FrmDeleteLockedAccountCode.Designer.cs">
+    <Compile Include="UI\U8\ClearLocker\FrmDeleteLockedAccountCode.Designer.cs">
       <DependentUpon>FrmDeleteLockedAccountCode.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ClearLocker\FrmDeleteLockedAccountVoucher.cs">
+    <Compile Include="UI\U8\ClearLocker\FrmDeleteLockedAccountVoucher.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\ClearLocker\FrmDeleteLockedAccountVoucher.Designer.cs">
+    <Compile Include="UI\U8\ClearLocker\FrmDeleteLockedAccountVoucher.Designer.cs">
       <DependentUpon>FrmDeleteLockedAccountVoucher.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\ClearLocker\FrmDeleteLockedVendor.cs">
+    <Compile Include="UI\U8\ClearLocker\FrmDeleteLockedVendor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\ClearLocker\FrmDeleteLockedVendor.Designer.cs">
+    <Compile Include="UI\U8\ClearLocker\FrmDeleteLockedVendor.Designer.cs">
       <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\RefForm\FrmRefInvClass.cs">
@@ -428,16 +453,22 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UI\ClearLocker\FrmClearU8Task.resx">
+    <EmbeddedResource Include="UI\RefForm\FrmRefInvClassTree.resx">
+      <DependentUpon>FrmRefInvClassTree.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\U8\CheckInvetory\FrmInference.resx">
+      <DependentUpon>FrmInference.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\U8\ClearLocker\FrmClearU8Task.resx">
       <DependentUpon>FrmClearU8Task.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ClearLocker\FrmDeleteLockedAccountCode.resx">
+    <EmbeddedResource Include="UI\U8\ClearLocker\FrmDeleteLockedAccountCode.resx">
       <DependentUpon>FrmDeleteLockedAccountCode.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ClearLocker\FrmDeleteLockedAccountVoucher.resx">
+    <EmbeddedResource Include="UI\U8\ClearLocker\FrmDeleteLockedAccountVoucher.resx">
       <DependentUpon>FrmDeleteLockedAccountVoucher.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\ClearLocker\FrmDeleteLockedVendor.resx">
+    <EmbeddedResource Include="UI\U8\ClearLocker\FrmDeleteLockedVendor.resx">
       <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\RefForm\FrmRefInvClass.resx">
@@ -553,6 +584,8 @@
     <None Include="Resources\delete.gif" />
     <None Include="Resources\query.gif" />
     <None Include="Resources\filter.gif" />
+    <None Include="Resources\giveUpAudit.gif" />
+    <None Include="Resources\calculate banlance.png" />
     <Content Include="Resources\template\外发需返资产清单导入模板.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -584,6 +617,7 @@
     <None Include="Resources\预览.jpg" />
     <None Include="Resources\打印.png" />
     <None Include="Resources\update.gif" />
+    <None Include="Resources\toolbar_checkbox_select.png" />
     <Content Include="setup.ico" />
   </ItemGroup>
   <ItemGroup>

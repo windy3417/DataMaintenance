@@ -31,10 +31,10 @@ namespace DataMaintenance.UI.Ref
         private void InitializeComponent()
         {
             this.dgvArchive = new System.Windows.Forms.DataGridView();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.tsbCertain = new System.Windows.Forms.ToolStripButton();
             this.cwhcode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cWhName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsbCertain = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArchive)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -56,6 +56,20 @@ namespace DataMaintenance.UI.Ref
             this.dgvArchive.TabIndex = 0;
             this.dgvArchive.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
             // 
+            // cwhcode
+            // 
+            this.cwhcode.DataPropertyName = "cWHCode";
+            this.cwhcode.HeaderText = "仓库编码";
+            this.cwhcode.Name = "cwhcode";
+            this.cwhcode.ReadOnly = true;
+            // 
+            // cWhName
+            // 
+            this.cWhName.DataPropertyName = "cwhName";
+            this.cWhName.HeaderText = "仓库名称";
+            this.cWhName.Name = "cWhName";
+            this.cWhName.ReadOnly = true;
+            // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -75,20 +89,6 @@ namespace DataMaintenance.UI.Ref
             this.tsbCertain.Text = "确定";
             this.tsbCertain.Click += new System.EventHandler(this.tsbConfirm_Click);
             // 
-            // cwhcode
-            // 
-            this.cwhcode.DataPropertyName = "cWHCode";
-            this.cwhcode.HeaderText = "仓库编码";
-            this.cwhcode.Name = "cwhcode";
-            this.cwhcode.ReadOnly = true;
-            // 
-            // cWhName
-            // 
-            this.cWhName.DataPropertyName = "cwhName";
-            this.cWhName.HeaderText = "仓库名称";
-            this.cWhName.Name = "cWhName";
-            this.cWhName.ReadOnly = true;
-            // 
             // FrmRefWarehouse
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -97,7 +97,7 @@ namespace DataMaintenance.UI.Ref
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dgvArchive);
             this.Name = "FrmRefWarehouse";
-            this.Text = "客户档案参照";
+            this.Text = "仓库档案参照";
             ((System.ComponentModel.ISupportInitialize)(this.dgvArchive)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

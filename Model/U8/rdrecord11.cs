@@ -6,7 +6,7 @@ namespace DataMaintenance.Model.U8
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class rdrecord10
+    public partial class rdrecord11
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long ID { get; set; }
@@ -152,6 +152,9 @@ namespace DataMaintenance.Model.U8
 
         public double? cDefine16 { get; set; }
 
+        [StringLength(60)]
+        public string cPsPcode { get; set; }
+
         [StringLength(30)]
         public string cMPoCode { get; set; }
 
@@ -160,7 +163,7 @@ namespace DataMaintenance.Model.U8
 
         public long? ipurorderid { get; set; }
 
-        public long? iproorderid { get; set; }
+        public int? iproorderid { get; set; }
 
         [Column(TypeName = "timestamp")]
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
@@ -201,6 +204,8 @@ namespace DataMaintenance.Model.U8
 
         public int? bredvouch { get; set; }
 
+        public byte? bmotran { get; set; }
+
         public int? iFlowId { get; set; }
 
         [StringLength(30)]
@@ -212,6 +217,8 @@ namespace DataMaintenance.Model.U8
         [StringLength(20)]
         public string cSourceCodeLs { get; set; }
 
+        public bool? bHYVouch { get; set; }
+
         public int? iPrintCount { get; set; }
 
         [StringLength(60)]
@@ -219,7 +226,5 @@ namespace DataMaintenance.Model.U8
 
         [StringLength(200)]
         public string cCurrentAuditor { get; set; }
-
-        public Guid? outid { get; set; }
     }
 }

@@ -6,7 +6,7 @@ namespace DataMaintenance.Model.U8
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class rdrecords10
+    public partial class rdrecords11
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -38,6 +38,9 @@ namespace DataMaintenance.Model.U8
         [StringLength(60)]
         public string cBatch { get; set; }
 
+        [StringLength(12)]
+        public string cObjCode { get; set; }
+
         public long? cVouchCode { get; set; }
 
         [StringLength(30)]
@@ -50,6 +53,15 @@ namespace DataMaintenance.Model.U8
 
         public decimal? iSOutNum { get; set; }
 
+        public long? coutvouchid { get; set; }
+
+        [StringLength(2)]
+        public string coutvouchtype { get; set; }
+
+        public decimal? iSRedOutQuantity { get; set; }
+
+        public decimal? iSRedOutNum { get; set; }
+
         [StringLength(20)]
         public string cFree1 { get; set; }
 
@@ -58,11 +70,17 @@ namespace DataMaintenance.Model.U8
 
         public byte iFlag { get; set; }
 
+        public decimal? iSQuantity { get; set; }
+
+        public decimal? iSNum { get; set; }
+
         public decimal? iFNum { get; set; }
 
         public decimal? iFQuantity { get; set; }
 
         public DateTime? dVDate { get; set; }
+
+        public long? iTrIds { get; set; }
 
         [StringLength(20)]
         public string cPosition { get; set; }
@@ -191,9 +209,29 @@ namespace DataMaintenance.Model.U8
         [StringLength(60)]
         public string cMoLotCode { get; set; }
 
+        [Column(TypeName = "money")]
+        public decimal? iMaterialFee { get; set; }
+
+        public decimal? iProcessCost { get; set; }
+
+        [Column(TypeName = "money")]
+        public decimal? iProcessFee { get; set; }
+
+        public DateTime? dMSDate { get; set; }
+
+        [Column(TypeName = "money")]
+        public decimal? iSMaterialFee { get; set; }
+
+        [Column(TypeName = "money")]
+        public decimal? iSProcessFee { get; set; }
+
+        public int? iOMoDID { get; set; }
+
+        public long? bFilled { get; set; }
+
         public bool? bChecked { get; set; }
 
-        public bool? bRelated { get; set; }
+        public long? iOMoMID { get; set; }
 
         [StringLength(8)]
         public string cmworkcentercode { get; set; }
@@ -231,6 +269,8 @@ namespace DataMaintenance.Model.U8
         [StringLength(50)]
         public string cwhpersonname { get; set; }
 
+        public long? iMaIDs { get; set; }
+
         [StringLength(38)]
         public string cserviceoid { get; set; }
 
@@ -243,7 +283,13 @@ namespace DataMaintenance.Model.U8
         public string corufts { get; set; }
 
         [StringLength(30)]
+        public string comcode { get; set; }
+
+        [StringLength(30)]
         public string cmocode { get; set; }
+
+        [StringLength(60)]
+        public string invcode { get; set; }
 
         public int? imoseq { get; set; }
 
@@ -288,6 +334,16 @@ namespace DataMaintenance.Model.U8
 
         public int? isoseq { get; set; }
 
+        [StringLength(40)]
+        public string ipesodid { get; set; }
+
+        public byte? ipesotype { get; set; }
+
+        [StringLength(40)]
+        public string cpesocode { get; set; }
+
+        public int? ipesoseq { get; set; }
+
         public decimal? cBatchProperty1 { get; set; }
 
         public decimal? cBatchProperty2 { get; set; }
@@ -315,6 +371,11 @@ namespace DataMaintenance.Model.U8
         [StringLength(255)]
         public string cbMemo { get; set; }
 
+        public int? applydid { get; set; }
+
+        [StringLength(30)]
+        public string applycode { get; set; }
+
         public int? irowno { get; set; }
 
         public Guid? strowguid { get; set; }
@@ -331,23 +392,37 @@ namespace DataMaintenance.Model.U8
 
         public decimal? ipreuseinum { get; set; }
 
-        public decimal? OutCopiedQuantity { get; set; }
+        public int? bsupersede { get; set; }
+
+        public decimal? isupersedeqty { get; set; }
+
+        public int? isupersedempoids { get; set; }
+
+        public Guid? imoallocatesubid { get; set; }
+
+        public int? cInVoucherLineID { get; set; }
+
+        [StringLength(40)]
+        public string cInVoucherCode { get; set; }
+
+        [StringLength(20)]
+        public string cInVoucherType { get; set; }
 
         [StringLength(80)]
         public string cbsysbarcode { get; set; }
 
+        [StringLength(30)]
+        public string cSourceMOCode { get; set; }
+
+        public int? iSourceMODetailsid { get; set; }
+
         [StringLength(80)]
         public string cplanlotcode { get; set; }
 
-        public bool? bmergecheck { get; set; }
-
-        public int? imergecheckautoid { get; set; }
+        public int? bcanreplace { get; set; }
 
         public short? iposflag { get; set; }
 
-        public long? iorderdetailid { get; set; }
-
-        [StringLength(50)]
-        public string body_outid { get; set; }
+        public short? bOutMaterials { get; set; }
     }
 }

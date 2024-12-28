@@ -11,8 +11,6 @@ namespace DataMaintenance.DAL.U8services
     class Rdrecord32Service
     {
 
-
-
         public static string MySqlScript = @"with cte_dispatch_01 as 
 (select 
 	u.cCCCode as 客户类别编码 , 

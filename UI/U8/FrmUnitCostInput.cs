@@ -30,7 +30,7 @@ namespace DataMaintenance.UI.U8
         }
 
         Button btnRef = new Button();
-        ToolStripButton tsbSaveEdit = new ToolStripButton();
+        //ToolStripButton tsbSaveEdit = new ToolStripButton();
         private bool isDeletingEmptyRow = false; // Flag to track row deletion
         private bool isMouseClick = false; // Flag to track if the edit mode ended due to a mouse click
         private bool isEditing = false;
@@ -97,6 +97,19 @@ namespace DataMaintenance.UI.U8
         {
             Utility.Style.DataGridViewStyle style = new Utility.Style.DataGridViewStyle();
             style.DataGridViewColumnHeaderStyle(dgvDetail);
+
+            //disabal all the button of the toolstrip except the tsbadd
+
+       
+            foreach (ToolStripItem item in toolStrip1.Items)
+            {
+                if (item.Name != "tsbAdd")
+                {
+                    item.Enabled = false;
+                }
+            }
+
+
             tsbSave.Enabled = false;
             dgvDetail.AllowUserToAddRows = false;
             dgvDetail.AutoGenerateColumns = false;
@@ -113,6 +126,11 @@ namespace DataMaintenance.UI.U8
             //do not put this statement into other  process provided by event method
             //otherwise the click event of this button will raise up many times
             btnRef.Click += BtnRef_Click;
+
+            //tsbSaveEdit.Text = "保存";
+            //tsbSaveEdit.Image = Resources.save;
+            //tsbSaveEdit.Visible= false;
+            //toolStrip1.Items.Insert(toolStrip1.Items.IndexOf(tsbSave), tsbSaveEdit);
 
 
         }
@@ -138,35 +156,45 @@ namespace DataMaintenance.UI.U8
                    tsbSave.PerformClick();
                     return;
                 }  
+                else
+                {
+                    dgvDetail.Rows.Clear();
+                    ActiveControlForAdding();
+                }
                 
             }
 
             else
             {
-                tsbEdit.Enabled = false;
-                tsbDelete.Enabled = false;
-                tsbSaveEdit.Visible = false;
-
-                tsbSave.Enabled = true;
-                tsbSave.Visible = true;
-                
-                tsbDeleteRow.Enabled = true;
-                tsbAddRow.Enabled = true;
-
-                cmbAccountNo.Enabled = true;
-                cmbYear.Enabled = true;
-                cmbMonth.Enabled = true;
-
-                dgvDetail.Enabled = true;
-
-
-                dgvDetail.ReadOnly = false;
-                dgvDetail.DataSource = null;
-                dgvDetail.Rows.Clear();
-                dgvDetail.Rows.Add();
-                dgvDetail.BeginEdit(true);
+                ActiveControlForAdding();
             }
-         
+
+        }
+
+        private void ActiveControlForAdding()
+        {
+            isEditing = false;
+
+            tsbEdit.Enabled = false;
+            tsbDelete.Enabled = false;
+
+            tsbSave.Enabled = true;
+            tsbSave.Visible = true;
+            tsbDeleteRow.Enabled = true;
+            tsbAddRow.Enabled = true;
+
+            cmbAccountNo.Enabled = true;
+            cmbYear.Enabled = true;
+            cmbMonth.Enabled = true;
+
+            dgvDetail.Enabled = true;
+
+
+            dgvDetail.ReadOnly = false;
+            dgvDetail.DataSource = null;
+            dgvDetail.Rows.Clear();
+            dgvDetail.Rows.Add();
+            dgvDetail.BeginEdit(true);
         }
 
         /// <summary>
@@ -318,6 +346,7 @@ namespace DataMaintenance.UI.U8
 
         private void tsbSave_Click(object sender, EventArgs e)
         {
+            dgvDetail.EndEdit();
             DeleteEmptyRows();
 
             if (!this.ValidatingBeforeSaving())
@@ -325,39 +354,86 @@ namespace DataMaintenance.UI.U8
                 return;
             }
 
-            List<UnitProductionCost> list = new List<UnitProductionCost>();
-            SaveService saveService = new SaveService();
-            foreach (DataGridViewRow row in dgvDetail.Rows)
+            if (isEditing)
             {
-                UnitProductionCost unitProductionCost = new UnitProductionCost();
-                unitProductionCost.cInvCode = row.Cells["cInvCode"].Value.ToString();
-                unitProductionCost.cInvName = row.Cells["cInvName"].Value.ToString();
-                unitProductionCost.cInvStd = row.Cells["cInvStd"].Value.ToString();
-                unitProductionCost.UnitCost = Convert.ToDecimal(row.Cells["unitCost"].Value);
-                unitProductionCost.iYear = Convert.ToInt32(cmbYear.Text);
-                unitProductionCost.cMonth = cmbMonth.Text;
-                unitProductionCost.AccountNo = cmbAccountNo.Text;
+                if (SaveEditing())
+                {
+                    MessageBox.Show("Record updated successfully!");
 
-                list.Add(unitProductionCost);
+                    initialData.Clear();
+                    isEditing = false;
+                    SetControlsStateAfterSaving();
+                }
+
 
 
             }
-            this.Cursor = Cursors.WaitCursor;
-            saveService.SaveRows<UnitProductionCost, DataMaintenanceContext>(list);
-            tsbSave.Enabled = false;
-            tsbDeleteRow.Enabled = false;
-            tsbAddRow.Enabled = false;
-            tsbDelete.Enabled = false;
 
-            tsbEdit.Enabled= true;
+            else
+            {
+                if (SaveAdding())
+                {
+                    SetControlsStateAfterSaving();
+                }
+            }
+
+           
+
+            this.Cursor = Cursors.Default;
+
+        }
+
+        private void SetControlsStateAfterSaving()
+        {
+
+            foreach (ToolStripButton item in toolStrip1.Items)
+            {
+                item.Enabled = false;
+            }
+       
+            tsbAdd.Enabled=true;
+            tsbEdit.Enabled = true;
+            tsbUpdate.Enabled = true;
+            tsbDelete.Enabled = true;
 
             cmbAccountNo.Enabled = false;
             cmbYear.Enabled = false;
             cmbMonth.Enabled = false;
 
+            dgvDetail.Enabled = false;
+        }
 
-            this.Cursor = Cursors.Default;
+        private bool SaveAdding()
+        {
+            try
+            {
+                List<UnitProductionCost> list = new List<UnitProductionCost>();
+                SaveService saveService = new SaveService();
+                foreach (DataGridViewRow row in dgvDetail.Rows)
+                {
+                    UnitProductionCost unitProductionCost = new UnitProductionCost();
+                    unitProductionCost.cInvCode = row.Cells["cInvCode"].Value.ToString();
+                    unitProductionCost.cInvName = row.Cells["cInvName"].Value.ToString();
+                    unitProductionCost.cInvStd = row.Cells["cInvStd"].Value.ToString();
+                    unitProductionCost.UnitCost = Convert.ToDecimal(row.Cells["unitCost"].Value);
+                    unitProductionCost.iYear = Convert.ToInt32(cmbYear.Text);
+                    unitProductionCost.cMonth = cmbMonth.Text;
+                    unitProductionCost.AccountNo = cmbAccountNo.Text;
 
+                    list.Add(unitProductionCost);
+
+
+                }
+                this.Cursor = Cursors.WaitCursor;
+                saveService.SaveRows<UnitProductionCost, DataMaintenanceContext>(list);
+                return true;
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("保存出错"+ ex.Message+ex.InnerException, "错误提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }  
         }
 
         private void DeleteEmptyRows()
@@ -520,9 +596,9 @@ namespace DataMaintenance.UI.U8
         /// <param name="parameters"></param>
         public void QueryVoucher(string sql, SqlParameter[] parameters = null)
         {
-            tsbAddRow.Enabled = false;
-            tsbDeleteRow.Enabled = false;
-            tsbSave.Enabled = false;
+            //enable all the button of toolstrip except the tsbsave button
+
+           SetControlsStatusAfterQuery();
 
             cmbAccountNo.Enabled = false;
             cmbYear.Enabled = false;
@@ -549,7 +625,7 @@ namespace DataMaintenance.UI.U8
 
 
             List<UnitProductionCost> list = new List<UnitProductionCost>();
-       
+
 
             //fetch the first batch record with same year and month and accountNo
             while (sqlDataReader.Read())
@@ -566,7 +642,7 @@ namespace DataMaintenance.UI.U8
                 m.UnitCost = Convert.ToDecimal(sqlDataReader["UnitCost"]);
                 m.Id = Convert.ToInt32(sqlDataReader["ID"]);
                 list.Add(m);
-           
+
 
             }
 
@@ -574,6 +650,8 @@ namespace DataMaintenance.UI.U8
 
             dgvDetail.DataSource = list;
         }
+
+     
 
         /// <summary>
         /// get invetory item from u8
@@ -614,11 +692,17 @@ namespace DataMaintenance.UI.U8
                     db.UnitProductionCost.RemoveRange(query);
                     db.SaveChanges();
                     MessageBox.Show("Record deleted successfully!");
+
+                    foreach (ToolStripItem item in toolStrip1.Items)
+                    {
+                        if (item.Name != "tsbAdd")
+                        {
+                            item.Enabled = false;
+                        }
+                    }
                     dgvDetail.DataSource = null;
-                    tsbDelete.Enabled = false;
-                    tsbSave.Enabled = false;
-                    tsbEdit.Enabled = false;
-                    tsbUpdate.Enabled = false;
+                    dgvDetail.Rows.Clear();
+                 
 
                     //clear the data of header
                     cmbYear.Text = "";
@@ -640,41 +724,54 @@ namespace DataMaintenance.UI.U8
 
         private void tsbEdit_Click(object sender, EventArgs e)
         {
-            isEditing = true;
             this.Cursor = Cursors.WaitCursor;
-            //replace the tsbSave button of toolstrip  with a new save button in the same location
-            tsbSave.Visible = false;
-           
-            tsbSaveEdit.Text = "保存";
-            tsbSaveEdit.Image = Resources.save;
-            toolStrip1.Items.Insert(toolStrip1.Items.IndexOf(tsbSave), tsbSaveEdit);
+
+            isEditing = true;
+
+            tsbGiveUp.Enabled = true;
+            tsbSave.Enabled = true;
+            tsbDeleteRow.Enabled = true;
+            tsbAddRow.Enabled = true;
 
             tsbEdit.Enabled = false;
+            tsbUpdate.Enabled = false;
+            tsbDelete.Enabled = false;
 
-            tsbAddRow.Enabled = true;
-            tsbDeleteRow.Enabled = true;
-            dgvDetail.Enabled = true;
+
+            //tsbSaveEdit.Visible = true;
+            //tsbSaveEdit.Enabled = true;
+
+
             dgvDetail.ReadOnly = false;
+            dgvDetail.Enabled = true;
             //dgvDetail.AllowUserToAddRows = true;
             dgvDetail.AllowUserToDeleteRows = true;
             dgvDetail.AllowUserToOrderColumns = true;
             dgvDetail.AllowUserToResizeColumns = true;
             dgvDetail.AllowUserToResizeRows = true;
-            tsbSaveEdit.Click += new System.EventHandler(this.tsbSaveEdit_Click);
 
 
-           
-                    
+
 
             var y = Convert.ToInt32(cmbYear.Text);
             using (DataMaintenanceContext db = new DataMaintenanceContext())
             {
-              var  query  = from u in db.UnitProductionCost
-                              where u.iYear == y && u.cMonth == cmbMonth.Text && u.AccountNo == cmbAccountNo.Text
-                              select u;
+                var query = from u in db.UnitProductionCost
+                            where u.iYear == y && u.cMonth == cmbMonth.Text && u.AccountNo == cmbAccountNo.Text
+                            select u;
                 this.initialData = query.ToList();
             }
 
+          
+            InputFromInitialData();
+
+            this.Cursor = Cursors.Default;
+
+
+        }
+
+        private void InputFromInitialData()
+        {
             dgvDetail.DataSource = null;
             //delete all rows of data grid view
             dgvDetail.Rows.Clear();
@@ -682,7 +779,7 @@ namespace DataMaintenance.UI.U8
             dgvDetail.Rows.Add(initialData.Count);
 
             //set each column value from intialData without binding data source
-               
+
             for (int i = 0; i < initialData.Count; i++)
             {
                 dgvDetail.Rows[i].Cells["cInvcode"].Value = this.initialData[i].cInvCode;
@@ -690,21 +787,14 @@ namespace DataMaintenance.UI.U8
                 dgvDetail.Rows[i].Cells["UnitCost"].Value = this.initialData[i].UnitCost;
                 dgvDetail.Rows[i].Cells["cInvStd"].Value = this.initialData[i].cInvStd;
                 dgvDetail.Rows[i].Cells["unitCost"].Value = this.initialData[i].UnitCost;
-               
+
                 dgvDetail.Rows[i].Cells["ID"].Value = this.initialData[i].Id;
 
-
             }
-       
-            this.Cursor = Cursors.Default;
-          
-
-
         }
 
-
-
-        private void tsbSaveEdit_Click(object sender, EventArgs e)
+        private bool SaveEditing()
+        
         {
             //add new record to database and update the current record edited in the datagridview to database and delete the record deleted in datagridview from database
 
@@ -712,14 +802,7 @@ namespace DataMaintenance.UI.U8
             {
                 using (DataMaintenanceContext db = new DataMaintenanceContext())
                 {
-                    this.Cursor = Cursors.WaitCursor;
-
-                    DeleteEmptyRows();
-
-                    if (!ValidatingBeforeSaving())
-                    {
-                        return;
-                    }
+                 
                     List<UnitProductionCost> addList = new List<UnitProductionCost>();
                     List<UnitProductionCost> updateList = new List<UnitProductionCost>();
                     List<UnitProductionCost> deleteList = new List<UnitProductionCost>();
@@ -753,18 +836,7 @@ namespace DataMaintenance.UI.U8
                     }
                     db.SaveChanges();
 
-                    MessageBox.Show("Record saved successfully!");
-
-                    initialData.Clear();
-
-                    tsbSaveEdit.Enabled=false;
-                    isEditing = false;
-                    tsbDeleteRow.Enabled = false;
-                    tsbAddRow.Enabled = false;
-                    tsbDelete.Enabled = false;
-
-                    tsbEdit.Enabled = true;
-
+                    return true;
 
 
 
@@ -774,12 +846,10 @@ namespace DataMaintenance.UI.U8
             {
 
                 MessageBox.Show(ex.Message+ex.InnerException);
+                return false;
             }
 
-            finally
-            {
-                this.Cursor= Cursors.Default;
-            }
+         
             
         }
 
@@ -1075,6 +1145,23 @@ namespace DataMaintenance.UI.U8
 
         #endregion
 
+        #region exclusive relationship between toolstrip buttons
+
+        private void SetControlsStatusAfterQuery()
+        {
+            foreach (ToolStripItem item in toolStrip1.Items)
+            {
+               
+                    item.Enabled = true;
+                
+            }
+            tsbSave.Enabled = false;
+            tsbAddRow.Enabled = false;
+            tsbDeleteRow.Enabled = false;
+            tsbGiveUp.Enabled = false;
+        }
+        #endregion
+
 
         #region UI operation
 
@@ -1189,5 +1276,22 @@ namespace DataMaintenance.UI.U8
             isMouseClick = true;
         }
 
+        private void tsbGiveUp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                InputFromInitialData();
+                initialData.Clear();
+                btnRef.Visible = false;
+                SetControlsStatusAfterQuery();
+              
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("放弃出错");
+            } 
+          
+        }
     }
 }

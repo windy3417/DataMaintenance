@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataMaintenance.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,8 +23,13 @@ namespace DataMaintenance.UI.ClearLocker
         void InitializeContolsData()
         {
             string sql = "select *  from LockVouch";
-           
-            dataGridView1.DataSource = Sqlhelper.GetDataTable(sql, Sqlhelper.DataSourceType.u8);
+
+            using (var db = new U8Context("017"))
+
+            {
+                db.Database.ExecuteSqlCommand(sql);
+
+            }
 
         }
 
@@ -40,8 +46,13 @@ namespace DataMaintenance.UI.ClearLocker
         private void Delete_Click(object sender, EventArgs e)
         {
             string sql = " delete  from LockVouch";
+            using (var db = new U8Context("017"))
+            {
+                db.Database.ExecuteSqlCommand(sql);
+                dataGridView1.DataSource = null;
+            }
 
-            dataGridView1.DataSource = Sqlhelper.ExecuteWithNoneParameter(sql,Sqlhelper.DataSourceType.u8);
+
         }
     }
 }
