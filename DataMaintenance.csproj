@@ -115,6 +115,7 @@
     <Compile Include="DAL\TableServices\U8services\InventoryClassService.cs" />
     <Compile Include="DAL\TableServices\U8services\InventoryService.cs" />
     <Compile Include="DAL\U8services\BomService.cs" />
+    <Compile Include="DAL\U8services\FinishedGoodService.cs" />
     <Compile Include="DAL\U8services\MateriaOutService.cs" />
     <Compile Include="DAL\U8services\PruchaseInService.cs" />
     <Compile Include="DAL\U8services\Rdrecord32Service.cs" />

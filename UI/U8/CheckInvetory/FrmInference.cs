@@ -41,17 +41,25 @@ namespace DataMaintenance.UI.U8.CheckInvetory
 
         private void tsbInfer_Click(object sender, EventArgs e)
         {
+           
+            //clear datagridview
+            dgv.Rows.Clear();
+            
             this.Cursor = Cursors.WaitCursor;
           
 
             dgv.AllowUserToAddRows = false;
             GetInventoryInformation(xmbtnInventoryClass.Text);
             GetPurchseAmountQty();
+            GetCurrentStock();
             GetMaterialOutAmount();
+            GetBomParentInvCode();
+            GetFinisedGoodAmount();
+            CaculateActualConsumedQty();
            
 
 
-            GetCurrentStock();
+            
             Utility.Style.DataGridViewStyle style = new Utility.Style.DataGridViewStyle();
             style.DataGridViewColumnHeaderStyle(dgv);
             this.Cursor = Cursors.Default;
@@ -75,6 +83,23 @@ namespace DataMaintenance.UI.U8.CheckInvetory
 
             };
             frm.ShowDialog();
+        }
+
+        void CaculateActualConsumedQty()
+        {
+            decimal? requestQty;
+            decimal? unitConsumingQty;
+            decimal? finishedGoodQty;
+            decimal? actualConsumedQty;
+            for (int i = 0; i < dgv.Rows.Count; i++)
+            {
+                 unitConsumingQty = Convert.ToDecimal(dgv.Rows[i].Cells["unitConsumingQty"].Value);
+                 finishedGoodQty = Convert.ToDecimal(dgv.Rows[i].Cells["finishedGoodQty"].Value);
+                 requestQty = Convert.ToDecimal(dgv.Rows[i].Cells["requestQty"].Value);
+                 actualConsumedQty = unitConsumingQty * finishedGoodQty ;
+                dgv.Rows[i].Cells["actualConsumedQty"].Value = actualConsumedQty;
+                dgv.Rows[i].Cells["inShopQty"].Value =requestQty - actualConsumedQty;
+            }
         }
 
         #region GetData
@@ -160,6 +185,39 @@ namespace DataMaintenance.UI.U8.CheckInvetory
 
 
         }
+
+        private void GetBomParentInvCode()
+        {
+            string invCode;
+            decimal? unitConsumingQty;
+            BomService bomService = new BomService();
+                for (int i = 0; i < dgv.Rows.Count; i++)
+                {
+                     invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();
+                    dgv.Rows[i].Cells["bomParentInvCode"].Value =
+                       bomService.GetBomParent(invCode, "018",
+                      out unitConsumingQty);
+                    dgv.Rows[i].Cells["unitConsumingQty"].Value = unitConsumingQty;
+                }
+            
+        }
+
+        private void GetFinisedGoodAmount()
+        {
+            DAL.U8services.FinishedGoodService rs = new DAL.U8services.FinishedGoodService();
+            string parentInvCode;
+            for (int i = 0; i < dgv.Rows.Count; i++)
+            {
+                 parentInvCode = dgv.Rows[i].Cells["bomParentInvCode"].Value.ToString();
+
+
+                dgv.Rows[i].Cells["finishedGoodQty"].Value =
+                   rs.GetFinishedGoodAmount(dtpEnd.Value, parentInvCode, "018");
+
+            }
+        }
+
+     
 
         #endregion
 

@@ -30,12 +30,16 @@ namespace DataMaintenance.UI.U8.CheckInvetory
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbInfer = new System.Windows.Forms.ToolStripButton();
             this.tsbSave = new System.Windows.Forms.ToolStripButton();
@@ -56,11 +60,13 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.cInvCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cInvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cInvStd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bomParentInvCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.startQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.purchaseQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.currentQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.requestQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.finishedGoodsQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.finishedGoodQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitConsumingQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.actualConsumedQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.inShopQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.checkedQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -135,32 +141,34 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.cInvCode,
             this.cInvName,
             this.cInvStd,
+            this.bomParentInvCode,
             this.startQty,
             this.purchaseQty,
             this.currentQty,
             this.requestQty,
-            this.finishedGoodsQty,
+            this.finishedGoodQty,
+            this.unitConsumingQty,
             this.actualConsumedQty,
             this.inShopQty,
             this.checkedQty});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv.DefaultCellStyle = dataGridViewCellStyle10;
             this.dgv.Location = new System.Drawing.Point(12, 168);
             this.dgv.Name = "dgv";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dgv.RowTemplate.Height = 23;
             this.dgv.Size = new System.Drawing.Size(776, 279);
             this.dgv.TabIndex = 1;
@@ -288,6 +296,11 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.cInvStd.HeaderText = "规格型号";
             this.cInvStd.Name = "cInvStd";
             // 
+            // bomParentInvCode
+            // 
+            this.bomParentInvCode.HeaderText = "对应成品编码";
+            this.bomParentInvCode.Name = "bomParentInvCode";
+            // 
             // startQty
             // 
             dataGridViewCellStyle2.Format = "N2";
@@ -322,18 +335,39 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.requestQty.HeaderText = "材料领用数";
             this.requestQty.Name = "requestQty";
             // 
-            // finishedGoodsQty
+            // finishedGoodQty
             // 
-            this.finishedGoodsQty.HeaderText = "成品入库数";
-            this.finishedGoodsQty.Name = "finishedGoodsQty";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.finishedGoodQty.DefaultCellStyle = dataGridViewCellStyle6;
+            this.finishedGoodQty.HeaderText = "成品入库数";
+            this.finishedGoodQty.Name = "finishedGoodQty";
+            // 
+            // unitConsumingQty
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.unitConsumingQty.DefaultCellStyle = dataGridViewCellStyle7;
+            this.unitConsumingQty.HeaderText = "单位消耗量";
+            this.unitConsumingQty.Name = "unitConsumingQty";
             // 
             // actualConsumedQty
             // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.actualConsumedQty.DefaultCellStyle = dataGridViewCellStyle8;
             this.actualConsumedQty.HeaderText = "实际消耗数";
             this.actualConsumedQty.Name = "actualConsumedQty";
             // 
             // inShopQty
             // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            dataGridViewCellStyle9.Format = "N2";
+            dataGridViewCellStyle9.NullValue = null;
+            this.inShopQty.DefaultCellStyle = dataGridViewCellStyle9;
             this.inShopQty.HeaderText = "车间数量";
             this.inShopQty.Name = "inShopQty";
             // 
@@ -387,11 +421,13 @@ namespace DataMaintenance.UI.U8.CheckInvetory
         private System.Windows.Forms.DataGridViewTextBoxColumn cInvCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn cInvName;
         private System.Windows.Forms.DataGridViewTextBoxColumn cInvStd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bomParentInvCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn startQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn purchaseQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn currentQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn requestQty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn finishedGoodsQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn finishedGoodQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn unitConsumingQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn actualConsumedQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn inShopQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn checkedQty;
