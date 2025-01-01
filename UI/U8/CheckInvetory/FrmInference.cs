@@ -7,8 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity;
 using System.Drawing;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -21,7 +23,8 @@ namespace DataMaintenance.UI.U8.CheckInvetory
         {
             InitializeComponent();
             xmbtnInventoryClass.RefButton.Click += RefInvClass;
-            //InitialDataSource();
+            //set default value of cmbAccountNo
+            cmbAccountNo.Text = "018";
 
 
         }
@@ -39,7 +42,7 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             }
         }
 
-        private void tsbInfer_Click(object sender, EventArgs e)
+        private async  void tsbInfer_Click(object sender, EventArgs e)
         {
            
             //clear datagridview
@@ -50,19 +53,23 @@ namespace DataMaintenance.UI.U8.CheckInvetory
 
             dgv.AllowUserToAddRows = false;
             GetInventoryInformation(xmbtnInventoryClass.Text);
-            GetPurchseAmountQty();
-            GetCurrentStock();
-            GetMaterialOutAmount();
+        Task<bool> taskPurchseAmountQty =  GetPurchseAmountQty(cmbAccountNo.Text);
+        Task<bool> taskCurrentStock=   GetCurrentStockAsync(cmbAccountNo.Text);
+        Task<bool> taskMaterialOutAmount =    GetMaterialOutAmountAsync(cmbAccountNo.Text);
             GetBomParentInvCode();
-            GetFinisedGoodAmount();
+        Task taskFinishedGoodAmount =   GetFinisedGoodAmountAsync(cmbAccountNo.Text);
+          
+
+            await Task.WhenAll(taskPurchseAmountQty,taskCurrentStock, 
+                taskMaterialOutAmount,taskFinishedGoodAmount);
             CaculateActualConsumedQty();
-           
 
 
-            
+
             Utility.Style.DataGridViewStyle style = new Utility.Style.DataGridViewStyle();
             style.DataGridViewColumnHeaderStyle(dgv);
             this.Cursor = Cursors.Default;
+            MessageBox.Show("计算完成");
 
         }
 
@@ -107,7 +114,7 @@ namespace DataMaintenance.UI.U8.CheckInvetory
         private void GetInventoryInformation(string invClassCode)
         {
             List<Inventory> ls = new List<Inventory>();
-            using (var db = new U8Context("018"))
+            using (var db = new U8Context(cmbAccountNo.Text))
             {
                 ls = db.Inventory.Where(s => s.cInvCCode.StartsWith(invClassCode)).ToList();
             }
@@ -127,66 +134,121 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             }
         }
 
-        private void GetCurrentStock()
+        private async  Task<Boolean> GetCurrentStockAsync(string accountNo)
         {
-
-            using (var db = new U8Context("018"))
+            await Task.Run(() =>
             {
-                for (int i = 0; i < dgv.Rows.Count; i++)
+                try
                 {
-                    var invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();
-                    dgv.Rows[i].Cells["currentQty"].Value = db.CurrentStock.
-                        Where(s => s.cInvCode == invCode).
-                        Select(s => s.iQuantity).Sum();
+                    using (var db = new U8Context(accountNo))
+                    {
+                        for (int i = 0; i < dgv.Rows.Count; i++)
+                        {
+                            var invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();
+                            dgv.Rows[i].Cells["currentQty"].Value = db.CurrentStock.
+                                Where(s => s.cInvCode == invCode).
+                                Select(s => s.iQuantity).Sum();
+                        }
+                       
+                    }
+
+                    return true;
                 }
-            }
-
-        }
-
-        private void GetPurchseAmountQty()
-        {
-            Func<RdRecord01, bool> funcHeader = d => { return d.dDate <= dtpEnd.Value.Date; };
-            Func<rdrecords01, bool> funcBody = s =>
-            {
-                return s.cInvCode == dgv.CurrentRow.Cells["cInvCode"].Value.ToString();
-            };
-            DAL.U8services.PruchaseInService rs = new DAL.U8services.PruchaseInService();
-            for (int i = 0; i < dgv.Rows.Count; i++)
-            {
-                var invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();
-
-
-                dgv.Rows[i].Cells["purchaseQty"].Value =
-                   rs.GetPurchseAmountQty(dtpEnd.Value, invCode, "018");
-                //rs.GetPurchseAmountQty(funcHeader, funcBody, "018");
-
-
-
-            }
-
-
-
-        }
-
-        private void GetMaterialOutAmount()
-        {
-                    
-            DAL.U8services.MateriaOutService rs = new DAL.U8services.MateriaOutService();
-            for (int i = 0; i < dgv.Rows.Count; i++)
-            {
-                var invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();
-
-
-                dgv.Rows[i].Cells["requestQty"].Value =
-                   rs.GetMateriaOutAmount(dtpEnd.Value, invCode, "018");
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
+                }
                 
-            }
+            });
+
+            return false;
+
+        }
+
+        private async Task<Boolean> GetPurchseAmountQty(string accountNo)
+        {
+            //Func<RdRecord01, bool> funcHeader = d => { return d.dDate <= dtpEnd.Value.Date; };
+            //Func<rdrecords01, bool> funcBody = s =>
+            //{
+            //    return s.cInvCode == dgv.CurrentRow.Cells["cInvCode"].Value.ToString();
+            //};
+
+            await Task.Run(() => {
+
+                try
+                {
+
+                    DAL.U8services.PruchaseInService rs = new DAL.U8services.PruchaseInService();
+                    for (int i = 0; i < dgv.Rows.Count; i++)
+                    {
+                        var invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();
+
+
+                        dgv.Rows[i].Cells["purchaseQty"].Value =
+                           rs.GetPurchseAmountQty(dtpEnd.Value, invCode, accountNo);
+                        //rs.GetPurchseAmountQty(funcHeader, funcBody, "018");
+
+                    }
+                    return true;
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
+                }   
+            
+
+
+            });
+
+            return false;
+       
+
+
+        }
+
+        private  async Task<Boolean> GetMaterialOutAmountAsync(string accountNo)
+        {
+            await Task.Run(() =>
+            {
+               try
+               {
+                    DAL.U8services.MateriaOutService rs = new DAL.U8services.MateriaOutService();
+                    for (int i = 0; i < dgv.Rows.Count; i++)
+                    {
+                        var invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();
+
+
+                        dgv.Rows[i].Cells["requestQty"].Value =
+                           rs.GetMateriaOutAmount(dtpEnd.Value, invCode, accountNo);
+
+                    }
+
+                    return true;
+
+
+
+                }
+
+
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
+                }
+            });
+
+            return false;
+
+             
 
 
 
         }
 
-        private void GetBomParentInvCode()
+        private  void GetBomParentInvCode()
         {
             string invCode;
             decimal? unitConsumingQty;
@@ -195,32 +257,51 @@ namespace DataMaintenance.UI.U8.CheckInvetory
                 {
                      invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();
                     dgv.Rows[i].Cells["bomParentInvCode"].Value =
-                       bomService.GetBomParent(invCode, "018",
+                       bomService.GetBomParent(invCode, cmbAccountNo.Text,
                       out unitConsumingQty);
                     dgv.Rows[i].Cells["unitConsumingQty"].Value = unitConsumingQty;
                 }
             
         }
 
-        private void GetFinisedGoodAmount()
+        private  async Task GetFinisedGoodAmountAsync(string accountNo)
         {
-            DAL.U8services.FinishedGoodService rs = new DAL.U8services.FinishedGoodService();
-            string parentInvCode;
-            for (int i = 0; i < dgv.Rows.Count; i++)
+            await Task.Run(() =>
             {
-                 parentInvCode = dgv.Rows[i].Cells["bomParentInvCode"].Value.ToString();
+                try
+                {
+                    DAL.U8services.FinishedGoodService rs = new DAL.U8services.FinishedGoodService();
+                    string parentInvCode;
+                    for (int i = 0; i < dgv.Rows.Count; i++)
+                    {
+                        parentInvCode = dgv.Rows[i].Cells["bomParentInvCode"].Value.ToString();
 
 
-                dgv.Rows[i].Cells["finishedGoodQty"].Value =
-                   rs.GetFinishedGoodAmount(dtpEnd.Value, parentInvCode, "018");
+                        dgv.Rows[i].Cells["finishedGoodQty"].Value =
+                           rs.GetFinishedGoodAmount(dtpEnd.Value, parentInvCode, accountNo);
 
-            }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                        MessageBox.Show(ex.Message);
+                }
+                
+         
+            });
+          
         }
 
-     
+
+
 
         #endregion
 
-
+        private void tsbExport_Click(object sender, EventArgs e)
+        {
+            Utility.Excel.ExportExcel exportExcel = new Utility.Excel.ExportExcel();
+            exportExcel.ExportExcelWithNPOI(dgv, this.Text);
+        }
     }
 }
