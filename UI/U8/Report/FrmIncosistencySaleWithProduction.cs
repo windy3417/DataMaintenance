@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace DataMaintenance.UI.U8.Report
 {
-    public partial class FrmSaleProduceIncosistency : Form
+    public partial class FrmIncosistencySaleWithProduction : Form
     {
-        public FrmSaleProduceIncosistency()
+        public FrmIncosistencySaleWithProduction()
         {
             InitializeComponent();
         }

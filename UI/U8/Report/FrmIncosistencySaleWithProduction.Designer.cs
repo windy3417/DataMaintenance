@@ -1,7 +1,7 @@
 ﻿
 namespace DataMaintenance.UI.U8.Report
 {
-    partial class FrmSaleProduceIncosistency
+    partial class FrmIncosistencySaleWithProduction
     {
         /// <summary>
         /// Required designer variable.

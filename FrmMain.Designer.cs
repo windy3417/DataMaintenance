@@ -60,6 +60,9 @@
             this.单位成本列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.u8产成品入库单价列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.当期有销售无入库清单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.库存管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.车间库存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.车间库存推算采购到销售ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.重登录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -71,8 +74,6 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tstb_currentUser = new System.Windows.Forms.ToolStripTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.库存管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.车间库存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_main.SuspendLayout();
             this.panel1.SuspendLayout();
             this.ts_foot.SuspendLayout();
@@ -209,14 +210,14 @@
             // 客商解锁ToolStripMenuItem
             // 
             this.客商解锁ToolStripMenuItem.Name = "客商解锁ToolStripMenuItem";
-            this.客商解锁ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.客商解锁ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.客商解锁ToolStripMenuItem.Text = "客商解锁";
             this.客商解锁ToolStripMenuItem.Click += new System.EventHandler(this.客商解锁ToolStripMenuItem_Click);
             // 
             // 凭证解锁ToolStripMenuItem
             // 
             this.凭证解锁ToolStripMenuItem.Name = "凭证解锁ToolStripMenuItem";
-            this.凭证解锁ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.凭证解锁ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.凭证解锁ToolStripMenuItem.Tag = "DataMaintenance.UI.ClearLocker.FrmDeleteLockedAccountVoucher";
             this.凭证解锁ToolStripMenuItem.Text = "凭证解锁";
             this.凭证解锁ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
@@ -224,7 +225,7 @@
             // 科目解锁ToolStripMenuItem
             // 
             this.科目解锁ToolStripMenuItem.Name = "科目解锁ToolStripMenuItem";
-            this.科目解锁ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.科目解锁ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.科目解锁ToolStripMenuItem.Tag = "DataMaintenance.UI.ClearLocker.FrmDeleteLockedAccountCode";
             this.科目解锁ToolStripMenuItem.Text = "科目解锁";
             this.科目解锁ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
@@ -232,7 +233,7 @@
             // 任务清理ToolStripMenuItem
             // 
             this.任务清理ToolStripMenuItem.Name = "任务清理ToolStripMenuItem";
-            this.任务清理ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.任务清理ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.任务清理ToolStripMenuItem.Text = "任务清理";
             this.任务清理ToolStripMenuItem.Click += new System.EventHandler(this.任务清理ToolStripMenuItem_Click);
             // 
@@ -247,7 +248,7 @@
             // 采购订单ToolStripMenuItem
             // 
             this.采购订单ToolStripMenuItem.Name = "采购订单ToolStripMenuItem";
-            this.采购订单ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.采购订单ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.采购订单ToolStripMenuItem.Text = "采购订单";
             this.采购订单ToolStripMenuItem.Click += new System.EventHandler(this.采购订单ToolStripMenuItem_Click);
             // 
@@ -343,6 +344,31 @@
             this.当期有销售无入库清单ToolStripMenuItem.Text = "当期有销售无入库清单";
             this.当期有销售无入库清单ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
             // 
+            // 库存管理ToolStripMenuItem
+            // 
+            this.库存管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.车间库存ToolStripMenuItem,
+            this.车间库存推算采购到销售ToolStripMenuItem});
+            this.库存管理ToolStripMenuItem.Name = "库存管理ToolStripMenuItem";
+            this.库存管理ToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.库存管理ToolStripMenuItem.Text = "库存管理";
+            // 
+            // 车间库存ToolStripMenuItem
+            // 
+            this.车间库存ToolStripMenuItem.Name = "车间库存ToolStripMenuItem";
+            this.车间库存ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.车间库存ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.CheckInvetory.FrmInference";
+            this.车间库存ToolStripMenuItem.Text = "车间库存-领用减入库";
+            this.车间库存ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
+            // 
+            // 车间库存推算采购到销售ToolStripMenuItem
+            // 
+            this.车间库存推算采购到销售ToolStripMenuItem.Name = "车间库存推算采购到销售ToolStripMenuItem";
+            this.车间库存推算采购到销售ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.车间库存推算采购到销售ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.CheckInvetory.FrmInferStockWithPurSubtractSale";
+            this.车间库存推算采购到销售ToolStripMenuItem.Text = "车间库存-采购减销售";
+            this.车间库存推算采购到销售ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
+            // 
             // 重登录ToolStripMenuItem
             // 
             this.重登录ToolStripMenuItem.Name = "重登录ToolStripMenuItem";
@@ -436,22 +462,6 @@
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
             // 
-            // 库存管理ToolStripMenuItem
-            // 
-            this.库存管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.车间库存ToolStripMenuItem});
-            this.库存管理ToolStripMenuItem.Name = "库存管理ToolStripMenuItem";
-            this.库存管理ToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.库存管理ToolStripMenuItem.Text = "库存管理";
-            // 
-            // 车间库存ToolStripMenuItem
-            // 
-            this.车间库存ToolStripMenuItem.Name = "车间库存ToolStripMenuItem";
-            this.车间库存ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.车间库存ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.CheckInvetory.FrmInference";
-            this.车间库存ToolStripMenuItem.Text = "车间库存";
-            this.车间库存ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
-            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -523,6 +533,7 @@
         private System.Windows.Forms.ToolStripMenuItem 当期有销售无入库清单ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 库存管理ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 车间库存ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 车间库存推算采购到销售ToolStripMenuItem;
     }
 }
 

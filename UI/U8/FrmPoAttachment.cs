@@ -17,13 +17,14 @@ namespace DataMaintenance.UI.U8
         public FrmPoAttachment()
         {
             InitializeComponent();
+            txtAccountNo.Text = "017";
             xmTxtVendor.RefButton.Click += RefButton_Click;
             
         }
 
         private void RefButton_Click(object sender, EventArgs e)
         {
-            FrmRefVendor fv = new FrmRefVendor();
+            FrmRefVendor fv = new FrmRefVendor(txtAccountNo.Text);
             fv.ActionRefVendorEntity = GetVendorCode;
             fv.Show();
         }
@@ -37,6 +38,11 @@ namespace DataMaintenance.UI.U8
         }
 
         private void btnQuery_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tsbQuery_Click(object sender, EventArgs e)
         {
 
         }
