@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using U8services.Model;
-using U8services.UI.FrmRef;
+using U8service.Model;
+using U8service.UI.FrmRef;
 
 namespace DataMaintenance.UI.U8
 {

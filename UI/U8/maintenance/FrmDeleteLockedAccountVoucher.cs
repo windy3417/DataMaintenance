@@ -16,16 +16,10 @@ namespace DataMaintenance.UI.ClearLocker
         {
             InitializeComponent();
             this.FormClosed += CloseParentForm;
-            InitializeContolsData();
+          
         }
 
-        void InitializeContolsData()
-        {
-            string sql = "select * from GL_mvcontrol";
-           
-            dataGridView1.DataSource = Sqlhelper.GetDataTable(sql, Sqlhelper.DataSourceType.u8);
-
-        }
+     
 
         private void CloseParentForm(object sender, FormClosedEventArgs e)
         {
@@ -41,7 +35,24 @@ namespace DataMaintenance.UI.ClearLocker
         {
             string sql = " delete  from GL_mvcontrol";
 
-            dataGridView1.DataSource = Sqlhelper.ExecuteWithNoneParameter(sql,Sqlhelper.DataSourceType.u8);
+            try
+            {
+                Sqlhelper.ExecuteQuery(sql, Sqlhelper.DataSourceType.u8, cmbAccountNo.Text);
+                MessageBox.Show("删除成功");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            } 
+        }
+
+        private void tsbQuery_Click(object sender, EventArgs e)
+        {
+            string sql = "select * from GL_mvcontrol";
+
+            dataGridView1.DataSource = Sqlhelper.GetDataTable(sql, Sqlhelper.DataSourceType.u8,cmbAccountNo.Text);
+
         }
     }
 }

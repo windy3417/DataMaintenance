@@ -41,9 +41,12 @@ namespace DataMaintenance.UI.U8.Report
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.btnQuery = new System.Windows.Forms.Button();
             this.dgvBody = new System.Windows.Forms.DataGridView();
+            this.panTitel = new System.Windows.Forms.Panel();
+            this.lblTitel = new System.Windows.Forms.Label();
             this.toolStrip1.SuspendLayout();
             this.tlpHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBody)).BeginInit();
+            this.panTitel.SuspendLayout();
             this.SuspendLayout();
             // 
             // toolStrip1
@@ -86,7 +89,7 @@ namespace DataMaintenance.UI.U8.Report
             this.tlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 27F));
             this.tlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 146F));
             this.tlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 256F));
-            this.tlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 21F));
+            this.tlpHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 34F));
             this.tlpHeader.Controls.Add(this.label2, 4, 0);
             this.tlpHeader.Controls.Add(this.dtpStartDate, 3, 0);
             this.tlpHeader.Controls.Add(this.label1, 2, 0);
@@ -94,7 +97,7 @@ namespace DataMaintenance.UI.U8.Report
             this.tlpHeader.Controls.Add(this.cmbAccountNo, 1, 0);
             this.tlpHeader.Controls.Add(this.dtpEndDate, 5, 0);
             this.tlpHeader.Controls.Add(this.btnQuery, 6, 0);
-            this.tlpHeader.Location = new System.Drawing.Point(12, 41);
+            this.tlpHeader.Location = new System.Drawing.Point(12, 92);
             this.tlpHeader.Name = "tlpHeader";
             this.tlpHeader.RowCount = 1;
             this.tlpHeader.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -177,28 +180,53 @@ namespace DataMaintenance.UI.U8.Report
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvBody.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dgvBody.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBody.Location = new System.Drawing.Point(12, 95);
+            this.dgvBody.Location = new System.Drawing.Point(12, 158);
             this.dgvBody.Name = "dgvBody";
             this.dgvBody.RowTemplate.Height = 23;
-            this.dgvBody.Size = new System.Drawing.Size(776, 343);
+            this.dgvBody.Size = new System.Drawing.Size(776, 280);
             this.dgvBody.TabIndex = 2;
             this.dgvBody.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvBody_RowPostPaint);
             // 
-            // FrmSaleProduceIncosistency
+            // panTitel
+            // 
+            this.panTitel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panTitel.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.panTitel.Controls.Add(this.lblTitel);
+            this.panTitel.Location = new System.Drawing.Point(12, 29);
+            this.panTitel.Name = "panTitel";
+            this.panTitel.Size = new System.Drawing.Size(776, 54);
+            this.panTitel.TabIndex = 3;
+            // 
+            // lblTitel
+            // 
+            this.lblTitel.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblTitel.AutoSize = true;
+            this.lblTitel.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTitel.Location = new System.Drawing.Point(261, 14);
+            this.lblTitel.Name = "lblTitel";
+            this.lblTitel.Size = new System.Drawing.Size(260, 24);
+            this.lblTitel.TabIndex = 0;
+            this.lblTitel.Text = "有销售无生产产品清单";
+            // 
+            // FrmIncosistencySaleWithProduction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.panTitel);
             this.Controls.Add(this.dgvBody);
             this.Controls.Add(this.tlpHeader);
             this.Controls.Add(this.toolStrip1);
-            this.Name = "FrmSaleProduceIncosistency";
+            this.Name = "FrmIncosistencySaleWithProduction";
             this.Text = "有销售无生产产品清单";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.tlpHeader.ResumeLayout(false);
             this.tlpHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBody)).EndInit();
+            this.panTitel.ResumeLayout(false);
+            this.panTitel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,5 +246,7 @@ namespace DataMaintenance.UI.U8.Report
         private System.Windows.Forms.DataGridView dgvBody;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cmbAccountNo;
+        private System.Windows.Forms.Panel panTitel;
+        private System.Windows.Forms.Label lblTitel;
     }
 }

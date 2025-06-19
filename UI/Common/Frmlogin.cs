@@ -12,7 +12,7 @@ using DataMaintenance.GlobeVary;
 using Utility;
 using System.Configuration;
 using DataMaintenance.DAL;
-using Utilities.Encrypt;
+using Utility.Encrypt;
 
 namespace DataMaintenance.UI
 {

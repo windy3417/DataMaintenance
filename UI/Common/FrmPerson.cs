@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using Utility;
 using DataMaintenance.Model.Maintenance;
+using Utility.Encrypt;
 
 namespace DataMaintenance.UI
 {

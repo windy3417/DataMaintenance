@@ -13,7 +13,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using U8services.DAL.JoinTableServices;
+using U8service.DAL.JoinTableSvc;
+
 using Utility.DAL;
 using Utility.Files;
 using Utility.Model;
@@ -88,7 +89,7 @@ namespace DataMaintenance.UI.U8Attachment
             switch (cmbArchiveType.Text)
             {
                 case "客户":
-                   U8services.UI.FrmRef.FrmRefCustomer  f = new U8services.UI.FrmRef.FrmRefCustomer(txtAccountNo.Text);
+                   U8service.UI.FrmRef.FrmRefCustomer  f = new U8service.UI.FrmRef.FrmRefCustomer(txtAccountNo.Text);
                     f.ActionRefCustomerEntity = GetCutomerCode;
                     f.Show();
                     break;
@@ -118,7 +119,7 @@ namespace DataMaintenance.UI.U8Attachment
 
         }
 
-        void GetCutomerCode(U8services.Model.Customer  customer)
+        void GetCutomerCode(U8service.Model.Customer  customer)
         {
             this.xmtxtArchivementBodyCode.Text = customer.cCusCode;
             this.txtArchvieName.Text = customer.cCusName;
@@ -159,7 +160,7 @@ namespace DataMaintenance.UI.U8Attachment
             {
                 archiveType = "Vendor";
                 sqlParameters.Add(new SqlParameter("@cTableName", archiveType));
-                this.dataGridView1.DataSource = new U8services.DAL.JoinTableServices.VendorAttachmentService(txtAccountNo.Text).GetVendorArchive(sqlParameters).ToList();
+                this.dataGridView1.DataSource = new U8service.DAL.JoinTableSvc.VendorAttachmentService(txtAccountNo.Text).GetVendorArchive(sqlParameters).ToList();
             }
 
             if (cmbArchiveType.Text == "存货")
@@ -170,7 +171,7 @@ namespace DataMaintenance.UI.U8Attachment
                 new SqlParameter("@cInvCode", xmtxtArchivementBodyCode.Text)};
                 
              
-                this.dataGridView1.DataSource = new U8services.DAL.JoinTableServices.InventoryAttachmentService().GetInventoryArchive(sqlParameter);
+                this.dataGridView1.DataSource = new U8service.DAL.JoinTableSvc.InventoryAttachmentService().GetInventoryArchive(sqlParameter);
             }
 
 
@@ -255,7 +256,7 @@ namespace DataMaintenance.UI.U8Attachment
             {
                 archiveType = "Vendor";
                 sqlParameters.Add(new SqlParameter("@cTableName", archiveType));
-                this.dataGridView1.DataSource = new U8services.DAL.JoinTableServices.VendorAttachmentService(txtAccountNo.Text).GetVendorArchive(sqlParameters).ToList();
+                this.dataGridView1.DataSource = new U8service.DAL.JoinTableSvc.VendorAttachmentService(txtAccountNo.Text).GetVendorArchive(sqlParameters).ToList();
             }
 
             if (cmbArchiveType.Text == "存货")
@@ -266,7 +267,7 @@ namespace DataMaintenance.UI.U8Attachment
                 new SqlParameter("@cInvCode", xmtxtArchivementBodyCode.Text)};
 
 
-                this.dataGridView1.DataSource = new U8services.DAL.JoinTableServices.InventoryAttachmentService().GetInventoryArchive(sqlParameter);
+                this.dataGridView1.DataSource = new U8service.DAL.JoinTableSvc.InventoryAttachmentService().GetInventoryArchive(sqlParameter);
             }
 
 

@@ -46,19 +46,6 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.tsbExport = new System.Windows.Forms.ToolStripButton();
             this.tsbPrint = new System.Windows.Forms.ToolStripButton();
             this.dgv = new System.Windows.Forms.DataGridView();
-            this.cInvCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cInvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.cInvStd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bomParentInvCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.startQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.purchaseQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.currentQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.requestQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.finishedGoodQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.unitConsumingQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.actualConsumedQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.inShopQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.checkedQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gpConditions = new System.Windows.Forms.GroupBox();
             this.xmbtnInventoryClass = new Utility.UControl.XmTextBoxWithButton();
             this.label5 = new System.Windows.Forms.Label();
@@ -72,6 +59,20 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.label2 = new System.Windows.Forms.Label();
             this.lblTitel = new System.Windows.Forms.Label();
             this.panTitel = new System.Windows.Forms.Panel();
+            this.cInvCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cInvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cInvStd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bomParentInvCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.parentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.startQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.requestQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.purchaseQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.finishedGoodQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.currentQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.unitConsumingQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.actualConsumedQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.inShopQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.checkedQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
             this.gpConditions.SuspendLayout();
@@ -133,7 +134,7 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.dgv.BackgroundColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -145,18 +146,19 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.cInvName,
             this.cInvStd,
             this.bomParentInvCode,
+            this.parentName,
             this.startQty,
-            this.purchaseQty,
-            this.currentQty,
             this.requestQty,
+            this.purchaseQty,
             this.finishedGoodQty,
+            this.currentQty,
             this.unitConsumingQty,
             this.actualConsumedQty,
             this.inShopQty,
             this.checkedQty});
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -166,7 +168,7 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.dgv.Name = "dgv";
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -176,101 +178,6 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.dgv.Size = new System.Drawing.Size(1003, 394);
             this.dgv.TabIndex = 1;
             this.dgv.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_RowPostPaint);
-            // 
-            // cInvCode
-            // 
-            this.cInvCode.HeaderText = "存货编码";
-            this.cInvCode.Name = "cInvCode";
-            // 
-            // cInvName
-            // 
-            this.cInvName.HeaderText = "存货名称";
-            this.cInvName.Name = "cInvName";
-            // 
-            // cInvStd
-            // 
-            this.cInvStd.HeaderText = "规格型号";
-            this.cInvStd.Name = "cInvStd";
-            // 
-            // bomParentInvCode
-            // 
-            this.bomParentInvCode.HeaderText = "对应成品编码";
-            this.bomParentInvCode.Name = "bomParentInvCode";
-            // 
-            // startQty
-            // 
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.startQty.DefaultCellStyle = dataGridViewCellStyle2;
-            this.startQty.HeaderText = "期初数量";
-            this.startQty.Name = "startQty";
-            // 
-            // purchaseQty
-            // 
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.purchaseQty.DefaultCellStyle = dataGridViewCellStyle3;
-            this.purchaseQty.HeaderText = "采购入库数";
-            this.purchaseQty.Name = "purchaseQty";
-            // 
-            // currentQty
-            // 
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
-            dataGridViewCellStyle4.Format = "N2";
-            this.currentQty.DefaultCellStyle = dataGridViewCellStyle4;
-            this.currentQty.HeaderText = "现存量";
-            this.currentQty.Name = "currentQty";
-            // 
-            // requestQty
-            // 
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
-            dataGridViewCellStyle5.Format = "N2";
-            dataGridViewCellStyle5.NullValue = null;
-            this.requestQty.DefaultCellStyle = dataGridViewCellStyle5;
-            this.requestQty.HeaderText = "材料领用数";
-            this.requestQty.Name = "requestQty";
-            // 
-            // finishedGoodQty
-            // 
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
-            dataGridViewCellStyle6.Format = "N2";
-            dataGridViewCellStyle6.NullValue = null;
-            this.finishedGoodQty.DefaultCellStyle = dataGridViewCellStyle6;
-            this.finishedGoodQty.HeaderText = "成品入库数";
-            this.finishedGoodQty.Name = "finishedGoodQty";
-            // 
-            // unitConsumingQty
-            // 
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
-            dataGridViewCellStyle7.Format = "N2";
-            dataGridViewCellStyle7.NullValue = null;
-            this.unitConsumingQty.DefaultCellStyle = dataGridViewCellStyle7;
-            this.unitConsumingQty.HeaderText = "单位消耗量";
-            this.unitConsumingQty.Name = "unitConsumingQty";
-            // 
-            // actualConsumedQty
-            // 
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
-            dataGridViewCellStyle8.Format = "N2";
-            dataGridViewCellStyle8.NullValue = null;
-            this.actualConsumedQty.DefaultCellStyle = dataGridViewCellStyle8;
-            this.actualConsumedQty.HeaderText = "实际消耗数";
-            this.actualConsumedQty.Name = "actualConsumedQty";
-            // 
-            // inShopQty
-            // 
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
-            dataGridViewCellStyle9.Format = "N2";
-            dataGridViewCellStyle9.NullValue = null;
-            this.inShopQty.DefaultCellStyle = dataGridViewCellStyle9;
-            this.inShopQty.HeaderText = "车间数量";
-            this.inShopQty.Name = "inShopQty";
-            // 
-            // checkedQty
-            // 
-            this.checkedQty.HeaderText = "盘点数";
-            this.checkedQty.Name = "checkedQty";
             // 
             // gpConditions
             // 
@@ -383,7 +290,7 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             // 
             this.lblTitel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblTitel.AutoSize = true;
-            this.lblTitel.Font = new System.Drawing.Font("宋体", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTitel.Font = new System.Drawing.Font("SimSun", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTitel.Location = new System.Drawing.Point(314, 14);
             this.lblTitel.Name = "lblTitel";
             this.lblTitel.Size = new System.Drawing.Size(387, 24);
@@ -400,6 +307,106 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.panTitel.Name = "panTitel";
             this.panTitel.Size = new System.Drawing.Size(1003, 55);
             this.panTitel.TabIndex = 4;
+            // 
+            // cInvCode
+            // 
+            this.cInvCode.HeaderText = "存货编码";
+            this.cInvCode.Name = "cInvCode";
+            // 
+            // cInvName
+            // 
+            this.cInvName.HeaderText = "存货名称";
+            this.cInvName.Name = "cInvName";
+            // 
+            // cInvStd
+            // 
+            this.cInvStd.HeaderText = "规格型号";
+            this.cInvStd.Name = "cInvStd";
+            // 
+            // bomParentInvCode
+            // 
+            this.bomParentInvCode.HeaderText = "对应成品编码";
+            this.bomParentInvCode.Name = "bomParentInvCode";
+            // 
+            // parentName
+            // 
+            this.parentName.HeaderText = "对应成品名称";
+            this.parentName.Name = "parentName";
+            // 
+            // startQty
+            // 
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.startQty.DefaultCellStyle = dataGridViewCellStyle2;
+            this.startQty.HeaderText = "期初数量";
+            this.startQty.Name = "startQty";
+            // 
+            // requestQty
+            // 
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.requestQty.DefaultCellStyle = dataGridViewCellStyle3;
+            this.requestQty.HeaderText = "材料领用数";
+            this.requestQty.Name = "requestQty";
+            // 
+            // purchaseQty
+            // 
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.purchaseQty.DefaultCellStyle = dataGridViewCellStyle4;
+            this.purchaseQty.HeaderText = "采购入库数";
+            this.purchaseQty.Name = "purchaseQty";
+            // 
+            // finishedGoodQty
+            // 
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
+            this.finishedGoodQty.DefaultCellStyle = dataGridViewCellStyle5;
+            this.finishedGoodQty.HeaderText = "成品入库数";
+            this.finishedGoodQty.Name = "finishedGoodQty";
+            // 
+            // currentQty
+            // 
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            dataGridViewCellStyle6.Format = "N2";
+            this.currentQty.DefaultCellStyle = dataGridViewCellStyle6;
+            this.currentQty.HeaderText = "现存量";
+            this.currentQty.Name = "currentQty";
+            // 
+            // unitConsumingQty
+            // 
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            dataGridViewCellStyle7.Format = "N2";
+            dataGridViewCellStyle7.NullValue = null;
+            this.unitConsumingQty.DefaultCellStyle = dataGridViewCellStyle7;
+            this.unitConsumingQty.HeaderText = "单位消耗量";
+            this.unitConsumingQty.Name = "unitConsumingQty";
+            // 
+            // actualConsumedQty
+            // 
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.actualConsumedQty.DefaultCellStyle = dataGridViewCellStyle8;
+            this.actualConsumedQty.HeaderText = "实际消耗数";
+            this.actualConsumedQty.Name = "actualConsumedQty";
+            // 
+            // inShopQty
+            // 
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            dataGridViewCellStyle9.Format = "N2";
+            dataGridViewCellStyle9.NullValue = null;
+            this.inShopQty.DefaultCellStyle = dataGridViewCellStyle9;
+            this.inShopQty.HeaderText = "车间数量";
+            this.inShopQty.Name = "inShopQty";
+            // 
+            // checkedQty
+            // 
+            this.checkedQty.HeaderText = "盘点数";
+            this.checkedQty.Name = "checkedQty";
             // 
             // FrmInference
             // 
@@ -443,20 +450,21 @@ namespace DataMaintenance.UI.U8.CheckInvetory
         private Utility.UControl.XmTextBoxWithButton xmbtnInventoryClass;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbWarehouse;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cmbAccountNo;
         private System.Windows.Forms.DataGridViewTextBoxColumn cInvCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn cInvName;
         private System.Windows.Forms.DataGridViewTextBoxColumn cInvStd;
         private System.Windows.Forms.DataGridViewTextBoxColumn bomParentInvCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn parentName;
         private System.Windows.Forms.DataGridViewTextBoxColumn startQty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn purchaseQty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn currentQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn requestQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn purchaseQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn finishedGoodQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn currentQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitConsumingQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn actualConsumedQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn inShopQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn checkedQty;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox cmbAccountNo;
     }
 }

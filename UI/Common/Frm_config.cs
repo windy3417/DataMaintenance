@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using DataMaintenance.Model;
 using DataMaintenance.Model.Maintenance;
 using Utility;
+using Utility.Encrypt;
 
 namespace DataMaintenance.UI
 {
@@ -29,7 +30,7 @@ namespace DataMaintenance.UI
 
                 m.userID = base.txt_adminCode.Text;
                 m.UserName = base.txt_adminName.Text;
-                m.pwd = Utility.Encrypt.Encode(base.txt_adminPwd.Text);
+                m.pwd = Encrypt.Encode(base.txt_adminPwd.Text);
                 m.RegistrationDate = DateTime.Now;
 
                 db.Users.Add(m);

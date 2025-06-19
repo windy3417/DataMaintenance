@@ -16,6 +16,10 @@ namespace DataMaintenance.UI.U8.Report
         public FrmIncosistencySaleWithProduction()
         {
             InitializeComponent();
+            //first day of current month
+            dtpStartDate.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            //last day of current month
+            dtpEndDate.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.DaysInMonth(DateTime.Now.Year, DateTime.Now.Month));
         }
 
         private void tsbQuery_Click(object sender, EventArgs e)
@@ -32,51 +36,51 @@ namespace DataMaintenance.UI.U8.Report
             {
                 #region finished goods inbound voucher
                 var query1 = from s in db.rdrecord10
-                            join i in db.rdrecords10 on s.ID equals i.ID
-                            join u in db.Inventory on i.cInvCode equals u.cInvCode
+                             join i in db.rdrecords10 on s.ID equals i.ID
+                             join u in db.Inventory on i.cInvCode equals u.cInvCode
 
-                            where s.dDate >= dtpStartDate.Value && s.dDate <= dtpEndDate.Value && i.iUnitCost.HasValue && i.iUnitCost.Value > 0
-
-
-                            select new
-                            {
-                                accountNo = cmbAccountNo.Text,
-                                year = s.dDate.Year,
-                                month = s.dDate.Month,
+                             where s.dDate >= dtpStartDate.Value && s.dDate <= dtpEndDate.Value && i.iUnitCost.HasValue && i.iUnitCost.Value > 0
 
 
-                                //s.dDate,
-                                i.cInvCode,
-                                u.cInvName,
-                                u.cInvStd,
-                                i.iUnitCost,
-                            };
-                var p=query1.Distinct().OrderBy(s => s.cInvCode).ThenBy(s => s.year).ThenBy(s => s.month);
+                             select new
+                             {
+                                 accountNo = cmbAccountNo.Text,
+                                 year = s.dDate.Year,
+                                 month = s.dDate.Month,
+
+
+                                 //s.dDate,
+                                 i.cInvCode,
+                                 u.cInvName,
+                                 u.cInvStd,
+                                 i.iUnitCost,
+                             };
+                var p = query1.Distinct().OrderBy(s => s.cInvCode).ThenBy(s => s.year).ThenBy(s => s.month);
 
                 #endregion
 
                 #region sale outbound voucher
 
                 var query2 = from s in db.rdrecord32
-                            join i in db.rdrecords32 on s.ID equals i.ID
-                            join u in db.Inventory on i.cInvCode equals u.cInvCode
+                             join i in db.rdrecords32 on s.ID equals i.ID
+                             join u in db.Inventory on i.cInvCode equals u.cInvCode
 
-                            where s.dDate >= dtpStartDate.Value && s.dDate <= dtpEndDate.Value && i.iUnitCost.HasValue && i.iUnitCost.Value > 0
-
-
-                            select new
-                            {
-                                accountNo = cmbAccountNo.Text,
-                                year = s.dDate.Year,
-                                month = s.dDate.Month,
+                             where s.dDate >= dtpStartDate.Value && s.dDate <= dtpEndDate.Value && i.iUnitCost.HasValue && i.iUnitCost.Value > 0
 
 
-                                //s.dDate,
-                                i.cInvCode,
-                                u.cInvName,
-                                u.cInvStd,
-                                i.iUnitCost,
-                            };
+                             select new
+                             {
+                                 accountNo = cmbAccountNo.Text,
+                                 year = s.dDate.Year,
+                                 month = s.dDate.Month,
+
+
+                                 //s.dDate,
+                                 i.cInvCode,
+                                 u.cInvName,
+                                 u.cInvStd,
+                                 i.iUnitCost,
+                             };
                 var sa = query2.Distinct().OrderBy(s => s.cInvCode).ThenBy(s => s.year).ThenBy(s => s.month);
 
 
@@ -84,7 +88,7 @@ namespace DataMaintenance.UI.U8.Report
 
 
                 // Perform left join between p and sa lists
-                var result = from  saItem in  sa
+                var result = from saItem in sa
                              join pItem in p
                              on new { Year = saItem.year, Month = saItem.month, InvCode = saItem.cInvCode }
                              equals new { Year = pItem.year, Month = pItem.month, InvCode = pItem.cInvCode }
@@ -100,12 +104,13 @@ namespace DataMaintenance.UI.U8.Report
                                  saItem.cInvName,
                                  saItem.cInvStd,
                                  saItem.iUnitCost,
-                                 
+
                              };
 
                 dgvBody.DataSource = result.ToList();
+                this.Cursor = Cursors.Default;
 
-             
+
             }
 
         }
@@ -113,7 +118,7 @@ namespace DataMaintenance.UI.U8.Report
         private void dgvBody_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             Utility.Style.DataGridViewStyle ui = new Utility.Style.DataGridViewStyle();
-            ui.DisplayRowNo(e,dgvBody,false);
+            ui.DisplayRowNo(e, dgvBody, false);
             this.Cursor = Cursors.Default;
         }
 

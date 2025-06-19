@@ -16,22 +16,13 @@ namespace DataMaintenance.UI.ClearLocker
         public FrmDeleteLockedVendor()
         {
             InitializeComponent();
+            //set default value of cmbAccountNo
+            cmbAccountNo.Text = "018";
             this.FormClosed += CloseParentForm;
-            InitializeContolsData();
+           
         }
 
-        void InitializeContolsData()
-        {
-            string sql = "select *  from LockVouch";
-
-            using (var db = new U8Context("017"))
-
-            {
-                db.Database.ExecuteSqlCommand(sql);
-
-            }
-
-        }
+       
 
         private void CloseParentForm(object sender, FormClosedEventArgs e)
         {
@@ -46,13 +37,21 @@ namespace DataMaintenance.UI.ClearLocker
         private void Delete_Click(object sender, EventArgs e)
         {
             string sql = " delete  from LockVouch";
-            using (var db = new U8Context("017"))
+            using (var db = new U8Context(cmbAccountNo.Text))
             {
                 db.Database.ExecuteSqlCommand(sql);
                 dataGridView1.DataSource = null;
             }
 
 
+        }
+
+        private void tsbQuery_Click(object sender, EventArgs e)
+        {
+            string sql = "select *  from LockVouch";
+
+           var ds= Utility.Sql.Sqlhelper.GetDataTable(sql, Sqlhelper.DataSourceType.u8,cmbAccountNo.Text);
+            dataGridView1.DataSource = ds;
         }
     }
 }

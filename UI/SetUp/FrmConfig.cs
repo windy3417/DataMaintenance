@@ -11,6 +11,7 @@ using Utility.DAL;
 using Utility.Model;
 using static Utility.Sql.Sqlhelper;
 using Utility.Files;
+using Utility.Encrypt;
 
 namespace DataMaintenance.UI.SetUp
 
@@ -65,7 +66,7 @@ namespace DataMaintenance.UI.SetUp
             dbConnect.DbConnectStringSave(m, DataSourceType.it.ToString());
 
             //存储为Json文件
-            m.Pwd = Utility.Encrypt.Encode("mixture"); //不存储真实密码
+            m.Pwd = Encrypt.Encode("mixture"); //不存储真实密码
             string fileName= Environment.CurrentDirectory + "\\" + DataSourceType.it.ToString() + "DBConfig.txt";
             Utility.Files.JsonOperate jsonOperate = new Utility.Files.JsonOperate();
             jsonOperate.ModelToJsonFile(fileName, m);
@@ -114,7 +115,7 @@ namespace DataMaintenance.UI.SetUp
             dbConnect.DbConnectStringSave(m, DataSourceType.u8.ToString());
 
             //存储为Json文件
-            m.Pwd = Utility.Encrypt.Encode("mixture"); //不存储真实密码
+            m.Pwd = Encrypt.Encode("mixture"); //不存储真实密码
             string fileName = Environment.CurrentDirectory + "\\" + DataSourceType.u8.ToString() + "DBConfig.txt";
             Utility.Files.JsonOperate jsonOperate = new Utility.Files.JsonOperate();
             jsonOperate.ModelToJsonFile(fileName, m);
@@ -158,7 +159,7 @@ namespace DataMaintenance.UI.SetUp
             dbConnect.DbConnectStringSave(m, DataSourceType.ufsystem.ToString());
 
             //存储为Json文件
-            m.Pwd = Utility.Encrypt.Encode("mixture"); //不存储真实密码
+            m.Pwd = Encrypt.Encode("mixture"); //不存储真实密码
             string fileName = Environment.CurrentDirectory + "\\" + DataSourceType.u8.ToString() + "DBConfig.txt";
             Utility.Files.JsonOperate jsonOperate = new Utility.Files.JsonOperate();
             jsonOperate.ModelToJsonFile(fileName, m);

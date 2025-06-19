@@ -31,7 +31,7 @@
     <SuiteName>信息平台管理</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>20</ApplicationRevision>
+    <ApplicationRevision>26</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -101,13 +101,13 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="U8services, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="U8services, Version=1.0.1.1, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\U8services\U8services\bin\Debug\U8services.dll</HintPath>
     </Reference>
     <Reference Include="Utility, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Utility\bin\Release\Utility.dll</HintPath>
+      <HintPath>..\..\Utility\bin\Debug\Utility.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -127,9 +127,6 @@
     <Compile Include="DAL\TableServices\U8services\AttacheFileService.cs" />
     <Compile Include="DAL\TableServices\U8services\MasterDataService.cs" />
     <Compile Include="DAL\ViewServices\U8services\InventoryAttachmentService.cs" />
-    <Compile Include="FrmTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="GlobalVary\CurrentUser.cs" />
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
@@ -162,6 +159,7 @@
       <DependentUpon>202409240836454_m5.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Model\PrintDocumentEventArgs.cs" />
     <Compile Include="Model\DataMaintenanceContext.cs" />
     <Compile Include="Model\Maintenance\AuthorizationModle.cs" />
     <Compile Include="Model\Maintenance\MaxKeys.cs" />
@@ -216,6 +214,21 @@
     <Compile Include="UI\RefForm\FrmRefInvClassTree.Designer.cs">
       <DependentUpon>FrmRefInvClassTree.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Test\FrmPrintTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Test\FrmPrintTest.Designer.cs">
+      <DependentUpon>FrmPrintTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Test\FrmTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\U8\CheckInvetory\FrmCurrentStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\U8\CheckInvetory\FrmCurrentStock.Designer.cs">
+      <DependentUpon>FrmCurrentStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\U8\CheckInvetory\FrmInferStockPurSubtractSale.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -228,28 +241,28 @@
     <Compile Include="UI\U8\CheckInvetory\FrmInference.Designer.cs">
       <DependentUpon>FrmInference.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\U8\ClearLocker\FrmClearU8Task.cs">
+    <Compile Include="UI\U8\maintenance\FrmClearU8Task.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\U8\ClearLocker\FrmClearU8Task.Designer.cs">
+    <Compile Include="UI\U8\maintenance\FrmClearU8Task.Designer.cs">
       <DependentUpon>FrmClearU8Task.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\U8\ClearLocker\FrmDeleteLockedAccountCode.cs">
+    <Compile Include="UI\U8\maintenance\FrmDeleteLockedAccountCode.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\U8\ClearLocker\FrmDeleteLockedAccountCode.Designer.cs">
+    <Compile Include="UI\U8\maintenance\FrmDeleteLockedAccountCode.Designer.cs">
       <DependentUpon>FrmDeleteLockedAccountCode.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\U8\ClearLocker\FrmDeleteLockedAccountVoucher.cs">
+    <Compile Include="UI\U8\maintenance\FrmDeleteLockedAccountVoucher.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\U8\ClearLocker\FrmDeleteLockedAccountVoucher.Designer.cs">
+    <Compile Include="UI\U8\maintenance\FrmDeleteLockedAccountVoucher.Designer.cs">
       <DependentUpon>FrmDeleteLockedAccountVoucher.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\U8\ClearLocker\FrmDeleteLockedVendor.cs">
+    <Compile Include="UI\U8\maintenance\FrmDeleteLockedVendor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\U8\ClearLocker\FrmDeleteLockedVendor.Designer.cs">
+    <Compile Include="UI\U8\maintenance\FrmDeleteLockedVendor.Designer.cs">
       <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\RefForm\FrmRefInvClass.cs">
@@ -429,9 +442,6 @@
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmTest.resx">
-      <DependentUpon>FrmTest.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202309140755289_m.resx">
       <DependentUpon>202309140755289_m.cs</DependentUpon>
     </EmbeddedResource>
@@ -463,22 +473,31 @@
     <EmbeddedResource Include="UI\RefForm\FrmRefInvClassTree.resx">
       <DependentUpon>FrmRefInvClassTree.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UI\Test\FrmPrintTest.resx">
+      <DependentUpon>FrmPrintTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Test\FrmTest.resx">
+      <DependentUpon>FrmTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\U8\CheckInvetory\FrmCurrentStock.resx">
+      <DependentUpon>FrmCurrentStock.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\CheckInvetory\FrmInferStockPurSubtractSale.resx">
       <DependentUpon>FrmInferStockPurSubtractSale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\CheckInvetory\FrmInference.resx">
       <DependentUpon>FrmInference.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\U8\ClearLocker\FrmClearU8Task.resx">
+    <EmbeddedResource Include="UI\U8\maintenance\FrmClearU8Task.resx">
       <DependentUpon>FrmClearU8Task.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\U8\ClearLocker\FrmDeleteLockedAccountCode.resx">
+    <EmbeddedResource Include="UI\U8\maintenance\FrmDeleteLockedAccountCode.resx">
       <DependentUpon>FrmDeleteLockedAccountCode.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\U8\ClearLocker\FrmDeleteLockedAccountVoucher.resx">
+    <EmbeddedResource Include="UI\U8\maintenance\FrmDeleteLockedAccountVoucher.resx">
       <DependentUpon>FrmDeleteLockedAccountVoucher.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\U8\ClearLocker\FrmDeleteLockedVendor.resx">
+    <EmbeddedResource Include="UI\U8\maintenance\FrmDeleteLockedVendor.resx">
       <DependentUpon>FrmDeleteLockedVendor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\RefForm\FrmRefInvClass.resx">
@@ -596,6 +615,7 @@
     <None Include="Resources\filter.gif" />
     <None Include="Resources\giveUpAudit.gif" />
     <None Include="Resources\calculate banlance.png" />
+    <Content Include="Resources\CZ-LOGO.jpg" />
     <Content Include="Resources\template\外发需返资产清单导入模板.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

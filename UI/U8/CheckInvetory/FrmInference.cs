@@ -8,12 +8,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using U8service.DAL.JoinTableSvc;
 
 namespace DataMaintenance.UI.U8.CheckInvetory
 {
@@ -23,8 +25,8 @@ namespace DataMaintenance.UI.U8.CheckInvetory
         {
             InitializeComponent();
             xmbtnInventoryClass.RefButton.Click += RefInvClass;
-            //set default value of cmbAccountNo
-            cmbAccountNo.Text = "018";
+            SetDefaultValue();
+          
 
 
         }
@@ -40,6 +42,16 @@ namespace DataMaintenance.UI.U8.CheckInvetory
                 cmbWarehouse.DisplayMember = "cWhName";
 
             }
+        }
+
+        //set default value of all controls
+        void SetDefaultValue()
+
+        {  
+            xmbtnInventoryClass.Text="1140";
+            //set default value of cmbAccountNo
+            cmbAccountNo.Text = "018";
+
         }
 
         private async  void tsbInfer_Click(object sender, EventArgs e)
@@ -92,6 +104,8 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             frm.ShowDialog();
         }
 
+        #region data handle
+
         void CaculateActualConsumedQty()
         {
             decimal? requestQty;
@@ -100,14 +114,23 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             decimal? actualConsumedQty;
             for (int i = 0; i < dgv.Rows.Count; i++)
             {
-                 unitConsumingQty = Convert.ToDecimal(dgv.Rows[i].Cells["unitConsumingQty"].Value);
-                 finishedGoodQty = Convert.ToDecimal(dgv.Rows[i].Cells["finishedGoodQty"].Value);
-                 requestQty = Convert.ToDecimal(dgv.Rows[i].Cells["requestQty"].Value);
-                 actualConsumedQty = unitConsumingQty * finishedGoodQty ;
+                unitConsumingQty = Convert.ToDecimal(dgv.Rows[i].Cells["unitConsumingQty"].Value);
+                finishedGoodQty = Convert.ToDecimal(dgv.Rows[i].Cells["finishedGoodQty"].Value);
+                requestQty = Convert.ToDecimal(dgv.Rows[i].Cells["requestQty"].Value);
+                actualConsumedQty = unitConsumingQty * finishedGoodQty;
                 dgv.Rows[i].Cells["actualConsumedQty"].Value = actualConsumedQty;
-                dgv.Rows[i].Cells["inShopQty"].Value =requestQty - actualConsumedQty;
+                dgv.Rows[i].Cells["inShopQty"].Value = requestQty - actualConsumedQty;
             }
         }
+
+
+        private void tsbExport_Click(object sender, EventArgs e)
+        {
+            Utility.Excel.ExportExcel exportExcel = new Utility.Excel.ExportExcel();
+            exportExcel.ExportExcelWithNPOI(dgv, this.Text);
+        }
+        #endregion
+
 
         #region GetData
 
@@ -132,6 +155,60 @@ namespace DataMaintenance.UI.U8.CheckInvetory
                 dgv.Rows[i].Cells["cInvName"].Value = ls[i].cInvName;
                 dgv.Rows[i].Cells["cInvStd"].Value = ls[i].cInvStd;
             }
+        }
+
+
+        private void GetBomParentInvCode()
+        {
+            string invCode;
+            //becauce a child component may have many bomParent
+            List<string> listParentInvCode;
+            StringBuilder sbParentName =new StringBuilder();
+            StringBuilder sbParentCode = new StringBuilder();
+            List< decimal?> ListUnitConsumingQty;
+            BomSvc bomService = new BomSvc(cmbAccountNo.Text);
+            for (int i = 0; i < dgv.Rows.Count; i++)
+            {
+                invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();
+
+              listParentInvCode  = bomService.GetBomParent(invCode,
+                  out ListUnitConsumingQty);
+
+                if (listParentInvCode.Count() > 0)
+                {
+                    for (int j = 0; j < listParentInvCode.Count; j++)
+                    {
+                        string parentName;
+                        parentName = Utility.DAL.QueryService.GetItemFromSingleTable<Inventory>(new SqlParameter[] { new SqlParameter(@"cInvcode", listParentInvCode[j]) },
+                       Utility.Sql.Sqlhelper.DataSourceType.u8, cmbAccountNo.Text).cInvName;
+                        sbParentName.Append(parentName);
+
+                        if (j>=1 & j<listParentInvCode.Count-1)
+                        {
+                            sbParentName.Append(",");
+                        }
+
+                    }
+                        
+                    
+               
+                    dgv.Rows[i].Cells["parentName"].Value = parentName;
+                }
+
+                for (int k = 0; k < listParentInvCode.Count; k++)
+                {
+                    sbParentCode.Append(listParentInvCode[k]);
+                    if (k >= 1 & k < listParentInvCode.Count - 1)
+                    {
+                        sbParentCode.Append(",");
+                    }
+                }
+                dgv.Rows[i].Cells["bomParentInvCode"].Value=sbParentCode;
+                dgv.Rows[i].Cells["unitConsumingQty"].Value = ListUnitConsumingQty.Sum();
+            
+
+            }
+
         }
 
         private async  Task<Boolean> GetCurrentStockAsync(string accountNo)
@@ -248,21 +325,6 @@ namespace DataMaintenance.UI.U8.CheckInvetory
 
         }
 
-        private  void GetBomParentInvCode()
-        {
-            string invCode;
-            decimal? unitConsumingQty;
-            BomService bomService = new BomService();
-                for (int i = 0; i < dgv.Rows.Count; i++)
-                {
-                     invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();
-                    dgv.Rows[i].Cells["bomParentInvCode"].Value =
-                       bomService.GetBomParent(invCode, cmbAccountNo.Text,
-                      out unitConsumingQty);
-                    dgv.Rows[i].Cells["unitConsumingQty"].Value = unitConsumingQty;
-                }
-            
-        }
 
         private  async Task GetFinisedGoodAmountAsync(string accountNo)
         {
@@ -298,10 +360,5 @@ namespace DataMaintenance.UI.U8.CheckInvetory
 
         #endregion
 
-        private void tsbExport_Click(object sender, EventArgs e)
-        {
-            Utility.Excel.ExportExcel exportExcel = new Utility.Excel.ExportExcel();
-            exportExcel.ExportExcelWithNPOI(dgv, this.Text);
-        }
     }
 }
