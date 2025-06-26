@@ -44,6 +44,33 @@ namespace DataMaintenance.UI.U8
 
         private void tsbQuery_Click(object sender, EventArgs e)
         {
+            this.Cursor=Cursors.WaitCursor;
+            var getPoAttachment = new U8service.DAL.JoinTable.Purchase.POSvc(txtAccountNo.Text);
+            if (rbDetail.Checked)
+            {
+                dgvBody.DataSource = getPoAttachment.GetPO(dtpStartDate.Value, dtpEndDate.Value, cmbBizType.Text.ToString());
+            }
+            else
+            {
+                dgvBody.DataSource = getPoAttachment.GetPOHeader(dtpStartDate.Value, dtpEndDate.Value, cmbBizType.Text.ToString());
+            }
+
+          
+         
+
+            dgvBody.ReadOnly = true;
+            this.Cursor = Cursors.Default;
+        }
+        private void dgvBody_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            Utility.Style.DataGridViewStyle style = new Utility.Style.DataGridViewStyle();
+            style.DisplayRowNo(e, dgvBody, false);
+            style.DataGridViewColumnHeaderStyle(dgvBody);
+
+        }
+
+        private void tsbDownloadBatch_Click(object sender, EventArgs e)
+        {
 
         }
     }

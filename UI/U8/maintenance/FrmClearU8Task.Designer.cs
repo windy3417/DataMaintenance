@@ -47,12 +47,12 @@ namespace DataMaintenance.UI.ClearLocker
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsbDeleteTask,
             this.tsbQuery,
+            this.tsbDeleteTask,
             this.tsbClose});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1333, 27);
+            this.toolStrip1.Size = new System.Drawing.Size(1000, 27);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -61,7 +61,7 @@ namespace DataMaintenance.UI.ClearLocker
             this.tsbDeleteTask.Image = global::DataMaintenance.Properties.Resources.delete_multipleRows;
             this.tsbDeleteTask.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbDeleteTask.Name = "tsbDeleteTask";
-            this.tsbDeleteTask.Size = new System.Drawing.Size(97, 24);
+            this.tsbDeleteTask.Size = new System.Drawing.Size(83, 24);
             this.tsbDeleteTask.Text = "删除任务";
             this.tsbDeleteTask.Click += new System.EventHandler(this.tsbDeleteTask_Click);
             // 
@@ -70,7 +70,7 @@ namespace DataMaintenance.UI.ClearLocker
             this.tsbQuery.Image = global::DataMaintenance.Properties.Resources.query;
             this.tsbQuery.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbQuery.Name = "tsbQuery";
-            this.tsbQuery.Size = new System.Drawing.Size(70, 24);
+            this.tsbQuery.Size = new System.Drawing.Size(61, 24);
             this.tsbQuery.Text = "query";
             this.tsbQuery.Click += new System.EventHandler(this.tsbQuery_Click);
             // 
@@ -79,7 +79,7 @@ namespace DataMaintenance.UI.ClearLocker
             this.tsbClose.Image = global::DataMaintenance.Properties.Resources.exit;
             this.tsbClose.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbClose.Name = "tsbClose";
-            this.tsbClose.Size = new System.Drawing.Size(65, 24);
+            this.tsbClose.Size = new System.Drawing.Size(57, 24);
             this.tsbClose.Text = "退出";
             this.tsbClose.Click += new System.EventHandler(this.tsbClose_Click);
             // 
@@ -89,12 +89,11 @@ namespace DataMaintenance.UI.ClearLocker
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(16, 139);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 111);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(1304, 550);
+            this.dataGridView1.Size = new System.Drawing.Size(978, 440);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dataGridView1_RowPostPaint);
             // 
@@ -104,10 +103,9 @@ namespace DataMaintenance.UI.ClearLocker
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(16, 35);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Location = new System.Drawing.Point(12, 28);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1304, 41);
+            this.panel1.Size = new System.Drawing.Size(978, 33);
             this.panel1.TabIndex = 2;
             // 
             // label1
@@ -115,18 +113,20 @@ namespace DataMaintenance.UI.ClearLocker
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("SimSun", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(586, 8);
+            this.label1.Location = new System.Drawing.Point(440, 6);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(140, 24);
+            this.label1.Size = new System.Drawing.Size(119, 19);
             this.label1.TabIndex = 0;
             this.label1.Text = "task clear";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(34, 100);
+            this.label2.Location = new System.Drawing.Point(26, 80);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 15);
+            this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 3;
             this.label2.Text = "accoutNo";
             // 
@@ -136,22 +136,22 @@ namespace DataMaintenance.UI.ClearLocker
             this.cmbAccountNo.Items.AddRange(new object[] {
             "017",
             "018"});
-            this.cmbAccountNo.Location = new System.Drawing.Point(111, 97);
+            this.cmbAccountNo.Location = new System.Drawing.Point(83, 78);
+            this.cmbAccountNo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbAccountNo.Name = "cmbAccountNo";
-            this.cmbAccountNo.Size = new System.Drawing.Size(121, 23);
+            this.cmbAccountNo.Size = new System.Drawing.Size(92, 20);
             this.cmbAccountNo.TabIndex = 4;
             // 
             // FrmClearU8Task
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1333, 702);
+            this.ClientSize = new System.Drawing.Size(1000, 562);
             this.Controls.Add(this.cmbAccountNo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.toolStrip1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FrmClearU8Task";
             this.Text = "U8任务清理";
             this.toolStrip1.ResumeLayout(false);

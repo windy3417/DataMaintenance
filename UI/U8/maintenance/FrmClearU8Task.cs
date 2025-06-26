@@ -48,7 +48,7 @@ namespace DataMaintenance.UI.ClearLocker
                 if (MessageBox.Show("强行清除正在执行的任务，有可能会使正在执行的数据出错！！！建议通知任务人员主动退出！是否要清除任务?", "任务清除警告"
                     , MessageBoxButtons.YesNo, MessageBoxIcon.Warning)==DialogResult.Yes)
                 {
-                    string sql = "delete from ua_task";
+                    string sql = $"delete from ua_task where cacc_id={cmbAccountNo.Text} ";
                     Sqlhelper.ExecuteWithNoneParameter(sql, Sqlhelper.DataSourceType.ufsystem);
                     MessageBox.Show("任务删除成功");
                     dataGridView1.DataSource = null;
