@@ -77,6 +77,7 @@ namespace DataMaintenance.UI.U8
             this.tsbExport.Name = "tsbExport";
             this.tsbExport.Size = new System.Drawing.Size(53, 22);
             this.tsbExport.Text = "导出";
+            this.tsbExport.Click += new System.EventHandler(this.tsbExport_Click);
             // 
             // tsbQuery
             // 

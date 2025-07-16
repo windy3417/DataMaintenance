@@ -33,19 +33,19 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbQuery = new System.Windows.Forms.ToolStripButton();
+            this.tsbExport = new System.Windows.Forms.ToolStripButton();
             this.tspPrint = new System.Windows.Forms.ToolStripButton();
             this.tlpFilter = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbAccountNo = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtpDeadLine = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbWarehouseNo = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvBody = new System.Windows.Forms.DataGridView();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
-            this.tsbExport = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
             this.tlpFilter.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -61,7 +61,7 @@
             this.tspPrint});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(800, 22);
+            this.toolStrip1.Size = new System.Drawing.Size(1000, 27);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -70,16 +70,26 @@
             this.tsbQuery.Image = global::DataMaintenance.Properties.Resources.query;
             this.tsbQuery.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbQuery.Name = "tsbQuery";
-            this.tsbQuery.Size = new System.Drawing.Size(57, 19);
+            this.tsbQuery.Size = new System.Drawing.Size(57, 24);
             this.tsbQuery.Text = "查询";
             this.tsbQuery.Click += new System.EventHandler(this.tsbQuery_Click);
+            // 
+            // tsbExport
+            // 
+            this.tsbExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbExport.Image = global::DataMaintenance.Properties.Resources.export;
+            this.tsbExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbExport.Name = "tsbExport";
+            this.tsbExport.Size = new System.Drawing.Size(24, 24);
+            this.tsbExport.Text = "输出";
+            this.tsbExport.Click += new System.EventHandler(this.tsbExport_Click);
             // 
             // tspPrint
             // 
             this.tspPrint.Image = global::DataMaintenance.Properties.Resources.打印;
             this.tspPrint.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tspPrint.Name = "tspPrint";
-            this.tspPrint.Size = new System.Drawing.Size(57, 19);
+            this.tspPrint.Size = new System.Drawing.Size(57, 24);
             this.tspPrint.Text = "打印";
             this.tspPrint.Click += new System.EventHandler(this.tspPrint_Click);
             // 
@@ -91,11 +101,11 @@
             this.tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 77F));
             this.tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 231F));
             this.tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102F));
-            this.tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 366F));
+            this.tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 371F));
             this.tlpFilter.Controls.Add(this.label2, 0, 0);
             this.tlpFilter.Controls.Add(this.cmbAccountNo, 1, 0);
             this.tlpFilter.Controls.Add(this.label3, 0, 1);
-            this.tlpFilter.Controls.Add(this.dateTimePicker1, 1, 1);
+            this.tlpFilter.Controls.Add(this.dtpDeadLine, 1, 1);
             this.tlpFilter.Controls.Add(this.label4, 2, 0);
             this.tlpFilter.Controls.Add(this.cmbWarehouseNo, 3, 0);
             this.tlpFilter.Location = new System.Drawing.Point(12, 85);
@@ -132,12 +142,12 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "当前日期";
             // 
-            // dateTimePicker1
+            // dtpDeadLine
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(80, 31);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(205, 21);
-            this.dateTimePicker1.TabIndex = 2;
+            this.dtpDeadLine.Location = new System.Drawing.Point(80, 31);
+            this.dtpDeadLine.Name = "dtpDeadLine";
+            this.dtpDeadLine.Size = new System.Drawing.Size(205, 21);
+            this.dtpDeadLine.TabIndex = 2;
             // 
             // label4
             // 
@@ -220,16 +230,6 @@
             // 
             this.printDialog1.UseEXDialog = true;
             // 
-            // tsbExport
-            // 
-            this.tsbExport.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbExport.Image = global::DataMaintenance.Properties.Resources.export;
-            this.tsbExport.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbExport.Name = "tsbExport";
-            this.tsbExport.Size = new System.Drawing.Size(24, 19);
-            this.tsbExport.Text = "输出";
-            this.tsbExport.Click += new System.EventHandler(this.tsbExport_Click);
-            // 
             // FrmCurrentStock
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -263,7 +263,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cmbAccountNo;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtpDeadLine;
         private System.Windows.Forms.DataGridView dgvBody;
         private System.Windows.Forms.ToolStripButton tsbQuery;
         private System.Windows.Forms.Label label4;

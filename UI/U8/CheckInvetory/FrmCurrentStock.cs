@@ -29,7 +29,7 @@ namespace DataMaintenance.UI.U8.CheckInvetory
         //记录当前打印的行数，以决定是继续另起一页打印，dataGridView的首行索引为0
         private int printRowCount = 0;
         float pageHeight = 0;
-        int rowsPerPage;
+        int rowsPerPage=40;
         //record current page
         private int _currentPage = 1;
         private int _totalPages=1;
@@ -157,90 +157,207 @@ namespace DataMaintenance.UI.U8.CheckInvetory
         private void PrintPageEventHandler(object sender, PrintPageEventArgs e)
         {
             // Define font and brush for drawing text
-            Font headerFont = new Font("Arial", 12f, FontStyle.Bold);
+            Font titleFont = new Font("Arial", 16f, FontStyle.Bold);
+            Font tableHeaderFont = new Font("Arial", 10f, FontStyle.Bold);
+            Font headerFont = new Font("Arial", 8f, FontStyle.Bold);
             Font dataFont = new Font("Arial", 8f);
             Brush brush = Brushes.Black;
             Pen pen = new Pen(Color.Black);
 
             // Define the layout dimensions 
 
-
-
             float pageWidth = e.PageBounds.Width;
             float pageHeight = e.PageBounds.Height;
-            float usedHeadFooterHeight = 0;
+         
             float usedTotalHeight = 0;
-            float margin = 50; // Adjust margin as needed
+            float margin = 20; // Adjust margin as needed
 
 
-            //logo
-            e.Graphics.DrawImage(Resources.CZ_LOGO, new Rectangle(100, Convert.ToInt32(margin), 150, 40));
-            usedHeadFooterHeight += 40;
-            usedTotalHeight += 40;
 
-            // Draw the layout elements (adjust as needed)
-            e.Graphics.DrawLine(pen, margin, margin, pageWidth - margin, margin); // Top border
-            e.Graphics.DrawLine(pen, margin, margin, margin, pageHeight - margin); // Left border
-            e.Graphics.DrawLine(pen, margin, pageHeight - margin, pageWidth - margin, pageHeight - margin); // Bottom border
-            e.Graphics.DrawLine(pen, pageWidth - margin, margin, pageWidth - margin, pageHeight - margin); // Right border
+            #region logo and title and table header
+            // Set logo position and size
+            int logoX = (int)margin + 10;
+            int logoY = (int)margin + 10;
+            int logoWidth = 150;
+            int logoHeight = 40;
 
+            // Draw the logo at the top-left
+            e.Graphics.DrawImage(Resources.CZ_LOGO, new Rectangle(logoX, logoY, logoWidth, logoHeight));
 
-            // Draw title
+            // Calculate the height used by the logo
+            usedTotalHeight += logoY+ logoHeight;
+            #endregion
+
+            #region draw title
+
+            // Set the vertical position for the title below the logo
+            float titleY = logoY + logoHeight / 2+10; // 10 units padding below logo
+
+            // Draw the title centered horizontally, below the logo
             string title = "盘点表";
-            SizeF titleSize = e.Graphics.MeasureString(title, headerFont);
-            e.Graphics.DrawString(title, headerFont, brush, (pageWidth - titleSize.Width) / 2, margin + 10);
+            SizeF titleSize = e.Graphics.MeasureString(title, titleFont);
+            e.Graphics.DrawString(title, titleFont, brush, (pageWidth - titleSize.Width) / 2, titleY);
+
+            // Calculate the height used by the title
+
+
+            #endregion
+
+
+            #region draw table header
+            // Draw the check date and account deadline below the title
+
+            usedTotalHeight += 25;
+            float headerPosY = usedTotalHeight;
+            string checkDate = "盘点日期:";
+            SizeF checkDateSize = e.Graphics.MeasureString(checkDate, tableHeaderFont);
+
+            // place the check date in the right and it's height is the same as deadline date and left some space to write actual check date
+            e.Graphics.DrawString(checkDate, tableHeaderFont, brush, pageWidth - margin - checkDateSize.Width-40,
+               headerPosY);
+
+          
+            string deadline =$"截止日期:{dtpDeadLine.Value.ToString("yyyy-MM-dd")}";
+          
+            SizeF deadlineDateSize = e.Graphics.MeasureString(deadline, tableHeaderFont);
+            e.Graphics.DrawString(deadline, tableHeaderFont, brush, (pageWidth - deadlineDateSize.Width) / 2,
+                headerPosY);
+
+          
+
+
+            //calculate usedtotalheight
+            usedTotalHeight +=deadlineDateSize.Height;
+            #endregion
+
+                              
+
+            #region draw column headers
 
 
             // Draw column headers (adjust column positions and widths)
-            float[] columnPositions = { margin + 10, margin + 80, margin + 160, margin + 300, margin + 450, margin + 500, margin + 550, margin + 600 };
+
+            usedTotalHeight += 20;
+            float columnHeaderY = usedTotalHeight ;
+
+            float[] columnWidths = { 90, 100, 140, 180, 80, 80, 80 };
+            float[] columnPositions = new float[columnWidths.Length];
+            columnPositions[0] = margin + 10;
+            for (int i = 1; i < columnWidths.Length; i++)
+            {
+                columnPositions[i] = columnPositions[i - 1] + columnWidths[i - 1];
+            }
             string[] columnHeaders = { "仓库名称", "存货编码", "存货名称", "规格型号", "现存数量", "盘点数量", "差异" };
             for (int i = 0; i < columnHeaders.Length; i++)
             {
                 e.Graphics.DrawString(columnHeaders[i], dataFont, brush, columnPositions[i], usedTotalHeight + 30);
             }
 
-            usedTotalHeight += 30;
-
-            // Calculate the starting position for drawing data
-            float xStart = margin + 10;
-            float yStart = usedTotalHeight;
+            //usedTotalHeight +=dataFont.Height;
 
 
+            #endregion
 
 
+            #region draw table frame
+
+            // Calculate table top-left and bottom-right
+            float tableX = margin ;
+            float tableY = usedTotalHeight -10;
+            float rowHeight = 30f;
+            int rowCount = Math.Min(rowsPerPage, dgvBody.Rows.Count - printRowCount); // or set a fixed number for preview
+
+            // Calculate table width (sum of column widths)
+            float tableWidth = columnWidths.Sum();
+            // Calculate table height (header + data rows)
+            float tableHeight = rowHeight * (rowCount + 1); // +1 for header
+
+            // Draw outer border
+            e.Graphics.DrawRectangle(pen, tableX, tableY, tableWidth, tableHeight);
+
+            // Draw vertical lines (columns)
+            float x = tableX;
+            for (int i = 0; i < columnWidths.Length; i++)
+            {
+                e.Graphics.DrawLine(pen, x, tableY, x, tableY + tableHeight);
+                x += columnWidths[i];
+            }
+            // Draw last vertical line at the end
+            e.Graphics.DrawLine(pen, tableX + tableWidth, tableY, tableX + tableWidth, tableY + tableHeight);
+
+            // Draw horizontal lines (rows)
+            for (int i = 0; i <= rowCount + 1; i++) // +1 for header
+            {
+                float y = tableY + i * rowHeight;
+                e.Graphics.DrawLine(pen, tableX, y, tableX + tableWidth, y);
+            }
+
+            #endregion
+
+            #region draw table data
 
             // Loop through the DataGridView rows
+
+            float dataPosY = usedTotalHeight + 10;
 
             while (usedTotalHeight < pageHeight - margin && printRowCount < dgvBody.Rows.Count)
             {
                 // Draw the row
-                for (int j = 0; j < dgvBody.Columns.Count; j++)
+                for (int j = 1; j < dgvBody.Columns.Count; j++)
                 {
                     string cellValue = dgvBody.Rows[printRowCount].Cells[j].Value?.ToString() ?? "";
-                    float x = columnPositions[j];
-                    e.Graphics.DrawString(cellValue, dataFont, brush, x, usedTotalHeight + 30);
+                    float a = columnPositions[j - 1];
+                    e.Graphics.DrawString(cellValue, dataFont, brush, a, dataPosY);
                 }
                 printRowCount++;
-                usedTotalHeight += 30;
+
+                dataPosY += 30;
             }
 
-            //打印页码
+
+            #endregion
 
 
+            #region footer
+            float footerPosY = pageHeight - margin-50;
+            float footPosX = margin + 10;
 
+            string makeBy = "制表人:";
+            SizeF makeBySize = e.Graphics.MeasureString(makeBy, tableHeaderFont);
+            e.Graphics.DrawString(makeBy, tableHeaderFont, brush, footPosX, footerPosY);
+
+            string checkBy = "盘点人:";
+            SizeF checkBySize = e.Graphics.MeasureString(checkBy, tableHeaderFont);
+            e.Graphics.DrawString(checkBy, tableHeaderFont, brush, (pageWidth-makeBySize.Width)/2 , footerPosY);
+
+            string auditBy = "稽核人:";
+            SizeF auditBySize = e.Graphics.MeasureString(auditBy, tableHeaderFont);
+            e.Graphics.DrawString(auditBy, tableHeaderFont, brush, pageWidth-margin-auditBySize.Width , footerPosY);
+
+
+            usedTotalHeight += makeBySize.Height;
+            #endregion
+
+
+            #region draw page number
+            float pageNumberPosY = pageHeight - margin - 30;
+
+            // Draw the footer line
+            e.Graphics.DrawLine(pen, margin + 10, pageNumberPosY, pageWidth - margin - 10, footerPosY);
             e.Graphics.DrawString("第" + _currentPage + "页 共" + this._totalPages + "页",
-                new Font("宋体", 10, FontStyle.Regular), Brushes.Black,
-                e.MarginBounds.Width / 2 - 30
-                , e.MarginBounds.Height - 50);//底边距太小，则无法打印出来
+             new Font("宋体", 10, FontStyle.Regular), Brushes.Black,
+             pageWidth / 2 - 30
+             , pageNumberPosY);//底边距太小，则无法打印出来
 
-            usedHeadFooterHeight += 50;
+            #endregion
 
+            #region has more pages
 
             // Calculate the total number of pages
-            float tableHeight = pageHeight -usedHeadFooterHeight ;
-            if (_currentPage==1)
+            //float tableHeight = pageHeight - usedHeadFooterHeight ;
+            if (_currentPage == 1)
             {
-                rowsPerPage=printRowCount;
+                rowsPerPage = printRowCount;
             }
             _totalPages = (int)Math.Ceiling((double)dgvBody.Rows.Count / rowsPerPage);
 
@@ -252,6 +369,10 @@ namespace DataMaintenance.UI.U8.CheckInvetory
                 e.HasMorePages = true;
 
             }
+
+
+            #endregion
+
 
             // Dispose of objects
             headerFont.Dispose();
