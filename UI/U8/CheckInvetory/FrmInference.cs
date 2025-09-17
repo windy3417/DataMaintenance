@@ -31,6 +31,8 @@ namespace DataMaintenance.UI.U8.CheckInvetory
 
         }
 
+
+
         void InitialDataSource()
         {
             using (var db = new U8Context("018"))
@@ -256,7 +258,7 @@ namespace DataMaintenance.UI.U8.CheckInvetory
                 try
                 {
 
-                    DAL.U8services.PruchaseInService rs = new DAL.U8services.PruchaseInService();
+                    DAL.U8services.PurchaseInService rs = new DAL.U8services.PurchaseInService(accountNo);
                     for (int i = 0; i < dgv.Rows.Count; i++)
                     {
                         var invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();

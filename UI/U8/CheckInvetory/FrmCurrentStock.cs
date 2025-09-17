@@ -29,7 +29,7 @@ namespace DataMaintenance.UI.U8.CheckInvetory
         //记录当前打印的行数，以决定是继续另起一页打印，dataGridView的首行索引为0
         private int printRowCount = 0;
         float pageHeight = 0;
-        int rowsPerPage=40;
+        int rowsPerPage=30;
         //record current page
         private int _currentPage = 1;
         private int _totalPages=1;
@@ -81,7 +81,20 @@ namespace DataMaintenance.UI.U8.CheckInvetory
                  new U8service.DAL.JoinTableSvc.CurrentStockService(cmbAccountNo.SelectedValue.ToString())
                  .GetCurrentStock(cmbWarehouseNo.SelectedValue.ToString());
 
+            //set last column  of datagridview as double 
+         
+                    dgvBody.Columns["iQuantity"].ValueType = typeof(double);
+                
+            
+          
+
             dgvBody.ReadOnly = true;
+
+            //display row number in datagridview
+            for (int i = 0; i < dgvBody.Rows.Count; i++)
+            {
+                dgvBody.Rows[i].HeaderCell.Value = (i + 1).ToString();
+            }
 
             this.Cursor = Cursors.Default;
         }
@@ -213,7 +226,7 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             SizeF checkDateSize = e.Graphics.MeasureString(checkDate, tableHeaderFont);
 
             // place the check date in the right and it's height is the same as deadline date and left some space to write actual check date
-            e.Graphics.DrawString(checkDate, tableHeaderFont, brush, pageWidth - margin - checkDateSize.Width-40,
+            e.Graphics.DrawString(checkDate, tableHeaderFont, brush, pageWidth - margin - checkDateSize.Width -100,
                headerPosY);
 
           
@@ -240,17 +253,17 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             usedTotalHeight += 20;
             float columnHeaderY = usedTotalHeight ;
 
-            float[] columnWidths = { 90, 100, 140, 180, 80, 80, 80 };
+            float[] columnWidths = {30, 90, 100, 140, 180, 80, 80, 80 };
             float[] columnPositions = new float[columnWidths.Length];
             columnPositions[0] = margin + 10;
             for (int i = 1; i < columnWidths.Length; i++)
             {
                 columnPositions[i] = columnPositions[i - 1] + columnWidths[i - 1];
             }
-            string[] columnHeaders = { "仓库名称", "存货编码", "存货名称", "规格型号", "现存数量", "盘点数量", "差异" };
+            string[] columnHeaders = {"行号", "仓库名称", "存货编码", "存货名称", "规格型号", "现存数量", "盘点数量", "差异" };
             for (int i = 0; i < columnHeaders.Length; i++)
             {
-                e.Graphics.DrawString(columnHeaders[i], dataFont, brush, columnPositions[i], usedTotalHeight + 30);
+                e.Graphics.DrawString(columnHeaders[i], dataFont, brush, columnPositions[i], columnHeaderY );
             }
 
             //usedTotalHeight +=dataFont.Height;
@@ -266,6 +279,7 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             float tableY = usedTotalHeight -10;
             float rowHeight = 30f;
             int rowCount = Math.Min(rowsPerPage, dgvBody.Rows.Count - printRowCount); // or set a fixed number for preview
+
 
             // Calculate table width (sum of column widths)
             float tableWidth = columnWidths.Sum();
@@ -298,7 +312,7 @@ namespace DataMaintenance.UI.U8.CheckInvetory
 
             // Loop through the DataGridView rows
 
-            float dataPosY = usedTotalHeight + 10;
+            float dataPosY = usedTotalHeight + 30;
 
             while (usedTotalHeight < pageHeight - margin && printRowCount < dgvBody.Rows.Count)
             {
@@ -332,7 +346,7 @@ namespace DataMaintenance.UI.U8.CheckInvetory
 
             string auditBy = "稽核人:";
             SizeF auditBySize = e.Graphics.MeasureString(auditBy, tableHeaderFont);
-            e.Graphics.DrawString(auditBy, tableHeaderFont, brush, pageWidth-margin-auditBySize.Width , footerPosY);
+            e.Graphics.DrawString(auditBy, tableHeaderFont, brush, pageWidth-margin-auditBySize.Width-100 , footerPosY);
 
 
             usedTotalHeight += makeBySize.Height;
@@ -343,7 +357,7 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             float pageNumberPosY = pageHeight - margin - 30;
 
             // Draw the footer line
-            e.Graphics.DrawLine(pen, margin + 10, pageNumberPosY, pageWidth - margin - 10, footerPosY);
+            e.Graphics.DrawLine(pen, margin + 10, pageNumberPosY, pageWidth - margin - 10, pageNumberPosY-10);
             e.Graphics.DrawString("第" + _currentPage + "页 共" + this._totalPages + "页",
              new Font("宋体", 10, FontStyle.Regular), Brushes.Black,
              pageWidth / 2 - 30

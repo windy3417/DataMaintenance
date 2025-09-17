@@ -31,7 +31,7 @@
     <SuiteName>信息平台管理</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>27</ApplicationRevision>
+    <ApplicationRevision>29</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -118,7 +118,7 @@
     <Compile Include="DAL\U8services\BomService.cs" />
     <Compile Include="DAL\U8services\FinishedGoodService.cs" />
     <Compile Include="DAL\U8services\MateriaOutService.cs" />
-    <Compile Include="DAL\U8services\PruchaseInService.cs" />
+    <Compile Include="DAL\U8services\PurchaseInService.cs" />
     <Compile Include="DAL\U8services\Rdrecord32Service.cs" />
     <Compile Include="DAL\ViewServices\U8services\BoxIDExistService.cs" />
     <Compile Include="DAL\ViewServices\U8services\VendorAttachmentService.cs" />
@@ -201,6 +201,7 @@
     <Compile Include="Model\Ufsystem\UA_TaskLog.cs" />
     <Compile Include="Model\Ufsystem\UA_User.cs" />
     <Compile Include="Model\ViewModel\ArchiveVModel.cs" />
+    <Compile Include="Model\ViewModel\PurchasingAmountVModel.cs" />
     <Compile Include="UI\Common\FrmHelp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -427,6 +428,12 @@
     <Compile Include="UI\U8\Report\FrmIncosistencySaleWithProduction.Designer.cs">
       <DependentUpon>FrmIncosistencySaleWithProduction.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\U8\Report\FrmPurchaseingQtyEachMonth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\U8\Report\FrmPurchaseingQtyEachMonth.Designer.cs">
+      <DependentUpon>FrmPurchaseingQtyEachMonth.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\U8\Report\FrmU8FinishedGoodsUnitPriceReport.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -577,6 +584,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\Report\FrmIncosistencySaleWithProduction.resx">
       <DependentUpon>FrmIncosistencySaleWithProduction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\U8\Report\FrmPurchaseingQtyEachMonth.resx">
+      <DependentUpon>FrmPurchaseingQtyEachMonth.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\Report\FrmU8FinishedGoodsUnitPriceReport.resx">
       <DependentUpon>FrmU8FinishedGoodsUnitPriceReport.cs</DependentUpon>
