@@ -11,17 +11,30 @@ using System.Windows.Forms;
 
 namespace DataMaintenance.UI.U8.Report
 {
-    public partial class FrmPurchaseingQtyEachMonth : Form
+    public partial class FrmQtyStatisticEachMonth : Form
     {
-        public FrmPurchaseingQtyEachMonth()
+        public FrmQtyStatisticEachMonth()
         {
             InitializeComponent();
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            PurchaseInService processor = new PurchaseInService(cmbAccountNo.Text);
-            DataTable reportData = processor.GetPurchasingQtyEachMonth();
+            DataTable reportData =new DataTable();
+
+            if (cmbVoucherType.Text=="采购入库单")
+            {
+                PurchaseInService processor = new PurchaseInService(cmbAccountNo.Text);
+
+                 reportData = processor.GetPurchasingQtyEachMonth();
+            }
+
+            if (cmbVoucherType.Text == "销售出库单")
+            {
+                SaleOutBoundVoucher saleOutBoundVoucher = new SaleOutBoundVoucher(cmbAccountNo.Text);
+                reportData = saleOutBoundVoucher.GetSaleOutQtyEachMonth();
+            }
+            
 
             if (reportData != null)
             {

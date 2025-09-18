@@ -1,7 +1,7 @@
 ﻿
 namespace DataMaintenance.UI.U8.Report
 {
-    partial class FrmU8FinishedGoodsUnitPriceReport
+    partial class FrmU8FinishedGoodsUnitPriceList
     {
         /// <summary>
         /// Required designer variable.

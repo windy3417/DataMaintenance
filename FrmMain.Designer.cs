@@ -64,6 +64,7 @@
             this.车间库存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.车间库存推算采购到销售ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.现存量ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.purchasingQtyEachMonthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.重登录ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.帮助ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -76,7 +77,6 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tstb_currentUser = new System.Windows.Forms.ToolStripTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.purchasingQtyEachMonthToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_main.SuspendLayout();
             this.panel1.SuspendLayout();
             this.ts_foot.SuspendLayout();
@@ -363,7 +363,7 @@
             // 车间库存ToolStripMenuItem
             // 
             this.车间库存ToolStripMenuItem.Name = "车间库存ToolStripMenuItem";
-            this.车间库存ToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.车间库存ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.车间库存ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.CheckInvetory.FrmInference";
             this.车间库存ToolStripMenuItem.Text = "车间库存-领用减入库";
             this.车间库存ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
@@ -371,7 +371,7 @@
             // 车间库存推算采购到销售ToolStripMenuItem
             // 
             this.车间库存推算采购到销售ToolStripMenuItem.Name = "车间库存推算采购到销售ToolStripMenuItem";
-            this.车间库存推算采购到销售ToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.车间库存推算采购到销售ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.车间库存推算采购到销售ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.CheckInvetory.FrmInferStockWithPurSubtractSale";
             this.车间库存推算采购到销售ToolStripMenuItem.Text = "车间库存-采购减销售";
             this.车间库存推算采购到销售ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
@@ -379,10 +379,18 @@
             // 现存量ToolStripMenuItem
             // 
             this.现存量ToolStripMenuItem.Name = "现存量ToolStripMenuItem";
-            this.现存量ToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.现存量ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.现存量ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.CheckInvetory.FrmCurrentStock";
             this.现存量ToolStripMenuItem.Text = "现存量";
             this.现存量ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
+            // 
+            // purchasingQtyEachMonthToolStripMenuItem
+            // 
+            this.purchasingQtyEachMonthToolStripMenuItem.Name = "purchasingQtyEachMonthToolStripMenuItem";
+            this.purchasingQtyEachMonthToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.purchasingQtyEachMonthToolStripMenuItem.Tag = "DataMaintenance.UI.U8.Report.FrmQtyStatisticEachMonth";
+            this.purchasingQtyEachMonthToolStripMenuItem.Text = "QtyEachMonth";
+            this.purchasingQtyEachMonthToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
             // 
             // 重登录ToolStripMenuItem
             // 
@@ -486,14 +494,6 @@
             this.tabControl1.TabIndex = 1;
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
-            // 
-            // purchasingQtyEachMonthToolStripMenuItem
-            // 
-            this.purchasingQtyEachMonthToolStripMenuItem.Name = "purchasingQtyEachMonthToolStripMenuItem";
-            this.purchasingQtyEachMonthToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
-            this.purchasingQtyEachMonthToolStripMenuItem.Tag = "DataMaintenance.UI.U8.Report.FrmPurchaseingQtyEachMonth";
-            this.purchasingQtyEachMonthToolStripMenuItem.Text = "PurchasingQtyEachMonth";
-            this.purchasingQtyEachMonthToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
             // 
             // FrmMain
             // 

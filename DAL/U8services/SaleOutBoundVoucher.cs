@@ -1,60 +1,24 @@
-﻿using DataMaintenance.Model;
-using DataMaintenance.Model.U8;
-using DataMaintenance.Model.ViewModel;
+﻿using DataMaintenance.Model.ViewModel;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using Utility.Sql;
 
 namespace DataMaintenance.DAL.U8services
 {
-    public class PurchaseInService
+    public class SaleOutBoundVoucher
     {
         private readonly List<string> productCodes = new List<string>
     {
-        "11400007", "11400008", "12400024", "12410025", "12410026", "12410027",
-        "12410028", "12410029", "12400041", "12410030", "12410031"
+        "40400006", "40400007"
     };
         private string _accountNo;
-
-        public PurchaseInService(string accountNo)
+        public SaleOutBoundVoucher(string accountNo)
         { this._accountNo = accountNo; }
-        public decimal? GetPurchseAmountQty(Func<RdRecord01, Boolean> headerFilter,
-            Func<rdrecords01, Boolean> funcDetail, string u8AccountNo)
-        {
-            using (var db = new U8Context(u8AccountNo))
-            {
-                var query = from p in db.RdRecord01.Where(headerFilter)
-                            join r in db.rdrecords01.Where(funcDetail)
-                            on p.ID equals r.ID
-
-
-                            select r.iQuantity;
-                return query.Sum();
-            }
-        }
-
-        public decimal? GetPurchseAmountQty(DateTime stockInDate,
-           string cinvCode, string u8AccountNo)
-        {
-            using (var db = new U8Context(u8AccountNo))
-            {
-                var query = from p in db.RdRecord01.Where(s => s.dDate <= stockInDate)
-                            join r in db.rdrecords01.Where(rd => rd.cInvCode == cinvCode)
-                            on p.ID equals r.ID
-
-
-                            select r.iQuantity;
-
-                return query.ToList().Sum();
-            }
-        }
-
         public List<QuantiryAmountEachMonthVModel> GetPurchseAmountQty()
         {
             var rawDataList = new List<QuantiryAmountEachMonthVModel>();
@@ -67,9 +31,9 @@ namespace DataMaintenance.DAL.U8services
                        CONVERT(VARCHAR(7), p.ddate, 120) AS Month,
                        ps.iQuantity AS Quantity
                    FROM
-                       rdrecord01 p
+                       rdrecord32 p
                    INNER JOIN
-                       rdrecords01 ps ON p.id = ps.id
+                       rdrecords32 ps ON p.id = ps.id
                    INNER JOIN
                        inventory i ON ps.cinvcode = i.cinvcode
                    WHERE
@@ -102,7 +66,7 @@ namespace DataMaintenance.DAL.U8services
             return rawDataList;
         }
 
-        public DataTable GetPurchasingQtyEachMonth()
+        public DataTable GetSaleOutQtyEachMonth()
         {
             // 步骤 1: 从数据库中获取原始数据
             var rawData = GetPurchseAmountQty();
@@ -151,8 +115,5 @@ namespace DataMaintenance.DAL.U8services
 
             return dataTable;
         }
-
     }
 }
-
-

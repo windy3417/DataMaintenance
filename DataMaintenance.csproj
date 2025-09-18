@@ -120,6 +120,7 @@
     <Compile Include="DAL\U8services\MateriaOutService.cs" />
     <Compile Include="DAL\U8services\PurchaseInService.cs" />
     <Compile Include="DAL\U8services\Rdrecord32Service.cs" />
+    <Compile Include="DAL\U8services\SaleOutBoundVoucher.cs" />
     <Compile Include="DAL\ViewServices\U8services\BoxIDExistService.cs" />
     <Compile Include="DAL\ViewServices\U8services\VendorAttachmentService.cs" />
     <Compile Include="DAL\RefServices\U8services\InventoryRefService.cs" />
@@ -201,7 +202,7 @@
     <Compile Include="Model\Ufsystem\UA_TaskLog.cs" />
     <Compile Include="Model\Ufsystem\UA_User.cs" />
     <Compile Include="Model\ViewModel\ArchiveVModel.cs" />
-    <Compile Include="Model\ViewModel\PurchasingAmountVModel.cs" />
+    <Compile Include="Model\ViewModel\QuantiryAmountEachMonthVModel.cs" />
     <Compile Include="UI\Common\FrmHelp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -428,17 +429,17 @@
     <Compile Include="UI\U8\Report\FrmIncosistencySaleWithProduction.Designer.cs">
       <DependentUpon>FrmIncosistencySaleWithProduction.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\U8\Report\FrmPurchaseingQtyEachMonth.cs">
+    <Compile Include="UI\U8\Report\FrmQtyStatisticEachMonth.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\U8\Report\FrmPurchaseingQtyEachMonth.Designer.cs">
-      <DependentUpon>FrmPurchaseingQtyEachMonth.cs</DependentUpon>
+    <Compile Include="UI\U8\Report\FrmQtyStatisticEachMonth.Designer.cs">
+      <DependentUpon>FrmQtyStatisticEachMonth.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\U8\Report\FrmU8FinishedGoodsUnitPriceReport.cs">
+    <Compile Include="UI\U8\Report\FrmU8FinishedGoodsUnitPriceList.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\U8\Report\FrmU8FinishedGoodsUnitPriceReport.Designer.cs">
-      <DependentUpon>FrmU8FinishedGoodsUnitPriceReport.cs</DependentUpon>
+    <Compile Include="UI\U8\Report\FrmU8FinishedGoodsUnitPriceList.Designer.cs">
+      <DependentUpon>FrmU8FinishedGoodsUnitPriceList.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\U8\VoucherList\FrmUnitProductionCostList.cs">
       <SubType>Form</SubType>
@@ -585,11 +586,11 @@
     <EmbeddedResource Include="UI\U8\Report\FrmIncosistencySaleWithProduction.resx">
       <DependentUpon>FrmIncosistencySaleWithProduction.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\U8\Report\FrmPurchaseingQtyEachMonth.resx">
-      <DependentUpon>FrmPurchaseingQtyEachMonth.cs</DependentUpon>
+    <EmbeddedResource Include="UI\U8\Report\FrmQtyStatisticEachMonth.resx">
+      <DependentUpon>FrmQtyStatisticEachMonth.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\U8\Report\FrmU8FinishedGoodsUnitPriceReport.resx">
-      <DependentUpon>FrmU8FinishedGoodsUnitPriceReport.cs</DependentUpon>
+    <EmbeddedResource Include="UI\U8\Report\FrmU8FinishedGoodsUnitPriceList.resx">
+      <DependentUpon>FrmU8FinishedGoodsUnitPriceList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\VoucherList\FrmUnitProductionCostList.resx">
       <DependentUpon>FrmUnitProductionCostList.cs</DependentUpon>

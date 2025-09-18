@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataMaintenance.Model.ViewModel
 {
-    public class PurchasingAmountVModel
+    public class QuantiryAmountEachMonthVModel
     {
 
        

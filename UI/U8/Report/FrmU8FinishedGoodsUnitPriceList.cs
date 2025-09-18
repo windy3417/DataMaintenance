@@ -15,9 +15,9 @@ using Utility.DAL;
 
 namespace DataMaintenance.UI.U8.Report
 {
-    public partial class FrmU8FinishedGoodsUnitPriceReport : Form
+    public partial class FrmU8FinishedGoodsUnitPriceList : Form
     {
-        public FrmU8FinishedGoodsUnitPriceReport()
+        public FrmU8FinishedGoodsUnitPriceList()
         {
             InitializeComponent();
             InitializeControlsStatus();
