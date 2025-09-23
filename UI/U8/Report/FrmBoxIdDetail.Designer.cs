@@ -38,7 +38,10 @@ namespace DataMaintenance.UI.U8
             this.boxId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.iquantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.xmPagingReader1 = new Utility.UControl.XmPagingReader();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.tsbExport = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetail)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvDetail
@@ -48,7 +51,7 @@ namespace DataMaintenance.UI.U8
             this.dgvDetail.BackgroundColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -63,17 +66,17 @@ namespace DataMaintenance.UI.U8
             this.iquantity});
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvDetail.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvDetail.Location = new System.Drawing.Point(0, 0);
+            this.dgvDetail.Location = new System.Drawing.Point(0, 33);
             this.dgvDetail.Name = "dgvDetail";
             this.dgvDetail.ReadOnly = true;
             this.dgvDetail.RowTemplate.Height = 23;
-            this.dgvDetail.Size = new System.Drawing.Size(545, 345);
+            this.dgvDetail.Size = new System.Drawing.Size(662, 438);
             this.dgvDetail.TabIndex = 0;
             // 
             // ddate
@@ -111,14 +114,14 @@ namespace DataMaintenance.UI.U8
             this.xmPagingReader1.ColumnsForSum = null;
             this.xmPagingReader1.DataSource = null;
             this.xmPagingReader1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.xmPagingReader1.Location = new System.Drawing.Point(0, 352);
+            this.xmPagingReader1.Location = new System.Drawing.Point(0, 474);
             this.xmPagingReader1.Name = "xmPagingReader1";
             this.xmPagingReader1.PageSize = new decimal(new int[] {
             10,
             0,
             0,
             0});
-            this.xmPagingReader1.Size = new System.Drawing.Size(545, 25);
+            this.xmPagingReader1.Size = new System.Drawing.Size(662, 25);
             this.xmPagingReader1.StartNo = "1";
             this.xmPagingReader1.TabIndex = 1;
             this.xmPagingReader1.TableBody = null;
@@ -129,16 +132,38 @@ namespace DataMaintenance.UI.U8
             0,
             0});
             // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbExport});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(662, 25);
+            this.toolStrip1.TabIndex = 2;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // tsbExport
+            // 
+            this.tsbExport.Image = global::DataMaintenance.Properties.Resources.export;
+            this.tsbExport.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbExport.Name = "tsbExport";
+            this.tsbExport.Size = new System.Drawing.Size(61, 22);
+            this.tsbExport.Text = "export";
+            this.tsbExport.Click += new System.EventHandler(this.tsbExport_Click);
+            // 
             // FrmBoxIdDetail
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(545, 377);
+            this.ClientSize = new System.Drawing.Size(662, 499);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.xmPagingReader1);
             this.Controls.Add(this.dgvDetail);
             this.Name = "FrmBoxIdDetail";
             this.Text = "箱号明细";
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetail)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,5 +178,7 @@ namespace DataMaintenance.UI.U8
         private System.Windows.Forms.DataGridViewTextBoxColumn cInvCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn boxId;
         private System.Windows.Forms.DataGridViewTextBoxColumn iquantity;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton tsbExport;
     }
 }

@@ -13,6 +13,7 @@ namespace DataMaintenance.UI.U8
 {
     public partial class FrmBoxIdDetail : Form
     {
+        DataTable dt = new DataTable();
         public FrmBoxIdDetail()
         {
             InitializeComponent();
@@ -37,7 +38,7 @@ namespace DataMaintenance.UI.U8
         public void GetBoxId(string invCode,DateTime stockInDate,string accountNo)
         {
 
-            DataTable dt = new BoxIDExistService().GetBoxIdExist(invCode,stockInDate,accountNo);
+             dt = new BoxIDExistService().GetBoxIdExist(invCode,stockInDate,accountNo);
 
             #region create datasource for paging
 
@@ -79,6 +80,21 @@ namespace DataMaintenance.UI.U8
 
 
             Utility.Style.DataGridViewStyle style = new Utility.Style.DataGridViewStyle(dgvDetail);
+        }
+
+        private void tsbExport_Click(object sender, EventArgs e)
+        {
+            //export excel
+            try
+            {
+                Utility.Excel.ExportExcel exporter = new Utility.Excel.ExportExcel();
+                exporter.ExportExcelWithNPOI(dt, this.Name);
+                MessageBox.Show("导出成功！");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("导出失败: " + ex.Message);
+            }
         }
     }
 }

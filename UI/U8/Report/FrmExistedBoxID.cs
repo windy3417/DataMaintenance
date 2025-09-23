@@ -16,11 +16,11 @@ using System.Windows.Forms;
 
 namespace DataMaintenance.UI.U8
 {
-    public partial class FrmBoxIdExist : Form
+    public partial class FrmExistedBoxID : Form
 
 
     {
-        public FrmBoxIdExist()
+        public FrmExistedBoxID()
 
 
         {

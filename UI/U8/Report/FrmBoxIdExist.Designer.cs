@@ -1,7 +1,7 @@
 ﻿
 namespace DataMaintenance.UI.U8
 {
-    partial class FrmBoxIdExist
+    partial class FrmExistedBoxID
 
     {
         /// <summary>

@@ -31,7 +31,7 @@
     <SuiteName>信息平台管理</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>29</ApplicationRevision>
+    <ApplicationRevision>31</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -369,11 +369,11 @@
     <Compile Include="UI\U8\Report\FrmBoxIdDetail.Designer.cs">
       <DependentUpon>FrmBoxIdDetail.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\U8\Report\FrmBoxIdExist.cs">
+    <Compile Include="UI\U8\Report\FrmExistedBoxID.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\U8\Report\FrmBoxIdExist.Designer.cs">
-      <DependentUpon>FrmBoxIdExist.cs</DependentUpon>
+      <DependentUpon>FrmExistedBoxID.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\U8\FrmPoAttachment.cs">
       <SubType>Form</SubType>
@@ -428,6 +428,12 @@
     </Compile>
     <Compile Include="UI\U8\Report\FrmIncosistencySaleWithProduction.Designer.cs">
       <DependentUpon>FrmIncosistencySaleWithProduction.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\U8\Report\FrmPurchaseBills.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\U8\Report\FrmPurchaseBills.Designer.cs">
+      <DependentUpon>FrmPurchaseBills.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\U8\Report\FrmQtyStatisticEachMonth.cs">
       <SubType>Form</SubType>
@@ -557,7 +563,7 @@
       <DependentUpon>FrmBoxIdDetail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\Report\FrmBoxIdExist.resx">
-      <DependentUpon>FrmBoxIdExist.cs</DependentUpon>
+      <DependentUpon>FrmExistedBoxID.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\FrmPoAttachment.resx">
       <DependentUpon>FrmPoAttachment.cs</DependentUpon>
@@ -585,6 +591,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\Report\FrmIncosistencySaleWithProduction.resx">
       <DependentUpon>FrmIncosistencySaleWithProduction.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\U8\Report\FrmPurchaseBills.resx">
+      <DependentUpon>FrmPurchaseBills.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\Report\FrmQtyStatisticEachMonth.resx">
       <DependentUpon>FrmQtyStatisticEachMonth.cs</DependentUpon>

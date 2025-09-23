@@ -60,6 +60,8 @@
             this.单位成本列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.u8产成品入库单价列表ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.当期有销售无入库清单ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.purchaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.purchaseBillsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.库存管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.车间库存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.车间库存推算采购到销售ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -93,6 +95,7 @@
             this.u8附件管理ToolStripMenuItem,
             this.箱号管理ToolStripMenuItem,
             this.成本管理ToolStripMenuItem,
+            this.purchaseToolStripMenuItem,
             this.库存管理ToolStripMenuItem,
             this.重登录ToolStripMenuItem,
             this.帮助ToolStripMenuItem,
@@ -302,7 +305,7 @@
             // 
             this.箱号结存ToolStripMenuItem.Name = "箱号结存ToolStripMenuItem";
             this.箱号结存ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
-            this.箱号结存ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.FrmBoxIdExist";
+            this.箱号结存ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.FrmExistedBoxID";
             this.箱号结存ToolStripMenuItem.Text = "箱号结存";
             this.箱号结存ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
             // 
@@ -348,6 +351,22 @@
             this.当期有销售无入库清单ToolStripMenuItem.Tag = "DataMaintenance.UI.U8.Report.FrmIncosistencySaleWithProduction";
             this.当期有销售无入库清单ToolStripMenuItem.Text = "当期有销售无入库清单";
             this.当期有销售无入库清单ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
+            // 
+            // purchaseToolStripMenuItem
+            // 
+            this.purchaseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.purchaseBillsToolStripMenuItem});
+            this.purchaseToolStripMenuItem.Name = "purchaseToolStripMenuItem";
+            this.purchaseToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.purchaseToolStripMenuItem.Text = "Purchase";
+            // 
+            // purchaseBillsToolStripMenuItem
+            // 
+            this.purchaseBillsToolStripMenuItem.Name = "purchaseBillsToolStripMenuItem";
+            this.purchaseBillsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.purchaseBillsToolStripMenuItem.Tag = "DataMaintenance.UI.U8.Report.FrmPurchaseBills";
+            this.purchaseBillsToolStripMenuItem.Text = "Purchase Bills";
+            this.purchaseBillsToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
             // 
             // 库存管理ToolStripMenuItem
             // 
@@ -570,6 +589,8 @@
         private System.Windows.Forms.ToolStripMenuItem 现存量ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem printToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem purchasingQtyEachMonthToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem purchaseToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem purchaseBillsToolStripMenuItem;
     }
 }
 
