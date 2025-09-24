@@ -64,9 +64,10 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.cInvStd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bomParentInvCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.parentName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.parentStd = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.startQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.requestQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.purchaseQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.repaireQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.finishedGoodQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.currentQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unitConsumingQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -147,9 +148,10 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.cInvStd,
             this.bomParentInvCode,
             this.parentName,
+            this.parentStd,
             this.startQty,
             this.requestQty,
-            this.purchaseQty,
+            this.repaireQty,
             this.finishedGoodQty,
             this.currentQty,
             this.unitConsumingQty,
@@ -293,9 +295,9 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.lblTitel.Font = new System.Drawing.Font("SimSun", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.lblTitel.Location = new System.Drawing.Point(314, 14);
             this.lblTitel.Name = "lblTitel";
-            this.lblTitel.Size = new System.Drawing.Size(387, 24);
+            this.lblTitel.Size = new System.Drawing.Size(324, 24);
             this.lblTitel.TabIndex = 3;
-            this.lblTitel.Text = "车间库存推算表(领用-入库-库存)";
+            this.lblTitel.Text = "车间库存推算表(领用-入库)";
             // 
             // panTitel
             // 
@@ -333,6 +335,12 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.parentName.HeaderText = "对应成品名称";
             this.parentName.Name = "parentName";
             // 
+            // parentStd
+            // 
+            this.parentStd.HeaderText = "成品型号";
+            this.parentStd.Name = "parentStd";
+            this.parentStd.ReadOnly = true;
+            // 
             // startQty
             // 
             dataGridViewCellStyle2.Format = "N2";
@@ -350,14 +358,14 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.requestQty.HeaderText = "材料领用数";
             this.requestQty.Name = "requestQty";
             // 
-            // purchaseQty
+            // repaireQty
             // 
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
             dataGridViewCellStyle4.Format = "N2";
             dataGridViewCellStyle4.NullValue = null;
-            this.purchaseQty.DefaultCellStyle = dataGridViewCellStyle4;
-            this.purchaseQty.HeaderText = "采购入库数";
-            this.purchaseQty.Name = "purchaseQty";
+            this.repaireQty.DefaultCellStyle = dataGridViewCellStyle4;
+            this.repaireQty.HeaderText = "成品返修领用数";
+            this.repaireQty.Name = "repaireQty";
             // 
             // finishedGoodQty
             // 
@@ -457,9 +465,10 @@ namespace DataMaintenance.UI.U8.CheckInvetory
         private System.Windows.Forms.DataGridViewTextBoxColumn cInvStd;
         private System.Windows.Forms.DataGridViewTextBoxColumn bomParentInvCode;
         private System.Windows.Forms.DataGridViewTextBoxColumn parentName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn parentStd;
         private System.Windows.Forms.DataGridViewTextBoxColumn startQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn requestQty;
-        private System.Windows.Forms.DataGridViewTextBoxColumn purchaseQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn repaireQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn finishedGoodQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn currentQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn unitConsumingQty;

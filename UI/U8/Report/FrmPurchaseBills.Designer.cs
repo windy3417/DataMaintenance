@@ -43,13 +43,13 @@
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
+            this.xmTxtSupplier = new Utility.UControl.XmTextBoxWithButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.tsbFirstPage = new System.Windows.Forms.ToolStripButton();
             this.tsbPrePage = new System.Windows.Forms.ToolStripButton();
             this.tsbNextPage = new System.Windows.Forms.ToolStripButton();
-            this.tsbFirstPage = new System.Windows.Forms.ToolStripButton();
             this.tsbLastPage = new System.Windows.Forms.ToolStripButton();
             this.lblPageInfo = new System.Windows.Forms.ToolStripLabel();
-            this.xmTxtSupplier = new Utility.UControl.XmTextBoxWithButton();
             this.txtPageNum = new System.Windows.Forms.ToolStripTextBox();
             this.tsbGo = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1.SuspendLayout();
@@ -77,7 +77,7 @@
             this.tsbQuery.Name = "tsbQuery";
             this.tsbQuery.Size = new System.Drawing.Size(59, 22);
             this.tsbQuery.Text = "Query";
-            this.tsbQuery.Click += new System.EventHandler(this.tsbQuery_Click);
+            this.tsbQuery.Click += new System.EventHandler(this.btnQuery_Click);
             // 
             // tsbExport
             // 
@@ -132,7 +132,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 61.81818F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 331F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 332F));
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.cmbAccountNo, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 1);
@@ -168,7 +168,7 @@
             "018"});
             this.cmbAccountNo.Location = new System.Drawing.Point(79, 4);
             this.cmbAccountNo.Name = "cmbAccountNo";
-            this.cmbAccountNo.Size = new System.Drawing.Size(118, 20);
+            this.cmbAccountNo.Size = new System.Drawing.Size(117, 20);
             this.cmbAccountNo.TabIndex = 1;
             this.cmbAccountNo.SelectedValueChanged += new System.EventHandler(this.cmbAccountNo_SelectedValueChanged);
             // 
@@ -186,7 +186,7 @@
             // 
             this.label4.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(203, 37);
+            this.label4.Location = new System.Drawing.Point(202, 37);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 0;
@@ -197,13 +197,13 @@
             this.dtpStartDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.dtpStartDate.Location = new System.Drawing.Point(79, 33);
             this.dtpStartDate.Name = "dtpStartDate";
-            this.dtpStartDate.Size = new System.Drawing.Size(118, 21);
+            this.dtpStartDate.Size = new System.Drawing.Size(117, 21);
             this.dtpStartDate.TabIndex = 2;
             // 
             // dtpEndDate
             // 
             this.dtpEndDate.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.dtpEndDate.Location = new System.Drawing.Point(293, 33);
+            this.dtpEndDate.Location = new System.Drawing.Point(292, 33);
             this.dtpEndDate.Name = "dtpEndDate";
             this.dtpEndDate.Size = new System.Drawing.Size(126, 21);
             this.dtpEndDate.TabIndex = 2;
@@ -212,11 +212,18 @@
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(203, 8);
+            this.label5.Location = new System.Drawing.Point(202, 8);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 0;
             this.label5.Text = "supplier";
+            // 
+            // xmTxtSupplier
+            // 
+            this.xmTxtSupplier.Location = new System.Drawing.Point(292, 3);
+            this.xmTxtSupplier.Name = "xmTxtSupplier";
+            this.xmTxtSupplier.Size = new System.Drawing.Size(194, 21);
+            this.xmTxtSupplier.TabIndex = 3;
             // 
             // toolStrip2
             // 
@@ -234,6 +241,15 @@
             this.toolStrip2.Size = new System.Drawing.Size(846, 25);
             this.toolStrip2.TabIndex = 4;
             this.toolStrip2.Text = "toolStrip2";
+            // 
+            // tsbFirstPage
+            // 
+            this.tsbFirstPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbFirstPage.Image = global::DataMaintenance.Properties.Resources.first_page;
+            this.tsbFirstPage.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbFirstPage.Name = "tsbFirstPage";
+            this.tsbFirstPage.Size = new System.Drawing.Size(23, 22);
+            this.tsbFirstPage.Text = "toolStripButton1";
             // 
             // tsbPrePage
             // 
@@ -253,15 +269,6 @@
             this.tsbNextPage.Size = new System.Drawing.Size(23, 22);
             this.tsbNextPage.Text = "toolStripButton1";
             // 
-            // tsbFirstPage
-            // 
-            this.tsbFirstPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbFirstPage.Image = global::DataMaintenance.Properties.Resources.first_page;
-            this.tsbFirstPage.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbFirstPage.Name = "tsbFirstPage";
-            this.tsbFirstPage.Size = new System.Drawing.Size(23, 22);
-            this.tsbFirstPage.Text = "toolStripButton1";
-            // 
             // tsbLastPage
             // 
             this.tsbLastPage.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -276,13 +283,6 @@
             this.lblPageInfo.Name = "lblPageInfo";
             this.lblPageInfo.Size = new System.Drawing.Size(86, 22);
             this.lblPageInfo.Text = "toolStripLabel1";
-            // 
-            // xmTxtSupplier
-            // 
-            this.xmTxtSupplier.Location = new System.Drawing.Point(293, 3);
-            this.xmTxtSupplier.Name = "xmTxtSupplier";
-            this.xmTxtSupplier.Size = new System.Drawing.Size(194, 21);
-            this.xmTxtSupplier.TabIndex = 3;
             // 
             // txtPageNum
             // 
