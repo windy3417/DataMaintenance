@@ -107,7 +107,7 @@
     </Reference>
     <Reference Include="Utility, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Utility\bin\Debug\Utility.dll</HintPath>
+      <HintPath>..\..\Utility\bin\Release\Utility.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

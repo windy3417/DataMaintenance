@@ -123,14 +123,15 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.qtyComponentOfGifeParent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.componenteSaledQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.otherOutBound = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.qtyInPlant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.finishedProductStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.componentOfFinishedProductStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.qtyInPlant = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.currentQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.inShopQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.WIPwithComponet = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.consumedQtyOfWIP = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.inShopQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qtyChecked = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotalChckedQty = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qtyDifference = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
@@ -220,14 +221,15 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.qtyComponentOfGifeParent,
             this.componenteSaledQty,
             this.otherOutBound,
-            this.qtyInPlant,
             this.finishedProductStock,
             this.componentOfFinishedProductStock,
+            this.qtyInPlant,
             this.currentQty,
+            this.inShopQty,
             this.WIPwithComponet,
             this.consumedQtyOfWIP,
-            this.inShopQty,
             this.qtyChecked,
+            this.TotalChckedQty,
             this.qtyDifference});
             dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
@@ -747,83 +749,88 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             this.otherOutBound.HeaderText = "子件外协外赠借出";
             this.otherOutBound.Name = "otherOutBound";
             // 
-            // qtyInPlant
-            // 
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.SlateBlue;
-            dataGridViewCellStyle10.Format = "N2";
-            dataGridViewCellStyle10.NullValue = "0";
-            this.qtyInPlant.DefaultCellStyle = dataGridViewCellStyle10;
-            this.qtyInPlant.HeaderText = "推算在厂数量";
-            this.qtyInPlant.Name = "qtyInPlant";
-            // 
             // finishedProductStock
             // 
             this.finishedProductStock.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
-            dataGridViewCellStyle11.Format = "N2";
-            dataGridViewCellStyle11.NullValue = null;
-            this.finishedProductStock.DefaultCellStyle = dataGridViewCellStyle11;
-            this.finishedProductStock.HeaderText = "成品及返修品库存";
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            dataGridViewCellStyle10.Format = "N2";
+            dataGridViewCellStyle10.NullValue = null;
+            this.finishedProductStock.DefaultCellStyle = dataGridViewCellStyle10;
+            this.finishedProductStock.HeaderText = "成品及返修品时点库存";
             this.finishedProductStock.Name = "finishedProductStock";
             this.finishedProductStock.ReadOnly = true;
-            this.finishedProductStock.Width = 83;
+            this.finishedProductStock.Width = 94;
             // 
             // componentOfFinishedProductStock
             // 
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
-            dataGridViewCellStyle12.Format = "N2";
-            dataGridViewCellStyle12.NullValue = null;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.componentOfFinishedProductStock.DefaultCellStyle = dataGridViewCellStyle12;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            dataGridViewCellStyle11.Format = "N2";
+            dataGridViewCellStyle11.NullValue = null;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.componentOfFinishedProductStock.DefaultCellStyle = dataGridViewCellStyle11;
             this.componentOfFinishedProductStock.HeaderText = "成品及返修品库存含子件";
             this.componentOfFinishedProductStock.Name = "componentOfFinishedProductStock";
             this.componentOfFinishedProductStock.ReadOnly = true;
             this.componentOfFinishedProductStock.Width = 105;
+            // 
+            // qtyInPlant
+            // 
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("SimSun", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.SlateBlue;
+            dataGridViewCellStyle12.Format = "N2";
+            dataGridViewCellStyle12.NullValue = "0";
+            this.qtyInPlant.DefaultCellStyle = dataGridViewCellStyle12;
+            this.qtyInPlant.HeaderText = "推算在厂数量";
+            this.qtyInPlant.Name = "qtyInPlant";
             // 
             // currentQty
             // 
             dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
             dataGridViewCellStyle13.Format = "N2";
             this.currentQty.DefaultCellStyle = dataGridViewCellStyle13;
-            this.currentQty.HeaderText = "子件现存量";
+            this.currentQty.HeaderText = "子件时点库存";
             this.currentQty.Name = "currentQty";
+            // 
+            // inShopQty
+            // 
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            dataGridViewCellStyle14.Format = "N2";
+            dataGridViewCellStyle14.NullValue = null;
+            this.inShopQty.DefaultCellStyle = dataGridViewCellStyle14;
+            this.inShopQty.HeaderText = "推算车间数量";
+            this.inShopQty.Name = "inShopQty";
             // 
             // WIPwithComponet
             // 
             this.WIPwithComponet.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
-            dataGridViewCellStyle14.Format = "N2";
-            dataGridViewCellStyle14.NullValue = null;
-            this.WIPwithComponet.DefaultCellStyle = dataGridViewCellStyle14;
-            this.WIPwithComponet.HeaderText = "含子件的在制品数";
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            dataGridViewCellStyle15.Format = "N2";
+            dataGridViewCellStyle15.NullValue = null;
+            this.WIPwithComponet.DefaultCellStyle = dataGridViewCellStyle15;
+            this.WIPwithComponet.HeaderText = "含子件的在制品盘点数";
             this.WIPwithComponet.Name = "WIPwithComponet";
-            this.WIPwithComponet.Width = 83;
+            this.WIPwithComponet.Width = 94;
             // 
             // consumedQtyOfWIP
             // 
             this.consumedQtyOfWIP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
-            dataGridViewCellStyle15.Format = "N2";
-            dataGridViewCellStyle15.NullValue = null;
-            this.consumedQtyOfWIP.DefaultCellStyle = dataGridViewCellStyle15;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
+            dataGridViewCellStyle16.Format = "N2";
+            dataGridViewCellStyle16.NullValue = null;
+            this.consumedQtyOfWIP.DefaultCellStyle = dataGridViewCellStyle16;
             this.consumedQtyOfWIP.HeaderText = "在制品中的子件数";
             this.consumedQtyOfWIP.Name = "consumedQtyOfWIP";
             this.consumedQtyOfWIP.Width = 83;
             // 
-            // inShopQty
-            // 
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomRight;
-            dataGridViewCellStyle16.Format = "N2";
-            dataGridViewCellStyle16.NullValue = null;
-            this.inShopQty.DefaultCellStyle = dataGridViewCellStyle16;
-            this.inShopQty.HeaderText = "推算车间数量";
-            this.inShopQty.Name = "inShopQty";
-            // 
             // qtyChecked
             // 
-            this.qtyChecked.HeaderText = "盘点数";
+            this.qtyChecked.HeaderText = "散件盘点数";
             this.qtyChecked.Name = "qtyChecked";
+            // 
+            // TotalChckedQty
+            // 
+            this.TotalChckedQty.HeaderText = "盘点合计数";
+            this.TotalChckedQty.Name = "TotalChckedQty";
             // 
             // qtyDifference
             // 
@@ -919,14 +926,15 @@ namespace DataMaintenance.UI.U8.CheckInvetory
         private System.Windows.Forms.DataGridViewTextBoxColumn qtyComponentOfGifeParent;
         private System.Windows.Forms.DataGridViewTextBoxColumn componenteSaledQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn otherOutBound;
-        private System.Windows.Forms.DataGridViewTextBoxColumn qtyInPlant;
         private System.Windows.Forms.DataGridViewTextBoxColumn finishedProductStock;
         private System.Windows.Forms.DataGridViewTextBoxColumn componentOfFinishedProductStock;
+        private System.Windows.Forms.DataGridViewTextBoxColumn qtyInPlant;
         private System.Windows.Forms.DataGridViewTextBoxColumn currentQty;
+        private System.Windows.Forms.DataGridViewTextBoxColumn inShopQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn WIPwithComponet;
         private System.Windows.Forms.DataGridViewTextBoxColumn consumedQtyOfWIP;
-        private System.Windows.Forms.DataGridViewTextBoxColumn inShopQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn qtyChecked;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TotalChckedQty;
         private System.Windows.Forms.DataGridViewTextBoxColumn qtyDifference;
     }
 }

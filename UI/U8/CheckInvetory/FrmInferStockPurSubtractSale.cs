@@ -19,6 +19,7 @@ using System.Data.SqlClient;
 
 using U8service.DAL.JoinTableSvc;
 using U8service.DAL.JoinTableSvc.ProductLogisticsSvc;
+using Utility.Sql;
 
 namespace DataMaintenance.UI.U8.CheckInvetory
 {
@@ -225,13 +226,15 @@ namespace DataMaintenance.UI.U8.CheckInvetory
                 GetInventoryInformation(item);
             }
 
+            GetBomParentInvCode();
+
             Task<bool> taskPurchseAmountQty = GetPurchseAmountQty(cmbAccountNo.Text);
             Task<bool> taskCurrentStock = GetComponentStockAsync(cmbAccountNo.Text);
             Task taskMaterialSaleOutAmount = GetMateriaSaleOutAmountAsync(cmbAccountNo.Text);
             Task taskScraptSaleOutAmount = GetScraptSaleOutAmountAsync(cmbAccountNo.Text, cmbWarehouse.SelectedValue.ToString());
 
-            GetBomParentInvCode();
-            //Task taskFinishedGoodAmount =   GetFinisedGoodAmountAsync(cmbAccountNo.Text);
+
+
             Task SaleOutAmount = GetSaleOutAmountAsync(cmbAccountNo.Text);
 
 
@@ -240,6 +243,8 @@ namespace DataMaintenance.UI.U8.CheckInvetory
 
             await Task.WhenAll(taskPurchseAmountQty, taskMaterialSaleOutAmount, taskCurrentStock, taskScraptSaleOutAmount,
              SaleOutAmount, taskFinishedGoodStock);
+
+
 
             CaculateActualConsumedQty();
 
@@ -553,17 +558,21 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             {
                 try
                 {
-                    using (var db = new U8Context(accountNo))
-                    {
-                        for (int i = 0; i < dgv.Rows.Count; i++)
-                        {
-                            var invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();
-                            dgv.Rows[i].Cells["currentQty"].Value = db.CurrentStock.
-                                Where(s => s.cInvCode == invCode).
-                                Select(s => s.iQuantity).Sum();
-                        }
+                    string conn = Utility.Sql.Sqlhelper.GetConnectionString(Sqlhelper.DataSourceType.u8, accountNo);
+                    U8services.DAL.Reporter.RealTimeInventory realTimeInventory = new U8services.DAL.Reporter.RealTimeInventory(conn);
 
+                    for (int i = 0; i < dgv.Rows.Count; i++)
+                    {
+                        var invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();
+                        //dgv.Rows[i].Cells["currentQty"].Value = db.CurrentStock.
+                        //    Where(s => s.cInvCode == invCode).
+                        //    Select(s => s.iQuantity).Sum();
+
+                        //get the stock of the component in the specified date
+                        dgv.Rows[i].Cells["currentQty"].Value = realTimeInventory.RetrieveStockAtSpecificTime(invCode, dtpEnd.Value);
                     }
+
+
 
                     return true;
                 }
@@ -584,28 +593,31 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             {
                 try
                 {
+                    string conn = Utility.Sql.Sqlhelper.GetConnectionString(Sqlhelper.DataSourceType.u8, accountNo);
+                    U8services.DAL.Reporter.RealTimeInventory realTimeInventory = new U8services.DAL.Reporter.RealTimeInventory(conn);
                     for (int i = 0; i < dgv.Rows.Count; i++)
                     {
                         var invCode = dgv.Rows[i].Cells[this.bomParentInvCode.Name].Value.ToString();
-                        U8service.DAL.JoinTableSvc.CurrentStockService currentStockService = new CurrentStockService(accountNo);
+                        //U8service.DAL.JoinTableSvc.CurrentStockService currentStockService = new CurrentStockService(accountNo);
 
                         // separte the invCode according to ","
                         if (invCode.Contains(","))
                         {
                             //split the invCode according to ","
                             var listParentCode = invCode.Split(',').ToList();
-                            decimal? qty = 0;
+                            double? qty = 0;
                             for (int j = 0; j < listParentCode.Count; j++)
                             {
-                                qty += currentStockService.GetSingleCurrentStock(listParentCode[j]);
+                                //qty += currentStockService.GetSingleCurrentStock(listParentCode[j]);
+                                qty += realTimeInventory.RetrieveStockAtSpecificTime(listParentCode[j],dtpEnd.Value);
                             }
                             dgv.Rows[i].Cells[this.finishedProductStock.Name].Value = qty;
                         }
                         else
-                            dgv.Rows[i].Cells[this.finishedProductStock.Name].Value = currentStockService.GetSingleCurrentStock(invCode);
+                            dgv.Rows[i].Cells[this.finishedProductStock.Name].Value = realTimeInventory.RetrieveStockAtSpecificTime(invCode, dtpEnd.Value);
                     }
-                
-            
+
+
 
                 }
                 catch (Exception ex)
@@ -666,405 +678,13 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             };
             frm.ShowDialog();
         }
+
+
+
+
+
+
     }
-
-    //        #region GetData single thread, it should be used in test environment.
-
-    //        private void tsbInfer_Click(object sender, EventArgs e)
-    //        {
-
-    //            if (!ValidateUI())
-    //            {
-    //                return;
-    //            }
-    //            dgv.Rows.Clear();
-
-    //            this.Cursor = Cursors.WaitCursor;
-
-
-    //            dgv.AllowUserToAddRows = false;
-    //            GetInventoryInformation(xmbtnInventoryClass.Text);
-    //            GetPurchseAmountQty(cmbAccountNo.Text);
-    //            GetComponentStockAsync(cmbAccountNo.Text);
-    //            GetMateriaSaleOutAmountAsync(cmbAccountNo.Text);
-    //            GetScraptSaleOutAmountAsync(cmbAccountNo.Text, cmbWarehouse.SelectedValue.ToString());
-
-    //            GetBomParentInvCode();
-
-
-    //            GetSaleOutAmountAsync(cmbAccountNo.Text);
-
-    //            GetFinshedGoodStockAsync(cmbAccountNo.Text);
-
-    //            CaculateActualConsumedQty();
-
-
-    //            this.Cursor = Cursors.Default;
-    //            MessageBox.Show("计算完成");
-
-    //        }
-    //        private void GetInventoryInformation(string invClassCode)
-    //        {
-    //            List<Inventory> ls = new List<Inventory>();
-    //            using (var db = new U8Context(cmbAccountNo.Text))
-    //            {
-    //                ls = db.Inventory.Where(s => s.cInvCCode.StartsWith(invClassCode)).ToList();
-    //            }
-    //            //add rows to datagridview from the count of ls
-
-    //            if (ls.Count > 0)
-    //                dgv.Rows.Add(ls.Count);
-    //            else return
-    //                    ;
-
-
-    //            for (int i = 0; i < ls.Count; i++)
-    //            {
-    //                dgv.Rows[i].Cells["cInvCode"].Value = ls[i].cInvCode;
-    //                dgv.Rows[i].Cells["cInvName"].Value = ls[i].cInvName;
-    //                dgv.Rows[i].Cells["cInvStd"].Value = ls[i].cInvStd;
-    //            }
-    //        }
-
-    //        private void GetBomParentInvCode()
-    //        {
-    //            string invCode;
-    //            //becauce a child component may have many bomParent
-
-    //            U8service.DAL.JoinTableSvc.BomSvc bomService = new BomSvc(cmbAccountNo.Text);
-    //            for (int i = 0; i < dgv.Rows.Count; i++)
-    //            {
-
-    //                List<string> listParentInvCode;
-    //                StringBuilder sbParentName = new StringBuilder();
-    //                StringBuilder sbParentCode = new StringBuilder();
-    //                List<decimal?> ListUnitConsumingQty;
-    //                invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();
-
-    //                listParentInvCode = bomService.GetBomParent(invCode,
-    //                    out ListUnitConsumingQty);
-
-    //                if (listParentInvCode != null)
-    //                {
-    //                    for (int j = 0; j < listParentInvCode.Count; j++)
-    //                    {
-    //                        string parentName;
-    //                        parentName = Utility.DAL.QueryService.GetItemFromSingleTable<Inventory>(new SqlParameter[] { new SqlParameter(@"cInvcode", listParentInvCode[j]) },
-    //                       Utility.Sql.Sqlhelper.DataSourceType.u8, cmbAccountNo.Text).cInvName;
-
-
-    //                        if (j >= 1 & j < listParentInvCode.Count)
-    //                        {
-    //                            sbParentName.Append(",");
-    //                        }
-
-    //                        sbParentName.Append(parentName);
-
-    //                    }
-
-
-    //                    for (int k = 0; k < listParentInvCode.Count; k++)
-    //                    {
-    //                        if (k >= 1 & k < listParentInvCode.Count)
-    //                        {
-    //                            sbParentCode.Append(",");
-    //                        }
-
-    //                        sbParentCode.Append(listParentInvCode[k]);
-
-    //                    }
-    //                }
-
-
-    //                dgv.Rows[i].Cells["bomParentInvCode"].Value = sbParentCode;
-    //                dgv.Rows[i].Cells["parentName"].Value = sbParentName;
-    //                dgv.Rows[i].Cells["unitConsumingQty"].Value = ListUnitConsumingQty is null ? 0 : ListUnitConsumingQty.Sum();
-
-
-    //            }
-
-
-    //        }
-
-    //        private void GetPurchseAmountQty(string accountNo)
-    //        {
-
-
-    //            try
-    //            {
-
-    //                DAL.U8services.PruchaseInService rs = new DAL.U8services.PruchaseInService();
-    //                for (int i = 0; i < dgv.Rows.Count; i++)
-    //                {
-    //                    var invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();
-
-
-    //                    dgv.Rows[i].Cells["purchaseQty"].Value =
-    //                       rs.GetPurchseAmountQty(dtpEnd.Value, invCode, accountNo);
-    //                    //rs.GetPurchseAmountQty(funcHeader, funcBody, "018");
-
-    //                }
-
-
-    //            }
-    //            catch (Exception ex)
-    //            {
-    //                MessageBox.Show(ex.Message);
-
-    //            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //        }
-
-
-    //        private void GetSaleOutAmountAsync(string accountNo)
-    //        {
-
-
-    //            try
-    //            {
-    //                SaleOutService rs = new SaleOutService(accountNo);
-    //                for (int i = 0; i < dgv.Rows.Count; i++)
-    //                {
-    //                    var invCode = dgv.Rows[i].Cells[this.bomParentInvCode.Name].Value.ToString();
-    //                    decimal? qtySaleOut = 0;
-    //                    List<string> listParentCode = new List<string>();
-    //                    if (invCode.Contains(","))
-    //                    {
-    //                        //split the invCode according to ","
-    //                        listParentCode = invCode.Split(',').ToList();
-    //                        for (int j = 0; j < listParentCode.Count; j++)
-    //                        {
-    //                            qtySaleOut += rs.GetSaleOutAmount(dtpEnd.Value, listParentCode[j]);
-
-    //                        }
-
-    //                    }
-    //                    else
-    //                    {
-    //                        dgv.Rows[i].Cells[this.saledQty.Name].Value =
-    //                      rs.GetSaleOutAmount(dtpEnd.Value, invCode);
-    //                    }
-
-
-
-    //                }
-
-
-
-    //            }
-
-
-    //            catch (Exception ex)
-    //            {
-    //                MessageBox.Show(ex.Message);
-
-    //            }
-
-
-    //        }
-
-    //        private void GetMateriaSaleOutAmountAsync(string accountNo)
-    //        {
-
-    //            try
-    //            {
-    //                SaleOutService rs = new SaleOutService(accountNo);
-    //                for (int i = 0; i < dgv.Rows.Count; i++)
-    //                {
-    //                    var invCode = dgv.Rows[i].Cells[this.cInvCode.Name].Value.ToString();
-
-
-    //                    dgv.Rows[i].Cells[this.componenteSaledQty.Name].Value =
-    //                       rs.GetSaleOutAmount(dtpEnd.Value, invCode);
-
-    //                }
-
-
-    //            }
-
-
-    //            catch (Exception ex)
-    //            {
-    //                MessageBox.Show(ex.Message);
-
-    //            }
-
-
-
-
-
-
-
-
-    //        }
-
-    //        private void GetScraptSaleOutAmountAsync(string accountNo, string warehouse)
-    //        {
-
-    //            try
-    //            {
-    //                OtherOutService rs = new OtherOutService(accountNo);
-    //                for (int i = 0; i < dgv.Rows.Count; i++)
-    //                {
-    //                    var invCode = dgv.Rows[i].Cells[this.cInvCode.Name].Value.ToString();
-
-
-    //                    dgv.Rows[i].Cells[this.scrapSaledQty.Name].Value =
-    //                       rs.GetSaleOutAmount(dtpEnd.Value, invCode, warehouse);
-
-    //                }
-
-
-    //            }
-
-
-    //            catch (Exception ex)
-    //            {
-    //                MessageBox.Show(ex.Message);
-
-    //            }
-
-
-
-
-
-    //        }
-
-
-
-    //        private void GetComponentStockAsync(string accountNo)
-    //        {
-
-    //            try
-    //            {
-    //                using (var db = new U8Context(accountNo))
-    //                {
-    //                    for (int i = 0; i < dgv.Rows.Count; i++)
-    //                    {
-    //                        var invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();
-    //                        dgv.Rows[i].Cells["currentQty"].Value = db.CurrentStock.
-    //                            Where(s => s.cInvCode == invCode).
-    //                            Select(s => s.iQuantity).Sum();
-    //                    }
-
-    //                }
-
-
-    //            }
-    //            catch (Exception ex)
-    //            {
-    //                MessageBox.Show(ex.Message);
-
-    //            }
-
-
-
-
-    //        }
-
-    //        private void GetFinshedGoodStockAsync(string accountNo)
-    //        {
-
-    //            try
-    //            {
-    //                //using (var db = new U8Context(accountNo))
-    //                //{
-    //                //    for (int i = 0; i < dgv.Rows.Count; i++)
-    //                //    {
-    //                //        var invCode = dgv.Rows[i].Cells[this.bomParentInvCode.Name].Value.ToString();
-    //                //        dgv.Rows[i].Cells[this.finishedProductStock.Name].Value = db.CurrentStock.
-    //                //            Where(s => s.cInvCode == invCode).
-    //                //            Select(s => s.iQuantity).Sum();
-    //                //    }
-
-    //                //}
-
-
-    //                    for (int i = 0; i < dgv.Rows.Count; i++)
-    //                    {
-    //                        var invCode = dgv.Rows[i].Cells[this.bomParentInvCode.Name].Value.ToString();
-    //                        U8service.DAL.JoinTableSvc.CurrentStockService currentStockService = new CurrentStockService(accountNo);
-
-    //                        // separte the invCode according to ","
-    //                        if (invCode.Contains(","))
-    //                        {
-    //                            //split the invCode according to ","
-    //                            var listParentCode = invCode.Split(',').ToList();
-    //                            decimal? qty = 0;
-    //                            for (int j = 0; j < listParentCode.Count; j++)
-    //                            {
-    //                                qty += currentStockService.GetSingleCurrentStock(listParentCode[j]);
-    //                            }
-    //                            dgv.Rows[i].Cells[this.finishedProductStock.Name].Value = qty;
-    //                        }
-    //                        else
-    //                            dgv.Rows[i].Cells[this.finishedProductStock.Name].Value = currentStockService.GetSingleCurrentStock(invCode);
-    //                    }
-
-
-
-
-    //            }
-    //            catch (Exception ex)
-    //            {
-    //                MessageBox.Show(ex.Message);
-
-    //            }
-    //        }
-
-    //        //    private void GetFinisedGoodAmountAsync(string accountNo)
-    //        //    {
-
-    //        //        try
-    //        //        {
-    //        //            U8services.DAL.JoinTableServices rs = new U8services.DAL.JoinTableServices.FinishedGoodInService();
-    //        //            string parentInvCode;
-    //        //            for (int i = 0; i < dgv.Rows.Count; i++)
-    //        //            {
-    //        //                parentInvCode = dgv.Rows[i].Cells["bomParentInvCode"].Value.ToString();
-
-
-    //        //                dgv.Rows[i].Cells["finishedGoodQty"].Value =
-    //        //                   rs.GetFinishedGoodAmount(dtpEnd.Value, parentInvCode, accountNo);
-
-    //        //            }
-    //        //        }
-    //        //        catch (Exception ex)
-    //        //        {
-
-    //        //            MessageBox.Show(ex.Message);
-    //        //        }
-
-
-
-
-    //        //    //}
-
-
-
-
-    //        //    #endregion
-
-
-    //        //}
-    //    }
-    //}
-    //    #endregion
 }
 
 
