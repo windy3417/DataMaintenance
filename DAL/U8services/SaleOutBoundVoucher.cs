@@ -19,9 +19,9 @@ namespace DataMaintenance.DAL.U8services
         private string _accountNo;
         public SaleOutBoundVoucher(string accountNo)
         { this._accountNo = accountNo; }
-        public List<QuantiryAmountEachMonthVModel> GetPurchseAmountQty()
+        public List<MonthlyQuantityViewModel> GetPurchseAmountQty()
         {
-            var rawDataList = new List<QuantiryAmountEachMonthVModel>();
+            var rawDataList = new List<MonthlyQuantityViewModel>();
 
             string sqlQuery = @"
                    SELECT
@@ -50,7 +50,7 @@ namespace DataMaintenance.DAL.U8services
                     {
                         while (reader.Read())
                         {
-                            rawDataList.Add(new QuantiryAmountEachMonthVModel
+                            rawDataList.Add(new MonthlyQuantityViewModel
                             {
                                 ProductCode = reader["ProductCode"].ToString(),
                                 ProductName = reader["ProductName"].ToString(),

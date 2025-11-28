@@ -95,7 +95,6 @@ namespace DataMaintenance.UI.U8.CheckInvetory
             cmbWarehouse.Text = "自加工不良品仓";
 
 
-
         }
 
         private void dgv_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)

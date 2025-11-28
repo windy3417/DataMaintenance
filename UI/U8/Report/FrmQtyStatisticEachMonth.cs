@@ -16,11 +16,22 @@ namespace DataMaintenance.UI.U8.Report
         public FrmQtyStatisticEachMonth()
         {
             InitializeComponent();
+            xmTxtInvClass.RefButton.Click += tsbInventoryClass_Click;
         }
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+
+            if (string.IsNullOrEmpty(cmbAccountNo.Text))
+            {
+                MessageBox.Show("账套不能为空");
+                return;
+            }
+
             DataTable reportData =new DataTable();
+            List<string> productCodes;
+            U8service.DAL.MasterData.InventoryRepo inventory = new U8service.DAL.MasterData.InventoryRepo(cmbAccountNo.Text);
+            productCodes=inventory.GetInvCodeListByCategory(xmTxtInvClass.Text);
 
             if (cmbVoucherType.Text=="采购入库单")
             {
@@ -31,8 +42,8 @@ namespace DataMaintenance.UI.U8.Report
 
             if (cmbVoucherType.Text == "销售出库单")
             {
-                SaleOutBoundVoucher saleOutBoundVoucher = new SaleOutBoundVoucher(cmbAccountNo.Text);
-                reportData = saleOutBoundVoucher.GetSaleOutQtyEachMonth();
+                U8service.DAL.Stock.DeliveryNote deliveryNote  = new U8service.DAL.Stock.DeliveryNote(cmbAccountNo.Text);
+                reportData = deliveryNote.GetSaleOutQtyEachMonth(productCodes);
             }
             
 
@@ -71,6 +82,42 @@ namespace DataMaintenance.UI.U8.Report
                     MessageBox.Show("导出失败: " + ex.Message);
                 }
             
+        }
+
+        private void tsbInventoryClass_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbAccountNo.Text))
+            {
+                MessageBox.Show("账套不能为空");
+                return;
+            }
+
+            U8service.UI.FrmRef.FrmRefInvClassTree f = new U8service.UI.FrmRef.FrmRefInvClassTree(cmbAccountNo.Text);
+            f.ActionInvClassDate += (s) => xmTxtInvClass.Text = s.cInvCCode;
+            
+            f.Show();
+            
+        }
+
+        //validate input
+        private void btnValidate_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(cmbAccountNo.Text))
+            {
+                MessageBox.Show("账套不能为空");
+                return;
+            }
+            if (string.IsNullOrEmpty(cmbVoucherType.Text))
+            {
+                MessageBox.Show("单据类型不能为空");
+                return;
+            }
+            if (string.IsNullOrEmpty(xmTxtInvClass.Text))
+            {
+                MessageBox.Show("存货分类不能为空");
+                return;
+            }
+            MessageBox.Show("验证通过");
         }
     }
 }

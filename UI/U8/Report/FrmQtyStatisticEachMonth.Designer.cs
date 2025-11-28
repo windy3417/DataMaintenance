@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmQtyStatisticEachMonth));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
@@ -38,6 +39,9 @@
             this.cmbVoucherType = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
+            this.tsbInventoryClass = new System.Windows.Forms.ToolStripButton();
+            this.xmTxtInvClass = new Utility.UControl.XmTextBoxWithButton();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -50,16 +54,17 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 146);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 156);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(800, 381);
+            this.dataGridView1.Size = new System.Drawing.Size(800, 371);
             this.dataGridView1.TabIndex = 0;
             // 
             // toolStrip1
             // 
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButton1,
+            this.tsbInventoryClass,
             this.tsbExport});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -110,7 +115,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(235, 100);
+            this.label2.Location = new System.Drawing.Point(231, 100);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 12);
             this.label2.TabIndex = 2;
@@ -122,7 +127,7 @@
             this.cmbVoucherType.Items.AddRange(new object[] {
             "采购入库单",
             "销售出库单"});
-            this.cmbVoucherType.Location = new System.Drawing.Point(334, 97);
+            this.cmbVoucherType.Location = new System.Drawing.Point(323, 97);
             this.cmbVoucherType.Name = "cmbVoucherType";
             this.cmbVoucherType.Size = new System.Drawing.Size(121, 20);
             this.cmbVoucherType.TabIndex = 3;
@@ -150,19 +155,47 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "出入库月度统计表";
             // 
-            // FrmPurchaseingQtyEachMonth
+            // tsbInventoryClass
+            // 
+            this.tsbInventoryClass.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbInventoryClass.Image = ((System.Drawing.Image)(resources.GetObject("tsbInventoryClass.Image")));
+            this.tsbInventoryClass.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbInventoryClass.Name = "tsbInventoryClass";
+            this.tsbInventoryClass.Size = new System.Drawing.Size(89, 22);
+            this.tsbInventoryClass.Text = "Inventory class";
+            this.tsbInventoryClass.Click += new System.EventHandler(this.tsbInventoryClass_Click);
+            // 
+            // xmTxtInvClass
+            // 
+            this.xmTxtInvClass.Location = new System.Drawing.Point(576, 96);
+            this.xmTxtInvClass.Name = "xmTxtInvClass";
+            this.xmTxtInvClass.Size = new System.Drawing.Size(121, 21);
+            this.xmTxtInvClass.TabIndex = 6;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(475, 100);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(95, 12);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Inventory Class";
+            // 
+            // FrmQtyStatisticEachMonth
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(824, 539);
+            this.Controls.Add(this.xmTxtInvClass);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.cmbVoucherType);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cmbAccountNo);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "FrmPurchaseingQtyEachMonth";
+            this.Name = "FrmQtyStatisticEachMonth";
             this.Text = "Qty statistic each month";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
@@ -186,5 +219,8 @@
         private System.Windows.Forms.ComboBox cmbVoucherType;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ToolStripButton tsbInventoryClass;
+        private Utility.UControl.XmTextBoxWithButton xmTxtInvClass;
+        private System.Windows.Forms.Label label4;
     }
 }

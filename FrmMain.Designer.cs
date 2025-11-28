@@ -79,6 +79,7 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tstb_currentUser = new System.Windows.Forms.ToolStripTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.bankReceiptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_main.SuspendLayout();
             this.panel1.SuspendLayout();
             this.ts_foot.SuspendLayout();
@@ -264,7 +265,8 @@
             // 
             this.u8附件管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmArchiveAttachment,
-            this.采购订单附件ToolStripMenuItem});
+            this.采购订单附件ToolStripMenuItem,
+            this.bankReceiptToolStripMenuItem});
             this.u8附件管理ToolStripMenuItem.Name = "u8附件管理ToolStripMenuItem";
             this.u8附件管理ToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
             this.u8附件管理ToolStripMenuItem.Text = "U8附件管理";
@@ -363,7 +365,7 @@
             // purchaseBillsToolStripMenuItem
             // 
             this.purchaseBillsToolStripMenuItem.Name = "purchaseBillsToolStripMenuItem";
-            this.purchaseBillsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.purchaseBillsToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.purchaseBillsToolStripMenuItem.Tag = "DataMaintenance.UI.U8.Report.FrmPurchaseBills";
             this.purchaseBillsToolStripMenuItem.Text = "Purchase Bills";
             this.purchaseBillsToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
@@ -514,6 +516,14 @@
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
             // 
+            // bankReceiptToolStripMenuItem
+            // 
+            this.bankReceiptToolStripMenuItem.Name = "bankReceiptToolStripMenuItem";
+            this.bankReceiptToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.bankReceiptToolStripMenuItem.Tag = "DataMaintenance.UI.U8.FrmBankReceipt";
+            this.bankReceiptToolStripMenuItem.Text = "Bank Receipt";
+            this.bankReceiptToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -591,6 +601,7 @@
         private System.Windows.Forms.ToolStripMenuItem purchasingQtyEachMonthToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem purchaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem purchaseBillsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem bankReceiptToolStripMenuItem;
     }
 }
 

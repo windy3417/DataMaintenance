@@ -31,7 +31,7 @@
     <SuiteName>信息平台管理</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>32</ApplicationRevision>
+    <ApplicationRevision>35</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -86,6 +86,9 @@
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="NPOI, Version=2.5.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL" />
+    <Reference Include="SMBLibrary, Version=1.5.5.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\SMBLibrary.1.5.5.1\lib\net40\SMBLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
@@ -202,7 +205,7 @@
     <Compile Include="Model\Ufsystem\UA_TaskLog.cs" />
     <Compile Include="Model\Ufsystem\UA_User.cs" />
     <Compile Include="Model\ViewModel\ArchiveVModel.cs" />
-    <Compile Include="Model\ViewModel\QuantiryAmountEachMonthVModel.cs" />
+    <Compile Include="Model\ViewModel\MonthlyQuantityViewModel.cs" />
     <Compile Include="UI\Common\FrmHelp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +245,12 @@
     </Compile>
     <Compile Include="UI\U8\CheckInvetory\FrmInference.Designer.cs">
       <DependentUpon>FrmInference.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\U8\FrmBankReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\U8\FrmBankReceipt.Designer.cs">
+      <DependentUpon>FrmBankReceipt.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\U8\maintenance\FrmClearU8Task.cs">
       <SubType>Form</SubType>
@@ -501,6 +510,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\CheckInvetory\FrmInference.resx">
       <DependentUpon>FrmInference.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\U8\FrmBankReceipt.resx">
+      <DependentUpon>FrmBankReceipt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\U8\maintenance\FrmClearU8Task.resx">
       <DependentUpon>FrmClearU8Task.cs</DependentUpon>

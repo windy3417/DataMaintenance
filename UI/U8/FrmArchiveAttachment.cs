@@ -48,7 +48,6 @@ namespace DataMaintenance.UI.U8Attachment
             if (e.RowIndex < 0 || e.ColumnIndex !=
              dataGridView1.Columns["downLoad"].Index) return;
             ConnectString connectString = new ConnectString();
-            ConnectStringModel m = connectString.GetSmbConnectionString(Environment.CurrentDirectory + @"/SmbConfig.bin");
 
             string[] savingFileName = dataGridView1.CurrentRow.Cells["archiveName"].Value.ToString().Split(new char[] { '.' });
             string extName = "." + savingFileName.Last();
@@ -57,8 +56,12 @@ namespace DataMaintenance.UI.U8Attachment
             {
                 extName = ".txt";
             }
+            ConnectStringModel m = connectString.GetSmbConnectionString(Environment.CurrentDirectory + @"/SmbConfig.bin");
 
-            string fileName = dataGridView1.CurrentRow.Cells["GUID"].Value.ToString() + extName;
+
+
+
+            string fileName = dataGridView1.CurrentRow.Cells["GUID"].Value.ToString()+extName;
 
             byte[] data = new SmbFiels().GetFile(m.DataSource.Trim(), m.DataBase, m.FileDirectory, fileName, m.UserName, m.Pwd).ToArray();
 
