@@ -41,7 +41,7 @@ namespace DataMaintenance.UI.ClearLocker
         {
             string sql = " delete  from GL_mvcontrol";
 
-            dataGridView1.DataSource = Sqlhelper.ExecuteWithNoneParameter(sql,Sqlhelper.DataSourceType.u8);
+            dataGridView1.DataSource = Sqlhelper.ExecuteWithNoneParameter(Sqlhelper.DataSourceType.u8,sql);
         }
     }
 }

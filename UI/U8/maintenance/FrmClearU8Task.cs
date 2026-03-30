@@ -49,7 +49,7 @@ namespace DataMaintenance.UI.ClearLocker
                     , MessageBoxButtons.YesNo, MessageBoxIcon.Warning)==DialogResult.Yes)
                 {
                     string sql = $"delete from ua_task where cacc_id={cmbAccountNo.Text} ";
-                    Sqlhelper.ExecuteWithNoneParameter(sql, Sqlhelper.DataSourceType.ufsystem);
+                    Sqlhelper.ExecuteWithNoneParameter(Sqlhelper.DataSourceType.ufsystem,sql );
                     MessageBox.Show("任务删除成功");
                     dataGridView1.DataSource = null;
                 }

@@ -52,6 +52,7 @@
             this.u8附件管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmArchiveAttachment = new System.Windows.Forms.ToolStripMenuItem();
             this.采购订单附件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.bankReceiptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.箱号管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.出库箱号ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.箱号结存ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,7 +80,7 @@
             this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
             this.tstb_currentUser = new System.Windows.Forms.ToolStripTextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.bankReceiptToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.documentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ms_main.SuspendLayout();
             this.panel1.SuspendLayout();
             this.ts_foot.SuspendLayout();
@@ -286,6 +287,14 @@
             this.采购订单附件ToolStripMenuItem.Text = "采购订单附件";
             this.采购订单附件ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
             // 
+            // bankReceiptToolStripMenuItem
+            // 
+            this.bankReceiptToolStripMenuItem.Name = "bankReceiptToolStripMenuItem";
+            this.bankReceiptToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
+            this.bankReceiptToolStripMenuItem.Tag = "DataMaintenance.UI.U8.FrmBankReceipt";
+            this.bankReceiptToolStripMenuItem.Text = "Bank Receipt";
+            this.bankReceiptToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
+            // 
             // 箱号管理ToolStripMenuItem
             // 
             this.箱号管理ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -423,7 +432,8 @@
             // 帮助ToolStripMenuItem
             // 
             this.帮助ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.关于ToolStripMenuItem});
+            this.关于ToolStripMenuItem,
+            this.documentToolStripMenuItem});
             this.帮助ToolStripMenuItem.Name = "帮助ToolStripMenuItem";
             this.帮助ToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
             this.帮助ToolStripMenuItem.Text = "帮助";
@@ -431,7 +441,7 @@
             // 关于ToolStripMenuItem
             // 
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
-            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.关于ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.关于ToolStripMenuItem.Tag = "DataMaintenance.UI.FrmHelp";
             this.关于ToolStripMenuItem.Text = "关于";
             this.关于ToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
@@ -516,13 +526,13 @@
             this.tabControl1.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.tabControl1_DrawItem);
             this.tabControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.tabControl1_MouseClick);
             // 
-            // bankReceiptToolStripMenuItem
+            // documentToolStripMenuItem
             // 
-            this.bankReceiptToolStripMenuItem.Name = "bankReceiptToolStripMenuItem";
-            this.bankReceiptToolStripMenuItem.Size = new System.Drawing.Size(217, 22);
-            this.bankReceiptToolStripMenuItem.Tag = "DataMaintenance.UI.U8.FrmBankReceipt";
-            this.bankReceiptToolStripMenuItem.Text = "Bank Receipt";
-            this.bankReceiptToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
+            this.documentToolStripMenuItem.Name = "documentToolStripMenuItem";
+            this.documentToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.documentToolStripMenuItem.Tag = "DataMaintenance.UI.Common.FormHelp";
+            this.documentToolStripMenuItem.Text = "document";
+            this.documentToolStripMenuItem.Click += new System.EventHandler(this.MenuItemClick);
             // 
             // FrmMain
             // 
@@ -602,6 +612,7 @@
         private System.Windows.Forms.ToolStripMenuItem purchaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem purchaseBillsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem bankReceiptToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem documentToolStripMenuItem;
     }
 }
 

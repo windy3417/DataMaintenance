@@ -135,17 +135,7 @@ namespace DataMaintenance.UI.U8.CheckInvetory
                 _componentOfSaledProduct = unitConsumingQty * _saledQty;
                 _componentOfFinishedProductStock = unitConsumingQty * _finishedProductStock;
 
-                //// if the invcode begin with "11" , the scraptSaledQty is not zero
-                //if (dgv.Rows[i].Cells[this.cInvCode.Name].Value.ToString().StartsWith("11"))
-                //{
-                //    _componetOfScraptSaledQty = unitConsumingQty * _scraptSaledQty;
-                //    dgv.Rows[i].Cells[this.componetOfScraptSaledQty.Name].Value = _componetOfScraptSaledQty;
-                //}
-                //else
-                //{
-                //    _componetOfScraptSaledQty = 0;
-                //    dgv.Rows[i].Cells[this.componetOfScraptSaledQty.Name].Value = _componetOfScraptSaledQty;
-                //}
+               
 
 
 
@@ -292,11 +282,30 @@ namespace DataMaintenance.UI.U8.CheckInvetory
                     for (int i = 0; i < dgv.Rows.Count; i++)
                     {
                         var invCode = dgv.Rows[i].Cells["cInvCode"].Value.ToString();
+                        var rawPartPurchaseQty = rs.GetPurchseAmountQty(dtpEnd.Value, invCode, accountNo);
+                        // get finished product purchase qty according to bomParentInvCode
+                        // splite bomParentInvCode according to ","
 
+                        List<string> listParentCode = new List<string>();
+                        if (dgv.Rows[i].Cells["bomParentInvCode"].Value != null)
+                        {
+                            var bomParentInvCode = dgv.Rows[i].Cells["bomParentInvCode"].Value.ToString();
+                            if (bomParentInvCode.Contains(","))
+                            {
+                                listParentCode = bomParentInvCode.Split(',').ToList();
+                                foreach (var parentCode in listParentCode)
+                                {
+                                    rawPartPurchaseQty += rs.GetPurchseAmountQty(dtpEnd.Value, parentCode, accountNo);
+                                }
+                            }
+                            else
+                            {
+                                rawPartPurchaseQty += rs.GetPurchseAmountQty(dtpEnd.Value, bomParentInvCode, accountNo);
+                            }
+                        }
 
-                        dgv.Rows[i].Cells["purchaseQty"].Value =
-                           rs.GetPurchseAmountQty(dtpEnd.Value, invCode, accountNo);
-                        //rs.GetPurchseAmountQty(funcHeader, funcBody, "018");
+                        dgv.Rows[i].Cells["purchaseQty"].Value =rawPartPurchaseQty;
+                         
 
                     }
                     return true;

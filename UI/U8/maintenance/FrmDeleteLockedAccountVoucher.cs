@@ -37,7 +37,7 @@ namespace DataMaintenance.UI.ClearLocker
 
             try
             {
-                Sqlhelper.ExecuteQuery(sql, Sqlhelper.DataSourceType.u8, cmbAccountNo.Text);
+                Sqlhelper.ExecuteSql(Sqlhelper.DataSourceType.u8,sql, cmbAccountNo.Text);
                 MessageBox.Show("删除成功");
             }
             catch (Exception)

@@ -16,10 +16,12 @@ namespace DataMaintenance.UI.U8.Report
         public FrmQtyStatisticEachMonth()
         {
             InitializeComponent();
+            dataGridView1.RowHeadersWidth = 60;
+        
             xmTxtInvClass.RefButton.Click += tsbInventoryClass_Click;
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void tsbQuery_Click(object sender, EventArgs e)
         {
 
             if (string.IsNullOrEmpty(cmbAccountNo.Text))
@@ -60,6 +62,14 @@ namespace DataMaintenance.UI.U8.Report
                         column.DefaultCellStyle.Format = "0.00";
                     }
                 }
+                // display row number
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+                {
+                    dataGridView1.Rows[i].HeaderCell.Value = (i + 1).ToString();
+                }
+                //lock the first to fifth columns
+
+                dataGridView1.Columns[4].Frozen = true;
             }
             else
             {

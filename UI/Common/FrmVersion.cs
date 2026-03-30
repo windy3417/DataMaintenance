@@ -6,9 +6,9 @@ using System.IO;
 
 namespace DataMaintenance.UI
 {
-    public partial class FrmHelp : Form
+    public partial class FrmVersion : Form
     {
-        public FrmHelp()
+        public FrmVersion()
         {
          
             InitializeUI();

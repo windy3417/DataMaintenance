@@ -210,11 +210,15 @@ namespace DataMaintenance.UI.U8
                 this.Cursor = Cursors.WaitCursor;
 
                 var query = @"
-                    select c.cVenCode, c.cVenName, b.dVouchDate,
+                    select a.cvouchid as applyNo, c.cVenCode, c.cVenName, b.dVouchDate as applyDate,
+        d.dVouchDate as payedDate,
                            b.cDigest, a.downloadState
                     from ef_bank_log as a
                     inner join AP_ApplyPayVouch as b on a.cVouchid = b.cVouchID
                     inner join Vendor as c on b.cDwCode = c.cVenCode
+                    inner join Ap_CloseBill as d
+                        on a.cvouchid=d.cApplyCode
+
                     where a.downloadState <> ''";
 
                 var filters = new List<string>();
@@ -235,6 +239,16 @@ namespace DataMaintenance.UI.U8
 
                     parameters.Add(new SqlParameter("@startDate", dtpStartDate.Value));
                     parameters.Add(new SqlParameter("@endDate", dtpEndDate.Value.AddDays(1))); // inclusive
+                }
+
+                if (cbPayedDate.Checked)
+                {
+                    filters.Add("d.dVouchDate >= @payedStartDate AND d.dVouchDate < @payedEndDate");
+                    //set satart date as first day of last month
+
+
+                    parameters.Add(new SqlParameter("@payedStartDate", dtpPayedStartDate.Value));
+                    parameters.Add(new SqlParameter("@payedEndDate", dtpPayedEndDate.Value.AddDays(1))); // inclusive
                 }
 
                 if (filters.Count > 0)
@@ -335,6 +349,7 @@ namespace DataMaintenance.UI.U8
             DateTime now = DateTime.Now;
             DateTime firstDayOfLastMonth = new DateTime(now.Year, now.Month, 1).AddMonths(-1);
             dtpStartDate.Value = firstDayOfLastMonth;
+            dtpPayedStartDate.Value=new DateTime(now.Year, now.Month, 1);
         }
         #endregion
 

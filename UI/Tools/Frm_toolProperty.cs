@@ -63,7 +63,7 @@ namespace DataMaintenance.UI
 
             try
             {
-                int influnceRows = Sqlhelper.UpdateWithparameters(sql, Sqlhelper.DataSourceType.u8, sqlParameterList.ToArray());
+                int influnceRows = Sqlhelper.UpdateWithparameters(Sqlhelper.DataSourceType.u8,sql,  sqlParameterList.ToArray());
                 MessageBox.Show("更新" + influnceRows + "条记录", "数据修改提示");
             }
             catch (Exception ex)

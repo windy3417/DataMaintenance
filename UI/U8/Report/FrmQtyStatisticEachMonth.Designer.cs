@@ -80,7 +80,7 @@
             this.toolStripButton1.Size = new System.Drawing.Size(59, 22);
             this.toolStripButton1.Text = "Query";
             this.toolStripButton1.ToolTipText = "Query";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.toolStripButton1.Click += new System.EventHandler(this.tsbQuery_Click);
             // 
             // tsbExport
             // 
