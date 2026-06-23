@@ -11,7 +11,7 @@ namespace DataMaintenance.Model
     public partial class U8Context : DbContext
     {
         public U8Context(string accountNo)
-            : base(Utility.Sql.Sqlhelper.sqlConnection(Utility.Sql.Sqlhelper.DataSourceType.u8,accountNo), true)
+            : base(Utility.Sql.Sqlhelper.GetSqlConnection(Utility.Sql.Sqlhelper.DataSourceType.u8,accountNo), true)
         {
         }
 

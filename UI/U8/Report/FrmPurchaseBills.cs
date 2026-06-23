@@ -33,7 +33,7 @@ namespace DataMaintenance.UI.U8.Report
             cmbAccountNo.SelectedIndex = 1;
             dgvBody.RowHeadersWidth = 60;
 
-            _sqlConnection = Utility.Sql.Sqlhelper.sqlConnection(Utility.Sql.Sqlhelper.DataSourceType.u8, cmbAccountNo.Text);
+            _sqlConnection = Utility.Sql.Sqlhelper.GetSqlConnection(Utility.Sql.Sqlhelper.DataSourceType.u8, cmbAccountNo.Text);
             _repository = new PurchaseBillRepository(_sqlConnection);
 
             InitPaginationEvents();
@@ -193,7 +193,7 @@ namespace DataMaintenance.UI.U8.Report
 
         private void cmbAccountNo_SelectedValueChanged(object sender, EventArgs e)
         {
-            _sqlConnection = Utility.Sql.Sqlhelper.sqlConnection(Utility.Sql.Sqlhelper.DataSourceType.u8, cmbAccountNo.Text);
+            _sqlConnection = Utility.Sql.Sqlhelper.GetSqlConnection(Utility.Sql.Sqlhelper.DataSourceType.u8, cmbAccountNo.Text);
             _repository = new PurchaseBillRepository(_sqlConnection);
         }
     }

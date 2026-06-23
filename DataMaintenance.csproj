@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>DataMaintenance</RootNamespace>
     <AssemblyName>DataMaintenance</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
@@ -31,7 +31,7 @@
     <SuiteName>信息平台管理</SuiteName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>40</ApplicationRevision>
+    <ApplicationRevision>43</ApplicationRevision>
     <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -129,11 +129,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="U8services, Version=1.0.1.1, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\U8services\U8services\bin\Debug\U8services.dll</HintPath>
+    <Reference Include="U8service">
+      <HintPath>..\..\U8services\U8service\bin\Debug\U8service.dll</HintPath>
     </Reference>
-    <Reference Include="Utility, Version=1.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Utility, Version=1.2.2.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Utility\bin\Release\Utility.dll</HintPath>
     </Reference>
@@ -150,6 +149,7 @@
     <Compile Include="DAL\U8services\Rdrecord32Service.cs" />
     <Compile Include="DAL\U8services\SaleOutBoundVoucher.cs" />
     <Compile Include="DAL\ViewServices\U8services\BoxIDExistService.cs" />
+    <Compile Include="DAL\ViewServices\U8services\NewestPriceJustService.cs" />
     <Compile Include="DAL\ViewServices\U8services\VendorAttachmentService.cs" />
     <Compile Include="DAL\RefServices\U8services\InventoryRefService.cs" />
     <Compile Include="DAL\RefServices\U8services\CustomerRefService.cs" />
@@ -205,6 +205,9 @@
     <Compile Include="Model\U8\Customer.cs" />
     <Compile Include="Model\U8\GL_mend.cs" />
     <Compile Include="Model\U8\InventoryClass.cs" />
+    <Compile Include="Model\U8\PU_PriceJustDetail.cs" />
+    <Compile Include="Model\U8\PU_PriceJustMain.cs" />
+    <Compile Include="Model\U8\PU_PriceJustMain_extradefine.cs" />
     <Compile Include="Model\U8\RdRecord01.cs" />
     <Compile Include="Model\U8\rdrecord10.cs" />
     <Compile Include="Model\U8\rdrecord11.cs" />
@@ -721,6 +724,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Common\" />
+    <Folder Include="Requirement\" />
     <Folder Include="UI\MarsterData\" />
   </ItemGroup>
   <ItemGroup>

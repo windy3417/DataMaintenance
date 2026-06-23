@@ -11,7 +11,7 @@ namespace DataMaintenance.Model.Maintenance
     {
         public DataMaintenanceContext()
 
-            : base(Utility.Sql.Sqlhelper.sqlConnection(Utility.Sql.Sqlhelper.DataSourceType.business), true)
+            : base(Utility.Sql.Sqlhelper.GetSqlConnection(Utility.Sql.Sqlhelper.DataSourceType.business), true)
         {
         }
 

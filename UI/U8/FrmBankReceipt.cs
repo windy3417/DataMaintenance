@@ -256,7 +256,7 @@ namespace DataMaintenance.UI.U8
                     query += " AND " + string.Join(" AND ", filters);
                 }
 
-                using (SqlConnection conn = Sqlhelper.sqlConnection(Sqlhelper.DataSourceType.u8, txtAccountNo.Text.ToString()))
+                using (SqlConnection conn = Sqlhelper.GetSqlConnection(Sqlhelper.DataSourceType.u8, txtAccountNo.Text.ToString()))
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
                     foreach (var param in parameters)

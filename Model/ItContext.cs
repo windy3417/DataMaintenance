@@ -9,7 +9,7 @@ namespace DataMaintenance.Model.Maintenance
     public partial class ITContext : DbContext
     {
         public ITContext()
-            : base(Utility.Sql.Sqlhelper.sqlConnection(Utility.Sql.Sqlhelper.DataSourceType.business), true)
+            : base(Utility.Sql.Sqlhelper.GetSqlConnection(Utility.Sql.Sqlhelper.DataSourceType.business), true)
         {
         }
 

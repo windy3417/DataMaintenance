@@ -20,6 +20,7 @@ using System.Data.SqlClient;
 using U8service.DAL.JoinTableSvc;
 using U8service.DAL.JoinTableSvc.ProductLogisticsSvc;
 using Utility.Sql;
+using U8service.DAL.ProductLogistics;
 
 namespace DataMaintenance.UI.U8.CheckInvetory
 {

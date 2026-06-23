@@ -8,7 +8,7 @@ namespace DataMaintenance.Model
     public partial class UfSsytmeContext : DbContext
     {
         public UfSsytmeContext()
-            : base(Utility.Sql.Sqlhelper.sqlConnection(Utility.Sql.Sqlhelper.DataSourceType.ufsystem), true)
+            : base(Utility.Sql.Sqlhelper.GetSqlConnection(Utility.Sql.Sqlhelper.DataSourceType.ufsystem), true)
         {
         }
 

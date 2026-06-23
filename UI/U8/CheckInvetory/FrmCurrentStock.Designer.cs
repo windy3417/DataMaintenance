@@ -1,4 +1,4 @@
-﻿namespace DataMaintenance.UI.U8.CheckInvetory
+﻿﻿namespace DataMaintenance.UI.U8.CheckInvetory
 {
     partial class FrmCurrentStock
     {
@@ -35,19 +35,18 @@
             this.tsbQuery = new System.Windows.Forms.ToolStripButton();
             this.tsbExport = new System.Windows.Forms.ToolStripButton();
             this.tspPrint = new System.Windows.Forms.ToolStripButton();
-            this.tlpFilter = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.cmbAccountNo = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.dtpDeadLine = new System.Windows.Forms.DateTimePicker();
             this.label4 = new System.Windows.Forms.Label();
-            this.cmbWarehouseNo = new System.Windows.Forms.ComboBox();
+            this.btnSelectWarehouse = new System.Windows.Forms.Button();
+            this.txtSelectedWarehouses = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvBody = new System.Windows.Forms.DataGridView();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.toolStrip1.SuspendLayout();
-            this.tlpFilter.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBody)).BeginInit();
             this.SuspendLayout();
@@ -93,33 +92,10 @@
             this.tspPrint.Text = "打印";
             this.tspPrint.Click += new System.EventHandler(this.tspPrint_Click);
             // 
-            // tlpFilter
-            // 
-            this.tlpFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpFilter.ColumnCount = 4;
-            this.tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 77F));
-            this.tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 231F));
-            this.tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 102F));
-            this.tlpFilter.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 371F));
-            this.tlpFilter.Controls.Add(this.label2, 0, 0);
-            this.tlpFilter.Controls.Add(this.cmbAccountNo, 1, 0);
-            this.tlpFilter.Controls.Add(this.label3, 0, 1);
-            this.tlpFilter.Controls.Add(this.dtpDeadLine, 1, 1);
-            this.tlpFilter.Controls.Add(this.label4, 2, 0);
-            this.tlpFilter.Controls.Add(this.cmbWarehouseNo, 3, 0);
-            this.tlpFilter.Location = new System.Drawing.Point(12, 85);
-            this.tlpFilter.Name = "tlpFilter";
-            this.tlpFilter.RowCount = 2;
-            this.tlpFilter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpFilter.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tlpFilter.Size = new System.Drawing.Size(781, 56);
-            this.tlpFilter.TabIndex = 1;
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Location = new System.Drawing.Point(12, 93);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 0;
@@ -128,7 +104,7 @@
             // cmbAccountNo
             // 
             this.cmbAccountNo.FormattingEnabled = true;
-            this.cmbAccountNo.Location = new System.Drawing.Point(80, 3);
+            this.cmbAccountNo.Location = new System.Drawing.Point(71, 88);
             this.cmbAccountNo.Name = "cmbAccountNo";
             this.cmbAccountNo.Size = new System.Drawing.Size(205, 20);
             this.cmbAccountNo.TabIndex = 1;
@@ -136,7 +112,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 28);
+            this.label3.Location = new System.Drawing.Point(12, 134);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 0;
@@ -144,7 +120,7 @@
             // 
             // dtpDeadLine
             // 
-            this.dtpDeadLine.Location = new System.Drawing.Point(80, 31);
+            this.dtpDeadLine.Location = new System.Drawing.Point(71, 128);
             this.dtpDeadLine.Name = "dtpDeadLine";
             this.dtpDeadLine.Size = new System.Drawing.Size(205, 21);
             this.dtpDeadLine.TabIndex = 2;
@@ -152,20 +128,29 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(311, 0);
+            this.label4.Location = new System.Drawing.Point(314, 91);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 12);
             this.label4.TabIndex = 0;
             this.label4.Text = "仓库名称";
             // 
-            // cmbWarehouseNo
+            // btnSelectWarehouse
             // 
-            this.cmbWarehouseNo.FormattingEnabled = true;
-            this.cmbWarehouseNo.Location = new System.Drawing.Point(413, 3);
-            this.cmbWarehouseNo.Name = "cmbWarehouseNo";
-            this.cmbWarehouseNo.Size = new System.Drawing.Size(179, 20);
-            this.cmbWarehouseNo.TabIndex = 1;
-            this.cmbWarehouseNo.DropDown += new System.EventHandler(this.cmbWarehouseNo_DropDown);
+            this.btnSelectWarehouse.Location = new System.Drawing.Point(576, 87);
+            this.btnSelectWarehouse.Name = "btnSelectWarehouse";
+            this.btnSelectWarehouse.Size = new System.Drawing.Size(41, 23);
+            this.btnSelectWarehouse.TabIndex = 2;
+            this.btnSelectWarehouse.Text = "选择";
+            this.btnSelectWarehouse.UseVisualStyleBackColor = true;
+            this.btnSelectWarehouse.Click += new System.EventHandler(this.btnSelectWarehouse_Click);
+            // 
+            // txtSelectedWarehouses
+            // 
+            this.txtSelectedWarehouses.Location = new System.Drawing.Point(373, 88);
+            this.txtSelectedWarehouses.Name = "txtSelectedWarehouses";
+            this.txtSelectedWarehouses.ReadOnly = true;
+            this.txtSelectedWarehouses.Size = new System.Drawing.Size(200, 21);
+            this.txtSelectedWarehouses.TabIndex = 1;
             // 
             // panel1
             // 
@@ -175,7 +160,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 29);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(781, 40);
+            this.panel1.Size = new System.Drawing.Size(976, 40);
             this.panel1.TabIndex = 2;
             // 
             // label1
@@ -183,7 +168,7 @@
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("SimSun", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(330, 13);
+            this.label1.Location = new System.Drawing.Point(428, 13);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(111, 24);
             this.label1.TabIndex = 0;
@@ -223,7 +208,7 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvBody.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvBody.RowTemplate.Height = 23;
-            this.dgvBody.Size = new System.Drawing.Size(781, 311);
+            this.dgvBody.Size = new System.Drawing.Size(976, 389);
             this.dgvBody.TabIndex = 3;
             // 
             // printDialog1
@@ -235,16 +220,20 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 562);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.dtpDeadLine);
             this.Controls.Add(this.dgvBody);
+            this.Controls.Add(this.cmbAccountNo);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.tlpFilter);
             this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtSelectedWarehouses);
+            this.Controls.Add(this.btnSelectWarehouse);
             this.Name = "FrmCurrentStock";
             this.Text = "现存量";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.tlpFilter.ResumeLayout(false);
-            this.tlpFilter.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBody)).EndInit();
@@ -257,7 +246,6 @@
 
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tspPrint;
-        private System.Windows.Forms.TableLayoutPanel tlpFilter;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
@@ -267,7 +255,8 @@
         private System.Windows.Forms.DataGridView dgvBody;
         private System.Windows.Forms.ToolStripButton tsbQuery;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox cmbWarehouseNo;
+        private System.Windows.Forms.Button btnSelectWarehouse;
+        private System.Windows.Forms.TextBox txtSelectedWarehouses;
         private System.Windows.Forms.PrintDialog printDialog1;
         private System.Windows.Forms.ToolStripButton tsbExport;
     }

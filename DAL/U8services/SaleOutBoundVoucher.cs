@@ -41,7 +41,7 @@ namespace DataMaintenance.DAL.U8services
                    ORDER BY
                        ProductCode, Month;";
 
-            using (var connection = Sqlhelper.sqlConnection(Sqlhelper.DataSourceType.u8, _accountNo))
+            using (var connection = Sqlhelper.GetSqlConnection(Sqlhelper.DataSourceType.u8, _accountNo))
             {
                 using (var command = new SqlCommand(sqlQuery, connection))
                 {

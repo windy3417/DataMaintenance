@@ -70,6 +70,8 @@ namespace DataMaintenance.UI.U8.Report
                 //lock the first to fifth columns
 
                 dataGridView1.Columns[4].Frozen = true;
+                //enable scroll bar
+                dataGridView1.ScrollBars = ScrollBars.Both;
             }
             else
             {
